@@ -15,7 +15,7 @@ class Stich
   def farbe
     @staerkste_karte.farbe
   end
-  
+
   def legen(karte:, spieler:)
     if karte.schlaegt?(@staerkste_karte)
       @sieger = spieler

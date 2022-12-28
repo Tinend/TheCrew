@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Farbe
   def initialize(name:, staerke:)
     @name = name
@@ -7,7 +9,7 @@ class Farbe
   attr_reader :name, :staerke
 
   def eql?(other)
-    self.class == other.class && self.name == other.name && self.staerke == other.staerke
+    self.class == other.class && name == other.name && staerke == other.staerke
   end
 
   def hash
@@ -31,5 +33,5 @@ class Farbe
   BLAU = new(name: 'blau', staerke: 0)
   GELB = new(name: 'gelb', staerke: 0)
 
-  NORMALE_FARBEN = [GRUEN, ROT, BLAU, GELB]
+  NORMALE_FARBEN = [GRUEN, ROT, BLAU, GELB].freeze
 end
