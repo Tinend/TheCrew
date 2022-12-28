@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# Spielkarte
 
 require 'farbe'
 
@@ -7,6 +6,7 @@ MIN_VALUE = 1
 MAX_VALUE = 9
 MAX_TRUMPF_VALUE = 4
 
+# Spielkarte
 class Karte
   def initialize(wert:, farbe:)
     @wert = wert

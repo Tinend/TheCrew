@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-# Entscheidet, ob das Spiel gewonnen oder verloren ist
 
+# Entscheidet, ob das Spiel gewonnen oder verloren ist
 class Richter
   def initialize
     @verloren = false
@@ -24,5 +24,9 @@ class Richter
     return unless @auftraege.length.zero?
 
     @gewonnen = true
+  end
+
+  def alle_karten_ausgespielt
+    @verloren = true
   end
 end

@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-class Karten_Verwalter
+# Verteilt die Karten an die Spieler
+class KartenVerwalter
   def initialize(karten:, spieler:)
     @spieler = spieler
     @karten = karten
   end
 
-  def verteilen()
+  def verteilen
     @karten.shuffle!
     blattgroesse = @karten.length / @spieler.length
     zusatzkarten = @karten.length - blattgroesse * @spieler.length
