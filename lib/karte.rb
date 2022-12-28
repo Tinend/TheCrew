@@ -14,19 +14,19 @@ class Karte
   end
 
   def self.max_trumpf
-    @max_trumpf ||= new(MAX_TRUMPF_VALUE, Farbe::RAKETE)
+    @max_trumpf ||= new(wert: MAX_TRUMPF_VALUE, farbe: Farbe::RAKETE)
   end
 
   def self.nil_karte
-    @nil_karte ||= new(0, Farbe::ANTI_RAKETE)
+    @nil_karte ||= new(wert: 0, farbe: Farbe::ANTI_RAKETE)
   end
 
   def self.alle_normalen
-    @alle_normalen ||= NORMALE_FARBEN.flat_map { |f| (MIN_VALUE..MAX_VALUE).map { |w| new(f, w) } }
+    @alle_normalen ||= Farbe::NORMALE_FARBEN.flat_map { |f| (MIN_VALUE..MAX_VALUE).map { |w| new(farbe: f, wert: w) } }
   end
 
   def self.alle_truempfe
-    @alle_truempfe ||= (MIN_VALUE..MAX_TRUMPF_VALUE).map { |w| new(f, w) }
+    @alle_truempfe ||= (MIN_VALUE..MAX_TRUMPF_VALUE).map { |w| new(farbe: Farbe::RAKETE, wert: w) }
   end
 
   def self.alle

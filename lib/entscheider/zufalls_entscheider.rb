@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../entscheider'
+
 # Entscheider, der immer zufällig entschiedet, was er spielt.
 class ZufallsEntscheider < Entscheider
   def waehl_auftrag(auftraege)
