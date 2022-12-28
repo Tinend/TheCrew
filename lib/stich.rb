@@ -23,4 +23,8 @@ class Stich
     end
     @karten.push(karte)
   end
+
+  def to_s
+    @karten.reduce("") {|anfang, karte| anfang + " " + karte.to_s}
+  end
 end

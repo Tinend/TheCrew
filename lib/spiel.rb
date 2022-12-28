@@ -38,6 +38,11 @@ class Spiel
     while kommunizieren; end
   end
 
+  def stich_ausgeben(stich)
+    puts "Spieler #{@spieler.find_index(stich.sieger) + 1} holt den Stich."
+    puts stich.to_s
+  end
+  
   def runde
     iterativ_kommunizieren
     stich = Stich.new
@@ -46,6 +51,7 @@ class Spiel
       wahl = spieler.waehle_karte(stich)
       stich.legen(karte: wahl, spieler: spieler)
     end
+    stich_ausgeben(stich)
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
     @richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen
