@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'karte'
+
 class Spieler
   def initialize(entscheider)
     @entscheider = entscheider
@@ -22,6 +24,8 @@ class Spieler
   end
 
   def bekomm_karten(karten)
+    raise TypeError unless karten.is_a?(Array) && karten.all?(Karte)
+
     @karten = karten
     @entscheider.bekomm_karten(karten)
   end
