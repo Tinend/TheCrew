@@ -11,3 +11,6 @@
 
 Style/Encoding:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 30
