@@ -1,6 +1,11 @@
+#!/usr/bin/ruby
+
+libx = File.join(File.dirname(__FILE__), '..', 'lib')
+$LOAD_PATH.unshift(libx) unless $LOAD_PATH.include?(libx)
+
 require 'richter'
 require 'spiel_information'
-require 'entscheider/ZufallsEntscheider'
+require 'entscheider/zufalls_entscheider'
 require 'spieler'
 require 'spiel'
 require 'auftrag_verwalter'
