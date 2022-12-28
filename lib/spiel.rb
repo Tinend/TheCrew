@@ -33,6 +33,16 @@ class Spiel
   def stich_ausgeben(stich)
     puts "Spieler #{@spieler.find_index(stich.sieger) + 1} holt den Stich."
     puts stich.to_s
+    if @richter.vermasselt_letzter_stich != []
+      vermasselt = @richter.vermasselt_letzter_stich.join(" ")
+      puts "Folgender Auftrag wurde nicht erfüllt: #{vermasselt}" if @richter.vermasselt_letzter_stich.length == 1
+      puts "Folgende Aufträge wurden nicht erfüllt: #{vermasselt}" if @richter.vermasselt_letzter_stich.length > 1
+    end
+    if @richter.erfuellt_letzter_stich != []
+      erfuellt = @richter.erfuellt_letzter_stich.join(" ")
+      puts "Folgender Auftrag wurde erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length == 1
+      puts "Folgende Aufträge wurden erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length > 1
+    end
   end
   
   def runde
@@ -43,9 +53,9 @@ class Spiel
       wahl = spieler.waehle_karte(stich)
       stich.legen(karte: wahl, spieler: spieler)
     end
-    stich_ausgeben(stich)
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
+    stich_ausgeben(stich)
     @richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen
     @ausspiel_recht_index = @spieler.find_index(stich.sieger)
   end

@@ -31,4 +31,8 @@ class Auftrag
   def hash
     [self.class, @erfuellt, @karte].hash
   end
+
+  def to_s
+    karte.to_s
+  end
 end

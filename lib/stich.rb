@@ -25,6 +25,6 @@ class Stich
   end
 
   def to_s
-    @karten.reduce("") {|anfang, karte| anfang + " " + karte.to_s}
+    @karten.join(' ')
   end
 end
