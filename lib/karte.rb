@@ -34,7 +34,7 @@ class Karte
   end
 
   def to_s
-    "#{farbe.name} #{wert}"
+    @farbe.faerben(wert.to_s)
   end
 
   def trumpf?
@@ -49,6 +49,10 @@ class Karte
 
   def eql?(other)
     self.class == other.class && @wert == other.wert && @farbe == other.farbe
+  end
+
+  def <=>(other)
+    [@farbe.sortier_wert, @wert] <=> [other.farbe.sortier_wert, other.wert]
   end
 
   alias == eql?

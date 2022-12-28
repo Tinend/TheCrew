@@ -80,4 +80,8 @@ class Spieler
     @karten.delete(karte)
     karte
   end
+
+  def to_s
+    (karten.sort.reduce('') { |start, karte| "#{start} #{karte}" })[1..]
+  end
 end

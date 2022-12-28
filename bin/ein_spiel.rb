@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+# frozen_string_literal: true
 
 libx = File.join(File.dirname(__FILE__), '..', 'lib')
 $LOAD_PATH.unshift(libx) unless $LOAD_PATH.include?(libx)
@@ -14,25 +15,23 @@ require 'auftrag'
 require 'karte'
 
 ANZAHL_SPIELER = 4
+ANZAHL_AUFTRAEGE = 3
 
-richter = Richter.new()
+richter = Richter.new
 spiel_information = SpielInformation.new(anzahl_spieler: ANZAHL_SPIELER)
-spieler = Array.new(ANZAHL_SPIELER) {|i|
-  Spieler.new(entscheider: ZufallsEntscheider.new(), spiel_informations_sicht: spiel_information.fuer_spieler(i))
-}
+spieler = Array.new(ANZAHL_SPIELER) do |i|
+  Spieler.new(entscheider: ZufallsEntscheider.new, spiel_informations_sicht: spiel_information.fuer_spieler(i))
+end
 karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spieler: spieler)
-karten_verwalter.verteilen()
-auftraege = Karte.alle.map {|karte| Auftrag.new(karte)}
+karten_verwalter.verteilen
+auftraege = Karte.alle_normalen.map { |karte| Auftrag.new(karte) }
 auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
-auftrag_verwalter.auftraege_ziehen(anzahl: 1, richter: richter)
+auftrag_verwalter.auftraege_ziehen(anzahl: ANZAHL_AUFTRAEGE, richter: richter)
 auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
 spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information)
-until richter.gewonnen or richter.verloren
-  spiel.runde()
-end
+spiel.runde until richter.gewonnen || richter.verloren
 if richter.verloren
-  puts "Leider wurde das Spiel verloren"
+  puts 'Leider wurde das Spiel verloren'
 elsif richter.gewonnen
-  puts "Herzliche Gratulation!"
+  puts 'Herzliche Gratulation!'
 end
-  

@@ -4,6 +4,8 @@
 # Just a funny line.
 source 'https://rubygems.org'
 
+gem 'colorize'
+
 group :development, :test do
   gem 'rake'
 end
