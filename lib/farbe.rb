@@ -1,5 +1,7 @@
+# coding: utf-8
 # frozen_string_literal: true
 
+# Eine Farbe für die Spielkarten. I.e. Trumpf und die vier normalen Farben (plus eine Pseudofarbe).
 class Farbe
   def initialize(name:, staerke:)
     @name = name
