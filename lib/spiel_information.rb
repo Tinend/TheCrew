@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # Öffentliche Information über das Spiel, i.e.:

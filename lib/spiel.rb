@@ -9,7 +9,7 @@ class Spiel
     @spieler = spieler
     @richter = richter
     @spiel_information = spiel_information
-    @ausspiel_recht_index = @spieler.find_index(&:faegt_an?)
+    @ausspiel_recht_index = @spieler.find_index(&:faengt_an?)
     @spiel_information.setze_kapitaen(@ausspiel_recht_index)
   end
 
@@ -23,6 +23,6 @@ class Spiel
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
     richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen
-    @ausspiel_recht_index = @spieler.find_index(&:faegt_an?)
+    @ausspiel_recht_index = @spieler.find_index(&:faengt_an?)
   end
 end

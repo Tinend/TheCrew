@@ -30,7 +30,7 @@ class Karte
   end
 
   def self.alle
-    @alle ||= @alle_normalen + @alle_truempfe
+    @alle ||= alle_normalen + alle_truempfe
   end
 
   def to_s

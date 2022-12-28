@@ -14,7 +14,7 @@ class Spieler
     @auftraege = []
   end
 
-  attr_reader :auftraege
+  attr_reader :auftraege, :karten
 
   def faengt_an?
     @karten.include?(Karte.max_trumpf)
@@ -40,7 +40,7 @@ class Spieler
   end
 
   def hat_karten?
-    !@karten.emtpy?
+    !@karten.empty?
   end
 
   def waehlbare_karten(stich)
