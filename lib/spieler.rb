@@ -2,6 +2,7 @@
 
 require 'karte'
 require 'stich'
+require 'kommunikation'
 
 # Ein Spieler im TheCrew Spiel.
 # Man beachte, dass diese Klasse keine Entscheidungen trifft. Sie verwaltet lediglich die Hand und die Aktionen des
@@ -10,6 +11,7 @@ class Spieler
   def initialize(entscheider:, spiel_informations_sicht:)
     @entscheider = entscheider
     @spiel_informations_sicht = spiel_informations_sicht
+    @entscheider.sehe_spiel_informations_sicht(spiel_informations_sicht)
     @karten = []
     @auftraege = []
     @kann_kommunizieren = true
@@ -36,7 +38,9 @@ class Spieler
   def waehle_kommunikation
     return unless @kann_kommunizieren
 
-    @entscheider.waehle_kommunikation(kommunizierbares)
+    kommunikation = @entscheider.waehle_kommunikation(kommunizierbares)
+    @kann_kommunizieren = false if kommunikation
+    kommunikation
   end
 
   def waehl_auftrag(auftraege)

@@ -28,7 +28,7 @@ class Spiel
       kommunikation = @spieler[i].waehle_kommunikation
       next unless kommunikation
 
-      @spiel_information.kommuniziere(i, kommunikation)
+      @spiel_information.kommuniziert(spieler_index: i, kommunikation: kommunikation)
       true
     end
   end
