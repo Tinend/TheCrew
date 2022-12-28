@@ -27,7 +27,7 @@ class SpielInformation
   end
 
   def fuer_spieler(spieler_index)
-    SpielInformationsSicht.new(self, spieler_index)
+    SpielInformationsSicht.new(spiel_information: self, spieler_index: spieler_index)
   end
 
   # Information aus Sicht eines Spielers (i.e. Spieler Indices sind entsprechend umgerechnet).

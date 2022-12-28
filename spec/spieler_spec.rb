@@ -4,12 +4,14 @@ require 'spieler'
 require 'karte'
 require 'farbe'
 require 'stich'
+require 'spiel_information'
 require 'entscheider/zufalls_entscheider'
 
 RSpec.describe Spieler do
-  subject(:spieler) { described_class.new(ZufallsEntscheider.new) }
+  subject(:spieler) { described_class.new(entscheider: ZufallsEntscheider.new, spiel_informations_sicht: spiel_information.fuer_spieler(0)) }
 
-  let(:anderer_spieler) { described_class.new(ZufallsEntscheider.new) }
+  let(:spiel_information) { SpielInformation.new(anzahl_spieler: 3) }
+  let(:anderer_spieler) { described_class.new(entscheider: ZufallsEntscheider.new, spiel_informations_sicht: spiel_information.fuer_spieler(1)) }
   let(:roter_stich) do
     stich = Stich.new
     stich.legen(karte: Karte.new(farbe: Farbe::ROT, wert: 2), spieler: anderer_spieler)

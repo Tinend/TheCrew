@@ -21,4 +21,14 @@ class Auftrag
   def aktivieren
     @erfuellt = false
   end
+
+  def eql?(other)
+    self.class == other.class && @erfuellt == other.erfuellt && @karte == other.karte
+  end
+
+  alias == eql?
+
+  def hash
+    [self.class, @erfuellt, @karte].hash
+  end
 end
