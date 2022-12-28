@@ -11,6 +11,8 @@
 
 require:
  - rubocop-rspec
+AllCops:
+  TargetRubyVersion: 3.0
 Style/Encoding:
   Enabled: false
 Metrics/AbcSize:
