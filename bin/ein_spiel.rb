@@ -22,7 +22,7 @@ spieler = Array.new(ANZAHL_SPIELER) {|i|
 }
 karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spieler: spieler)
 karten_verwalter.verteilen()
-auftraege = Karte.alle.map {|karte| Auftrag.new(karte)}
+auftraege = Karte.alle_normalen.map {|karte| Auftrag.new(karte)}
 auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
 auftrag_verwalter.auftraege_ziehen(anzahl: 1, richter: richter)
 auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
