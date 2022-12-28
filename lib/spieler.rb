@@ -9,6 +9,10 @@ class Spieler
 
   attr_reader :auftraege
 
+  def faengt_an?
+    @karten.include?(Karte.max_trumpf)
+  end
+
   def waehl_auftrag(auftraege)
     auftrag = @entscheider.waehl_auftrag(auftraege)
     raise 'Entscheider hat einen nicht existierenden Auftrag gewaehlt.' unless auftraege.include?(auftrag)
@@ -22,9 +26,22 @@ class Spieler
     @entscheider.bekomm_karten(karten)
   end
 
+  def muss_bedienen?(stich)
+    @karten.any? { |k| k.farbe == stich.farbe }
+  end
+
+  def waehlbare_karten(stich)
+    if muss_bedienen?(stich)
+      @karten.select { |k| k.farbe == stich.farbe }
+    else
+      @karten
+    end
+  end
+
   def waehle_karte(stich)
-    entscheider.waehle_karte(stich)
-    raise 'Entscheider hat einen nicht existierenden Auftrag gewaehlt.' unless @karten.include?(karte)
+    waehlbare = waehlbare_karten(stich)
+    entscheider.waehle_karte(stich, waehlbare)
+    raise 'Entscheider hat einen nicht existierenden Auftrag gewaehlt.' unless waehlbare.include?(karte)
 
     @karten.delete(karte)
     karte
