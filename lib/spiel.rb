@@ -11,6 +11,9 @@ class Spiel
     @spiel_information = spiel_information
     @ausspiel_recht_index = @spieler.find_index(&:faengt_an?)
     @spiel_information.setze_kapitaen(@ausspiel_recht_index)
+    @spieler.each do |s|
+      puts s
+    end
   end
 
   def runde
