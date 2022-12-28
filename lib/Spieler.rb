@@ -15,8 +15,9 @@ class Spieler
     auftrag
   end
 
-  def bekomm_hand(hand)
-    @hand = hand
+  def bekomm_karten(karten)
+    @karten = karten
+    @entscheider.bekomm_karten(karten)
   end
 
   def waehle_karte(stich)
