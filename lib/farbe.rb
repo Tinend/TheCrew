@@ -1,6 +1,8 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+require 'colorize'
+
 # Eine Farbe für die Spielkarten. I.e. Trumpf und die vier normalen Farben (plus eine Pseudofarbe).
 class Farbe
   def initialize(name:, staerke:)
@@ -36,4 +38,12 @@ class Farbe
   GELB = new(name: 'gelb', staerke: 0)
 
   NORMALE_FARBEN = [GRUEN, ROT, BLAU, GELB].freeze
+
+  def faerben(string)
+    return string.green if @name == 'grün'
+    return string.red if @name == 'rot'
+    return string.blue if @name == 'blau'
+    return string.yellow if @name == 'gelb'
+    string
+  end
 end

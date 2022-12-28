@@ -34,7 +34,7 @@ class Karte
   end
 
   def to_s
-    "#{farbe.name} #{wert}"
+    @farbe.faerben(wert.to_s)
   end
 
   attr_reader :wert, :farbe

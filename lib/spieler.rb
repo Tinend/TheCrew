@@ -61,4 +61,8 @@ class Spieler
     @karten.delete(karte)
     karte
   end
+
+  def to_s
+    karten.reduce("") {|start, karte| start + " " + karte.to_s}
+  end
 end

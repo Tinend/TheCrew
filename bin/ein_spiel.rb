@@ -21,6 +21,10 @@ spieler = Array.new(ANZAHL_SPIELER) {|i|
   Spieler.new(entscheider: ZufallsEntscheider.new(), spiel_informations_sicht: spiel_information.fuer_spieler(i))
 }
 karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spieler: spieler)
+Karte.alle.each do |k|
+  puts k
+end
+
 karten_verwalter.verteilen()
 auftraege = Karte.alle_normalen.map {|karte| Auftrag.new(karte)}
 auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
