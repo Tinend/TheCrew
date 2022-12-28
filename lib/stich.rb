@@ -6,7 +6,7 @@ require_relative 'karte'
 class Stich
   def initialize
     @sieger = nil
-    @staerksteKarte = Karte.new(wert: 0, farbe: :antiRakete)
+    @staerksteKarte = Karte.nil_karte
     @karten = []
   end
 
