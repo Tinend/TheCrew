@@ -11,12 +11,17 @@ class SpielInformation
     @anzahl_spieler = anzahl_spieler
     @stiche = []
     @auftraege = Array.new(anzahl_spieler) { [] }
+    @kommunikationen = Array.new(anzahl_spieler) { nil }
   end
 
   attr_reader :anzahl_spieler, :kapitaen, :stiche, :auftraege
 
   def auftrag_gewaehlt(spieler_index:, auftrag:)
     @auftraege[spieler_index].push(auftrag)
+  end
+
+  def kommuniziert(spieler_index:, kommunikation:)
+    @kommunikationen[spieler_index] = kommunikation
   end
 
   def setze_kapitaen(spieler_index)
@@ -49,6 +54,10 @@ class SpielInformation
 
     def auftraege
       @spiel_information.auftraege.rotate(@spieler_index)
+    end
+
+    def kommunikationen
+      @spiel_information.kommunikationen.rotate(@spieler_index)
     end
 
     def stiche

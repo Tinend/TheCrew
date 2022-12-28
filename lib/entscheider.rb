@@ -16,4 +16,8 @@ class Entscheider
 
   # Macht nix wenn nicht neu definiert.
   def stich_fertig(stich); end
+
+  # Nil bedeutet keine Kommunikation.
+  # Macht nix wenn nicht neu definiert.
+  def waehle_kommunikation; end
 end

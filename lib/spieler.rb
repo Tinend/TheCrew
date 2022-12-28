@@ -12,12 +12,31 @@ class Spieler
     @spiel_informations_sicht = spiel_informations_sicht
     @karten = []
     @auftraege = []
+    @kann_kommunizieren = true
   end
 
   attr_reader :auftraege, :karten
 
   def faengt_an?
     @karten.include?(Karte.max_trumpf)
+  end
+
+  def kommunizierbares
+    @karten.reject(&:trumpf?).group_by(&:farbe).flat_map do |_k, v|
+      max = v.max_by(&:wert)
+      min = v.min_by(&:wert)
+      if max == min
+        [Kommunikation.einzige(max)]
+      else
+        [Kommunikation.tiefste(min), Kommunikation.hoechste(max)]
+      end
+    end
+  end
+
+  def waehle_kommunikation
+    return unless @kann_kommunizieren
+
+    @entscheider.waehle_kommunikation(kommunizierbares)
   end
 
   def waehl_auftrag(auftraege)

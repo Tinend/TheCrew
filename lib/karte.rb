@@ -37,6 +37,10 @@ class Karte
     "#{farbe.name} #{wert}"
   end
 
+  def trumpf?
+    @farbe.trumpf?
+  end
+
   attr_reader :wert, :farbe
 
   def schlaegt?(karte)

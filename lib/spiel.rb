@@ -13,7 +13,15 @@ class Spiel
     @spiel_information.setze_kapitaen(@ausspiel_recht_index)
   end
 
+  def kommunizieren
+    @spieler.each_index do |i|
+      kommunikation = @spieler[i].waehle_kommunikation
+      @spiel_information.kommuniziere(i, kommunikation) if kommunikation
+    end
+  end
+
   def runde
+    kommunizieren
     stich = Stich.new
     @spieler.length.times do |i|
       spieler = @spieler[(i + @ausspiel_recht_index) % @spieler.length]
