@@ -5,10 +5,12 @@ require_relative 'stich'
 
 # Verwaltet das Spiel. Lässt jeden Spieler jede Runde auf den Stich spielen
 class Spiel
-  def initialize(spieler:, richter:)
+  def initialize(spieler:, richter:, spiel_information:)
     @spieler = spieler
     @richter = richter
+    @spiel_information = spiel_information
     @ausspiel_recht_index = @spieler.find_index(&:faegt_an?)
+    @spiel_information.kapitaen(@ausspiel_recht_index)
   end
 
   def runde
@@ -18,9 +20,7 @@ class Spiel
       wahl = spieler.waehle_karte(stich)
       stich.legen(karte: wahl, spieler: spieler)
     end
-    @spieler.each do |spieler|
-      spieler.stich_fertig(stich)
-    end
+    @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
     richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen
     @ausspiel_recht_index = @spieler.find_index(&:faegt_an?)

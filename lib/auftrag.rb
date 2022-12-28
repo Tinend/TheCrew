@@ -1,6 +1,8 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+require_relative "karte"
+
 # Auftrag zu einer Karte, der erfüllt werden muss
 class Auftrag
   def initialize(karte)
