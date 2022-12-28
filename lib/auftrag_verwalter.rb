@@ -21,7 +21,7 @@ class AuftragVerwalter
     start = @spieler.find_index(&:faegt_an?)
     @ausgelegte_auftraege.length.times do |i|
       wahl = @spieler[(start + i) % @spieler.length].waehl_auftrag(auftraege)
-      spiel_informationen.auftrag_gewaehlt(auftrag: wahl, spieler_index: (start + i) % @spieler.length)
+      spiel_information.auftrag_gewaehlt(auftrag: wahl, spieler_index: (start + i) % @spieler.length)
       @ausgelegte_auftraege.delete(wahl)
     end
   end
