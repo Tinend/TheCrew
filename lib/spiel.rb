@@ -29,6 +29,7 @@ class Spiel
       next unless kommunikation
 
       @spiel_information.kommuniziert(spieler_index: i, kommunikation: kommunikation)
+      puts "Spieler #{i + 1} kommuniziert, dass #{kommunikation.karte} seine #{kommunikation.art} #{kommunikation.karte.farbe.name}e ist."
       true
     end
   end
