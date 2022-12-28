@@ -7,8 +7,9 @@ require 'stich'
 # Man beachte, dass diese Klasse keine Entscheidungen trifft. Sie verwaltet lediglich die Hand und die Aktionen des
 # Spielers. Der `Entscheider` trifft die Entscheidungen.
 class Spieler
-  def initialize(entscheider)
+  def initialize(entscheider:, spiel_informations_sicht:)
     @entscheider = entscheider
+    @spiel_informations_sicht = spiel_informations_sicht
     @karten = []
     @auftraege = []
   end
@@ -59,9 +60,5 @@ class Spieler
 
     @karten.delete(karte)
     karte
-  end
-
-  def stich_fertig(stich)
-    @entscheider.stich_fertig(stich)
   end
 end

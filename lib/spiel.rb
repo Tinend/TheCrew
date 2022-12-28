@@ -10,7 +10,7 @@ class Spiel
     @richter = richter
     @spiel_information = spiel_information
     @ausspiel_recht_index = @spieler.find_index(&:faegt_an?)
-    @spiel_information.kapitaen(@ausspiel_recht_index)
+    @spiel_information.setze_kapitaen(@ausspiel_recht_index)
   end
 
   def runde
