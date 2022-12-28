@@ -11,18 +11,19 @@ require 'spiel'
 require 'auftrag_verwalter'
 require 'karten_verwalter'
 require 'auftrag'
+require 'karte'
 
 ANZAHL_SPIELER = 4
 
 richter = Richter.new()
-spiel_information = SpielInformation.new()
+spiel_information = SpielInformation.new(anzahl_spieler: ANZAHL_SPIELER)
 spieler = Array.new(ANZAHL_SPIELER) {|i|
-  Spieler.new(entscheider: ZufallsEntscheider.new(), spiel_information: spiel_information.fuer_spieler(i))
+  Spieler.new(entscheider: ZufallsEntscheider.new(), spiel_informations_sicht: spiel_information.fuer_spieler(i))
 }
 spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information)
-karten_verwalter = KartenVerwalter.new(karten: Karten.all, spieler: spieler)
+karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spieler: spieler)
 karten_verwalter.verteilen()
-auftraege = Karten.all.map {|karte| Auftrag.new(karte)}
+auftraege = Karte.alle.map {|karte| Auftrag.new(karte)}
 auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
 auftrag_verwalter.auftraege_ziehen(anzahl: 1, richter: richter)
 auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
