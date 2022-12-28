@@ -25,6 +25,19 @@ RSpec.describe Spieler do
     stich
   end
 
+  let(:top_bottom_karten) do
+    [
+      Kommunikation.tiefste(Karte.new(farbe: Farbe::ROT, wert: 1)),
+      Kommunikation.hoechste(Karte.new(farbe: Farbe::ROT, wert: 9)),
+      Kommunikation.tiefste(Karte.new(farbe: Farbe::BLAU, wert: 1)),
+      Kommunikation.hoechste(Karte.new(farbe: Farbe::BLAU, wert: 9)),
+      Kommunikation.tiefste(Karte.new(farbe: Farbe::GELB, wert: 1)),
+      Kommunikation.hoechste(Karte.new(farbe: Farbe::GELB, wert: 9)),
+      Kommunikation.tiefste(Karte.new(farbe: Farbe::GRUEN, wert: 1)),
+      Kommunikation.hoechste(Karte.new(farbe: Farbe::GRUEN, wert: 9))
+    ]
+  end
+
   it 'knows trumpf cannot be communicated' do
     spieler.bekomm_karten(Karte.alle_truempfe)
     expect(spieler.kommunizierbares).to be_empty
@@ -32,18 +45,7 @@ RSpec.describe Spieler do
 
   it 'knows top and bottom cards can be communicated' do
     spieler.bekomm_karten(Karte.alle)
-    expect(spieler.kommunizierbares).to match_array(
-                                          [
-                                            Kommunikation.tiefste(Karte.new(farbe: Farbe::ROT, wert: 1)),
-                                            Kommunikation.hoechste(Karte.new(farbe: Farbe::ROT, wert: 9)),
-                                            Kommunikation.tiefste(Karte.new(farbe: Farbe::BLAU, wert: 1)),
-                                            Kommunikation.hoechste(Karte.new(farbe: Farbe::BLAU, wert: 9)),
-                                            Kommunikation.tiefste(Karte.new(farbe: Farbe::GELB, wert: 1)),
-                                            Kommunikation.hoechste(Karte.new(farbe: Farbe::GELB, wert: 9)),
-                                            Kommunikation.tiefste(Karte.new(farbe: Farbe::GRUEN, wert: 1)),
-                                            Kommunikation.hoechste(Karte.new(farbe: Farbe::GRUEN, wert: 9))
-                                          ]
-                                        )
+    expect(spieler.kommunizierbares).to match_array(top_bottom_karten)
   end
 
   it 'knows unique cards can be communicated' do
