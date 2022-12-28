@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "auftrag"
+
 # Verteilt die Karten an die Spieler
 class KartenVerwalter
   def initialize(karten:, spieler:)
