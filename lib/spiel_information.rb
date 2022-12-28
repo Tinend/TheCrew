@@ -6,6 +6,7 @@
 # * Wer fängt an.
 # * Welche Spieler hat welche Aufträge.
 # * Welche Karten sind gegangen.
+# * Wer was kommuniziert hat.
 class SpielInformation
   def initialize(anzahl_spieler:)
     @anzahl_spieler = anzahl_spieler

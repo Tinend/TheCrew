@@ -26,7 +26,7 @@ class Farbe
   end
 
   def trumpf?
-    @staerke > 0
+    @staerke.positive?
   end
 
   alias == eql?

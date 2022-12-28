@@ -12,6 +12,9 @@ class Entscheider
   end
 
   # Macht nix wenn nicht neu definiert.
+  def sehe_spiel_informations_sicht(spiel_informations_sicht); end
+
+  # Macht nix wenn nicht neu definiert.
   def bekomm_karten(karten); end
 
   # Macht nix wenn nicht neu definiert.
