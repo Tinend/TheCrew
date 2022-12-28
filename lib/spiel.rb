@@ -24,14 +24,22 @@ class Spiel
   end
 
   def kommunizieren
-    @spieler.each_index do |i|
+    @spieler.each_index.any? do |i|
       kommunikation = @spieler[i].waehle_kommunikation
-      @spiel_information.kommuniziere(i, kommunikation) if kommunikation
+      next unless kommunikation
+
+      @spiel_information.kommuniziere(i, kommunikation)
+      true
     end
   end
 
+  # Immer wenn jemand kommuniziert, kriegen andere die Gelegenheit, nochmal zu kommunizieren. Bis keiner mehr will.
+  def iterativ_kommunizieren
+    while kommunizieren; end
+  end
+
   def runde
-    kommunizieren
+    iterativ_kommunizieren
     stich = Stich.new
     @spieler.each_index do |i|
       spieler = @spieler[(i + @ausspiel_recht_index) % @spieler.length]
