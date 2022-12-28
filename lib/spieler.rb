@@ -2,6 +2,7 @@
 
 require 'karte'
 require 'stich'
+require 'kommunikation'
 
 # Ein Spieler im TheCrew Spiel.
 # Man beachte, dass diese Klasse keine Entscheidungen trifft. Sie verwaltet lediglich die Hand und die Aktionen des
