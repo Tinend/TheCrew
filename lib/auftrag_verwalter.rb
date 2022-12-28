@@ -14,9 +14,7 @@ class AuftragVerwalter
   def auftraege_ziehen(anzahl:, richter:)
     @auftraege.shuffle!
     @ausgelegte_auftraege = @auftraege[0...anzahl]
-    @ausgelegte_auftraege.each do |auftrag|
-      auftrag.aktivieren
-    end
+    @ausgelegte_auftraege.each(&:aktivieren)
     richter.auftraege_erhalten(@ausgelegte_auftraege.dup)
   end
 

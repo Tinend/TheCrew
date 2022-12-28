@@ -11,10 +11,14 @@ class Spiel
     @spiel_information = spiel_information
     @ausspiel_recht_index = @spieler.find_index(&:faengt_an?)
     @spiel_information.setze_kapitaen(@ausspiel_recht_index)
+    starthand_zeigen
+  end
+
+  def starthand_zeigen
     @spieler.each_with_index do |spieler, index|
       puts "Spieler #{index + 1}"
       puts "Hand: #{spieler}"
-      puts "Aufträge: #{@spiel_information.auftraege[index].reduce("") {|start, auftrag| start + auftrag.karte.to_s}}"
+      puts "Aufträge: #{@spiel_information.auftraege[index].reduce('') { |start, auftrag| start + auftrag.karte.to_s }}"
       puts
     end
   end
@@ -28,7 +32,7 @@ class Spiel
     end
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
-    @richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen    
+    @richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen
     @ausspiel_recht_index = @spieler.find_index(stich.sieger)
   end
 end

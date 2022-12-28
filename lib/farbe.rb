@@ -45,6 +45,7 @@ class Farbe
     return string.red if @name == 'rot'
     return string.blue if @name == 'blau'
     return string.yellow if @name == 'gelb'
+
     string
   end
 end

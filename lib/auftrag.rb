@@ -14,6 +14,7 @@ class Auftrag
 
   def erfuellen(karte)
     return unless karte == @karte
+
     @erfuellt = true
   end
 

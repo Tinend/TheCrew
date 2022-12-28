@@ -47,8 +47,8 @@ class Karte
     self.class == other.class && @wert == other.wert && @farbe == other.farbe
   end
 
-  def <=>(karte)
-    [@farbe.sortier_wert, @wert] <=> [karte.farbe.sortier_wert, karte.wert]
+  def <=>(other)
+    [@farbe.sortier_wert, @wert] <=> [other.farbe.sortier_wert, other.wert]
   end
 
   alias == eql?
