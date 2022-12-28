@@ -1,6 +1,6 @@
 require 'richter'
 require 'spiel_information'
-require 'entscheider/ZufallsEntscheider'
+require 'entscheider/zufalls_entscheider'
 require 'spieler'
 require 'spiel'
 require 'auftrag_verwalter'
@@ -10,7 +10,7 @@ require 'auftrag'
 ANZAHL_SPIELER = 4
 
 richter = Richter.new()
-spiel_information = SpielInformation.new(4)
+spiel_information = SpielInformation.new()
 spieler = Array.new(ANZAHL_SPIELER) {|i|
   Spieler.new(entscheider: ZufallsEntscheider.new(), spiel_information: spiel_information.fuer_spieler(i))
 }
