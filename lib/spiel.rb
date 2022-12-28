@@ -29,7 +29,8 @@ class Spiel
       next unless kommunikation
 
       @spiel_information.kommuniziert(spieler_index: i, kommunikation: kommunikation)
-      puts "Spieler #{i + 1} kommuniziert, dass #{kommunikation.karte} seine #{kommunikation.art} #{kommunikation.karte.farbe.name}e ist."
+      puts "Spieler #{i + 1} kommuniziert, dass #{kommunikation.karte} seine #{kommunikation.art} " \
+           "#{kommunikation.karte.farbe.name}e ist."
       true
     end
   end
@@ -43,7 +44,7 @@ class Spiel
     puts "Spieler #{@spieler.find_index(stich.sieger) + 1} holt den Stich."
     puts stich.to_s
   end
-  
+
   def runde
     iterativ_kommunizieren
     stich = Stich.new

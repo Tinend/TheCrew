@@ -22,7 +22,7 @@ class ZufallsEntscheider < Entscheider
 
   def kommuniziert?
     karten = @anzahl_anfangs_karten - @spiel_informations_sicht.stiche.length
-    rand(karten) == 0
+    rand(karten).zero?
   end
 
   def waehle_kommunikation(kommunizierbares)
