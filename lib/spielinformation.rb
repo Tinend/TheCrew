@@ -30,6 +30,7 @@ class SpielInformation
     SpielInformationsSicht.new(self, spieler_index)
   end
 
+  # Information aus Sicht eines Spielers (i.e. Spieler Indices sind entsprechend umgerechnet).
   class SpielInformationsSicht
     def initialize(spiel_information:, spieler_index:)
       @spiel_information = spiel_information
@@ -41,7 +42,8 @@ class SpielInformation
     end
 
     def kapitaen
-      (@spiel_information.kapitaen - @spieler_index + @spiel_information.anzahl_spieler) % @spiel_information.anzahl_spieler
+      n = @spiel_information.anzahl_spieler
+      (@spiel_information.kapitaen - @spieler_index + n) % n
     end
 
     def auftraege
