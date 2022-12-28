@@ -30,6 +30,10 @@ class Spieler
     @karten.any? { |k| k.farbe == stich.farbe }
   end
 
+  def hat_karten?
+    !@karten.emtpy?
+  end
+
   def waehlbare_karten(stich)
     if muss_bedienen?(stich)
       @karten.select { |k| k.farbe == stich.farbe }
