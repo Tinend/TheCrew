@@ -47,6 +47,10 @@ class Karte
     self.class == other.class && @wert == other.wert && @farbe == other.farbe
   end
 
+  def <=>(karte)
+    [@farbe.sortier_wert, @wert] <=> [karte.farbe.sortier_wert, karte.wert]
+  end
+
   alias == eql?
 
   def hash

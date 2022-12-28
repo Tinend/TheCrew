@@ -11,14 +11,17 @@ class Spiel
     @spiel_information = spiel_information
     @ausspiel_recht_index = @spieler.find_index(&:faengt_an?)
     @spiel_information.setze_kapitaen(@ausspiel_recht_index)
-    @spieler.each do |s|
-      puts s
+    @spieler.each_with_index do |spieler, index|
+      puts "Spieler #{index + 1}"
+      puts "Hand: #{spieler}"
+      puts "Aufträge: #{@spiel_information.auftraege[index].reduce("") {|start, auftrag| start + auftrag.karte.to_s}}"
+      puts
     end
   end
 
   def runde
     stich = Stich.new
-    @spieler.length.times do |i|
+    @spieler.each_index do |i|
       spieler = @spieler[(i + @ausspiel_recht_index) % @spieler.length]
       wahl = spieler.waehle_karte(stich)
       stich.legen(karte: wahl, spieler: spieler)

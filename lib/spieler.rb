@@ -63,6 +63,6 @@ class Spieler
   end
 
   def to_s
-    karten.reduce("") {|start, karte| start + " " + karte.to_s}
+    (karten.sort.reduce("") {|start, karte| start + " " + karte.to_s})[1..-1]
   end
 end

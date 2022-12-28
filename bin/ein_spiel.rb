@@ -14,6 +14,7 @@ require 'auftrag'
 require 'karte'
 
 ANZAHL_SPIELER = 4
+ANZAHL_AUFTRAEGE = 3
 
 richter = Richter.new()
 spiel_information = SpielInformation.new(anzahl_spieler: ANZAHL_SPIELER)
@@ -24,7 +25,7 @@ karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spieler: spieler)
 karten_verwalter.verteilen()
 auftraege = Karte.alle_normalen.map {|karte| Auftrag.new(karte)}
 auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
-auftrag_verwalter.auftraege_ziehen(anzahl: 1, richter: richter)
+auftrag_verwalter.auftraege_ziehen(anzahl: ANZAHL_AUFTRAEGE, richter: richter)
 auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
 spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information)
 until richter.gewonnen or richter.verloren
