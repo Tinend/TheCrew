@@ -33,6 +33,10 @@ class Karte
     @alle ||= @alle_normalen + @alle_truempfe
   end
 
+  def to_s
+    "#{farbe.name} #{wert}"
+  end
+
   attr_reader :wert, :farbe
 
   def schlaegt?(karte)
