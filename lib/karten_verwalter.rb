@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Kartenverwalter
+class Karten_Verwalter
   def initialize(karten:, spieler:)
     @spieler = spieler
     @karten = karten
