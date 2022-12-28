@@ -37,7 +37,7 @@ class Karte
   attr_reader :wert, :farbe
 
   def schlaegt?(karte)
-    @farbe.schlaegt?(karte.farbe) || @farbe == karte.farbe && @wert > karte.wert
+    @farbe.schlaegt?(karte.farbe) || (@farbe == karte.farbe && @wert > karte.wert)
   end
 
   def eql?(other)

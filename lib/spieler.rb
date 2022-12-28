@@ -3,6 +3,8 @@
 require 'karte'
 require 'stich'
 
+# Ein Spieler im TheCrew Spiel.
+# Man beachte, dass diese Klasse keine Entscheidungen trifft. Sie verwaltet lediglich die Hand und die Aktionen des Spielers. Der `Entscheider` trifft die Entscheidungen.
 class Spieler
   def initialize(entscheider)
     @entscheider = entscheider
@@ -51,7 +53,7 @@ class Spieler
     raise TypeError unless stich.is_a?(Stich)
 
     waehlbare = waehlbare_karten(stich)
-    @entscheider.waehle_karte(stich, waehlbare)
+    karte = @entscheider.waehle_karte(stich, waehlbare)
     raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' unless waehlbare.include?(karte)
 
     @karten.delete(karte)
