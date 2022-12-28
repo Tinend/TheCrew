@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# Spielkarte
 
 class Karte
   def initialize(wert:, farbe:)

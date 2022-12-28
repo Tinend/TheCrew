@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# verwaltet einen Stich und Karten die drauf gelegt werden
 
 require_relative 'karte'
 
