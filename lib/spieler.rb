@@ -4,7 +4,8 @@ require 'karte'
 require 'stich'
 
 # Ein Spieler im TheCrew Spiel.
-# Man beachte, dass diese Klasse keine Entscheidungen trifft. Sie verwaltet lediglich die Hand und die Aktionen des Spielers. Der `Entscheider` trifft die Entscheidungen.
+# Man beachte, dass diese Klasse keine Entscheidungen trifft. Sie verwaltet lediglich die Hand und die Aktionen des
+# Spielers. Der `Entscheider` trifft die Entscheidungen.
 class Spieler
   def initialize(entscheider)
     @entscheider = entscheider

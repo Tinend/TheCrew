@@ -4,7 +4,16 @@
 # Just a funny line.
 source 'https://rubygems.org'
 
-group :development do
+group :development, :test do
+  gem 'rake'
+end
+
+group :test do
   gem 'rspec'
+end
+
+group :development do
   gem 'rubocop'
+  gem 'rubocop-rake'
+  gem 'rubocop-rspec'
 end
