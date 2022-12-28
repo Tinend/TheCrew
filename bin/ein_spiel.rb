@@ -7,11 +7,11 @@ require 'auftrag_verwalter'
 require 'karten_verwalter'
 require 'auftrag'
 
-Anzahl_Spieler = 4
+ANZAHL_SPIELER = 4
 
 richter = Richter.new()
 spiel_information = SpielInformation.new(4)
-spieler = Array.new(Anzahl_Spieler) {|i|
+spieler = Array.new(ANZAHL_SPIELER) {|i|
   Spieler.new(entscheider: ZufallsEntscheider.new(), spiel_information: spiel_information.fuer_spieler(i))
 }
 spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information)
