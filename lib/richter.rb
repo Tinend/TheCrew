@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Entscheidet, ob das Spiel gewonnen oder verloren ist
 
 class Richter

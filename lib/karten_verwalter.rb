@@ -6,7 +6,7 @@ class Karten_Verwalter
     @karten = karten
   end
 
-  def verteilen()
+  def verteilen
     @karten.shuffle!
     blattgroesse = @karten.length / @spieler.length
     zusatzkarten = @karten.length - blattgroesse * @spieler.length

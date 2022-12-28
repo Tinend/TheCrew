@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # verwaltet einen Stich und Karten die drauf gelegt werden
 
 require_relative 'karte'
@@ -15,7 +16,7 @@ class Stich
   def farbe
     @staerksteKarte.farbe
   end
-  
+
   def legen(karte:, spieler:)
     if karte.schlaegt?(@staerksteKarte)
       @sieger = :spieler

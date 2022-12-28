@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spieler'
 require 'karte'
 require 'farbe'
@@ -10,6 +12,7 @@ RSpec.describe Spieler do
   let(:roter_stich) do
     stich = Stich.new
     stich.legen(karte: Karte.new(farbe: Farbe::ROT, wert: 2), spieler: anderer_spieler)
+    stich
   end
 
   it 'knows if it begins' do

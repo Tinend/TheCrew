@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'karte'
+require 'stich'
 
 class Spieler
   def initialize(entscheider)
@@ -47,9 +48,11 @@ class Spieler
   end
 
   def waehle_karte(stich)
+    raise TypeError unless stich.is_a?(Stich)
+
     waehlbare = waehlbare_karten(stich)
-    entscheider.waehle_karte(stich, waehlbare)
-    raise 'Entscheider hat einen nicht existierenden Auftrag gewaehlt.' unless waehlbare.include?(karte)
+    @entscheider.waehle_karte(stich, waehlbare)
+    raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' unless waehlbare.include?(karte)
 
     @karten.delete(karte)
     karte
