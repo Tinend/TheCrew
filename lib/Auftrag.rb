@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Auftrag
   def initialize(karte)
     @erfuellt = true
@@ -7,13 +9,12 @@ class Auftrag
   attr_reader :karte, :erfuellt
 
   def erfuellen(karte)
-    if karte == @karte
-      @erfuellt = true
-    end
+    return unless karte == @karte
+
+    @erfuellt = true
   end
 
-  def aktivieren()
+  def aktivieren
     @erfuellt = false
   end
-
 end

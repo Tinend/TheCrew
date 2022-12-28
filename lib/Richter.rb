@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class Richter
-  def initialize()
+  def initialize
     @verloren = false
     @gewonnen = false
     @auftraege = []
   end
 
   attr_reader :gewonnen, :verloren
-  
+
   def auftragErhalten(auftrag)
     @auftraege.push(auftrag)
   end
@@ -17,11 +19,9 @@ class Richter
         auftrag.erfuellen(karte)
       end
     end
-    @auftraege.delete_if {|auftrag| auftrag.erfuellt}
-    if @auftraege.length == 0
-      @gewonnen = true
-    end
-  end
+    @auftraege.delete_if(&:erfuellt)
+    return unless @auftraege.length.zero?
 
-  
+    @gewonnen = true
+  end
 end

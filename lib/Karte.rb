@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Karte
   def initialize(wert:, farbe:)
     @wert = wert
@@ -7,20 +9,16 @@ class Karte
   attr_reader :wert, :farbe
 
   def schlaegt?(karte)
-    if karte.farbe == :rakete and (@farbe != :rakete or @wert <= karte.wert)
-      return false
+    if (karte.farbe == :rakete) && ((@farbe != :rakete) || (@wert <= karte.wert))
+      false
     elsif farbe == :rakete
-      return true
+      true
     elsif farbe == :antiRakete
-      return false
+      false
     elsif karte.farbe == :antiRakete
-      return true
-    elsif farbe != karte.farbe
-      return false
+      true
     else
-      return true
+      farbe == karte.farbe
     end
-    
   end
-  
 end
