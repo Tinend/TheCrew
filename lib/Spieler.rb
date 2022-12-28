@@ -9,7 +9,7 @@ class Spieler
 
   def waehl_auftrag(auftraege)
     auftrag = @entscheider.waehl_auftrag(auftraege)
-    raise "Entscheider hat einen nicht existierenden Auftrag gewaehlt." unless auftraege.include?(Auftrag)
+    raise "Entscheider hat einen nicht existierenden Auftrag gewaehlt." unless auftraege.include?(auftrag)
 
     @auftraege.push(auftrag)
     auftrag
@@ -23,7 +23,7 @@ class Spieler
     entscheider.waehle_karte(stich)
     raise "Entscheider hat einen nicht existierenden Auftrag gewaehlt." unless @karten.include?(karte)
 
-    @karten.delete(stich)
+    @karten.delete(karte)
     karte
   end
 
