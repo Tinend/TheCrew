@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Superklasse von allen Entscheidern, die jeweils einen Bot oder menschlichen darstellen und spielrelevante Infos bekommen und Entscheidungen treffen.
+# Superklasse von allen Entscheidern, die jeweils einen Bot oder menschlichen darstellen und spielrelevante Infos
+# bekommen und Entscheidungen treffen.
 class Entscheider
   def waehl_auftrag(auftraege)
     raise NotImplementedError
