@@ -8,6 +8,7 @@ require 'richter'
 require 'spiel_information'
 require 'entscheider/zufalls_entscheider'
 require 'entscheider/hase'
+require 'entscheider/saeuger'
 require 'spieler'
 require 'spiel'
 require 'auftrag_verwalter'
@@ -18,7 +19,7 @@ require 'karte'
 ANZAHL_SPIELER = 4
 ANZAHL_AUFTRAEGE = 1
 ANZAHL_SPIELE = 1000
-ENTSCHEIDER = [ZufallsEntscheider, Hase]
+ENTSCHEIDER = [ZufallsEntscheider, Hase, Saeuger]
 
 zufalls_generator = Random.new()
 
