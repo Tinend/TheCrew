@@ -14,6 +14,8 @@ class Richter
 
   def auftraege_erhalten(auftraege)
     @auftraege = auftraege
+    @verloren = false
+    @gewonnen = false
   end
 
   def stechen(stich)

@@ -9,8 +9,8 @@ class KartenVerwalter
     @karten = karten
   end
 
-  def verteilen
-    @karten.shuffle!
+  def verteilen(zufalls_generator: Random.new)
+    @karten.shuffle!(random: zufalls_generator)
     blattgroesse = @karten.length / @spieler.length
     zusatzkarten = @karten.length - (blattgroesse * @spieler.length)
     @spieler.each_with_index do |spieler, i|

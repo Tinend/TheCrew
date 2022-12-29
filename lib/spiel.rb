@@ -5,13 +5,13 @@ require_relative 'stich'
 
 # Verwaltet das Spiel. Lässt jeden Spieler jede Runde auf den Stich spielen
 class Spiel
-  def initialize(spieler:, richter:, spiel_information:)
+  def initialize(spieler:, richter:, spiel_information:, ausgeben: true)
     @spieler = spieler
     @richter = richter
     @spiel_information = spiel_information
     @ausspiel_recht_index = @spieler.find_index(&:faengt_an?)
     @spiel_information.setze_kapitaen(@ausspiel_recht_index)
-    starthand_zeigen
+    starthand_zeigen if ausgeben
   end
 
   def starthand_zeigen
@@ -23,21 +23,23 @@ class Spiel
     end
   end
 
-  def kommunizieren
+  def kommunizieren(ausgeben)
     @spieler.each_index.any? do |i|
       kommunikation = @spieler[i].waehle_kommunikation
       next unless kommunikation
 
       @spiel_information.kommuniziert(spieler_index: i, kommunikation: kommunikation)
-      puts "Spieler #{i + 1} kommuniziert, dass #{kommunikation.karte} seine #{kommunikation.art} " \
-           "#{kommunikation.karte.farbe.name}e ist."
+      if ausgeben
+        puts "Spieler #{i + 1} kommuniziert, dass #{kommunikation.karte} seine #{kommunikation.art} " \
+             "#{kommunikation.karte.farbe.name}e ist."
+      end
       true
     end
   end
 
   # Immer wenn jemand kommuniziert, kriegen andere die Gelegenheit, nochmal zu kommunizieren. Bis keiner mehr will.
-  def iterativ_kommunizieren
-    while kommunizieren; end
+  def iterativ_kommunizieren(ausgeben)
+    while kommunizieren(ausgeben); end
   end
 
   def stich_ausgeben(stich)
@@ -55,8 +57,8 @@ class Spiel
     puts "Folgende Aufträge wurden erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length > 1
   end
 
-  def runde
-    iterativ_kommunizieren
+  def runde(ausgeben: true)
+    iterativ_kommunizieren(ausgeben)
     stich = Stich.new
     @spieler.each_index do |i|
       spieler = @spieler[(i + @ausspiel_recht_index) % @spieler.length]
@@ -65,7 +67,7 @@ class Spiel
     end
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
-    stich_ausgeben(stich)
+    stich_ausgeben(stich) if ausgeben
     @richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen
     @ausspiel_recht_index = @spieler.find_index(stich.sieger)
   end
