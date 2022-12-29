@@ -11,12 +11,20 @@ class Saeuger < Entscheider
       wert = 0
       if @karten.include?(auftrag.karte)
         wert = auftrag.karte.wert
-      elsif @karten.any? { |karte| (karte.farbe == auftrag.karte.farbe) && karte.schlaegt?(auftrag.karte) }
-        wert = @karten.select { |karte| karte.farbe == auftrag.karte.farbe }.max_by(&:wert).wert
-        wert -= auftrag.karte.wert * 0.1
+      else
+        max_karte = finde_max_karte(auftrag)
+        wert = if max_karte.nil?
+                 0
+               else
+                 max_karte.wert - (auftrag.karte.wert * 0.1)
+               end
       end
       wert
     end
+  end
+
+  def finde_max_karte(auftrag)
+    @karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
   end
 
   def waehle_karte(_stich, waehlbare_karten)
@@ -28,7 +36,8 @@ class Saeuger < Entscheider
   end
 
   def bekomm_karten(karten)
-    @anzahl_anfangs_karten = karten.length
+    @karten = karten
+    @anzahl_anfangs_karten = @karten.length
   end
 
   def kommuniziert?

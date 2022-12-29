@@ -11,12 +11,20 @@ class Hase < Entscheider
       wert = 0
       if @karten.include?(auftrag.karte)
         wert = auftrag.karte.wert
-      elsif @karten.any? { |karte| (karte.farbe == auftrag.karte.farbe) && karte.schlaegt?(auftrag.karte) }
-        wert = @karten.select { |karte| karte.farbe == auftrag.karte.farbe }.max_by(&:wert).wert
-        wert -= auftrag.karte.wert * 0.1
+      else
+        max_karte = finde_max_karte(auftrag)
+        wert = if max_karte.nil?
+                 0
+               else
+                 max_karte.wert - (auftrag.karte.wert * 0.1)
+               end
       end
       wert
     end
+  end
+
+  def finde_max_karte(auftrag)
+    @karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
   end
 
   def anspielen(_stich, waehlbare_karten)
@@ -32,16 +40,27 @@ class Hase < Entscheider
     end
   end
 
-  def abspielen(stich, waehlbare_karten)
+  def auftrag_abspielen(stich, waehlbare_karten)
     @spiel_informations_sicht.auftraege[0].each do |auftrag|
-      if (auftrag.karte.farbe == stich.farbe) && !waehlbare_karten.include?(auftrag.karte) && waehlbare_karten.any? do |karte|
-           karte.farbe == stich.farbe
-         end
+      if auftrag_holen?(auftrag: auftrag, stich: stich, waehlbare_karten: waehlbare_karten)
         return waehlbare_karten.select { |karte| karte.farbe == stich.farbe }.min_by(&:wert)
       elsif (auftrag.karte.farbe == stich.farbe) && waehlbare_karten.include?(auftrag.karte)
         return auftrag.karte
       end
     end
+    nil
+  end
+
+  def auftrag_holen?(auftrag:, stich:, waehlbare_karten:)
+    auftrag.karte.farbe == stich.farbe && !waehlbare_karten.include?(auftrag.karte) && waehlbare_karten.any? do |karte|
+      karte.farbe == stich.farbe
+    end
+  end
+
+  def abspielen(stich, waehlbare_karten)
+    rueck = auftrag_abspielen(stich, waehlbare_karten)
+    return rueck unless rueck.nil?
+
     @spiel_informations_sicht.auftraege[1..].reduce(:+).each do |auftrag|
       return auftrag.karte if waehlbare_karten.include?(auftrag.karte)
     end
