@@ -10,19 +10,52 @@ require 'spiel_information'
 require 'entscheider/zufalls_entscheider'
 require 'entscheider/hase'
 require 'entscheider/saeuger'
+require 'entscheider/archaeon'
 require 'spieler'
 require 'spiel'
 require 'auftrag_verwalter'
 require 'karten_verwalter'
 require 'auftrag'
 require 'karte'
+require 'hilfe'
+
+seed_setzer = nil
+auftrag_setzer = nil
+anzahl_spiele_setzer = nil
+entscheider_setzer = []
+ARGV.each do |a|
+  seed_setzer = a if a[0..1] == '-r'
+  auftrag_setzer = a if a[0..1] == '-a'
+  entscheider_setzer.push(a) if a[0..1] == '-x'
+  anzahl_spiele_setzer = a if a[0..1] == '-s'
+  hilfe if a[0..1] == '-h'
+end
 
 ANZAHL_SPIELER = 4
-ANZAHL_AUFTRAEGE = 3
-ANZAHL_SPIELE = 100
-ENTSCHEIDER = [ZufallsEntscheider, Hase, Saeuger].freeze
+SEED = if seed_setzer.nil?
+         220_357_742_778_267_021_154_878_235_677_688_577_309
+       elsif seed_setzer[3..].to_i.zero?
+         Random.new_seed
+       else
+         seed_setzer[3..].to_i
+       end
+ANZAHL_AUFTRAEGE = if auftrag_setzer.nil?
+                     6
+                   else
+                     auftrag_setzer[3..].to_i
+                   end
+ANZAHL_SPIELE = if anzahl_spiele_setzer.nil?
+                  10_000
+                else
+                  anzahl_spiele_setzer[3..].to_i
+                end
+ENTSCHEIDER = [Hase, Saeuger, Archaeon, ZufallsEntscheider].delete_if do |entscheider|
+  entscheider_setzer.any? do |es|
+    es[3..] == entscheider.to_s
+  end
+end
 
-zufalls_generator = Random.new
+zufalls_generator = Random.new(SEED)
 
 puts "Es gibt #{ANZAHL_AUFTRAEGE} Aufträge und jeder Spieler spielt #{ANZAHL_SPIELE} Runden."
 ENTSCHEIDER.each do |entscheider|

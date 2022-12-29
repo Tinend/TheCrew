@@ -4,7 +4,7 @@
 require_relative '../entscheider'
 
 # Aufträge: Wenn er ihn hat, bevorzugt groß, wenn er ihn nicht hat, bevorzugt tief
-# Wirft höchste Karte wenn er Auftrag hat, tiefste Karte wenn anderer Auftrag hat und Auftrag, wenn möglich
+# Grundlage für die meisten Entscheider mit Tiernamen
 class Saeuger < Entscheider
   def waehl_auftrag(auftraege)
     auftraege.max_by do |auftrag|
