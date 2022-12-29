@@ -44,15 +44,15 @@ class Spiel
     puts "Spieler #{@spieler.find_index(stich.sieger) + 1} holt den Stich."
     puts stich.to_s
     if @richter.vermasselt_letzter_stich != []
-      vermasselt = @richter.vermasselt_letzter_stich.join(" ")
+      vermasselt = @richter.vermasselt_letzter_stich.join(' ')
       puts "Folgender Auftrag wurde nicht erfüllt: #{vermasselt}" if @richter.vermasselt_letzter_stich.length == 1
       puts "Folgende Aufträge wurden nicht erfüllt: #{vermasselt}" if @richter.vermasselt_letzter_stich.length > 1
     end
-    if @richter.erfuellt_letzter_stich != []
-      erfuellt = @richter.erfuellt_letzter_stich.join(" ")
-      puts "Folgender Auftrag wurde erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length == 1
-      puts "Folgende Aufträge wurden erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length > 1
-    end
+    return unless @richter.erfuellt_letzter_stich != []
+
+    erfuellt = @richter.erfuellt_letzter_stich.join(' ')
+    puts "Folgender Auftrag wurde erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length == 1
+    puts "Folgende Aufträge wurden erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length > 1
   end
 
   def runde

@@ -23,15 +23,11 @@ class Richter
       stich.karten.each do |karte|
         auftrag.erfuellen(karte)
       end
-      if auftrag.erfuellt and @auftraege.include?(auftrag)
-        @erfuellt_letzter_stich.push(auftrag)
-      end
-   end
+      @erfuellt_letzter_stich.push(auftrag) if auftrag.erfuellt && @auftraege.include?(auftrag)
+    end
     (@auftraege - stich.sieger.auftraege).each do |auftrag|
       stich.karten.each do |karte|
-        if auftrag.karte == karte
-          @vermasselt_letzter_stich.push(auftrag)
-        end
+        @vermasselt_letzter_stich.push(auftrag) if auftrag.karte == karte
       end
     end
     @auftraege.delete_if(&:erfuellt)
