@@ -23,4 +23,7 @@ class Entscheider
   # Nil bedeutet keine Kommunikation.
   # Macht nix wenn nicht neu definiert.
   def waehle_kommunikation(kommunizierbares); end
+
+  # Macht nix wenn nicht neu definiert.
+  def vorbereitungs_phase; end
 end

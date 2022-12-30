@@ -88,4 +88,8 @@ class Spieler
   def to_s
     (karten.sort.reduce('') { |start, karte| "#{start} #{karte}" })[1..]
   end
+
+  def vorbereitungs_phase
+    @entscheider.vorbereitungs_phase
+  end
 end
