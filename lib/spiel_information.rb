@@ -21,6 +21,10 @@ class SpielInformation
     @auftraege[spieler_index].push(auftrag)
   end
 
+  def unerfuellte_auftraege
+    @auftraege.map { |as| as.reject(&:erfuellt) }
+  end
+
   def kommuniziert(spieler_index:, kommunikation:)
     @kommunikationen[spieler_index] = kommunikation
   end
@@ -55,6 +59,10 @@ class SpielInformation
 
     def auftraege
       @spiel_information.auftraege.rotate(@spieler_index)
+    end
+
+    def unerfuellte_auftraege
+      @spiel_information.unerfuellte_auftraege.rotate(@spieler_index)
     end
 
     def kommunikationen

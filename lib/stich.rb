@@ -16,6 +16,14 @@ class Stich
     @staerkste_karte.farbe
   end
 
+  def length
+    @karten.length
+  end
+
+  def empty?
+    @karten.empty?
+  end
+
   def legen(karte:, spieler:)
     if karte.schlaegt?(@staerkste_karte)
       @sieger = spieler
@@ -25,6 +33,6 @@ class Stich
   end
 
   def to_s
-    @karten.reduce('') { |anfang, karte| "#{anfang} #{karte}" }
+    @karten.join(' ')
   end
 end
