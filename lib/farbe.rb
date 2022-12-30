@@ -14,11 +14,11 @@ class Farbe
   attr_reader :name, :staerke, :sortier_wert
 
   def eql?(other)
-    self.class == other.class && name == other.name && staerke == other.staerke
+    self.class == other.class && @name == other.name && @staerke == other.staerke && @sortier_wert == other.sortier_wert
   end
 
   def hash
-    @hash ||= [self.class, @name, @staerke].hash
+    @hash ||= [self.class, @name, @staerke, @sortier_wert].hash
   end
 
   def schlaegt?(other)
@@ -33,9 +33,6 @@ class Farbe
 
   # Trumpf
   RAKETE = new(name: 'Rakete', staerke: 1, sortier_wert: 4)
-
-  # Pseudo Farbe die es nicht wirklich gibt und die anti Trumpf ist.
-  ANTI_RAKETE = new(name: 'AntiRakete', staerke: -1, sortier_wert: -1)
 
   GRUEN = new(name: 'grün', staerke: 0, sortier_wert: 3)
   ROT = new(name: 'rot', staerke: 0, sortier_wert: 2)

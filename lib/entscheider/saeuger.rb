@@ -9,7 +9,7 @@ class Saeuger < Entscheider
   def waehl_auftrag(auftraege)
     auftraege.max_by do |auftrag|
       wert = 0
-      if @karten.include?(auftrag.karte)
+      if karten.include?(auftrag.karte)
         wert = auftrag.karte.wert
       else
         max_karte = finde_max_karte(auftrag)
@@ -23,8 +23,12 @@ class Saeuger < Entscheider
     end
   end
 
+  def karten
+    @spiel_informations_sicht.karten
+  end
+
   def finde_max_karte(auftrag)
-    @karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
+    karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
   end
 
   def waehle_karte(_stich, waehlbare_karten)
@@ -35,14 +39,8 @@ class Saeuger < Entscheider
     @spiel_informations_sicht = spiel_informations_sicht
   end
 
-  def bekomm_karten(karten)
-    @karten = karten
-    @anzahl_anfangs_karten = @karten.length
-  end
-
   def kommuniziert?
-    karten = @anzahl_anfangs_karten - @spiel_informations_sicht.stiche.length
-    rand(karten).zero?
+    rand(karten.length).zero?
   end
 
   def waehle_kommunikation(kommunizierbares)

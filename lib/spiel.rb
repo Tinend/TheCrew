@@ -9,16 +9,15 @@ class Spiel
     @spieler = spieler
     @richter = richter
     @spiel_information = spiel_information
-    @ausspiel_recht_index = @spieler.find_index(&:faengt_an?)
-    @spiel_information.setze_kapitaen(@ausspiel_recht_index)
+    @ausspiel_recht_index = @spiel_information.kapitaen_index
     starthand_zeigen if ausgeben
   end
 
   def starthand_zeigen
-    @spieler.each_with_index do |spieler, index|
+    @spieler.each_index do |index|
       puts "Spieler #{index + 1}"
-      puts "Hand: #{spieler}"
-      puts "Aufträge: #{@spiel_information.auftraege[index].reduce('') { |start, auftrag| start + auftrag.karte.to_s }}"
+      puts "Hand: #{@spiel_information.karten[index].join(' ')}"
+      puts "Aufträge: #{@spiel_information.auftraege[index].join(' ')}"
       puts
     end
   end
@@ -43,7 +42,7 @@ class Spiel
   end
 
   def stich_ausgeben(stich)
-    puts "Spieler #{@spieler.find_index(stich.sieger) + 1} holt den Stich."
+    puts "Spieler #{stich.sieger_index + 1} holt den Stich."
     puts stich.to_s
     if @richter.vermasselt_letzter_stich != []
       vermasselt = @richter.vermasselt_letzter_stich.join(' ')
@@ -61,14 +60,16 @@ class Spiel
     iterativ_kommunizieren(ausgeben)
     stich = Stich.new
     @spieler.each_index do |i|
-      spieler = @spieler[(i + @ausspiel_recht_index) % @spieler.length]
+      spieler_index = (i + @ausspiel_recht_index) % @spieler.length
+      spieler = @spieler[spieler_index]
       wahl = spieler.waehle_karte(stich)
-      stich.legen(karte: wahl, spieler: spieler)
+      @spiel_information.karte_gespielt(spieler_index: spieler_index, karte: wahl)
+      stich.legen(karte: wahl, spieler_index: spieler_index)
     end
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
     stich_ausgeben(stich) if ausgeben
-    @richter.alle_karten_ausgespielt if @spieler.any? { |spieler| !spieler.hat_karten? } && !@richter.gewonnen
-    @ausspiel_recht_index = @spieler.find_index(stich.sieger)
+    @richter.alle_karten_ausgespielt if @spiel_information.existiert_blanker_spieler?
+    @ausspiel_recht_index = stich.sieger_index
   end
 end

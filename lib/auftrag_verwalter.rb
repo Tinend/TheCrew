@@ -11,15 +11,14 @@ class AuftragVerwalter
 
   attr_reader :ausgelegte_auftraege
 
-  def auftraege_ziehen(anzahl:, richter:, zufalls_generator: Random.new)
+  def auftraege_ziehen(anzahl:, zufalls_generator: Random.new)
     @auftraege.shuffle!(random: zufalls_generator)
     @ausgelegte_auftraege = @auftraege[0...anzahl]
     @ausgelegte_auftraege.each(&:aktivieren)
-    richter.auftraege_erhalten(@ausgelegte_auftraege.dup)
   end
 
   def auftraege_verteilen(spiel_information:)
-    start = @spieler.find_index(&:faengt_an?)
+    start = spiel_information.kapitaen_index
     @ausgelegte_auftraege.length.times do |i|
       wahl = @spieler[(start + i) % @spieler.length].waehl_auftrag(@ausgelegte_auftraege)
       spiel_information.auftrag_gewaehlt(auftrag: wahl, spieler_index: (start + i) % @spieler.length)

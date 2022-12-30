@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'karte'
 require 'stich'
 require 'kommunikation'
 
@@ -12,19 +11,15 @@ class Spieler
     @entscheider = entscheider
     @spiel_informations_sicht = spiel_informations_sicht
     @entscheider.sehe_spiel_informations_sicht(spiel_informations_sicht)
-    @karten = []
-    @auftraege = []
     @kann_kommunizieren = true
   end
 
-  attr_reader :auftraege, :karten
-
-  def faengt_an?
-    @karten.include?(Karte.max_trumpf)
+  def auftraege
+    @spiel_information.eigene_auftraege
   end
 
   def kommunizierbares
-    @karten.reject(&:trumpf?).group_by(&:farbe).flat_map do |_k, v|
+    karten.reject(&:trumpf?).group_by(&:farbe).flat_map do |_k, v|
       max = v.max_by(&:wert)
       min = v.min_by(&:wert)
       if max == min
@@ -47,30 +42,18 @@ class Spieler
     auftrag = @entscheider.waehl_auftrag(auftraege)
     raise 'Entscheider hat einen nicht existierenden Auftrag gewaehlt.' unless auftraege.include?(auftrag)
 
-    @auftraege.push(auftrag)
     auftrag
   end
 
-  def bekomm_karten(karten)
-    raise TypeError unless karten.is_a?(Array) && karten.all?(Karte)
-
-    @karten = karten
-    @entscheider.bekomm_karten(karten)
-  end
-
   def muss_bedienen?(stich)
-    @karten.any? { |k| k.farbe == stich.farbe }
-  end
-
-  def hat_karten?
-    !@karten.empty?
+    !stich.empty? && karten.any? { |k| k.farbe == stich.farbe }
   end
 
   def waehlbare_karten(stich)
     if muss_bedienen?(stich)
-      @karten.select { |k| k.farbe == stich.farbe }
+      karten.select { |k| k.farbe == stich.farbe }
     else
-      @karten
+      karten
     end
   end
 
@@ -81,11 +64,10 @@ class Spieler
     karte = @entscheider.waehle_karte(stich, waehlbare)
     raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' unless waehlbare.include?(karte)
 
-    @karten.delete(karte)
     karte
   end
 
-  def to_s
-    (karten.sort.reduce('') { |start, karte| "#{start} #{karte}" })[1..]
+  def karten
+    @spiel_informations_sicht.karten
   end
 end

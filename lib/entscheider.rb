@@ -15,9 +15,6 @@ class Entscheider
   def sehe_spiel_informations_sicht(spiel_informations_sicht); end
 
   # Macht nix wenn nicht neu definiert.
-  def bekomm_karten(karten); end
-
-  # Macht nix wenn nicht neu definiert.
   def stich_fertig(stich); end
 
   # Nil bedeutet keine Kommunikation.

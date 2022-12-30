@@ -4,33 +4,61 @@ require_relative 'karte'
 
 # verwaltet einen Stich und Karten die drauf gelegt werden
 class Stich
-  def initialize
-    @sieger = nil
-    @staerkste_karte = Karte.nil_karte
-    @karten = []
-    @farbe = Karte.nil_karte.farbe
+  # Eine Karte die von einem Spieler gespielt wurde.
+  class GespielteKarte
+    def initialize(spieler_index:, karte:)
+      @spieler_index = spieler_index
+      @karte = karte
+    end
+
+    attr_reader :karte, :spieler_index
+
+    def farbe
+      @karte.farbe
+    end
   end
 
-  attr_reader :sieger, :karten, :farbe, :staerkste_karte
+  def initialize
+    @gespielte_karten = []
+    @staerkste_gespielte_karte = nil
+  end
 
-  def length
-    @karten.length
+  attr_reader :gespielte_karten, :staerkste_gespielte_karte
+
+  def staerkste_karte
+    @staerkste_gespielte_karte&.karte
+  end
+
+  def karten
+    @gespielte_karten.map(&:karte)
+  end
+
+  def sieger_index
+    @staerkste_gespielte_karte&.spieler_index
+  end
+
+  def farbe
+    @gespielte_karten.first.farbe unless @gespielte_karten.empty?
   end
 
   def empty?
-    @karten.empty?
+    @gespielte_karten.empty?
   end
 
-  def legen(karte:, spieler:)
-    if karte.schlaegt?(@staerkste_karte)
-      @farbe = karte.farbe if @staerkste_karte == Karte.nil_karte
-      @sieger = spieler
-      @staerkste_karte = karte
-    end
-    @karten.push(karte)
+  def length
+    @gespielte_karten.length
+  end
+
+  # Gibt `true` zurück, wenn die Karte schlägt.
+  def legen(karte:, spieler_index:)
+    gespielte_karte = GespielteKarte.new(spieler_index: spieler_index, karte: karte)
+    @gespielte_karten.push(gespielte_karte)
+    schlaegt = @gespielte_karte.nil? || gespielte_karte.karte.schlaegt?(@staerkste_gespielte_karte.karte)
+    @staerkste_gespielte_karte = gespielte_karte if schlaegt
+    schlaegt
   end
 
   def to_s
-    @karten.join(' ')
+    karten.join(' ')
   end
 end
