@@ -11,8 +11,8 @@ class AuftragVerwalter
 
   attr_reader :ausgelegte_auftraege
 
-  def auftraege_ziehen(anzahl:, richter:)
-    @auftraege.shuffle!
+  def auftraege_ziehen(anzahl:, richter:, zufalls_generator: Random.new)
+    @auftraege.shuffle!(random: zufalls_generator)
     @ausgelegte_auftraege = @auftraege[0...anzahl]
     @ausgelegte_auftraege.each(&:aktivieren)
     richter.auftraege_erhalten(@ausgelegte_auftraege.dup)

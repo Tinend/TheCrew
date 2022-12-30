@@ -8,13 +8,10 @@ class Stich
     @sieger = nil
     @staerkste_karte = Karte.nil_karte
     @karten = []
+    @farbe = Karte.nil_karte.farbe
   end
 
-  attr_reader :sieger, :karten
-
-  def farbe
-    @staerkste_karte.farbe
-  end
+  attr_reader :sieger, :karten, :farbe, :staerkste_karte
 
   def length
     @karten.length
@@ -26,6 +23,7 @@ class Stich
 
   def legen(karte:, spieler:)
     if karte.schlaegt?(@staerkste_karte)
+      @farbe = karte.farbe if @staerkste_karte == Karte.nil_karte
       @sieger = spieler
       @staerkste_karte = karte
     end
