@@ -16,13 +16,12 @@ class ZufallsEntscheider < Entscheider
     @spiel_informations_sicht = spiel_informations_sicht
   end
 
-  def bekomm_karten(karten)
-    @anzahl_anfangs_karten = karten.length
+  def karten
+    @spiel_informations_sicht.karten
   end
 
   def kommuniziert?
-    karten = @anzahl_anfangs_karten - @spiel_informations_sicht.stiche.length
-    rand(karten).zero?
+    rand(karten.length).zero?
   end
 
   def waehle_kommunikation(kommunizierbares)

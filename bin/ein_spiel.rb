@@ -18,17 +18,17 @@ require 'karte'
 ANZAHL_SPIELER = 4
 ANZAHL_AUFTRAEGE = 3
 
-richter = Richter.new
 spiel_information = SpielInformation.new(anzahl_spieler: ANZAHL_SPIELER)
 spieler = Array.new(ANZAHL_SPIELER) do |i|
   Spieler.new(entscheider: Hase.new, spiel_informations_sicht: spiel_information.fuer_spieler(i))
 end
-karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spieler: spieler)
+karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spiel_information: spiel_information)
 karten_verwalter.verteilen
 auftraege = Karte.alle_normalen.map { |karte| Auftrag.new(karte) }
 auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
-auftrag_verwalter.auftraege_ziehen(anzahl: ANZAHL_AUFTRAEGE, richter: richter)
+auftrag_verwalter.auftraege_ziehen(anzahl: ANZAHL_AUFTRAEGE)
 auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
+richter = Richter.new(spiel_information: spiel_information)
 spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information)
 spiel.runde until richter.gewonnen || richter.verloren
 if richter.verloren

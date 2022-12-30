@@ -9,10 +9,10 @@ class Hase < Entscheider
   def waehl_auftrag(auftraege)
     auftraege.max_by do |auftrag|
       wert = 0
-      if @karten.include?(auftrag.karte)
+      if karten.include?(auftrag.karte)
         wert = auftrag.karte.wert
       else
-        max_karte = finde_max_karte(auftrag: auftrag, karten: @karten)
+        max_karte = finde_max_karte(auftrag: auftrag, karten: karten)
         wert = if max_karte.nil?
                  0
                else
@@ -23,7 +23,11 @@ class Hase < Entscheider
     end
   end
 
-  def finde_max_karte(auftrag:, karten: @karten)
+  def karten
+    @spiel_informations_sicht.karten
+  end
+
+  def finde_max_karte(auftrag:, karten: self.karten)
     karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
   end
 
@@ -92,13 +96,9 @@ class Hase < Entscheider
   end
 
   def waehle_karte(stich, waehlbare_karten)
-    return anspielen(stich, waehlbare_karten) if stich.farbe == Farbe::ANTI_RAKETE
+    return anspielen(stich, waehlbare_karten) if stich.empty?
 
     abspielen(stich, waehlbare_karten)
-  end
-
-  def bekomm_karten(karten)
-    @karten = karten
   end
 
   def sehe_spiel_informations_sicht(spiel_informations_sicht)
