@@ -15,17 +15,19 @@ class Spieler
   end
 
   def auftraege
-    @spiel_information.eigene_auftraege
+    @spiel_informations_sicht.eigene_auftraege
   end
 
   def kommunizierbares
+    gegangene_stiche = @spiel_informations_sicht.stiche.length
     karten.reject(&:trumpf?).group_by(&:farbe).flat_map do |_k, v|
       max = v.max_by(&:wert)
       min = v.min_by(&:wert)
       if max == min
-        [Kommunikation.einzige(max)]
+        [Kommunikation.einzige(karte: max, gegangene_stiche: gegangene_stiche)]
       else
-        [Kommunikation.tiefste(min), Kommunikation.hoechste(max)]
+        [Kommunikation.tiefste(karte: min, gegangene_stiche: gegangene_stiche),
+         Kommunikation.hoechste(karte: max, gegangene_stiche: gegangene_stiche)]
       end
     end
   end
@@ -58,7 +60,7 @@ class Spieler
   end
 
   def waehle_karte(stich)
-    raise TypeError unless stich.is_a?(Stich)
+    raise TypeError unless stich.is_a?(Stich::StichSicht)
 
     waehlbare = waehlbare_karten(stich)
     karte = @entscheider.waehle_karte(stich, waehlbare)

@@ -96,11 +96,25 @@ class SpielInformation
     end
 
     def stiche
-      @spiel_information.stiche
+      @spiel_information.stiche.map do |s|
+        s.fuer_spieler(spieler_index: @spieler_index, anzahl_spieler: @spiel_information.anzahl_spieler)
+      end
     end
 
     def eigene_auftraege
       auftraege.first
+    end
+
+    def ist_gegangen?(karte)
+      stiche.any? { |s| s.karten.include?(karte) }
+    end
+
+    # Kommunikation, aber mit Einberechnung von Stichen, die danach passiert sind.
+    # E.g. wenn man eine Karte ausgespielt hat, gilt es nicht mehr, dass sie vorher
+    # kommuniziert wurde. Wenn eine andere Karte derselben Farbe ausgespielt wurde,
+    # gilt evtl das Prädikat `hoechste` nicht mehr.
+    def erweiterte_kommunikation(karte)
+      return nil if ist_gegangen?(karte)
     end
   end
 end

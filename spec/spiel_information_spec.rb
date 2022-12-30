@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spiel_information'
+require 'karte'
 
 def auftrag(index)
   Karte.alle_normalen[index]
@@ -26,19 +27,19 @@ RSpec.describe(SpielInformation) do
 
   it 'tells a captain that they are the capitain' do
     sicht = spiel_information.fuer_spieler(1)
-    spiel_information.setze_kapitaen(1)
-    expect(sicht.kapitaen).to eq(0)
+    spiel_information.verteil_karten([[], Karte.alle_truempfe, []])
+    expect(sicht.kapitaen_index).to eq(0)
   end
 
   it 'tells a captain that their next neightbor is the capitain' do
     sicht = spiel_information.fuer_spieler(2)
-    spiel_information.setze_kapitaen(0)
-    expect(sicht.kapitaen).to eq(1)
+    spiel_information.verteil_karten([Karte.alle_truempfe, [], Karte.alle_normalen])
+    expect(sicht.kapitaen_index).to eq(1)
   end
 
   it 'tells a captain that their previous neighbor is the capitain' do
     sicht = spiel_information.fuer_spieler(1)
-    spiel_information.setze_kapitaen(0)
-    expect(sicht.kapitaen).to eq(2)
+    spiel_information.verteil_karten([Karte.alle_truempfe, [], []])
+    expect(sicht.kapitaen_index).to eq(2)
   end
 end
