@@ -18,7 +18,7 @@ require 'auftrag_verwalter'
 require 'karten_verwalter'
 require 'auftrag'
 require 'karte'
-require 'hilfe'
+require 'turnier_hilfe'
 
 seed_setzer = nil
 auftrag_setzer = nil
@@ -29,7 +29,7 @@ ARGV.each do |a|
   auftrag_setzer = a if a[0..1] == '-a'
   entscheider_setzer.push(a) if a[0..1] == '-x'
   anzahl_spiele_setzer = a if a[0..1] == '-s'
-  hilfe if a[0..1] == '-h'
+  turnier_hilfe if a[0..1] == '-h'
 end
 
 ANZAHL_SPIELER = 4

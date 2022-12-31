@@ -1,7 +1,7 @@
 # coding: utf-8
 # frozen_string_literal: true
 
-def hilfe
+def turnier_hilfe
   puts 'Benutzung: /usr/bin/bundle exec ruby bin/tournier.rb [Argumente]'
   puts '   -a=x         Setzt die Zahl der Aufträge auf x, Standart ist 6'
   puts '   -h           Gibt diese Hilfe aus'
