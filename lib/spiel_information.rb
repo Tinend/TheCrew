@@ -108,13 +108,5 @@ class SpielInformation
     def ist_gegangen?(karte)
       stiche.any? { |s| s.karten.include?(karte) }
     end
-
-    # Kommunikation, aber mit Einberechnung von Stichen, die danach passiert sind.
-    # E.g. wenn man eine Karte ausgespielt hat, gilt es nicht mehr, dass sie vorher
-    # kommuniziert wurde. Wenn eine andere Karte derselben Farbe ausgespielt wurde,
-    # gilt evtl das Prädikat `hoechste` nicht mehr.
-    def erweiterte_kommunikation(karte)
-      return nil if ist_gegangen?(karte)
-    end
   end
 end
