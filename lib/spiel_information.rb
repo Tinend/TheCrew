@@ -94,14 +94,34 @@ class SpielInformation
       @spiel_information.karten[@spieler_index]
     end
 
+    def karten_mit_farbe(farbe)
+      @spiel_information.karten[@spieler_index].select{|karte| karte.farbe == farbe}
+    end
+    
     def auftraege
       stich_cache(:auftraege) { @spiel_information.auftraege.rotate(@spieler_index) }
     end
 
+    def auftraege_mit_farbe(farbe)
+      stich_cache(:auftraege) {
+        @spiel_information.auftraege.rotate(@spieler_index).select{|auftrag| auftrag.farbe == farbe}
+      }
+    end
+    
     def unerfuellte_auftraege
       stich_cache(:unerfuellte_auftraege) { @spiel_information.unerfuellte_auftraege.rotate(@spieler_index) }
     end
 
+    def unerfuellte_auftraege_mit_farbe(farbe)
+      stich_cache(:unerfuellte_auftraege) {
+        @spiel_information.unerfuellte_auftraege.rotate(@spieler_index).select {|auftrag_liste|
+          auftrag_liste.select {|auftrag|
+            auftrag.farbe == farbe
+          }
+        }
+      }
+    end
+    
     def kommunikationen
       stich_cache(:kommunikationen) { @spiel_information.kommunikationen.rotate(@spieler_index) }
     end
