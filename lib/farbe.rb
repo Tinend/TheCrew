@@ -5,6 +5,10 @@ require 'colorize'
 
 # Eine Farbe für die Spielkarten. I.e. Trumpf und die vier normalen Farben (plus eine Pseudofarbe).
 class Farbe
+  MIN_WERT = 1
+  MAX_WERT = 9
+  MAX_TRUMPF_WERT = 4
+
   def initialize(name:, staerke:, sortier_wert:)
     @name = name
     @staerke = staerke
@@ -27,6 +31,14 @@ class Farbe
 
   def trumpf?
     @staerke.positive?
+  end
+
+  def min_wert
+    MIN_WERT
+  end
+
+  def max_wert
+    trumpf? ? MAX_TRUMPF_WERT : MAX_WERT
   end
 
   alias == eql?

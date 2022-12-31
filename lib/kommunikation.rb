@@ -2,7 +2,7 @@
 
 # Stellt die Kommunikation eines Spielers, dass eine bestimmte Karte seine höchste, tiefste oder einzige Karte ist, dar.
 class Kommunikation
-  ARTEN = %i[strikt_hoechste einzige strikt_tiefste tiefste_oder_einzige hoechste_oder_einzige].freeze
+  ARTEN = %i[einzige tiefste hoechste].freeze
 
   def initialize(karte:, art:, gegangene_stiche:)
     raise ArgumentError unless ARTEN.include?(art)
@@ -15,15 +15,27 @@ class Kommunikation
   attr_reader :karte, :art, :gegangene_stiche
 
   def self.hoechste(karte:, gegangene_stiche:)
-    new(karte: karte, art: :strikt_hoechste, gegangene_stiche: gegangene_stiche)
+    new(karte: karte, art: :hoechste, gegangene_stiche: gegangene_stiche)
   end
 
   def self.tiefste(karte:, gegangene_stiche:)
-    new(karte: karte, art: :strikt_tiefste, gegangene_stiche: gegangene_stiche)
+    new(karte: karte, art: :tiefste, gegangene_stiche: gegangene_stiche)
   end
 
   def self.einzige(karte:, gegangene_stiche:)
     new(karte: karte, art: :einzige, gegangene_stiche: gegangene_stiche)
+  end
+
+  def einzige?
+    @art == :einzige
+  end
+
+  def hoechste?
+    @art == :einzige
+  end
+
+  def tiefste?
+    @art == :einzige
   end
 
   def eql?(other)

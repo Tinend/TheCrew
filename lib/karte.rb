@@ -4,17 +4,13 @@ require 'farbe'
 
 # Spielkarte
 class Karte
-  MIN_WERT = 1
-  MAX_WERT = 9
-  MAX_TRUMPF_WERT = 4
-
   def initialize(wert:, farbe:)
     @wert = wert
     @farbe = farbe
   end
 
   def self.max_trumpf
-    @max_trumpf ||= new(wert: MAX_TRUMPF_WERT, farbe: Farbe::RAKETE)
+    @max_trumpf ||= new(wert: Farbe::RAKETE.max_wert, farbe: Farbe::RAKETE)
   end
 
   def self.nil_karte
@@ -22,11 +18,15 @@ class Karte
   end
 
   def self.alle_normalen
-    @alle_normalen ||= Farbe::NORMALE_FARBEN.flat_map { |f| (MIN_WERT..MAX_WERT).map { |w| new(farbe: f, wert: w) } }
+    @alle_normalen ||= Farbe::NORMALE_FARBEN.flat_map do |f|
+      (f.min_wert..f.max_wert).map do |w|
+        new(farbe: f, wert: w)
+      end
+    end
   end
 
   def self.alle_truempfe
-    @alle_truempfe ||= (MIN_WERT..MAX_TRUMPF_WERT).map { |w| new(farbe: Farbe::RAKETE, wert: w) }
+    @alle_truempfe ||= (Farbe::RAKETE.min_wert..Farbe::RAKETE.max_wert).map { |w| new(farbe: Farbe::RAKETE, wert: w) }
   end
 
   def self.alle
