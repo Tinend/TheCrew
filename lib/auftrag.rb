@@ -35,4 +35,8 @@ class Auftrag
   def to_s
     karte.to_s
   end
+
+  def farbe
+    karte.farbe
+  end
 end

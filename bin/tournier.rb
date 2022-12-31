@@ -11,6 +11,7 @@ require 'entscheider/zufalls_entscheider'
 require 'entscheider/hase'
 require 'entscheider/saeuger'
 require 'entscheider/archaeon'
+require 'entscheider/rhinoceros'
 require 'spieler'
 require 'spiel'
 require 'auftrag_verwalter'
@@ -49,7 +50,7 @@ ANZAHL_SPIELE = if anzahl_spiele_setzer.nil?
                 else
                   anzahl_spiele_setzer[3..].to_i
                 end
-ENTSCHEIDER = [Hase, Saeuger, Archaeon, ZufallsEntscheider].delete_if do |entscheider|
+ENTSCHEIDER = [Rhinoceros, Hase, Saeuger, Archaeon, ZufallsEntscheider].delete_if do |entscheider|
   entscheider_setzer.any? do |es|
     es[3..] == entscheider.to_s
   end
