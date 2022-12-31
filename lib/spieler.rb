@@ -72,4 +72,8 @@ class Spieler
   def karten
     @spiel_informations_sicht.karten
   end
+
+  def vorbereitungs_phase
+    @entscheider.vorbereitungs_phase
+  end
 end

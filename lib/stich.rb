@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 require_relative 'karte'
@@ -63,7 +64,7 @@ class Stich
   def legen(karte:, spieler_index:)
     gespielte_karte = GespielteKarte.new(spieler_index: spieler_index, karte: karte)
     @gespielte_karten.push(gespielte_karte)
-    schlaegt = @gespielte_karte.nil? || gespielte_karte.karte.schlaegt?(@staerkste_gespielte_karte.karte)
+    schlaegt = @staerkste_gespielte_karte.nil? || gespielte_karte.karte.schlaegt?(@staerkste_gespielte_karte.karte)
     @staerkste_gespielte_karte = gespielte_karte if schlaegt
     schlaegt
   end

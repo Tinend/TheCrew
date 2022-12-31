@@ -2,33 +2,15 @@
 # frozen_string_literal: true
 
 require_relative '../entscheider'
+require_relative 'saeuger_auftrag_nehmer'
 
 # Aufträge: Wenn er ihn hat, bevorzugt groß, wenn er ihn nicht hat, bevorzugt tief
 # Wirft höchste Karte wenn er Auftrag hat, tiefste Karte wenn anderer Auftrag hat und Auftrag, wenn möglich
 class Hase < Entscheider
-  def waehl_auftrag(auftraege)
-    auftraege.max_by do |auftrag|
-      wert = 0
-      if karten.include?(auftrag.karte)
-        wert = auftrag.karte.wert
-      else
-        max_karte = finde_max_karte(auftrag: auftrag, karten: karten)
-        wert = if max_karte.nil?
-                 0
-               else
-                 max_karte.wert - (auftrag.karte.wert * 0.1)
-               end
-      end
-      wert
-    end
-  end
+  include SaeugerAuftragNehmer
 
-  def karten
-    @spiel_informations_sicht.karten
-  end
-
-  def finde_max_karte(auftrag:, karten: self.karten)
-    karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
+  def finde_max_karte_aus_auswahl(auftrag:, moegliche_karten:)
+    moegliche_karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
   end
 
   def anspielen(_stich, waehlbare_karten)
@@ -38,7 +20,7 @@ class Hase < Entscheider
     if waehlbare_karten.include?(ziel_auftrag.karte)
       ziel_auftrag.karte
     elsif waehlbare_karten.any? { |karte| karte.schlaegt?(ziel_auftrag.karte) && !karte.trumpf? }
-      finde_max_karte(auftrag: ziel_auftrag, karten: waehlbare_karten)
+      finde_max_karte_aus_auswahl(auftrag: ziel_auftrag, moegliche_karten: waehlbare_karten)
     elsif waehlbare_karten & @spiel_informations_sicht.auftraege.flatten != []
       waehle_minimum(waehlbare_karten & @spiel_informations_sicht.auftraege.flatten)
     else

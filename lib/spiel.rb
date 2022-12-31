@@ -10,6 +10,7 @@ class Spiel
     @richter = richter
     @spiel_information = spiel_information
     @ausspiel_recht_index = @spiel_information.kapitaen_index
+    @spieler.each(&:vorbereitungs_phase)
     starthand_zeigen if ausgeben
   end
 
