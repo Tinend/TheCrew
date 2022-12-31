@@ -8,6 +8,7 @@ require 'richter'
 require 'spiel_information'
 require 'entscheider/zufalls_entscheider'
 require 'entscheider/hase'
+require 'entscheider/reinwerfer'
 require 'spieler'
 require 'spiel'
 require 'auftrag_verwalter'
@@ -20,7 +21,7 @@ ANZAHL_AUFTRAEGE = 3
 
 spiel_information = SpielInformation.new(anzahl_spieler: ANZAHL_SPIELER)
 spieler = Array.new(ANZAHL_SPIELER) do |i|
-  Spieler.new(entscheider: Hase.new, spiel_informations_sicht: spiel_information.fuer_spieler(i))
+  Spieler.new(entscheider: Reinwerfer.new, spiel_informations_sicht: spiel_information.fuer_spieler(i))
 end
 karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spiel_information: spiel_information)
 karten_verwalter.verteilen

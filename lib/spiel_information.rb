@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'karte'
+require 'bekannte_karten_tracker'
 
 # Gesamte Information über die Spiel Situation, i.e.:
 # * Anzahl Spieler
@@ -20,7 +21,7 @@ class SpielInformation
     @kapitaen_index = nil
   end
 
-  attr_reader :anzahl_spieler, :kapitaen_index, :stiche, :auftraege, :karten
+  attr_reader :anzahl_spieler, :kapitaen_index, :stiche, :auftraege, :karten, :kommunikationen
 
   def auftrag_gewaehlt(spieler_index:, auftrag:)
     @auftraege[spieler_index].push(auftrag)
@@ -65,6 +66,16 @@ class SpielInformation
 
   # Information aus Sicht eines Spielenrs (i.e. Spieler Indices sind entsprechend umgerechnet).
   class SpielInformationsSicht
+    # Ein Wert, der sich während eines Stichs nicht verändert und die Anzahl Stiche.
+    class StichCacheEintrag
+      def initialize(anzahl_stiche:, wert:)
+        @anzahl_stiche = anzahl_stiche
+        @wert = wert
+      end
+
+      attr_reader :anzahl_stiche, :wert
+    end
+
     def initialize(spiel_information:, spieler_index:)
       @spiel_information = spiel_information
       @spieler_index = spieler_index
@@ -84,20 +95,45 @@ class SpielInformation
     end
 
     def auftraege
-      @spiel_information.auftraege.rotate(@spieler_index)
+      stich_cache(:auftraege) { @spiel_information.auftraege.rotate(@spieler_index) }
     end
 
     def unerfuellte_auftraege
-      @spiel_information.unerfuellte_auftraege.rotate(@spieler_index)
+      stich_cache(:unerfuellte_auftraege) { @spiel_information.unerfuellte_auftraege.rotate(@spieler_index) }
     end
 
     def kommunikationen
-      @spiel_information.kommunikationen.rotate(@spieler_index)
+      stich_cache(:kommunikationen) { @spiel_information.kommunikationen.rotate(@spieler_index) }
+    end
+
+    # Dies kann benutzt werden, um eine Berechnung, die sich pro Stich nicht verändert, zu cachen.
+    def stich_cache(key)
+      vorheriger_eintrag = (@stich_cache ||= {})[key]
+      anzahl_stiche = @spiel_information.stiche.length
+      return vorheriger_eintrag.wert if vorheriger_eintrag && vorheriger_eintrag.anzahl_stiche == anzahl_stiche
+
+      wert = yield
+      @stich_cache[key] = StichCacheEintrag.new(anzahl_stiche: anzahl_stiche, wert: wert)
+      wert
+    end
+
+    def bekannte_karten_tracker
+      stich_cache(:bekannte_karten_tracker) { BekannteKartenTracker.new(spiel_informations_sicht: self) }
+    end
+
+    def sichere_karten(spieler_index)
+      bekannte_karten_tracker.sichere_karten[spieler_index]
+    end
+
+    def moegliche_karten(spieler_index)
+      bekannte_karten_tracker.moegliche_karten[spieler_index]
     end
 
     def stiche
-      @spiel_information.stiche.map do |s|
-        s.fuer_spieler(spieler_index: @spieler_index, anzahl_spieler: @spiel_information.anzahl_spieler)
+      stich_cache(:stiche) do
+        @spiel_information.stiche.map do |s|
+          s.fuer_spieler(spieler_index: @spieler_index, anzahl_spieler: @spiel_information.anzahl_spieler)
+        end
       end
     end
 

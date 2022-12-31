@@ -23,15 +23,14 @@ class Reinwerfer < Entscheider
   # Karten, die die Farbe angeben und den Stich übernehmen könnten.
   # I.e. ohne Trumpf stechen, aber mit Stichen, die Trumpf ausgespielt haben.
   def uebernehmende_karten(stich)
-    max_wert = stich.farbe.trumpf? ? Karte::MAX_TRUMPF_WERT : Karte::MAX_WERT
-    (stich.staerkste_karte.wert + 1..max_wert).map do |w|
+    (stich.staerkste_karte.wert + 1..stich.farbe.max_wert).map do |w|
       Karte.new(wert: w, farbe: stich.farbe)
     end
   end
 
   # Karten, die die Farbe angeben und den Stich nicht übernehmen könnten.
-  def uebernehmende_karten(stich)
-    (Karte::MIN_WERT...stich.staerkste_karte.wert).map do |w|
+  def unternehmende_karten(stich)
+    (stich.farbe.min_wert...stich.staerkste_karte.wert).map do |w|
       Karte.new(wert: w, farbe: stich.farbe)
     end
   end
@@ -47,8 +46,8 @@ class Reinwerfer < Entscheider
     unternehmende_karten = unternehmende_karten(stich)
     rettungs_karten = unternehmende_karten - auftrags_karten_anderer(gespielte_karte.spieler_index)
     spieler_indizes_danach(stich).none? do |spieler_index|
-      moegliche_uebernehmende_karten = @spieler_information.moegliche_karten(spieler_index) & uebernehmende_karten
-      sichere_karten = @spieler_information.sichere_karten(spieler_index)
+      moegliche_uebernehmende_karten = @spiel_informations_sicht.moegliche_karten(spieler_index) & uebernehmende_karten
+      sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index)
 
       # Spieler kann nichts zum drüber gehen haben.
       next if moegliche_uebernehmende_karten.empty?
@@ -74,7 +73,7 @@ class Reinwerfer < Entscheider
   end
 
   def auftrags_karten(spieler_index)
-    @spiel_information.unerfuellte_auftraege[spieler_index].map(&:karte)
+    @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].map(&:karte)
   end
 
   def andere_spieler_indizes(spieler_index)
@@ -84,12 +83,12 @@ class Reinwerfer < Entscheider
   # Auftragskarten der Leute, die nicht momentane Stichsieger sind.
   def auftrags_karten_anderer(spieler_index)
     andere_spieler_indizes(spieler_index).flat_map do |i|
-      @spiel_information.unerfuellte_auftraege[i].map(&:karte)
+      @spiel_informations_sicht.unerfuellte_auftraege[i].map(&:karte)
     end
   end
 
   def selbst_helfende_karten(waehlbare_karten, stich)
-    (waehlbare_karten & auftrags_karten(0)).select { |k| karte_sollte_bleiben?(stich, k) }
+    (waehlbare_karten & auftrags_karten(0)).select { |k| karte_sollte_bleiben?(stich, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) }
   end
 
   def hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
@@ -101,7 +100,7 @@ class Reinwerfer < Entscheider
   end
 
   def spieler_indizes_danach(stich)
-    (0...stich.gespielte_karten.map(&spieler_index).min).to_a
+    (0...stich.gespielte_karten.map(&:spieler_index).min).to_a
   end
 
   # Karten von Spielern danach, die den Stich nehmen könnten.
@@ -131,21 +130,21 @@ class Reinwerfer < Entscheider
 
   # Karten, die den Stich nicht schlagen und auch nicht machen, dass wir sofort verlieren.
   def undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
-    nicht_schlagende_karten(stich, waehlbare_karten) - auftragskarten_anderer(stich.sieger_index)
+    nicht_schlagende_karten(stich, waehlbare_karten) - auftrags_karten_anderer(stich.sieger_index)
   end
 
   # Karten, die die gegebene Karte nicht hindern, den Stich zu schlagen
   # und auch nicht machen, dass wir sofort verlieren.
   def undestruktive_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
-    nehmbare_karten(stich, nehmende_karte, waehlbare_karten) - auftragskarten_anderer(nehmende_karte.spieler_index)
+    nehmbare_karten(stich, nehmende_karte, waehlbare_karten) - auftrags_karten_anderer(nehmende_karte.spieler_index)
   end
 
   def nicht_schlagende_karten(stich, waehlbare_karten)
-    waehlbare_karten.reject { |k| k.schlaegt?(stich) }
+    waehlbare_karten.reject { |k| k.schlaegt?(stich.staerkste_karte) }
   end
 
   def nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
-    waehlbare_karten.select { |k| !k.schlaegt?(stich) || nehmende_karte.schlaegt?(k) }
+    waehlbare_karten.select { |k| !k.schlaegt?(stich.staerkste_karte) || nehmende_karte.karte.schlaegt?(k) }
   end
 
   def karten
@@ -178,7 +177,7 @@ class Reinwerfer < Entscheider
     gute_karten = auftrags_karten(0)
 
     # Kandidatenkarten, die den Stich nehmen könnten.
-    kandidaten = waehlbare_karten.select { |k| karte_sollte_bleiben?(k, stich) }
+    kandidaten = waehlbare_karten.select { |k| karte_sollte_bleiben?(stich, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) }
     return [] if kandidaten.empty?
 
     # Kandidatenkarten, gleichzeitig Auftragskarten sind (beste Variante).
@@ -198,12 +197,12 @@ class Reinwerfer < Entscheider
     # Wenn dieser Stich eh schon tötlich ist, wenn er nicht durchkommt.
     if toetlicher_stich?(stich)
       # Wenn möglich eine Auftragskarte rein schmeissen.
-      hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich.staerkste_gespielte_karte, waehlbare_karten)
+      hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
       return hilfreiche_karten.sample unless hilfreiche_karten.empty?
 
       # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
       gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
-      return gefaehrliche.sample unless gefaehrliche.empty?
+      return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
 
       # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt.
       nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
@@ -211,11 +210,11 @@ class Reinwerfer < Entscheider
     end
 
     # Wenn der Sieger bleiben sollte, solange die Spieler danach vernünftig sind.
-    sollte_bleiben = karte_sollte_bleiben?(stich, stich.staerkste_karte)
+    sollte_bleiben = karte_sollte_bleiben?(stich, stich.staerkste_gespielte_karte)
 
     # Wenn möglich eine Auftragskarte rein schmeissen.
-    if sollte_bleiben?
-      hilfreiche_karten = hilfreiche_karten_fuer_sieger(stich, waehlbare_karten)
+    if sollte_bleiben
+      hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
       return hilfreiche_karten.sample unless hilfreiche_karten.empty?
     end
 
@@ -230,14 +229,14 @@ class Reinwerfer < Entscheider
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
     if sollte_bleiben
-      gefaehrliche_karten = gefaehrliche_verlierende_karten(waehlbare_karten, stich)
-      return gefaehrliche.sample unless gefaehrliche.empty?
+      gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
+      return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann unter der Annahme, dass ein späterer Spieler übernimmt, macht man das.
-    nehmende_karten.each do |_nehmende_karte|
-      gefaehrliche_karten = gefaehrliche_nehmbare_karten(waehlbare_karten, stich)
-      return gefaehrliche.sample unless gefaehrliche.empty?
+    nehmende_karten.each do |nehmende_karte|
+      gefaehrliche_karten = gefaehrliche_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
+      return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
     end
 
     # Wenn man selber einen Auftrag erfüllen könnte.
@@ -257,7 +256,7 @@ class Reinwerfer < Entscheider
     end
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass man selber den Stich holt.
-    nicht_destruktive_karten = waehlbare_karten - auftragskarten_anderer(0)
+    nicht_destruktive_karten = waehlbare_karten - auftrags_karten_anderer(0)
     nicht_destruktive_karten.sample
 
     waehlbare_karten.sample

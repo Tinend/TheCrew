@@ -30,6 +30,14 @@ class Kommunikation
     @art == :einzige
   end
 
+  def hoechste?
+    @art == :einzige
+  end
+
+  def tiefste?
+    @art == :einzige
+  end
+
   def eql?(other)
     self.class == other.class && @karte == other.karte && @art == other.art &&
       @gegangene_stiche == other.gegangene_stiche
