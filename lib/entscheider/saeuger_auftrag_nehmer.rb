@@ -1,4 +1,6 @@
 # coding: utf-8
+# frozen_string_literal: true
+
 # Simpler algorithmus zum Aufträge wählen
 module SaeugerAuftragNehmer
   def waehl_auftrag(auftraege)

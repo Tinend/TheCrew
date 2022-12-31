@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Stellt eine Farbe aus Sicht vom Rhinoceros dar
 # Dient zur analyse, ob eine Farbe angespielt werden sollte oder nicht
 class RhinocerosFarbe
@@ -12,24 +14,20 @@ class RhinocerosFarbe
   end
 
   attr_reader :schwierigkeit, :farbe, :anzahl
-  
+
   def auftrag_erhalten(auftrag)
     @farb_auftrag_pro_spieler[auftrag.spieler_index] += 1
     @auftraege.push(auftrag)
   end
 
   def analysieren
-    @schwierigkeit = @farb_auftrag_pro_spieler.reduce(0) {|anfang, anzahl|
+    @schwierigkeit = @farb_auftrag_pro_spieler.reduce(0) do |anfang, anzahl|
       wert = anfang + anzahl
-      wert += 10 if anzahl > 0
+      wert += 10 if anzahl.positive?
       wert
-    }
+    end
     @schwierigkeit += 100 if @farbe.trumpf?
-    @selbst_auftrag = if @farb_auftrag_pro_spieler[0] == 0
-                        false
-                      else
-                        true
-                      end
+    @selbst_auftrag = @farb_auftrag_pro_spieler[0] != 0
   end
 
   def eigene_karten_erhalten(karten)
@@ -37,16 +35,16 @@ class RhinocerosFarbe
   end
 
   def auftrag_verteilungs_wert
-    wert = @farb_auftrag_pro_spieler.reduce(1) {|wert, anzahl| wert * (anzahl + 4)}
+    wert = @farb_auftrag_pro_spieler.reduce(1) { |produkt, anzahl| produkt * (anzahl + 4) }
     wert / (@farb_auftrag_pro_spieler[0] + 1)
   end
-  
+
   def anspielen_wert
     return -1000 if @eigene_anzahl.zero?
     return 0 if @farb_auftrag_pro_spieler.sum.zero?
-    wert = @auftraege.reduce(0) {|w, auftrag| w + auftrag.farb_anspiel_wert(@eigene_anzahl)}
+
+    wert = @auftraege.reduce(0) { |w, auftrag| w + auftrag.farb_anspiel_wert(@eigene_anzahl) }
     wert -= auftrag_verteilungs_wert
     wert
   end
 end
-
