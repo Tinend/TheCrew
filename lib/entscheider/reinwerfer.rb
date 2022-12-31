@@ -17,7 +17,7 @@ class Reinwerfer < Entscheider
   end
 
   def spieler_indizes_danach(stich)
-    (1..@spiel_informations_sicht.anzanl_spieler - stich.length).to_a
+    (1...@spiel_informations_sicht.anzahl_spieler - stich.length).to_a
   end
 
   # Karten, die die Farbe angeben und den Stich übernehmen könnten.
@@ -40,25 +40,39 @@ class Reinwerfer < Entscheider
     # Wenn der Stich gestochen wurde, gehen wir Mal davon aus, dass niemand übersticht.
     # Meistens sollte ein schlauer Mitspieler nicht überstechen. Wenn er muss, hatten wir eh
     # keine Wahl.
+    puts 'karte_sollte_bleiben?'
+    puts stich.karten.join(' ')
+    puts "GespielteKarte(#{gespielte_karte.spieler_index}, #{gespielte_karte.karte})"
     return true if stich.staerkste_karte.trumpf? && !stich.farbe.trumpf?
 
+    puts 'nicht gestochen'
     uebernehmende_karten = uebernehmende_karten(stich)
     unternehmende_karten = unternehmende_karten(stich)
     rettungs_karten = unternehmende_karten - auftrags_karten_anderer(gespielte_karte.spieler_index)
-    spieler_indizes_danach(stich).none? do |spieler_index|
+    puts "uebernehmend #{uebernehmende_karten.join(' ')}"
+    puts "unternehmend #{unternehmende_karten.join(' ')}"
+    puts "rettungs #{rettungs_karten.join(' ')}"
+    spieler_indizes_danach(stich).any? do |spieler_index|
+      puts
+      puts "Spieler #{spieler_index}"
       moegliche_uebernehmende_karten = @spiel_informations_sicht.moegliche_karten(spieler_index) & uebernehmende_karten
+      puts "moegliche uebernehmende #{moegliche_uebernehmende_karten.join(' ')}"
       sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index)
+      puts "sichere #{sichere_karten.join(' ')}"
 
       # Spieler kann nichts zum drüber gehen haben.
       next if moegliche_uebernehmende_karten.empty?
+      puts 'koennte drueber'
 
       # Spieler hat sicher was zum drunter gehen.
       next unless (sichere_karten & rettungs_karten).empty?
+      puts 'kann nicht sicher drunter'
 
       # Spieler hat nur warnpflichtige Karten zum drüber gehen und nichts zum drunter gehen, also ist dies unmöglich (sonst hätte er ja gewarnt)
-      next unless (sichere_karten & unternehmende_karten).empty? && (moegliche_uebernehmende_karten & sichere_karten).empty? && moegliche_uebernehmende_karten.all? do |k|
-                    k.wert > MIN_WARN_KOMMUNIZIER_WERT
-                  end
+      alles_warn_karten = moegliche_uebernehmende_karten.all? { |k| k.wert >= MIN_WARN_KOMMUNIZIER_WERT }
+      puts 'nur warnkarten', alles_warn_karten
+      next if (sichere_karten & unternehmende_karten).empty? && (moegliche_uebernehmende_karten & sichere_karten).empty? && alles_warn_karten
+      puts 'koennte gefahr haben'
 
       # Ansonsten müssen wir leider davon ausgehen, dass der Spieler drüber gehen muss.
       true
@@ -97,10 +111,6 @@ class Reinwerfer < Entscheider
 
   def hilfreiche_karten_fuer_nehmende_karte(stich, nehmende_karte, waehlbare_karten)
     nehmbare_karten(stich, nehmende_karte, waehlbare_karten) & auftrags_karten(nehmende_karte.spieler_index)
-  end
-
-  def spieler_indizes_danach(stich)
-    (0...stich.gespielte_karten.map(&:spieler_index).min).to_a
   end
 
   # Karten von Spielern danach, die den Stich nehmen könnten.
@@ -211,6 +221,7 @@ class Reinwerfer < Entscheider
 
     # Wenn der Sieger bleiben sollte, solange die Spieler danach vernünftig sind.
     sollte_bleiben = karte_sollte_bleiben?(stich, stich.staerkste_gespielte_karte)
+    puts "sollte bleiben", sollte_bleiben
 
     # Wenn möglich eine Auftragskarte rein schmeissen.
     if sollte_bleiben
