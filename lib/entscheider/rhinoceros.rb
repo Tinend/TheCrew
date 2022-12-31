@@ -5,37 +5,15 @@ require_relative '../entscheider'
 require_relative '../farbe'
 require_relative 'rhinoceros_farbe'
 require_relative 'rhinoceros_auftrag'
+require_relative 'saeuger_auftrag_nehmer'
 
 # Rennt geradewegs auf die Aufträge zu
 # Analysiert Aufträge um sich einen Vorteil zu verschaffen.
 class Rhinoceros < Entscheider
-  def waehl_auftrag(auftraege)
-    auftraege.max_by do |auftrag|
-      wert = 0
-      if karten.include?(auftrag.karte)
-        wert = auftrag.karte.wert
-      else
-        max_karte = finde_max_karte_ohne_trumpf(auftrag)
-        wert = if max_karte.nil?
-                 0
-               else
-                 max_karte.wert - (auftrag.karte.wert * 0.1)
-               end
-      end
-      wert
-    end
-  end
-
-  def finde_max_karte_ohne_trumpf(auftrag)
-    karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
-  end
-
+  include SaeugerAuftragNehmer
+  
   def sehe_spiel_informations_sicht(spiel_informations_sicht)
     @spiel_informations_sicht = spiel_informations_sicht
-  end
-
-  def karten
-    @spiel_informations_sicht.karten
   end
 
   def anspielen(waehlbare_karten)
