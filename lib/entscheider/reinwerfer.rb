@@ -250,14 +250,18 @@ class Reinwerfer < Entscheider
     end
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass ein späterer Spieler übernimmt.
-    nehmende_karten.each do |_nehmende_karte|
-      nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
+    nehmende_karten.each do |nehmende_karte|
+      nicht_destruktive_karten = undestruktive_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
       return nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
     end
 
-    # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass man selber den Stich holt.
+    # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist.
+    nicht_destruktive_karten = waehlbare_karten - alle_auftrags_karten
+    nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
+
+    # Dann wenn möglich eine Karte werfen, die eine eigene Auftragskarte ist.
     nicht_destruktive_karten = waehlbare_karten - auftrags_karten_anderer(0)
-    nicht_destruktive_karten.sample
+    nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
 
     waehlbare_karten.sample
   end
