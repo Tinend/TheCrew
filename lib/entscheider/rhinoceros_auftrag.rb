@@ -20,26 +20,26 @@ class RhinocerosAuftrag
   end
 
   def hat_selber_will_selber_farb_anspiel_wert(anzahl_karten)
-    10 * (@auftrag.karte.wert - 8 + anzahl_karten * 2)
+    10 * (@auftrag.karte.wert - 8 + (anzahl_karten * 2))
   end
-  
+
   def hat_selber_farb_anspiel_wert(anzahl_karten)
     10 * (8 - @auftrag.karte.wert - anzahl_karten)
   end
 
   def will_selber_farb_anspiel_wert(anzahl_karten)
-    10 * (8 - anzahl_karten * 2)
+    10 * (8 - (anzahl_karten * 2))
   end
 
   def sonst_farb_anspiel_wert(anzahl_karten)
     - 10 * anzahl_karten
   end
-  
+
   def farb_anspiel_wert(anzahl_karten)
-    return hat_selber_will_selber_farb_anspiel_wert(anzahl_karten) if @hat_selber and @spieler_index == 0
-    return hat_selber_farb_anspiel_wert(anzahl_karten) if @hat_selber and @spieler_index != 0
-    return will_selber_farb_anspiel_wert(anzahl_karten) if !@hat_selber and @spieler_index == 0
-    return sonst_farb_anspiel_wert(anzahl_karten) if !@hat_selber and @spieler_index != 0
-    raise
+    return hat_selber_will_selber_farb_anspiel_wert(anzahl_karten) if @hat_selber && @spieler_index.zero?
+    return hat_selber_farb_anspiel_wert(anzahl_karten) if @hat_selber && (@spieler_index != 0)
+    return will_selber_farb_anspiel_wert(anzahl_karten) if !@hat_selber && @spieler_index.zero?
+
+    sonst_farb_anspiel_wert(anzahl_karten)
   end
 end
