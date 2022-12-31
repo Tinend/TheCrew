@@ -22,6 +22,10 @@ class Auftrag
     @erfuellt = false
   end
 
+  def <=>(other)
+    [farbe.sortier_wert, @karte.wert] <=> [other.farbe.sortier_wert, other.karte.wert]
+  end
+
   def eql?(other)
     self.class == other.class && @erfuellt == other.erfuellt && @karte == other.karte
   end

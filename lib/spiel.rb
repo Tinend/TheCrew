@@ -17,8 +17,8 @@ class Spiel
   def starthand_zeigen
     @spieler.each_index do |index|
       puts "Spieler #{index + 1}"
-      puts "Hand: #{@spiel_information.karten[index].join(' ')}"
-      puts "Aufträge: #{@spiel_information.auftraege[index].join(' ')}"
+      puts "Hand: #{@spiel_information.karten[index].sort.reverse.join(' ')}"
+      puts "Aufträge: #{@spiel_information.auftraege[index].sort.reverse.join(' ')}"
       puts
     end
   end
