@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'entscheider/reinwerfer'
 require 'spieler'
 require 'karte'
@@ -28,7 +30,7 @@ end
 
 RSpec.describe Reinwerfer do
   subject(:reinwerfer) do
-    reinwerfer = Reinwerfer.new
+    reinwerfer = described_class.new
     reinwerfer.sehe_spiel_informations_sicht(spiel_informations_sicht)
     reinwerfer
   end
@@ -131,7 +133,8 @@ RSpec.describe Reinwerfer do
 
   xit 'nimmt an, dass eine sechs bleibt wenn er selber die 7 hat und wirft rein' do
     spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
-    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3), gruene(7)], standard_stich_sicht)
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3), gruene(7)],
+                                          standard_stich_sicht)
     expect(karte).to eq(gruene(2))
   end
 
