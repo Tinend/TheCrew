@@ -37,8 +37,9 @@ class RhinocerosFarbe
   end
   
   def auftrag_verteilungs_wert
-    wert = farb_auftrag_pro_spieler.reduce(1) { |produkt, anzahl| produkt * (anzahl + 4) }
-    wert / (farb_auftrag_pro_spieler[0] + 1)
+    wert = - farb_auftrag_pro_spieler.sum
+    wert += 20 if farb_auftrag_pro_spieler[0] > 0
+    wert
   end
 
   def eigene_anzahl
@@ -50,7 +51,40 @@ class RhinocerosFarbe
     return 0 if farb_auftrag_pro_spieler.sum.zero?
 
     wert = @auftraege.reduce(0) { |w, auftrag| w + auftrag.farb_anspiel_wert(eigene_anzahl) }
-    wert -= auftrag_verteilungs_wert
+    wert += auftrag_verteilungs_wert
     wert
+  end
+
+  def hat_fremden_auftrag?(stich)
+    stich.gespielte_karten.any? {|gespielte_karte|
+      @spiel_informations_sicht.auftraege[1..].flatten.any?{|auftrag| auftrag.karte == gespielte_karte.karte}
+    }
+  end
+  
+  def hat_eigenen_auftrag?(stich)
+    stich.gespielte_karten.any? {|gespielte_karte|
+      @spiel_informations_sicht.auftraege[0].any?{|auftrag| auftrag.karte == gespielte_karte.karte}
+    }
+  end
+  
+  def abspiel_wert_trumpf(stich)
+    return 2000 if hat_eigenen_auftrag?(stich)
+    return -2000 if hat_fremden_auftrag?(stich)
+
+    -1000
+  end
+
+  def abspiel_abwerfen(stich)
+    return 0 if farb_auftrag_pro_spieler.sum == 0
+    return -1000 if farb_auftrag_pro_spieler[0] > 0
+
+    1000
+  end
+  
+  def abspiel_wert(stich)
+    return abspiel_wert_trumpf(stich) if @farbe.trumpf?
+    return abspiel_abwerfen(stich) if @farbe != stich.staerkste_karte.farbe
+
+    0
   end
 end

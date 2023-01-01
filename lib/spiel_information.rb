@@ -103,8 +103,8 @@ class SpielInformation
     end
 
     def auftraege_mit_farbe(farbe)
-      stich_cache(:auftraege) {
-        @spiel_information.auftraege.rotate(@spieler_index).select{|auftrag| auftrag.farbe == farbe}
+      auftraege.collect {|auftrag_liste|
+        auftrag_liste.select {|auftrag| auftrag.farbe == farbe}
       }
     end
     
@@ -113,12 +113,8 @@ class SpielInformation
     end
 
     def unerfuellte_auftraege_mit_farbe(farbe)
-      stich_cache(:unerfuellte_auftraege) {
-        @spiel_information.unerfuellte_auftraege.rotate(@spieler_index).select {|auftrag_liste|
-          auftrag_liste.select {|auftrag|
-            auftrag.farbe == farbe
-          }
-        }
+      unerfuellte_auftraege.collect {|auftrag_liste|
+        auftrag_liste.select{|auftrag| auftrag.farbe == farbe}
       }
     end
     

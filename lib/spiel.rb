@@ -63,7 +63,7 @@ class Spiel
     @spieler.each_index do |i|
       spieler_index = (i + @ausspiel_recht_index) % @spieler.length
       spieler = @spieler[spieler_index]
-      wahl = spieler.waehle_karte(stich.fuer_spieler(spieler_index: i,
+      wahl = spieler.waehle_karte(stich.fuer_spieler(spieler_index: spieler_index,
                                                      anzahl_spieler: @spiel_information.anzahl_spieler))
       @spiel_information.karte_gespielt(spieler_index: spieler_index, karte: wahl)
       stich.legen(karte: wahl, spieler_index: spieler_index)

@@ -20,19 +20,19 @@ class RhinocerosAuftrag
   end
 
   def hat_selber_will_selber_farb_anspiel_wert(anzahl_karten)
-    10 * (@auftrag.karte.wert - 8 + (anzahl_karten * 2))
+    (@auftrag.karte.wert - 8 + (anzahl_karten * 2))
   end
 
   def hat_selber_farb_anspiel_wert(anzahl_karten)
-    10 * (8 - @auftrag.karte.wert - anzahl_karten)
+    (8 - @auftrag.karte.wert - anzahl_karten)
   end
 
   def will_selber_farb_anspiel_wert(anzahl_karten)
-    10 * (8 - (anzahl_karten * 2))
+    (8 - (anzahl_karten * 2))
   end
 
   def sonst_farb_anspiel_wert(anzahl_karten)
-    - 10 * anzahl_karten
+    - anzahl_karten
   end
 
   def farb_anspiel_wert(anzahl_karten)

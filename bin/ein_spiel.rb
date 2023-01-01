@@ -63,10 +63,10 @@ spieler = Array.new(ANZAHL_SPIELER) do |i|
   Spieler.new(entscheider: GEWAEHLTER_ENTSCHEIDER.new, spiel_informations_sicht: spiel_information.fuer_spieler(i))
 end
 karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spiel_information: spiel_information)
-karten_verwalter.verteilen
+karten_verwalter.verteilen(zufalls_generator: zufalls_generator)
 auftraege = Karte.alle_normalen.map { |karte| Auftrag.new(karte) }
 auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
-auftrag_verwalter.auftraege_ziehen(anzahl: ANZAHL_AUFTRAEGE)
+auftrag_verwalter.auftraege_ziehen(anzahl: ANZAHL_AUFTRAEGE, zufalls_generator: zufalls_generator)
 auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
 richter = Richter.new(spiel_information: spiel_information)
 spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information)
