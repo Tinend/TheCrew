@@ -13,6 +13,7 @@ require 'entscheider/saeuger'
 require 'entscheider/archaeon'
 require 'entscheider/rhinoceros'
 require 'entscheider/reinwerfer'
+require 'entscheider/geschlossene_formel_bot'
 require 'spieler'
 require 'spiel'
 require 'auftrag_verwalter'
@@ -51,7 +52,7 @@ ANZAHL_SPIELE = if anzahl_spiele_setzer.nil?
                 else
                   anzahl_spiele_setzer[3..].to_i
                 end
-ENTSCHEIDER = [Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon, ZufallsEntscheider].delete_if do |entscheider|
+ENTSCHEIDER = [Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon, ZufallsEntscheider, GeschlosseneFormelBot].delete_if do |entscheider|
   entscheider_setzer.any? do |es|
     es[3..] == entscheider.to_s
   end

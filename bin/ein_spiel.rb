@@ -12,6 +12,7 @@ require 'entscheider/saeuger'
 require 'entscheider/archaeon'
 require 'entscheider/rhinoceros'
 require 'entscheider/reinwerfer'
+require 'entscheider/geschlossene_formel_bot'
 require 'ein_spiel_hilfe'
 require 'spieler'
 require 'spiel'
@@ -19,7 +20,6 @@ require 'auftrag_verwalter'
 require 'karten_verwalter'
 require 'auftrag'
 require 'karte'
-
 
 seed_setzer = nil
 auftrag_setzer = nil
@@ -38,7 +38,7 @@ ANZAHL_SPIELER = if anzahl_spieler_setzer.nil?
                  else
                    anzahl_spieler_setzer.to_i
                  end
-SEED = if seed_setzer.nil? or seed_setzer.zero?
+SEED = if seed_setzer.nil? || seed_setzer.zero?
          Random.new_seed
        else
          seed_setzer
@@ -48,8 +48,11 @@ ANZAHL_AUFTRAEGE = if auftrag_setzer.nil?
                    else
                      auftrag_setzer.to_i
                    end
-ENTSCHEIDER_MOEGLICH = ["Reinwerfer", "Rhinoceros", "Hase", "Saeuger", "Archaeon", "ZufallsEntscheider"].freeze
-raise "Diesen Entscheider gibt es nicht!" unless entscheider_setzer.nil? or ENTSCHEIDER_MOEGLICH.include?(entscheider_setzer)
+ENTSCHEIDER_MOEGLICH = %w[Reinwerfer Rhinoceros Hase Saeuger Archaeon ZufallsEntscheider GeschlosseneFormelBot].freeze
+unless entscheider_setzer.nil? || ENTSCHEIDER_MOEGLICH.include?(entscheider_setzer)
+  raise 'Diesen Entscheider gibt es nicht!'
+end
+
 GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
                            ZufallsEntscheider
                          else
