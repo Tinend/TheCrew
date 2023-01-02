@@ -41,44 +41,28 @@ class Reinwerfer < Entscheider
     # Wenn der Stich gestochen wurde, gehen wir Mal davon aus, dass niemand übersticht.
     # Meistens sollte ein schlauer Mitspieler nicht überstechen. Wenn er muss, hatten wir eh
     # keine Wahl.
-    #puts
-    #puts
-    #puts "karte_sollte_bleiben?(#{stich.karten.join(' ')}, GespielteKarte(#{gespielte_karte.spieler_index}, #{gespielte_karte.karte}))"
     return true if stich.staerkste_karte.trumpf? && !stich.farbe.trumpf?
 
-    #puts 'nicht gestochen'
     uebernehmende_karten = uebernehmende_karten(gespielte_karte.karte)
     unternehmende_karten = unternehmende_karten(gespielte_karte.karte)
     rettungs_karten = unternehmende_karten - auftrags_karten_anderer(gespielte_karte.spieler_index)
-    #puts "uebernehmend #{uebernehmende_karten.join(' ')}"
-    #puts "unternehmend #{unternehmende_karten.join(' ')}"
-    #puts "rettungs #{rettungs_karten.join(' ')}"
     spieler_indizes_danach(stich).none? do |spieler_index|
-      #puts
-      #puts "Spieler #{spieler_index}"
-      #puts "moegliche karten #{@spiel_informations_sicht.moegliche_karten(spieler_index).join(' ')}"
       moegliche_uebernehmende_karten = @spiel_informations_sicht.moegliche_karten(spieler_index) & uebernehmende_karten
-      #puts "moegliche uebernehmende #{moegliche_uebernehmende_karten.join(' ')}"
       sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index)
-      #puts "sichere #{sichere_karten.join(' ')}"
 
       # Spieler kann nichts zum drüber gehen haben.
       next if moegliche_uebernehmende_karten.empty?
-      #puts 'koennte drueber'
 
       # Spieler hat sicher was zum drunter gehen.
       # TODO: Wenn wir wegen "hoechste Karte" wissen, dass er etwas tieferes hat, aber nicht _welche_ tiefere,
       # würde er hier nicht merken, dass der andere sicher drunter kann.
       next unless (sichere_karten & rettungs_karten).empty?
-      #puts 'kann nicht sicher drunter'
 
       # Spieler hat nur warnpflichtige Karten zum drüber gehen und nichts zum drunter gehen, also ist dies unmöglich (sonst hätte er ja gewarnt)
       hat_nichts_drunter = (sichere_karten & unternehmende_karten).empty?
       hat_nicht_gewarnt = (moegliche_uebernehmende_karten & sichere_karten).empty?
       alles_warn_karten = moegliche_uebernehmende_karten.all? { |k| k.wert >= MIN_WARN_KOMMUNIZIER_WERT }
-      #puts 'nur warnkarten', alles_warn_karten
       next if hat_nichts_drunter && hat_nicht_gewarnt && alles_warn_karten
-      #puts 'koennte gefahr haben'
 
       # Ansonsten müssen wir leider davon ausgehen, dass der Spieler drüber gehen muss.
       true
@@ -223,7 +207,6 @@ class Reinwerfer < Entscheider
 
     # Wenn der Sieger bleiben sollte, solange die Spieler danach vernünftig sind.
     sollte_bleiben = karte_sollte_bleiben?(stich, stich.staerkste_gespielte_karte)
-    puts "sollte bleiben #{sollte_bleiben}"
 
     # Wenn möglich eine Auftragskarte rein schmeissen.
     if sollte_bleiben
@@ -233,32 +216,27 @@ class Reinwerfer < Entscheider
 
     # Wenn Spieler danach eine gute Chance haben, den Stich zu nehmen.
     nehmende_karten = nehmende_karten_danach(stich)
-    puts "nehmende karten #{nehmende_karten.map(&:karte).join(' ')}"
 
     # Wenn möglich eine Auftragskarte für einen späteren Spieler rein schmeissen.
     nehmende_karten.each do |nehmende_karte|
       hilfreiche_karten = hilfreiche_karten_fuer_nehmende_karte(stich, nehmende_karte, waehlbare_karten)
-      puts "hilfreiche karten fuer nehmende karten #{hilfreiche_karten.join(' ')}"
       return hilfreiche_karten.sample unless hilfreiche_karten.empty?
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
     if sollte_bleiben
       gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
-      puts "gefaehrliche karten #{gefaehrliche_karten.join(' ')}"
       return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann unter der Annahme, dass ein späterer Spieler übernimmt, macht man das.
     nehmende_karten.each do |nehmende_karte|
       gefaehrliche_karten = gefaehrliche_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
-      puts "gefaehrliche karten #{gefaehrliche_karten.join(' ')}"
       return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
     end
 
     # Wenn man selber einen Auftrag erfüllen könnte.
     selbst_helfende_karten = auftrags_nehmende_karten(waehlbare_karten, stich)
-    puts "selbst helfende karten #{selbst_helfende_karten.join(' ')}"
     return selbst_helfende_karten.sample unless selbst_helfende_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass der Stich Sieger bleibt.
@@ -274,15 +252,11 @@ class Reinwerfer < Entscheider
     end
 
     # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist.
-    puts "waehlbare karten #{waehlbare_karten.join(' ')}"
-    puts "alle auftrags karten #{alle_auftrags_karten.join(' ')}"
     nicht_destruktive_karten = waehlbare_karten - alle_auftrags_karten
-    puts "nicht destruktive karten #{nicht_destruktive_karten.join(' ')}"
     return nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die eine eigene Auftragskarte ist.
     nicht_andere_destruktive_karten = waehlbare_karten - auftrags_karten_anderer(0)
-    puts "nicht destruktive karten #{nicht_destruktive_karten.join(' ')}"
     return nicht_andere_destruktive_karten.sample unless nicht_andere_destruktive_karten.empty?
 
     waehlbare_karten.sample

@@ -8,17 +8,9 @@ class BekannteKartenTracker
     @sichere_karten = anfangs_sichere_karten
     @moegliche_karten = anfangs_moegliche_karten
 
-    #puts "moegliche karten am Anfang:"
-    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
     beachte_kommunikationen
-    #puts "moegliche karten nach Kommunikation:"
-    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
     beachte_blankheit
-    #puts "moegliche karten nach Blankheit:"
-    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
     stabilisiere_karten_information
-    #puts "moegliche karten nach Stabilisierung:"
-    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
   end
 
   attr_reader :sichere_karten, :moegliche_karten
@@ -115,8 +107,6 @@ class BekannteKartenTracker
   end
 
   def beachte_kommunikation(spieler_index, kommunikation)
-    #puts "beachte_kommunikation(#{spieler_index}, #{kommunikation.karte}, #{kommunikation.art})"
-    #puts "augeschlossene karten: #{ausgeschlossene_karten(kommunikation).join(' ')}"
     @moegliche_karten[spieler_index] -= ausgeschlossene_karten(kommunikation)
     @sichere_karten[spieler_index].push(kommunikation.karte)
     vielleicht_eindeutige_karte = eine_dieser_karten_ist_sicher_drinnen(spieler_index,
