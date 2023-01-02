@@ -31,11 +31,11 @@ class Kommunikation
   end
 
   def hoechste?
-    @art == :einzige
+    @art == :hoechste
   end
 
   def tiefste?
-    @art == :einzige
+    @art == :tiefste
   end
 
   def eql?(other)

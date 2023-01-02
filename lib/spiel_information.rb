@@ -81,6 +81,10 @@ class SpielInformation
       @spieler_index = spieler_index
     end
 
+    def anzahl_karten(spieler_index:)
+      @spiel_information.karten[spieler_index].length
+    end
+   
     def anzahl_spieler
       @spiel_information.anzahl_spieler
     end

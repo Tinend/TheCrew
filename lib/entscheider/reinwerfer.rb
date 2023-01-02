@@ -23,16 +23,16 @@ class Reinwerfer < Entscheider
 
   # Karten, die die Farbe angeben und den Stich übernehmen könnten.
   # I.e. ohne Trumpf stechen, aber mit Stichen, die Trumpf ausgespielt haben.
-  def uebernehmende_karten(stich)
-    (stich.staerkste_karte.wert + 1..stich.farbe.max_wert).map do |w|
-      Karte.new(wert: w, farbe: stich.farbe)
+  def uebernehmende_karten(karte)
+    (karte.wert + 1..karte.farbe.max_wert).map do |w|
+      Karte.new(wert: w, farbe: karte.farbe)
     end
   end
 
   # Karten, die die Farbe angeben und den Stich nicht übernehmen könnten.
-  def unternehmende_karten(stich)
-    (stich.farbe.min_wert...stich.staerkste_karte.wert).map do |w|
-      Karte.new(wert: w, farbe: stich.farbe)
+  def unternehmende_karten(karte)
+    (karte.farbe.min_wert...karte.wert).map do |w|
+      Karte.new(wert: w, farbe: karte.farbe)
     end
   end
 
@@ -41,21 +41,22 @@ class Reinwerfer < Entscheider
     # Wenn der Stich gestochen wurde, gehen wir Mal davon aus, dass niemand übersticht.
     # Meistens sollte ein schlauer Mitspieler nicht überstechen. Wenn er muss, hatten wir eh
     # keine Wahl.
-    #puts 'karte_sollte_bleiben?'
-    #puts stich.karten.join(' ')
-    #puts "GespielteKarte(#{gespielte_karte.spieler_index}, #{gespielte_karte.karte})"
+    #puts
+    #puts
+    #puts "karte_sollte_bleiben?(#{stich.karten.join(' ')}, GespielteKarte(#{gespielte_karte.spieler_index}, #{gespielte_karte.karte}))"
     return true if stich.staerkste_karte.trumpf? && !stich.farbe.trumpf?
 
     #puts 'nicht gestochen'
-    uebernehmende_karten = uebernehmende_karten(stich)
-    unternehmende_karten = unternehmende_karten(stich)
+    uebernehmende_karten = uebernehmende_karten(gespielte_karte.karte)
+    unternehmende_karten = unternehmende_karten(gespielte_karte.karte)
     rettungs_karten = unternehmende_karten - auftrags_karten_anderer(gespielte_karte.spieler_index)
     #puts "uebernehmend #{uebernehmende_karten.join(' ')}"
     #puts "unternehmend #{unternehmende_karten.join(' ')}"
     #puts "rettungs #{rettungs_karten.join(' ')}"
-    spieler_indizes_danach(stich).any? do |spieler_index|
+    spieler_indizes_danach(stich).none? do |spieler_index|
       #puts
       #puts "Spieler #{spieler_index}"
+      #puts "moegliche karten #{@spiel_informations_sicht.moegliche_karten(spieler_index).join(' ')}"
       moegliche_uebernehmende_karten = @spiel_informations_sicht.moegliche_karten(spieler_index) & uebernehmende_karten
       #puts "moegliche uebernehmende #{moegliche_uebernehmende_karten.join(' ')}"
       sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index)
@@ -66,13 +67,17 @@ class Reinwerfer < Entscheider
       #puts 'koennte drueber'
 
       # Spieler hat sicher was zum drunter gehen.
+      # TODO: Wenn wir wegen "hoechste Karte" wissen, dass er etwas tieferes hat, aber nicht _welche_ tiefere,
+      # würde er hier nicht merken, dass der andere sicher drunter kann.
       next unless (sichere_karten & rettungs_karten).empty?
       #puts 'kann nicht sicher drunter'
 
       # Spieler hat nur warnpflichtige Karten zum drüber gehen und nichts zum drunter gehen, also ist dies unmöglich (sonst hätte er ja gewarnt)
+      hat_nichts_drunter = (sichere_karten & unternehmende_karten).empty?
+      hat_nicht_gewarnt = (moegliche_uebernehmende_karten & sichere_karten).empty?
       alles_warn_karten = moegliche_uebernehmende_karten.all? { |k| k.wert >= MIN_WARN_KOMMUNIZIER_WERT }
       #puts 'nur warnkarten', alles_warn_karten
-      next if (sichere_karten & unternehmende_karten).empty? && (moegliche_uebernehmende_karten & sichere_karten).empty? && alles_warn_karten
+      next if hat_nichts_drunter && hat_nicht_gewarnt && alles_warn_karten
       #puts 'koennte gefahr haben'
 
       # Ansonsten müssen wir leider davon ausgehen, dass der Spieler drüber gehen muss.
@@ -100,10 +105,6 @@ class Reinwerfer < Entscheider
     andere_spieler_indizes(spieler_index).flat_map do |i|
       @spiel_informations_sicht.unerfuellte_auftraege[i].map(&:karte)
     end
-  end
-
-  def selbst_helfende_karten(waehlbare_karten, stich)
-    (waehlbare_karten & auftrags_karten(0)).select { |k| karte_sollte_bleiben?(stich, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) }
   end
 
   def hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
@@ -163,7 +164,7 @@ class Reinwerfer < Entscheider
   end
 
   def alle_auftrags_karten
-    @spiel_informations_sicht.unerfuellte_auftraege.flatten
+    @spiel_informations_sicht.unerfuellte_auftraege.flatten.map(&:karte)
   end
 
   def gefaehrliche_karten
@@ -188,7 +189,7 @@ class Reinwerfer < Entscheider
     gute_karten = auftrags_karten(0)
 
     # Kandidatenkarten, die den Stich nehmen könnten.
-    kandidaten = waehlbare_karten.select { |k| karte_sollte_bleiben?(stich, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) }
+    kandidaten = waehlbare_karten.select { |k| k.schlaegt?(stich.staerkste_karte) & karte_sollte_bleiben?(stich, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) }
     return [] if kandidaten.empty?
 
     # Kandidatenkarten, gleichzeitig Auftragskarten sind (beste Variante).
@@ -222,7 +223,7 @@ class Reinwerfer < Entscheider
 
     # Wenn der Sieger bleiben sollte, solange die Spieler danach vernünftig sind.
     sollte_bleiben = karte_sollte_bleiben?(stich, stich.staerkste_gespielte_karte)
-    #puts "sollte bleiben", sollte_bleiben
+    puts "sollte bleiben #{sollte_bleiben}"
 
     # Wenn möglich eine Auftragskarte rein schmeissen.
     if sollte_bleiben
@@ -232,27 +233,32 @@ class Reinwerfer < Entscheider
 
     # Wenn Spieler danach eine gute Chance haben, den Stich zu nehmen.
     nehmende_karten = nehmende_karten_danach(stich)
+    puts "nehmende karten #{nehmende_karten.map(&:karte).join(' ')}"
 
     # Wenn möglich eine Auftragskarte für einen späteren Spieler rein schmeissen.
     nehmende_karten.each do |nehmende_karte|
       hilfreiche_karten = hilfreiche_karten_fuer_nehmende_karte(stich, nehmende_karte, waehlbare_karten)
+      puts "hilfreiche karten fuer nehmende karten #{hilfreiche_karten.join(' ')}"
       return hilfreiche_karten.sample unless hilfreiche_karten.empty?
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
     if sollte_bleiben
       gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
+      puts "gefaehrliche karten #{gefaehrliche_karten.join(' ')}"
       return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann unter der Annahme, dass ein späterer Spieler übernimmt, macht man das.
     nehmende_karten.each do |nehmende_karte|
       gefaehrliche_karten = gefaehrliche_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
+      puts "gefaehrliche karten #{gefaehrliche_karten.join(' ')}"
       return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
     end
 
     # Wenn man selber einen Auftrag erfüllen könnte.
     selbst_helfende_karten = auftrags_nehmende_karten(waehlbare_karten, stich)
+    puts "selbst helfende karten #{selbst_helfende_karten.join(' ')}"
     return selbst_helfende_karten.sample unless selbst_helfende_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass der Stich Sieger bleibt.
@@ -268,12 +274,16 @@ class Reinwerfer < Entscheider
     end
 
     # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist.
+    puts "waehlbare karten #{waehlbare_karten.join(' ')}"
+    puts "alle auftrags karten #{alle_auftrags_karten.join(' ')}"
     nicht_destruktive_karten = waehlbare_karten - alle_auftrags_karten
-    nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
+    puts "nicht destruktive karten #{nicht_destruktive_karten.join(' ')}"
+    return nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die eine eigene Auftragskarte ist.
-    nicht_destruktive_karten = waehlbare_karten - auftrags_karten_anderer(0)
-    nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
+    nicht_andere_destruktive_karten = waehlbare_karten - auftrags_karten_anderer(0)
+    puts "nicht destruktive karten #{nicht_destruktive_karten.join(' ')}"
+    return nicht_andere_destruktive_karten.sample unless nicht_andere_destruktive_karten.empty?
 
     waehlbare_karten.sample
   end

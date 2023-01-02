@@ -8,11 +8,17 @@ class BekannteKartenTracker
     @sichere_karten = anfangs_sichere_karten
     @moegliche_karten = anfangs_moegliche_karten
 
-    @spiel_informations_sicht.kommunikationen.each_with_index do |kommunikation, spieler_index|
-      next unless kommunikation
-
-      kommuniziere(spieler_index, kommunikation)
-    end
+    #puts "moegliche karten am Anfang:"
+    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
+    beachte_kommunikationen
+    #puts "moegliche karten nach Kommunikation:"
+    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
+    beachte_blankheit
+    #puts "moegliche karten nach Blankheit:"
+    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
+    stabilisiere_karten_information
+    #puts "moegliche karten nach Stabilisierung:"
+    #puts @moegliche_karten.map.with_index { |k, i| "#{i}: #{k.join(' ')}" }
   end
 
   attr_reader :sichere_karten, :moegliche_karten
@@ -47,19 +53,19 @@ class BekannteKartenTracker
   end
 
   def karten_drueber(karte)
-    (karte.wert + 1..farbe.max_wert).map { |w| Karte.new(farbe: karte.farbe, wert: w) }
+    (karte.wert + 1..karte.farbe.max_wert).map { |w| Karte.new(farbe: karte.farbe, wert: w) }
   end
 
   def karten_drunter(karte)
-    (karte.farbe.min_wert...kommunikation.karte.wert).map { |w| Karte.new(farbe: karte.farbe, wert: w) }
+    (karte.farbe.min_wert...karte.wert).map { |w| Karte.new(farbe: karte.farbe, wert: w) }
   end
 
   def ausgeschlossene_karten(kommunikation)
-    if kommunikation.karte.hoechste?
-      karten_drunter(kommunikation.karte)
-    elsif kommunikation.karte.tiefste?
+    if kommunikation.hoechste?
       karten_drueber(kommunikation.karte)
-    elsif kommunikation.karte.einzige?
+    elsif kommunikation.tiefste?
+      karten_drunter(kommunikation.karte)
+    elsif kommunikation.einzige?
       karten_drueber(kommunikation.karte) + karten_drunter(kommunikation.karte)
     else
       raise
@@ -67,42 +73,107 @@ class BekannteKartenTracker
   end
 
   def hat_nachher_andere_karte_dieser_farbe_gespielt(spieler_index, kommunikation)
-    @spiel_informations_sicht.stiche.with_index.any? do |s, i|
-      i >= kommunikation.gegangene_stiche &&
-        s.gespielte_karten.any? do |k|
-          k.karte != kommunikation.karte &&
-            k.karte.farbe == kommunikation.karte.farbe && k.spieler_index == spieler_index
-        end
+    @spiel_informations_sicht.stiche[kommunikation.gegangene_stiche..-1].any? do |s, i|
+      s.gespielte_karten.any? do |k|
+        k.karte != kommunikation.karte &&
+          k.karte.farbe == kommunikation.karte.farbe && k.spieler_index == spieler_index
+      end
     end
   end
 
   def eine_dieser_karten_ist_sicher_drinnen(spieler_index, kommunikation)
     return [] if hat_nachher_andere_karte_dieser_farbe_gespielt(spieler_index, kommunikation)
 
-    if kommunikation.karte.hoechste?
-      karten_drueber(kommunikation.karte)
-    elsif kommunikation.karte.tiefste?
+    if kommunikation.hoechste?
       karten_drunter(kommunikation.karte)
-    elsif kommunikation.karte.einzige?
+    elsif kommunikation.tiefste?
+      karten_drueber(kommunikation.karte)
+    elsif kommunikation.einzige?
       []
     else
       raise
     end
   end
 
-  def kommuniziere(spieler_index, kommunikation)
-    @sichere_karten[spieler_index] -= ausgeschlossene_karten(kommunikation)
+  def beachte_blankheit
+    @spiel_informations_sicht.stiche.each do |s|
+      s.gespielte_karten.each do |g|
+        # Spieler hat nicht angegeben.
+        if g.karte.farbe != s.farbe
+          @moegliche_karten[g.spieler_index].delete_if { |k| k.farbe == s.farbe }
+        end
+      end
+    end
+  end
+
+  def beachte_kommunikationen
+    @spiel_informations_sicht.kommunikationen.each_with_index do |kommunikation, spieler_index|
+      next unless kommunikation
+
+      beachte_kommunikation(spieler_index, kommunikation)
+    end
+  end
+
+  def beachte_kommunikation(spieler_index, kommunikation)
+    #puts "beachte_kommunikation(#{spieler_index}, #{kommunikation.karte}, #{kommunikation.art})"
+    #puts "augeschlossene karten: #{ausgeschlossene_karten(kommunikation).join(' ')}"
     @moegliche_karten[spieler_index] -= ausgeschlossene_karten(kommunikation)
     @sichere_karten[spieler_index].push(kommunikation.karte)
     vielleicht_eindeutige_karte = eine_dieser_karten_ist_sicher_drinnen(spieler_index,
                                                                         kommunikation) &
                                   @moegliche_karten[spieler_index]
-    @sichere_karten[spieler_index].push(vielleicht_eindeutige_karte) if vielleicht_eindeutige_karte.length == 1
+    @sichere_karten[spieler_index].push(vielleicht_eindeutige_karte.first) if vielleicht_eindeutige_karte.length == 1
     @sichere_karten[spieler_index].uniq!
-    @moegliche_karten.each_with_index do |e, i|
-      next if i == spieler_index
+  end
 
-      @sichere_karten[spieler_index].each { |k| e.delete(k) }
+  def stabilisiere_karten_information
+    while entferne_andere_sichere_karten || beachte_eindeutige_besitzer || beachte_eindeutige_karten; end
+  end
+
+  def beachte_eindeutige_karten
+    was_veraendert = false
+    @moegliche_karten.each_with_index do |m, i|
+      if m.length > @sichere_karten[i].length && m.length == @spiel_informations_sicht.anzahl_karten(spieler_index: i)
+        was_veraendert = true
+        @sichere_karten[i] = m
+      end
     end
+    was_veraendert
+  end
+
+  def entferne_andere_sichere_karten
+    was_veraendert = false
+    @sichere_karten.each_with_index do |s, i|
+      @moegliche_karten.each_with_index do |m, j|
+        next if i == j
+
+        reduziert = m - s
+        next unless reduziert.length < m.length
+
+        was_veraendert = true
+        @moegliche_karten[j] = reduziert
+      end
+    end
+    was_veraendert
+  end
+
+  def beachte_eindeutige_besitzer
+    besitzer = {}
+    besitzer.default_proc = proc { |hash, key| hash[key] = [] }
+
+    @moegliche_karten.each_with_index do |m, i|
+      (m - @sichere_karten[i]).each do |k|
+        besitzer[k].push(i)
+      end
+    end
+
+    was_veraendert = false
+    besitzer.each do |karte, spieler_indizes|
+      next unless spieler_indizes.length == 1
+
+      was_veraendert = true
+      @sichere_karten[spieler_indizes.first].push(karte)
+    end
+    was_veraendert
   end
 end

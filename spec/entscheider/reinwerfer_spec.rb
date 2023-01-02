@@ -56,6 +56,15 @@ RSpec.describe Reinwerfer do
   let(:gestochene_stich_sicht) { gestochener_stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler) }
   let(:leerer_stich) { Stich.new }
   let(:leere_stich_sicht) { leerer_stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler) }
+  let(:stich_mit_blank_anzeige) do
+    stich = Stich.new
+    stich.legen(karte: gruene(9), spieler_index: 3)
+    stich.legen(karte: gruene(1), spieler_index: 4)
+    stich.legen(karte: gruene(4), spieler_index: 0)
+    stich.legen(karte: gelbe(4), spieler_index: 1)
+    stich.legen(karte: gelbe(5), spieler_index: 2)
+    stich
+  end
 
   it 'waehlt seine einzige waehlbare Karte' do
     karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [Karte.max_trumpf], standard_stich_sicht)
@@ -131,16 +140,81 @@ RSpec.describe Reinwerfer do
     expect(karte).to eq(gruene(3))
   end
 
-  xit 'nimmt an, dass eine sechs bleibt wenn er selber die 7 hat und wirft rein' do
+  it 'nimmt an, dass eine sechs bleibt wenn er selber die 7 hat und wirft rein' do
     spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
     karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3), gruene(7)],
                                           standard_stich_sicht)
     expect(karte).to eq(gruene(2))
   end
 
-  xit 'nimmt an, dass eine sechs nicht bleibt und rettet Auftrag' do
+  it 'nimmt an, dass eine sechs nicht bleibt und rettet Auftrag' do
     spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
     karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3)], standard_stich_sicht)
     expect(karte).to eq(gruene(3))
+  end
+
+  it 'nimmt an, dass eine sechs bleibt wenn die Spieler danach blank sind und wirft rein' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
+    spiel_information.stich_fertig(stich_mit_blank_anzeige)
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3), gruene(6)],
+                                          standard_stich_sicht)
+    expect(karte).to eq(gruene(2))
+  end
+  
+  it 'nimmt an, dass eine sechs bleibt wenn die Spieler danach tiefe kommuniziert haben und wirft rein' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(1)))
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
+    spiel_information.kommuniziert(spieler_index: 1, kommunikation: Kommunikation.tiefste(karte: gruene(1), gegangene_stiche: 0))
+    spiel_information.kommuniziert(spieler_index: 2, kommunikation: Kommunikation.hoechste(karte: gruene(4), gegangene_stiche: 0))
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3), gruene(6)],
+                                          standard_stich_sicht)
+    expect(karte).to eq(gruene(2))
+  end
+
+  it 'nimmt an, dass eine sechs nicht bleibt, wenn ein anderer eine tiefe Auftragskarte eines anderen kommuniziert hat und rettet Auftrag' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(1)))
+    spiel_information.kommuniziert(spieler_index: 1, kommunikation: Kommunikation.tiefste(karte: gruene(1), gegangene_stiche: 0))
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3)], standard_stich_sicht)
+    expect(karte).to eq(gruene(3))
+  end
+
+  it 'nimmt an, dass eine sechs nicht bleibt, wenn ein anderer eine 9 kommuniziert hat und rettet Auftrag' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(1)))
+    spiel_information.kommuniziert(spieler_index: 1, kommunikation: Kommunikation.einzige(karte: gruene(9), gegangene_stiche: 0))
+    spiel_information.kommuniziert(spieler_index: 4, kommunikation: Kommunikation.hoechste(karte: gruene(7), gegangene_stiche: 0))
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3)], standard_stich_sicht)
+    expect(karte).to eq(gruene(3))
+  end
+
+  it 'nimmt an, dass eine sechs nicht bleibt, wenn er selber die 7 hat und ein anderer eine tiefe Auftragskarte eines anderen kommuniziert hat und rettet Auftrag' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: aktivierter_auftrag(gruene(2)))
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(1)))
+    spiel_information.kommuniziert(spieler_index: 1, kommunikation: Kommunikation.tiefste(karte: gruene(1), gegangene_stiche: 0))
+    spiel_information.kommuniziert(spieler_index: 4, kommunikation: Kommunikation.hoechste(karte: gruene(7), gegangene_stiche: 0))
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3)], standard_stich_sicht)
+    expect(karte).to eq(gruene(3))
+  end
+
+  it 'nimmt an, dass eine 8 danach den Stich holt und wirft rein' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(2)))
+    spiel_information.kommuniziert(spieler_index: 1, kommunikation: Kommunikation.tiefste(karte: gruene(8), gegangene_stiche: 0))
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(3)], standard_stich_sicht)
+    expect(karte).to eq(gruene(2))
+  end
+
+  it 'nimmt an, dass eine sechs bleibt, wenn die Spieler danach blank sind und wirft eine hohe Karte, die einen anderen Auftrag bedroht, rein' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(3)))
+    spiel_information.stich_fertig(stich_mit_blank_anzeige)
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(5)], standard_stich_sicht)
+    expect(karte).to eq(gruene(5))
+  end
+
+  it 'nimmt an, dass eine 8 danach den Stich holt und wirft eine hohe Karte, die einen anderen Auftrag bedroht, rein' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(3)))
+    spiel_information.kommuniziert(spieler_index: 1, kommunikation: Kommunikation.tiefste(karte: gruene(8), gegangene_stiche: 0))
+    karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(7)], standard_stich_sicht)
+    expect(karte).to eq(gruene(7))
   end
 end
