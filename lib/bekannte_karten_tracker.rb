@@ -65,7 +65,7 @@ class BekannteKartenTracker
   end
 
   def hat_nachher_andere_karte_dieser_farbe_gespielt(spieler_index, kommunikation)
-    @spiel_informations_sicht.stiche[kommunikation.gegangene_stiche..-1].any? do |s, i|
+    @spiel_informations_sicht.stiche[kommunikation.gegangene_stiche..].any? do |s, _i|
       s.gespielte_karten.any? do |k|
         k.karte != kommunikation.karte &&
           k.karte.farbe == kommunikation.karte.farbe && k.spieler_index == spieler_index
@@ -91,9 +91,7 @@ class BekannteKartenTracker
     @spiel_informations_sicht.stiche.each do |s|
       s.gespielte_karten.each do |g|
         # Spieler hat nicht angegeben.
-        if g.karte.farbe != s.farbe
-          @moegliche_karten[g.spieler_index].delete_if { |k| k.farbe == s.farbe }
-        end
+        @moegliche_karten[g.spieler_index].delete_if { |k| k.farbe == s.farbe } if g.karte.farbe != s.farbe
       end
     end
   end

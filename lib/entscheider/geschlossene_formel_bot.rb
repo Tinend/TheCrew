@@ -10,20 +10,20 @@ class GeschlosseneFormelBot < Entscheider
   include SaeugerAuftragNehmer
 
   def waehle_karte(stich, waehlbare_karten)
-    waehlbare_karten.max_by {|karte| geschlossene_formel_wert(karte, stich)}
+    waehlbare_karten.max_by { |karte| geschlossene_formel_wert(karte, stich) }
   end
 
   def karten_wert(karte)
     return 10 + karte.wert if karte.trumpf?
-    return karte.wert
+
+    karte.wert
   end
-  
-  def geschlossene_formel_wert(karte, stich)
-    karten_wert(karte) * (@spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length * 2 - 1)
+
+  def geschlossene_formel_wert(karte, _stich)
+    karten_wert(karte) * ((@spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length * 2) - 1)
   end
-  
+
   def sehe_spiel_informations_sicht(spiel_informations_sicht)
     @spiel_informations_sicht = spiel_informations_sicht
   end
-
 end
