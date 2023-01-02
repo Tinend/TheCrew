@@ -5,11 +5,14 @@ require_relative 'zufalls_entscheider'
 require_relative '../entscheider'
 require_relative '../stich'
 require_relative '../karte'
+require_relative 'saeuger_auftrag_nehmer'
 
 # Entscheider, der immer zufällig entschiedet, was er spielt.
 # Wenn er eine Karte reinwerfen kann, die jemand anderem hilft,
 # tut er das.
 class Reinwerfer < Entscheider
+  include SaeugerAuftragNehmer
+
   # Ab diesem Wert sollten alleinstehende oder tiefste Karten immer kommuniziert werden.
   MIN_WARN_KOMMUNIZIER_WERT = 8
 

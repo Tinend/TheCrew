@@ -4,19 +4,19 @@
 # Simpler algorithmus zum Aufträge wählen
 module SaeugerAuftragNehmer
   def waehl_auftrag(auftraege)
-    auftraege.max_by do |auftrag|
-      wert = 0
-      if karten.include?(auftrag.karte)
-        wert = auftrag.karte.wert
+    auftraege.max_by { |auftrag| auftrag_punkte(auftrag) }
+  end
+
+  def auftrag_punkte(auftrag)
+    if karten.include?(auftrag.karte)
+      auftrag.karte.wert
+    else
+      max_karte = finde_max_karte(auftrag)
+      if max_karte.nil?
+        0
       else
-        max_karte = finde_max_karte(auftrag)
-        wert = if max_karte.nil?
-                 0
-               else
-                 max_karte.wert - (auftrag.karte.wert * 0.1)
-               end
+        max_karte.wert - (auftrag.karte.wert * 0.1)
       end
-      wert
     end
   end
 
