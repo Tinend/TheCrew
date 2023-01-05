@@ -5,61 +5,40 @@ require_relative 'stich'
 
 # Verwaltet das Spiel. Lässt jeden Spieler jede Runde auf den Stich spielen
 class Spiel
-  def initialize(spieler:, richter:, spiel_information:, ausgeben: true)
+  def initialize(spieler:, richter:, spiel_information:, reporter:)
     @spieler = spieler
     @richter = richter
     @spiel_information = spiel_information
     @ausspiel_recht_index = @spiel_information.kapitaen_index
     @spieler.each(&:vorbereitungs_phase)
-    starthand_zeigen if ausgeben
+    @reporter = reporter
   end
 
-  def starthand_zeigen
-    @spieler.each_index do |index|
-      puts "Spieler #{index + 1}"
-      puts "Hand: #{@spiel_information.karten[index].sort.reverse.join(' ')}"
-      puts "Aufträge: #{@spiel_information.auftraege[index].sort.reverse.join(' ')}"
-      puts
-    end
+  def start_situation_berichten
+    @reporter.berichte_start_situation(karten: @spiel_information.karten, auftraege: @spiel_information.auftraege)
   end
 
-  def kommunizieren(ausgeben)
+  def kommunizieren
     @spieler.each_index.any? do |i|
       kommunikation = @spieler[i].waehle_kommunikation
       next unless kommunikation
 
       @spiel_information.kommuniziert(spieler_index: i, kommunikation: kommunikation)
-      if ausgeben
-        puts "Spieler #{i + 1} kommuniziert, dass #{kommunikation.karte} seine #{kommunikation.art} " \
-             "#{kommunikation.karte.farbe.name}e ist."
-      end
+      @reporter.berichte_kommunikation(spieler_index: i, kommunikation: kommunikation)
       true
     end
   end
 
   # Immer wenn jemand kommuniziert, kriegen andere die Gelegenheit, nochmal zu kommunizieren. Bis keiner mehr will.
-  def iterativ_kommunizieren(ausgeben)
-    while kommunizieren(ausgeben); end
+  def iterativ_kommunizieren
+    while kommunizieren; end
   end
 
   def stich_ausgeben(stich)
-    puts "Spieler #{stich.sieger_index + 1} holt den Stich."
-    puts stich.to_s
-    if @richter.vermasselt_letzter_stich != []
-      vermasselt = @richter.vermasselt_letzter_stich.join(' ')
-      puts "Folgender Auftrag wurde nicht erfüllt: #{vermasselt}" if @richter.vermasselt_letzter_stich.length == 1
-      puts "Folgende Aufträge wurden nicht erfüllt: #{vermasselt}" if @richter.vermasselt_letzter_stich.length > 1
-    end
-    return unless @richter.erfuellt_letzter_stich != []
-
-    erfuellt = @richter.erfuellt_letzter_stich.join(' ')
-    puts "Folgender Auftrag wurde erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length == 1
-    puts "Folgende Aufträge wurden erfüllt: #{erfuellt}" if @richter.erfuellt_letzter_stich.length > 1
   end
 
-  def runde(ausgeben: true)
-    raise if ausgeben
-    iterativ_kommunizieren(ausgeben)
+  def runde
+    iterativ_kommunizieren
     stich = Stich.new
     @spieler.each_index do |i|
       spieler_index = (i + @ausspiel_recht_index) % @spieler.length
@@ -71,22 +50,19 @@ class Spiel
     end
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
-    stich_ausgeben(stich) if ausgeben
+    @reporter.berichte_stich(stich: stich, vermasselte_auftraege: @richter.vermasselt_letzter_stich, erfuellte_auftraege: @richter.erfuellt_letzter_stich)
     @richter.alle_karten_ausgespielt if @spiel_information.existiert_blanker_spieler?
     @ausspiel_recht_index = stich.sieger_index
   end
 
-  def spiele(ausgeben: true)
-    raise if ausgeben
-    runde(ausgeben: ausgeben) until @richter.gewonnen || @richter.verloren
+  def spiele
+    start_situation_berichten
+    runde until @richter.gewonnen || @richter.verloren
 
-    if ausgeben
-      if @richter.verloren
-        puts 'Leider wurde das Spiel verloren'
-      elsif @richter.gewonnen
-        puts 'Herzliche Gratulation!'
-      end
+    if @richter.verloren
+      @reporter.berichte_verloren
+    elsif @richter.gewonnen
+      @reporter.berichte_gewonnen
     end
-    @richter.resultat
   end
 end
