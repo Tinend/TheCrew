@@ -64,5 +64,6 @@ class Spiel
     elsif @richter.gewonnen
       @reporter.berichte_gewonnen
     end
+    @richter.resultat
   end
 end

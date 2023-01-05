@@ -1,5 +1,5 @@
 # coding: utf-8
-# frozen_string_litera: true
+# frozen_string_literal: true
 
 require_relative '../entscheider'
 require_relative 'saeuger_auftrag_nehmer'
