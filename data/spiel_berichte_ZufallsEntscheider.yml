@@ -1,0 +1,5289 @@
+---
+- :karten:
+  - rot 8, blau 9, Rakete 4, blau 5, gelb 1, gelb 6, grün 1, gelb 8, grün 3, gelb
+    7
+  - blau 8, grün 2, rot 9, blau 7, grün 6, Rakete 2, gelb 3, grün 9, Rakete 3, grün
+    8
+  - Rakete 1, rot 1, grün 7, rot 3, blau 4, blau 6, rot 5, gelb 5, gelb 4, grün 5
+  - rot 7, gelb 2, blau 3, grün 4, rot 4, blau 2, rot 2, blau 1, rot 6, gelb 9
+  :auftraege:
+  - rot 2, gelb 2
+  - blau 5, blau 4
+  - gelb 6
+  - grün 1
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: &12 !ruby/object:Karte
+      wert: 7
+      farbe: &1 !ruby/object:Farbe
+        name: blau
+        staerke: 0
+        sortier_wert: 1
+        hash: 3511604104161053865
+      hash: -808049176592122386
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: &8 !ruby/object:Karte
+      wert: 5
+      farbe: *1
+      hash: 500020623557110711
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: &16 !ruby/object:Karte
+      wert: 4
+      farbe: &2 !ruby/object:Farbe
+        name: grün
+        staerke: 0
+        sortier_wert: 3
+        hash: 2384975004857068550
+      hash: 4283408874386436167
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: &31 !ruby/object:Karte
+      wert: 1
+      farbe: &3 !ruby/object:Farbe
+        name: rot
+        staerke: 0
+        sortier_wert: 2
+        hash: 306795290659932906
+      hash: -1302615838575781840
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: gelb 1, gelb 3, gelb 5, gelb 9
+  - :anspieler: 3
+    :karten: rot 4, rot 8, rot 9, rot 5
+  - :anspieler: 1
+    :karten: Rakete 2, Rakete 1, blau 2, Rakete 4
+  - :anspieler: 0
+    :karten: blau 9, blau 7, blau 4, blau 3
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 0
+    :karten: gelb 7, grün 2, gelb 4, gelb 2
+    :erfuellte_auftraege: gelb 2
+  - :anspieler: 0
+    :karten: grün 1, grün 9, grün 7, grün 4
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 1
+    :karten: grün 6, grün 5, rot 6, grün 3
+  - :anspieler: 1
+    :karten: Rakete 3, blau 6, rot 7, blau 5
+    :erfuellte_auftraege: blau 5
+  - :anspieler: 1
+    :karten: grün 8, rot 3, rot 2, gelb 6
+    :vermasselte_auftraege: rot 2, gelb 6
+  - :anspieler: 1
+    :karten: blau 8, rot 1, blau 1, gelb 8
+  :resultat: :verloren
+- :karten:
+  - gelb 6, blau 7, grün 8, gelb 2, rot 6, blau 9, blau 5, blau 1, rot 4, rot 5
+  - rot 7, gelb 5, gelb 7, gelb 1, rot 1, blau 3, rot 2, Rakete 4, gelb 9, gelb 3
+  - Rakete 3, blau 8, gelb 8, grün 2, grün 5, blau 2, grün 3, grün 1, grün 4, rot
+    8
+  - rot 9, grün 6, gelb 4, blau 4, blau 6, rot 3, grün 9, Rakete 2, Rakete 1, grün
+    7
+  :auftraege:
+  - grün 6
+  - rot 7, grün 2
+  - rot 8, blau 2
+  - gelb 7
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: &20 !ruby/object:Karte
+      wert: 3
+      farbe: *1
+      hash: 4108117827122854600
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: &26 !ruby/object:Karte
+      wert: 9
+      farbe: *2
+      hash: 599167587856617620
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: &9 !ruby/object:Karte
+      wert: 5
+      farbe: *2
+      hash: -1192641833034414306
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: &22 !ruby/object:Karte
+      wert: 6
+      farbe: *3
+      hash: -4274616518034222131
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 1
+    :karten: gelb 7, gelb 8, gelb 4, gelb 6
+    :vermasselte_auftraege: gelb 7
+  - :anspieler: 2
+    :karten: blau 8, blau 6, blau 5, blau 3
+  - :anspieler: 2
+    :karten: grün 3, grün 7, grün 8, rot 1
+  - :anspieler: 0
+    :karten: blau 7, rot 2, blau 2, blau 4
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 0
+    :karten: rot 4, rot 7, rot 8, rot 9
+    :vermasselte_auftraege: rot 7, rot 8
+  - :anspieler: 3
+    :karten: Rakete 2, gelb 2, Rakete 4, Rakete 3
+  - :anspieler: 1
+    :karten: gelb 3, grün 1, grün 9, blau 1
+  - :anspieler: 1
+    :karten: gelb 5, grün 5, Rakete 1, blau 9
+  - :anspieler: 3
+    :karten: grün 6, rot 5, gelb 9, grün 2
+    :vermasselte_auftraege: grün 6, grün 2
+  - :anspieler: 3
+    :karten: rot 3, rot 6, gelb 1, grün 4
+  :resultat: :verloren
+- :karten:
+  - rot 1, rot 2, Rakete 3, blau 7, gelb 1, Rakete 4, gelb 2, blau 3, grün 2, blau
+    2
+  - blau 6, gelb 9, gelb 5, rot 5, blau 8, grün 4, rot 6, gelb 8, blau 1, grün 7
+  - grün 6, grün 8, rot 4, gelb 7, grün 9, blau 4, grün 3, gelb 4, rot 9, gelb 6
+  - rot 3, blau 5, grün 5, Rakete 2, rot 7, rot 8, gelb 3, Rakete 1, grün 1, blau
+    9
+  :auftraege:
+  - rot 7, rot 4
+  - blau 7, grün 7
+  - rot 1
+  - rot 6
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: &6 !ruby/object:Karte
+      wert: 9
+      farbe: *1
+      hash: -2913232797777058214
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: &21 !ruby/object:Karte
+      wert: 1
+      farbe: &4 !ruby/object:Farbe
+        name: gelb
+        staerke: 0
+        sortier_wert: 0
+        hash: -1540043776568132142
+      hash: 4578816944410622610
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: &5 !ruby/object:Karte
+      wert: 9
+      farbe: *4
+      hash: -4284651511510953095
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: &7 !ruby/object:Karte
+      wert: 8
+      farbe: *2
+      hash: -1609055501866097768
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 0
+    :karten: rot 2, rot 5, rot 9, rot 3
+  - :anspieler: 2
+    :karten: gelb 6, gelb 3, gelb 1, gelb 5
+  - :anspieler: 2
+    :karten: gelb 7, grün 5, gelb 2, gelb 8
+  - :anspieler: 1
+    :karten: blau 6, blau 4, blau 9, blau 2
+  - :anspieler: 3
+    :karten: grün 1, grün 2, grün 4, grün 9
+  - :anspieler: 2
+    :karten: rot 4, rot 8, rot 1, rot 6
+    :vermasselte_auftraege: rot 4, rot 1
+    :erfuellte_auftraege: rot 6
+  - :anspieler: 3
+    :karten: rot 7, Rakete 4, blau 8, gelb 4
+    :erfuellte_auftraege: rot 7
+  - :anspieler: 0
+    :karten: blau 3, blau 1, grün 6, blau 5
+  - :anspieler: 3
+    :karten: Rakete 2, Rakete 3, gelb 9, grün 8
+  - :anspieler: 0
+    :karten: blau 7, grün 7, grün 3, Rakete 1
+    :vermasselte_auftraege: blau 7, grün 7
+  :resultat: :verloren
+- :karten:
+  - blau 9, grün 8, rot 5, blau 1, blau 3, grün 6, Rakete 4, blau 7, blau 5, blau
+    8
+  - rot 9, gelb 5, grün 2, rot 7, rot 8, gelb 7, Rakete 1, gelb 1, gelb 9, Rakete
+    2
+  - gelb 3, rot 2, rot 6, grün 7, grün 3, blau 4, grün 4, gelb 2, Rakete 3, blau 2
+  - gelb 6, rot 3, rot 4, grün 9, gelb 4, blau 6, rot 1, gelb 8, grün 1, grün 5
+  :auftraege:
+  - blau 3, rot 8
+  - rot 4, gelb 1
+  - rot 1
+  - grün 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: &27 !ruby/object:Karte
+      wert: 3
+      farbe: *4
+      hash: -1945297935867903884
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: &18 !ruby/object:Karte
+      wert: 4
+      farbe: *3
+      hash: 540843280028072479
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *6
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 8, gelb 7, blau 4, blau 6
+  - :anspieler: 0
+    :karten: grün 6, grün 2, grün 7, grün 1
+  - :anspieler: 2
+    :karten: grün 4, grün 9, grün 8, Rakete 1
+  - :anspieler: 1
+    :karten: rot 8, rot 6, rot 1, rot 5
+    :vermasselte_auftraege: rot 8, rot 1
+  - :anspieler: 1
+    :karten: Rakete 2, Rakete 3, rot 4, Rakete 4
+    :vermasselte_auftraege: rot 4
+  - :anspieler: 0
+    :karten: blau 3, rot 9, blau 2, gelb 8
+    :erfuellte_auftraege: blau 3
+  - :anspieler: 0
+    :karten: blau 1, gelb 9, gelb 2, rot 3
+  - :anspieler: 0
+    :karten: blau 7, gelb 5, gelb 3, gelb 6
+  - :anspieler: 0
+    :karten: blau 9, gelb 1, rot 2, gelb 4
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 0
+    :karten: blau 5, rot 7, grün 3, grün 5
+    :vermasselte_auftraege: grün 5
+  :resultat: :verloren
+- :karten:
+  - grün 4, gelb 8, rot 1, blau 4, rot 9, grün 2, rot 6, Rakete 4, gelb 7, grün 8
+  - gelb 5, blau 7, gelb 1, grün 3, rot 3, rot 8, blau 8, rot 2, Rakete 2, blau 9
+  - grün 9, grün 5, gelb 6, blau 6, grün 7, grün 1, blau 5, rot 5, grün 6, gelb 3
+  - rot 7, Rakete 3, blau 2, gelb 2, Rakete 1, gelb 4, blau 1, gelb 9, blau 3, rot
+    4
+  :auftraege:
+  - blau 4, gelb 7
+  - rot 1, gelb 8
+  - rot 2
+  - grün 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: &13 !ruby/object:Karte
+      wert: 8
+      farbe: *3
+      hash: 2523766393105284875
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *7
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: &23 !ruby/object:Karte
+      wert: 6
+      farbe: *4
+      hash: -1023976393535792392
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: &11 !ruby/object:Karte
+      wert: 4
+      farbe: *4
+      hash: -1092132123538486416
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: gelb 7, gelb 5, gelb 3, gelb 9
+    :vermasselte_auftraege: gelb 7
+  - :anspieler: 3
+    :karten: blau 1, blau 4, blau 9, blau 6
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 1
+    :karten: rot 8, rot 5, rot 4, rot 6
+  - :anspieler: 1
+    :karten: rot 2, grün 9, rot 7, rot 1
+    :vermasselte_auftraege: rot 1, rot 2
+  - :anspieler: 3
+    :karten: blau 2, Rakete 4, blau 7, blau 5
+  - :anspieler: 0
+    :karten: grün 2, grün 3, grün 1, Rakete 1
+  - :anspieler: 3
+    :karten: blau 3, gelb 8, blau 8, grün 6
+    :erfuellte_auftraege: gelb 8
+  - :anspieler: 1
+    :karten: gelb 1, gelb 6, gelb 2, grün 4
+  - :anspieler: 2
+    :karten: grün 5, gelb 4, grün 8, Rakete 2
+    :vermasselte_auftraege: grün 5
+  - :anspieler: 1
+    :karten: rot 3, grün 7, Rakete 3, rot 9
+  :resultat: :verloren
+- :karten:
+  - gelb 2, grün 1, gelb 4, rot 7, grün 7, rot 6, gelb 5, grün 3, rot 5, grün 6
+  - grün 9, Rakete 1, gelb 8, grün 5, blau 5, blau 6, grün 4, blau 7, gelb 7, rot
+    4
+  - blau 3, blau 8, Rakete 2, grün 8, rot 2, gelb 1, rot 8, blau 9, gelb 9, gelb 6
+  - rot 1, rot 3, gelb 3, Rakete 3, grün 2, blau 4, rot 9, Rakete 4, blau 2, blau
+    1
+  :auftraege:
+  - grün 3, grün 9
+  - blau 6
+  - rot 4
+  - rot 9, grün 8
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: &17 !ruby/object:Karte
+      wert: 9
+      farbe: *3
+      hash: 2501570568771336398
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *5
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: &10 !ruby/object:Karte
+      wert: 7
+      farbe: *2
+      hash: -273332977495206772
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *8
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 3
+    :karten: rot 3, rot 7, rot 4, rot 8
+    :erfuellte_auftraege: rot 4
+  - :anspieler: 2
+    :karten: gelb 6, gelb 3, gelb 2, gelb 7
+  - :anspieler: 1
+    :karten: gelb 8, gelb 1, blau 1, gelb 4
+  - :anspieler: 1
+    :karten: blau 6, blau 9, blau 4, gelb 5
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 2
+    :karten: gelb 9, Rakete 4, grün 1, grün 5
+  - :anspieler: 3
+    :karten: rot 9, rot 5, grün 4, rot 2
+    :erfuellte_auftraege: rot 9
+  - :anspieler: 3
+    :karten: rot 1, rot 6, Rakete 1, blau 3
+  - :anspieler: 1
+    :karten: grün 9, grün 8, grün 2, grün 7
+    :vermasselte_auftraege: grün 9, grün 8
+  - :anspieler: 1
+    :karten: blau 7, blau 8, blau 2, grün 6
+  - :anspieler: 2
+    :karten: Rakete 2, Rakete 3, grün 3, blau 5
+    :vermasselte_auftraege: grün 3
+  :resultat: :verloren
+- :karten:
+  - blau 6, blau 8, rot 7, rot 5, rot 6, rot 1, blau 7, blau 2, blau 4, Rakete 2
+  - rot 2, gelb 5, blau 5, grün 4, Rakete 4, rot 9, grün 1, grün 5, blau 3, gelb 8
+  - blau 1, gelb 6, grün 6, grün 3, gelb 1, gelb 2, gelb 4, grün 2, grün 7, grün 9
+  - gelb 7, gelb 9, Rakete 3, gelb 3, Rakete 1, grün 8, rot 4, rot 8, rot 3, blau
+    9
+  :auftraege:
+  - rot 6
+  - grün 2, rot 4
+  - blau 1, gelb 5
+  - grün 6
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *9
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: &24 !ruby/object:Karte
+      wert: 8
+      farbe: *1
+      hash: -3008238041742857306
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *10
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *5
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: blau 5, blau 1, blau 9, blau 7
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 3
+    :karten: gelb 7, rot 1, gelb 5, gelb 6
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 2, Rakete 4, gelb 4
+  - :anspieler: 1
+    :karten: rot 9, grün 3, rot 8, rot 5
+  - :anspieler: 1
+    :karten: rot 2, gelb 1, rot 4, rot 7
+    :vermasselte_auftraege: rot 4
+  - :anspieler: 0
+    :karten: blau 4, blau 3, grün 9, gelb 3
+  - :anspieler: 0
+    :karten: rot 6, gelb 8, grün 2, rot 3
+    :vermasselte_auftraege: grün 2
+    :erfuellte_auftraege: rot 6
+  - :anspieler: 0
+    :karten: blau 8, grün 4, gelb 2, grün 8
+  - :anspieler: 0
+    :karten: blau 6, grün 5, grün 6, Rakete 3
+    :erfuellte_auftraege: grün 6
+  - :anspieler: 3
+    :karten: gelb 9, blau 2, grün 1, grün 7
+  :resultat: :verloren
+- :karten:
+  - gelb 6, blau 2, blau 6, rot 1, blau 8, rot 4, grün 6, rot 2, grün 1, grün 3
+  - grün 9, gelb 3, grün 5, Rakete 1, Rakete 2, gelb 1, blau 5, grün 8, gelb 4, rot
+    5
+  - grün 7, Rakete 3, rot 8, rot 7, rot 6, blau 1, rot 9, Rakete 4, gelb 2, rot 3
+  - gelb 8, gelb 9, gelb 7, grün 4, grün 2, blau 7, blau 4, blau 9, blau 3, gelb 5
+  :auftraege:
+  - gelb 6
+  - blau 6
+  - gelb 2, gelb 4
+  - rot 6, blau 3
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *11
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: &39 !ruby/object:Karte
+      wert: 1
+      farbe: *2
+      hash: -688565384357413459
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *12
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *13
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 2
+    :karten: rot 3, blau 3, rot 2, rot 5
+    :vermasselte_auftraege: blau 3
+  - :anspieler: 1
+    :karten: grün 9, grün 7, grün 4, grün 3
+  - :anspieler: 1
+    :karten: gelb 1, gelb 2, gelb 5, gelb 6
+    :vermasselte_auftraege: gelb 2
+    :erfuellte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: blau 8, blau 5, blau 1, blau 9
+  - :anspieler: 3
+    :karten: gelb 8, rot 1, gelb 3, Rakete 4
+  - :anspieler: 2
+    :karten: rot 7, gelb 9, rot 4, gelb 4
+    :erfuellte_auftraege: gelb 4
+  - :anspieler: 2
+    :karten: rot 9, grün 2, grün 1, grün 8
+  - :anspieler: 2
+    :karten: Rakete 3, blau 4, blau 2, Rakete 2
+  - :anspieler: 2
+    :karten: rot 6, blau 7, grün 6, Rakete 1
+    :vermasselte_auftraege: rot 6
+  - :anspieler: 1
+    :karten: grün 5, rot 8, gelb 7, blau 6
+    :erfuellte_auftraege: blau 6
+  :resultat: :verloren
+- :karten:
+  - grün 3, gelb 8, blau 2, rot 7, gelb 9, gelb 2, grün 6, rot 2, rot 5, rot 8
+  - grün 4, grün 2, blau 5, Rakete 1, gelb 5, grün 1, blau 7, grün 8, gelb 4, blau
+    9
+  - rot 1, blau 8, grün 9, rot 9, Rakete 3, gelb 1, grün 7, Rakete 2, rot 3, blau
+    4
+  - gelb 3, blau 1, rot 4, gelb 7, rot 6, Rakete 4, grün 5, blau 6, gelb 6, blau 3
+  :auftraege:
+  - blau 7, rot 2
+  - gelb 9
+  - rot 1
+  - gelb 4, blau 1
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *11
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: &15 !ruby/object:Karte
+      wert: 2
+      farbe: *4
+      hash: 184485257415351030
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *9
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: &14 !ruby/object:Karte
+      wert: 3
+      farbe: *3
+      hash: -3649618726329063267
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: rot 4, rot 8, grün 1, rot 9
+  - :anspieler: 2
+    :karten: blau 4, blau 3, blau 2, blau 9
+  - :anspieler: 1
+    :karten: grün 4, grün 9, grün 5, grün 3
+  - :anspieler: 2
+    :karten: blau 8, blau 6, grün 6, blau 5
+  - :anspieler: 2
+    :karten: rot 1, rot 6, rot 5, gelb 4
+    :vermasselte_auftraege: rot 1
+    :erfuellte_auftraege: gelb 4
+  - :anspieler: 3
+    :karten: blau 1, rot 2, blau 7, gelb 1
+    :vermasselte_auftraege: blau 7, rot 2, blau 1
+  - :anspieler: 1
+    :karten: grün 8, grün 7, gelb 6, gelb 2
+  - :anspieler: 1
+    :karten: Rakete 1, Rakete 2, Rakete 4, gelb 9
+    :vermasselte_auftraege: gelb 9
+  - :anspieler: 3
+    :karten: gelb 7, gelb 8, gelb 5, rot 3
+  - :anspieler: 0
+    :karten: rot 7, grün 2, Rakete 3, gelb 3
+  :resultat: :verloren
+- :karten:
+  - rot 7, Rakete 2, gelb 5, rot 3, rot 2, blau 3, grün 2, Rakete 4, rot 6, blau 6
+  - rot 8, gelb 3, Rakete 1, rot 9, grün 6, gelb 4, rot 4, gelb 7, blau 9, gelb 9
+  - gelb 6, gelb 2, grün 9, grün 1, grün 5, blau 4, blau 2, rot 5, gelb 8, grün 3
+  - blau 5, blau 7, grün 7, blau 8, Rakete 3, gelb 1, rot 1, grün 4, blau 1, grün
+    8
+  :auftraege:
+  - rot 1, rot 2
+  - gelb 3, blau 2
+  - grün 9
+  - blau 1
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *14
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *15
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *16
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: rot 6, rot 8, rot 5, rot 1
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 1
+    :karten: Rakete 1, blau 2, Rakete 3, Rakete 4
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 0
+    :karten: blau 3, blau 9, blau 4, blau 8
+  - :anspieler: 1
+    :karten: gelb 4, gelb 6, gelb 1, gelb 5
+  - :anspieler: 2
+    :karten: grün 3, grün 7, grün 2, grün 6
+  - :anspieler: 3
+    :karten: grün 8, rot 2, gelb 9, grün 9
+    :vermasselte_auftraege: rot 2
+    :erfuellte_auftraege: grün 9
+  - :anspieler: 2
+    :karten: gelb 8, blau 1, rot 3, gelb 7
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 2
+    :karten: gelb 2, blau 7, blau 6, gelb 3
+    :erfuellte_auftraege: gelb 3
+  - :anspieler: 1
+    :karten: rot 9, grün 1, blau 5, rot 7
+  - :anspieler: 1
+    :karten: rot 4, grün 5, grün 4, Rakete 2
+  :resultat: :verloren
+- :karten:
+  - gelb 2, blau 8, grün 5, gelb 3, grün 4, rot 7, rot 9, grün 8, Rakete 4, grün 9
+  - rot 5, blau 2, grün 2, rot 6, gelb 5, gelb 7, gelb 4, blau 9, rot 8, Rakete 1
+  - blau 4, gelb 6, blau 3, Rakete 2, Rakete 3, blau 5, gelb 9, rot 1, blau 7, gelb
+    1
+  - blau 1, blau 6, rot 3, gelb 8, rot 2, rot 4, grün 3, grün 6, grün 1, grün 7
+  :auftraege:
+  - grün 3, gelb 4
+  - rot 7, gelb 3
+  - blau 6
+  - grün 7
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: &19 !ruby/object:Karte
+      wert: 4
+      farbe: *1
+      hash: -4590815347556900023
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *6
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *18
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 0
+    :karten: gelb 2, gelb 7, gelb 9, gelb 8
+  - :anspieler: 2
+    :karten: blau 5, blau 1, blau 8, blau 2
+  - :anspieler: 0
+    :karten: grün 5, grün 2, blau 3, grün 6
+  - :anspieler: 3
+    :karten: grün 1, grün 4, gelb 4, Rakete 2
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 2
+    :karten: gelb 6, grün 3, gelb 3, gelb 5
+    :vermasselte_auftraege: grün 3, gelb 3
+  - :anspieler: 2
+    :karten: rot 1, rot 2, rot 7, rot 8
+    :erfuellte_auftraege: rot 7
+  - :anspieler: 1
+    :karten: Rakete 1, Rakete 3, grün 7, Rakete 4
+    :vermasselte_auftraege: grün 7
+  - :anspieler: 0
+    :karten: rot 9, rot 5, gelb 1, rot 4
+  - :anspieler: 0
+    :karten: grün 8, rot 6, blau 7, rot 3
+  - :anspieler: 0
+    :karten: grün 9, blau 9, blau 4, blau 6
+    :vermasselte_auftraege: blau 6
+  :resultat: :verloren
+- :karten:
+  - gelb 7, grün 8, rot 4, blau 4, blau 7, grün 6, grün 3, gelb 6, gelb 9, gelb 3
+  - gelb 2, Rakete 4, blau 2, gelb 1, Rakete 1, Rakete 3, blau 1, gelb 4, gelb 8,
+    grün 9
+  - grün 4, rot 1, rot 8, rot 3, rot 7, blau 9, grün 2, blau 6, rot 5, rot 2
+  - grün 7, gelb 5, grün 5, rot 9, grün 1, blau 5, blau 8, Rakete 2, rot 6, blau 3
+  :auftraege:
+  - rot 6
+  - gelb 1, blau 6
+  - gelb 2, blau 5
+  - gelb 4
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *19
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *20
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: &38 !ruby/object:Karte
+      wert: 2
+      farbe: *2
+      hash: 4267994162791728852
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *15
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: gelb 8, rot 7, gelb 5, gelb 9
+  - :anspieler: 0
+    :karten: grün 8, grün 9, grün 4, grün 5
+  - :anspieler: 1
+    :karten: blau 2, blau 9, blau 8, blau 4
+  - :anspieler: 2
+    :karten: rot 1, rot 9, rot 4, Rakete 3
+  - :anspieler: 1
+    :karten: gelb 4, rot 8, blau 5, gelb 7
+    :vermasselte_auftraege: blau 5, gelb 4
+  - :anspieler: 0
+    :karten: gelb 3, gelb 1, rot 2, blau 3
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 0
+    :karten: grün 3, Rakete 4, grün 2, grün 1
+  - :anspieler: 1
+    :karten: blau 1, blau 6, Rakete 2, blau 7
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 3
+    :karten: rot 6, gelb 6, gelb 2, rot 5
+    :vermasselte_auftraege: rot 6, gelb 2
+  - :anspieler: 3
+    :karten: grün 7, grün 6, Rakete 1, rot 3
+  :resultat: :verloren
+- :karten:
+  - rot 8, rot 7, gelb 3, Rakete 3, grün 3, gelb 4, gelb 9, grün 1, rot 6, blau 6
+  - grün 4, rot 4, rot 3, blau 2, rot 5, blau 3, blau 5, grün 5, gelb 5, gelb 1
+  - grün 7, blau 8, Rakete 4, blau 1, grün 2, gelb 7, grün 9, gelb 8, blau 4, rot
+    1
+  - rot 9, grün 6, blau 7, blau 9, gelb 6, gelb 2, Rakete 1, grün 8, Rakete 2, rot
+    2
+  :auftraege:
+  - rot 4
+  - gelb 8
+  - grün 4, gelb 1
+  - grün 7, rot 1
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: &25 !ruby/object:Karte
+      wert: 2
+      farbe: *1
+      hash: -2689026748827373641
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: &28 !ruby/object:Karte
+      wert: 1
+      farbe: *1
+      hash: 2905975057826819716
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *12
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: Rakete 4, Rakete 1, Rakete 3, gelb 1
+    :erfuellte_auftraege: gelb 1
+  - :anspieler: 2
+    :karten: grün 2, grün 6, grün 1, grün 4
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 3
+    :karten: blau 9, blau 6, blau 3, blau 8
+  - :anspieler: 3
+    :karten: rot 9, rot 6, rot 5, rot 1
+    :erfuellte_auftraege: rot 1
+  - :anspieler: 3
+    :karten: gelb 6, gelb 3, gelb 5, gelb 7
+  - :anspieler: 2
+    :karten: gelb 8, gelb 2, gelb 4, rot 3
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 2
+    :karten: grün 9, grün 8, grün 3, grün 5
+  - :anspieler: 2
+    :karten: blau 4, blau 7, gelb 9, blau 2
+  - :anspieler: 3
+    :karten: Rakete 2, rot 8, rot 4, blau 1
+    :vermasselte_auftraege: rot 4
+  - :anspieler: 3
+    :karten: rot 2, rot 7, blau 5, grün 7
+    :vermasselte_auftraege: grün 7
+  :resultat: :verloren
+- :karten:
+  - rot 3, grün 3, gelb 7, rot 4, rot 6, rot 9, gelb 8, rot 1, grün 4, blau 4
+  - Rakete 3, blau 6, blau 8, blau 3, gelb 1, gelb 3, Rakete 2, gelb 4, blau 1, gelb
+    9
+  - gelb 5, grün 9, grün 8, grün 7, Rakete 1, rot 7, blau 9, gelb 6, gelb 2, blau
+    5
+  - rot 2, rot 8, rot 5, Rakete 4, blau 7, grün 6, blau 2, grün 1, grün 5, grün 2
+  :auftraege:
+  - rot 8, blau 6
+  - grün 7
+  - rot 7
+  - grün 9, blau 8
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *16
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *13
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *6
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: blau 7, blau 4, blau 6, blau 5
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 3
+    :karten: rot 5, rot 1, blau 3, rot 7
+    :erfuellte_auftraege: rot 7
+  - :anspieler: 2
+    :karten: grün 8, grün 5, grün 4, gelb 1
+  - :anspieler: 2
+    :karten: gelb 2, grün 6, gelb 8, gelb 9
+  - :anspieler: 1
+    :karten: gelb 3, gelb 5, rot 2, gelb 7
+  - :anspieler: 0
+    :karten: grün 3, blau 8, grün 7, grün 1
+    :vermasselte_auftraege: grün 7, blau 8
+  - :anspieler: 2
+    :karten: grün 9, grün 2, rot 4, blau 1
+    :vermasselte_auftraege: grün 9
+  - :anspieler: 2
+    :karten: gelb 6, Rakete 4, rot 9, gelb 4
+  - :anspieler: 3
+    :karten: blau 2, rot 3, Rakete 3, blau 9
+  - :anspieler: 1
+    :karten: Rakete 2, Rakete 1, rot 8, rot 6
+    :vermasselte_auftraege: rot 8
+  :resultat: :verloren
+- :karten:
+  - grün 3, grün 6, rot 8, grün 8, gelb 7, gelb 5, gelb 1, blau 5, rot 9, gelb 2
+  - blau 9, blau 2, grün 1, gelb 9, rot 3, gelb 8, Rakete 3, grün 9, blau 7, blau
+    3
+  - blau 1, grün 4, Rakete 2, blau 4, rot 1, gelb 6, grün 7, rot 6, rot 2, gelb 3
+  - rot 4, Rakete 4, grün 5, rot 5, Rakete 1, gelb 4, blau 8, grün 2, blau 6, rot
+    7
+  :auftraege:
+  - grün 4, rot 6
+  - gelb 5
+  - blau 1
+  - gelb 4, blau 5
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *8
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *22
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *9
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *12
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 3
+    :karten: Rakete 4, grün 3, Rakete 3, Rakete 2
+  - :anspieler: 3
+    :karten: Rakete 1, rot 8, blau 9, gelb 6
+  - :anspieler: 3
+    :karten: gelb 4, gelb 5, gelb 9, gelb 3
+    :vermasselte_auftraege: gelb 4
+    :erfuellte_auftraege: gelb 5
+  - :anspieler: 1
+    :karten: blau 2, blau 4, blau 6, blau 5
+    :erfuellte_auftraege: blau 5
+  - :anspieler: 3
+    :karten: rot 4, rot 9, rot 3, rot 1
+  - :anspieler: 0
+    :karten: gelb 2, gelb 8, blau 1, blau 8
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 1
+    :karten: grün 1, grün 4, grün 5, grün 8
+    :erfuellte_auftraege: grün 4
+  - :anspieler: 0
+    :karten: gelb 7, grün 9, rot 2, rot 5
+  - :anspieler: 0
+    :karten: grün 6, blau 7, grün 7, grün 2
+  - :anspieler: 2
+    :karten: rot 6, rot 7, gelb 1, blau 3
+    :vermasselte_auftraege: rot 6
+  :resultat: :verloren
+- :karten:
+  - grün 5, gelb 7, gelb 4, blau 3, rot 9, gelb 2, grün 4, blau 2, rot 6, blau 9
+  - gelb 1, grün 7, blau 4, grün 8, blau 1, rot 8, gelb 5, rot 4, grün 6, rot 1
+  - rot 3, gelb 6, gelb 9, rot 7, grün 9, Rakete 1, blau 5, gelb 8, rot 5, grün 2
+  - Rakete 3, rot 2, blau 8, blau 6, blau 7, Rakete 2, gelb 3, grün 1, Rakete 4, grün
+    3
+  :auftraege:
+  - rot 5, rot 8
+  - gelb 4
+  - gelb 9
+  - rot 3, grün 9
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *15
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: &29 !ruby/object:Karte
+      wert: 3
+      farbe: *2
+      hash: 1666129901878466049
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *10
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *23
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: Rakete 3, gelb 7, grün 8, Rakete 1
+  - :anspieler: 3
+    :karten: blau 6, blau 9, blau 4, blau 5
+  - :anspieler: 0
+    :karten: rot 9, rot 4, rot 3, rot 2
+    :vermasselte_auftraege: rot 3
+  - :anspieler: 0
+    :karten: gelb 4, gelb 1, gelb 9, gelb 3
+    :vermasselte_auftraege: gelb 4
+    :erfuellte_auftraege: gelb 9
+  - :anspieler: 2
+    :karten: gelb 8, Rakete 4, gelb 2, gelb 5
+  - :anspieler: 3
+    :karten: grün 3, grün 4, grün 6, grün 2
+  - :anspieler: 1
+    :karten: rot 8, rot 5, blau 7, rot 6
+    :vermasselte_auftraege: rot 5, rot 8
+  - :anspieler: 1
+    :karten: grün 7, grün 9, grün 1, grün 5
+    :vermasselte_auftraege: grün 9
+  - :anspieler: 2
+    :karten: rot 7, blau 8, blau 3, rot 1
+  - :anspieler: 2
+    :karten: gelb 6, Rakete 2, blau 2, blau 1
+  :resultat: :verloren
+- :karten:
+  - blau 1, blau 3, Rakete 4, blau 4, Rakete 1, rot 8, rot 7, grün 9, grün 6, gelb
+    8
+  - grün 2, gelb 3, grün 4, blau 6, blau 2, grün 8, blau 9, gelb 5, gelb 6, rot 2
+  - grün 3, rot 3, blau 8, rot 6, gelb 2, blau 5, Rakete 2, blau 7, grün 7, Rakete
+    3
+  - gelb 9, gelb 4, grün 1, gelb 1, rot 1, rot 9, grün 5, gelb 7, rot 4, rot 5
+  :auftraege:
+  - gelb 3, rot 6
+  - grün 1, grün 3
+  - blau 2
+  - grün 8
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: &40 !ruby/object:Karte
+      wert: 7
+      farbe: *4
+      hash: 3285231013207748769
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *24
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: &32 !ruby/object:Karte
+      wert: 8
+      farbe: *4
+      hash: 479117295835577532
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *25
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: rot 8, rot 2, rot 6, rot 4
+    :erfuellte_auftraege: rot 6
+  - :anspieler: 0
+    :karten: Rakete 1, blau 6, Rakete 2, gelb 9
+  - :anspieler: 2
+    :karten: Rakete 3, grün 1, Rakete 4, gelb 5
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: blau 4, blau 9, blau 5, gelb 7
+  - :anspieler: 1
+    :karten: gelb 3, gelb 2, gelb 4, gelb 8
+    :erfuellte_auftraege: gelb 3
+  - :anspieler: 0
+    :karten: rot 7, blau 2, rot 3, rot 9
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 3
+    :karten: gelb 1, blau 1, gelb 6, grün 7
+  - :anspieler: 1
+    :karten: grün 4, grün 3, grün 5, grün 9
+    :vermasselte_auftraege: grün 3
+  - :anspieler: 0
+    :karten: grün 6, grün 8, blau 7, rot 1
+    :vermasselte_auftraege: grün 8
+  - :anspieler: 1
+    :karten: grün 2, blau 8, rot 5, blau 3
+  :resultat: :verloren
+- :karten:
+  - gelb 8, Rakete 3, grün 8, gelb 7, rot 8, blau 7, blau 6, rot 1, gelb 3, grün 6
+  - rot 6, grün 4, gelb 5, rot 2, grün 1, gelb 6, grün 5, gelb 2, gelb 9, rot 4
+  - Rakete 1, blau 2, blau 8, rot 5, rot 3, Rakete 4, grün 9, rot 7, Rakete 2, blau
+    9
+  - blau 4, gelb 4, gelb 1, grün 2, grün 3, grün 7, blau 5, rot 9, blau 1, blau 3
+  :auftraege:
+  - grün 1
+  - blau 2
+  - blau 6, gelb 7
+  - rot 4, blau 3
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *7
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *11
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *15
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: &37 !ruby/object:Karte
+      wert: 5
+      farbe: *3
+      hash: 2266206097795935861
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: Rakete 4, gelb 1, Rakete 3, rot 4
+    :vermasselte_auftraege: rot 4
+  - :anspieler: 2
+    :karten: blau 2, blau 5, blau 6, grün 1
+    :vermasselte_auftraege: blau 2, blau 6
+    :erfuellte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: grün 6, grün 5, grün 9, grün 2
+  - :anspieler: 2
+    :karten: blau 8, blau 4, blau 7, gelb 5
+  - :anspieler: 2
+    :karten: rot 3, rot 9, rot 1, rot 6
+  - :anspieler: 3
+    :karten: gelb 4, gelb 3, gelb 9, rot 7
+  - :anspieler: 1
+    :karten: gelb 2, Rakete 2, blau 3, gelb 7
+    :vermasselte_auftraege: blau 3
+    :erfuellte_auftraege: gelb 7
+  - :anspieler: 2
+    :karten: blau 9, blau 1, grün 8, rot 2
+  - :anspieler: 2
+    :karten: Rakete 1, grün 3, gelb 8, grün 4
+  - :anspieler: 2
+    :karten: rot 5, grün 7, rot 8, gelb 6
+  :resultat: :verloren
+- :karten:
+  - grün 7, blau 4, gelb 6, blau 7, rot 5, gelb 8, grün 2, gelb 7, blau 3, blau 1
+  - blau 9, gelb 1, rot 6, rot 8, gelb 9, Rakete 3, gelb 5, grün 4, rot 3, blau 5
+  - grün 5, Rakete 4, grün 6, rot 7, grün 8, grün 3, rot 4, gelb 4, Rakete 2, blau
+    8
+  - grün 9, gelb 2, rot 1, gelb 3, rot 9, grün 1, rot 2, blau 6, blau 2, Rakete 1
+  :auftraege:
+  - grün 6
+  - grün 1
+  - blau 2, grün 4
+  - rot 6, blau 7
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *10
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: &33 !ruby/object:Karte
+      wert: 7
+      farbe: *3
+      hash: 2985742194023682188
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: &30 !ruby/object:Karte
+      wert: 2
+      farbe: *3
+      hash: 1782829923296076837
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: Rakete 4, Rakete 1, gelb 6, Rakete 3
+  - :anspieler: 2
+    :karten: rot 4, rot 9, rot 5, rot 3
+  - :anspieler: 3
+    :karten: blau 2, blau 7, blau 5, blau 8
+    :vermasselte_auftraege: blau 7
+    :erfuellte_auftraege: blau 2
+  - :anspieler: 2
+    :karten: grün 8, grün 9, grün 2, grün 4
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 3
+    :karten: grün 1, grün 7, gelb 1, grün 3
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: gelb 8, gelb 9, gelb 4, gelb 3
+  - :anspieler: 1
+    :karten: gelb 5, grün 5, gelb 2, gelb 7
+  - :anspieler: 0
+    :karten: blau 1, blau 9, grün 6, blau 6
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 1
+    :karten: rot 8, rot 7, rot 1, blau 3
+  - :anspieler: 1
+    :karten: rot 6, Rakete 2, rot 2, blau 4
+    :vermasselte_auftraege: rot 6
+  :resultat: :verloren
+- :karten:
+  - Rakete 3, grün 6, rot 9, gelb 2, gelb 5, rot 3, blau 6, Rakete 4, grün 1, blau
+    5
+  - blau 1, gelb 6, gelb 4, blau 8, grün 5, grün 4, gelb 7, rot 1, blau 2, blau 4
+  - rot 6, grün 9, rot 8, gelb 3, grün 2, gelb 8, blau 9, Rakete 2, rot 5, grün 3
+  - rot 4, gelb 1, blau 7, rot 7, Rakete 1, blau 3, gelb 9, grün 7, grün 8, rot 2
+  :auftraege:
+  - gelb 6, blau 3
+  - rot 7, blau 1
+  - blau 6
+  - grün 7
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *13
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *9
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *7
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: &35 !ruby/object:Karte
+      wert: 5
+      farbe: *4
+      hash: -3811277446234943747
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 5, blau 8, blau 9, blau 3
+    :vermasselte_auftraege: blau 3
+  - :anspieler: 2
+    :karten: grün 2, grün 7, grün 6, grün 4
+    :erfuellte_auftraege: grün 7
+  - :anspieler: 3
+    :karten: rot 4, rot 3, rot 1, rot 6
+  - :anspieler: 2
+    :karten: rot 5, rot 2, rot 9, gelb 6
+    :erfuellte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: Rakete 4, blau 4, Rakete 2, Rakete 1
+  - :anspieler: 0
+    :karten: gelb 2, gelb 4, gelb 3, gelb 1
+  - :anspieler: 1
+    :karten: gelb 7, gelb 8, gelb 9, gelb 5
+  - :anspieler: 3
+    :karten: grün 8, grün 1, grün 5, grün 3
+  - :anspieler: 3
+    :karten: rot 7, blau 6, blau 2, rot 8
+    :vermasselte_auftraege: rot 7
+    :erfuellte_auftraege: blau 6
+  - :anspieler: 2
+    :karten: grün 9, blau 7, Rakete 3, blau 1
+    :vermasselte_auftraege: blau 1
+  :resultat: :verloren
+- :karten:
+  - rot 5, grün 2, blau 8, blau 6, rot 2, gelb 2, grün 9, rot 4, blau 5, grün 1
+  - blau 1, gelb 1, gelb 6, grün 4, gelb 3, rot 6, rot 7, Rakete 3, blau 4, blau 3
+  - rot 8, grün 6, blau 9, rot 9, blau 2, grün 3, grün 8, Rakete 1, gelb 7, blau 7
+  - gelb 9, Rakete 2, gelb 4, rot 3, rot 1, gelb 8, gelb 5, Rakete 4, grün 7, grün
+    5
+  :auftraege:
+  - grün 5, blau 9
+  - gelb 1
+  - rot 7
+  - blau 2, blau 1
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *13
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *26
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *11
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *27
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 3
+    :karten: gelb 9, gelb 2, gelb 1, gelb 7
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 3
+    :karten: grün 5, grün 9, grün 4, grün 8
+    :erfuellte_auftraege: grün 5
+  - :anspieler: 0
+    :karten: blau 6, blau 1, blau 2, Rakete 2
+    :erfuellte_auftraege: blau 2, blau 1
+  - :anspieler: 3
+    :karten: rot 1, rot 5, rot 7, rot 8
+    :erfuellte_auftraege: rot 7
+  - :anspieler: 2
+    :karten: grün 3, grün 7, grün 2, rot 6
+  - :anspieler: 3
+    :karten: gelb 4, blau 5, gelb 3, Rakete 1
+  - :anspieler: 2
+    :karten: rot 9, rot 3, rot 4, Rakete 3
+  - :anspieler: 1
+    :karten: gelb 6, grün 6, gelb 5, rot 2
+  - :anspieler: 1
+    :karten: blau 3, blau 7, Rakete 4, blau 8
+  - :anspieler: 3
+    :karten: gelb 8, grün 1, blau 4, blau 9
+    :vermasselte_auftraege: blau 9
+  :resultat: :verloren
+- :karten:
+  - rot 2, Rakete 4, grün 5, blau 9, blau 5, rot 6, rot 4, grün 2, grün 7, gelb 9
+  - Rakete 1, blau 4, gelb 2, gelb 7, blau 1, gelb 6, grün 9, rot 8, blau 8, gelb
+    5
+  - rot 3, gelb 3, grün 4, blau 2, Rakete 3, rot 9, grün 3, blau 7, rot 5, gelb 4
+  - grün 1, rot 1, grün 6, gelb 1, rot 7, grün 8, blau 6, gelb 8, Rakete 2, blau 3
+  :auftraege:
+  - gelb 9, grün 4
+  - gelb 1, grün 8
+  - blau 9
+  - blau 8
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *12
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *22
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *28
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 5, blau 8, blau 7, blau 6
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 1
+    :karten: gelb 7, gelb 3, gelb 1, gelb 9
+    :vermasselte_auftraege: gelb 1
+    :erfuellte_auftraege: gelb 9
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 1, Rakete 3, Rakete 2
+  - :anspieler: 0
+    :karten: rot 4, rot 8, rot 5, rot 7
+  - :anspieler: 1
+    :karten: blau 4, blau 2, blau 3, blau 9
+    :vermasselte_auftraege: blau 9
+  - :anspieler: 0
+    :karten: rot 2, grün 9, rot 3, rot 1
+  - :anspieler: 2
+    :karten: rot 9, grün 1, rot 6, gelb 2
+  - :anspieler: 2
+    :karten: grün 4, grün 8, grün 5, gelb 6
+    :vermasselte_auftraege: grün 4, grün 8
+  - :anspieler: 3
+    :karten: grün 6, grün 2, blau 1, grün 3
+  - :anspieler: 3
+    :karten: gelb 8, grün 7, gelb 5, gelb 4
+  :resultat: :verloren
+- :karten:
+  - gelb 4, grün 4, gelb 3, rot 8, rot 2, gelb 9, rot 7, blau 6, Rakete 4, Rakete
+    1
+  - blau 5, gelb 2, gelb 6, blau 8, blau 3, rot 6, grün 7, blau 9, grün 1, Rakete
+    2
+  - gelb 1, rot 1, grün 8, gelb 7, gelb 5, grün 6, rot 9, blau 7, blau 2, rot 3
+  - blau 4, gelb 8, grün 5, rot 4, grün 3, blau 1, grün 2, rot 5, grün 9, Rakete 3
+  :auftraege:
+  - grün 7, grün 3
+  - grün 5, gelb 8
+  - gelb 7
+  - blau 6
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *11
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *23
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *18
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *14
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: gelb 9, gelb 2, gelb 7, gelb 8
+    :vermasselte_auftraege: gelb 8, gelb 7
+  - :anspieler: 0
+    :karten: grün 4, grün 1, grün 8, grün 5
+    :vermasselte_auftraege: grün 5
+  - :anspieler: 2
+    :karten: grün 6, grün 3, rot 8, grün 7
+    :vermasselte_auftraege: grün 7, grün 3
+  - :anspieler: 1
+    :karten: blau 3, blau 7, blau 4, blau 6
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 2
+    :karten: rot 9, rot 5, rot 2, rot 6
+  - :anspieler: 2
+    :karten: blau 2, blau 1, Rakete 1, blau 8
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 2, gelb 1, Rakete 3
+  - :anspieler: 0
+    :karten: gelb 3, gelb 6, gelb 5, rot 4
+  - :anspieler: 1
+    :karten: blau 9, rot 1, grün 2, gelb 4
+  - :anspieler: 1
+    :karten: blau 5, rot 3, grün 9, rot 7
+  :resultat: :verloren
+- :karten:
+  - gelb 4, rot 2, rot 1, gelb 1, grün 7, gelb 7, Rakete 3, grün 1, grün 2, grün 5
+  - gelb 6, blau 8, Rakete 1, blau 2, rot 6, rot 8, grün 3, gelb 8, blau 1, Rakete
+    2
+  - gelb 5, grün 8, blau 6, gelb 2, blau 9, blau 7, rot 7, rot 3, blau 4, Rakete 4
+  - gelb 9, rot 9, gelb 3, blau 5, rot 4, blau 3, grün 6, rot 5, grün 4, grün 9
+  :auftraege:
+  - grün 1
+  - grün 2
+  - blau 4, blau 9
+  - grün 7, gelb 3
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *29
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *12
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *16
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: rot 3, rot 5, rot 1, rot 8
+  - :anspieler: 1
+    :karten: Rakete 1, Rakete 4, blau 3, Rakete 3
+  - :anspieler: 2
+    :karten: gelb 2, gelb 3, gelb 1, gelb 8
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 1
+    :karten: blau 8, blau 4, blau 5, grün 1
+    :vermasselte_auftraege: grün 1, blau 4
+  - :anspieler: 1
+    :karten: gelb 6, gelb 5, gelb 9, gelb 7
+  - :anspieler: 3
+    :karten: rot 9, rot 2, rot 6, rot 7
+  - :anspieler: 3
+    :karten: grün 9, grün 2, grün 3, grün 8
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 3
+    :karten: rot 4, gelb 4, blau 2, blau 6
+  - :anspieler: 3
+    :karten: grün 6, grün 7, Rakete 2, blau 9
+    :vermasselte_auftraege: blau 9, grün 7
+  - :anspieler: 1
+    :karten: blau 1, blau 7, grün 4, grün 5
+  :resultat: :verloren
+- :karten:
+  - rot 5, grün 3, blau 2, gelb 6, gelb 5, blau 7, Rakete 4, grün 2, grün 7, blau
+    9
+  - grün 6, rot 8, blau 4, gelb 9, grün 4, grün 9, blau 6, gelb 4, gelb 3, grün 1
+  - gelb 8, Rakete 1, rot 1, blau 8, grün 8, rot 7, blau 1, grün 5, Rakete 3, gelb
+    7
+  - gelb 1, rot 4, rot 6, rot 2, blau 5, blau 3, rot 9, gelb 2, Rakete 2, rot 3
+  :auftraege:
+  - blau 8, rot 9
+  - gelb 7, blau 1
+  - gelb 5
+  - blau 3
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *28
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *6
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: grün 2, grün 1, grün 5, rot 4
+  - :anspieler: 2
+    :karten: gelb 7, gelb 1, gelb 5, gelb 3
+    :vermasselte_auftraege: gelb 7
+    :erfuellte_auftraege: gelb 5
+  - :anspieler: 2
+    :karten: Rakete 3, Rakete 2, Rakete 4, rot 8
+  - :anspieler: 0
+    :karten: grün 3, grün 4, grün 8, rot 3
+  - :anspieler: 2
+    :karten: rot 7, rot 6, rot 5, gelb 9
+  - :anspieler: 2
+    :karten: rot 1, rot 2, blau 2, blau 6
+  - :anspieler: 3
+    :karten: rot 9, gelb 6, grün 6, blau 8
+    :vermasselte_auftraege: blau 8, rot 9
+  - :anspieler: 3
+    :karten: blau 5, blau 7, blau 4, blau 1
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 0
+    :karten: blau 9, gelb 4, gelb 8, blau 3
+    :vermasselte_auftraege: blau 3
+  - :anspieler: 0
+    :karten: grün 7, grün 9, Rakete 1, gelb 2
+  :resultat: :verloren
+- :karten:
+  - blau 8, blau 3, Rakete 4, gelb 3, grün 8, Rakete 3, gelb 4, grün 9, gelb 1, blau
+    4
+  - grün 6, grün 2, rot 4, Rakete 1, gelb 6, blau 9, Rakete 2, rot 6, blau 6, blau
+    1
+  - gelb 2, gelb 8, gelb 7, blau 5, blau 2, rot 1, rot 5, rot 7, rot 2, gelb 5
+  - grün 7, grün 3, gelb 9, grün 1, blau 7, grün 4, grün 5, rot 3, rot 8, rot 9
+  :auftraege:
+  - blau 6, grün 7
+  - gelb 7, blau 8
+  - grün 3
+  - rot 4
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *5
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *19
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *28
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *31
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 3, blau 9, blau 5, blau 7
+  - :anspieler: 1
+    :karten: gelb 6, gelb 7, gelb 9, gelb 4
+    :vermasselte_auftraege: gelb 7
+  - :anspieler: 3
+    :karten: grün 1, grün 8, grün 2, rot 2
+  - :anspieler: 0
+    :karten: Rakete 3, Rakete 2, rot 7, grün 7
+    :erfuellte_auftraege: grün 7
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 1, rot 5, grün 3
+    :vermasselte_auftraege: grün 3
+  - :anspieler: 0
+    :karten: blau 4, blau 1, blau 2, grün 5
+  - :anspieler: 0
+    :karten: grün 9, grün 6, gelb 5, grün 4
+  - :anspieler: 0
+    :karten: gelb 3, blau 6, gelb 2, rot 9
+    :erfuellte_auftraege: blau 6
+  - :anspieler: 0
+    :karten: gelb 1, rot 4, gelb 8, rot 8
+    :vermasselte_auftraege: rot 4
+  - :anspieler: 2
+    :karten: rot 1, rot 3, blau 8, rot 6
+    :erfuellte_auftraege: blau 8
+  :resultat: :verloren
+- :karten:
+  - grün 2, Rakete 2, blau 9, rot 1, Rakete 4, blau 4, gelb 2, grün 4, gelb 6, grün
+    8
+  - blau 1, gelb 4, gelb 8, grün 9, blau 8, gelb 5, gelb 7, grün 3, grün 5, rot 6
+  - rot 7, blau 5, blau 6, rot 5, rot 2, Rakete 1, rot 8, rot 9, gelb 3, grün 6
+  - grün 1, grün 7, blau 7, rot 3, rot 4, blau 2, gelb 9, gelb 1, Rakete 3, blau 3
+  :auftraege:
+  - blau 7, gelb 1
+  - gelb 7, rot 6
+  - grün 1
+  - blau 4
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *19
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *8
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *32
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *21
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: Rakete 2, blau 1, Rakete 1, Rakete 3
+  - :anspieler: 3
+    :karten: gelb 9, gelb 2, gelb 4, gelb 3
+  - :anspieler: 3
+    :karten: blau 2, blau 9, blau 8, blau 5
+  - :anspieler: 0
+    :karten: grün 8, grün 5, grün 6, grün 7
+  - :anspieler: 0
+    :karten: rot 1, rot 6, rot 9, rot 4
+    :vermasselte_auftraege: rot 6
+  - :anspieler: 2
+    :karten: rot 2, rot 3, gelb 6, grün 3
+  - :anspieler: 3
+    :karten: blau 7, blau 4, grün 9, blau 6
+    :vermasselte_auftraege: blau 7
+    :erfuellte_auftraege: blau 4
+  - :anspieler: 3
+    :karten: blau 3, Rakete 4, gelb 8, rot 8
+  - :anspieler: 0
+    :karten: grün 2, gelb 5, rot 7, grün 1
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: grün 4, gelb 7, rot 5, gelb 1
+    :vermasselte_auftraege: gelb 7
+    :erfuellte_auftraege: gelb 1
+  :resultat: :verloren
+- :karten:
+  - rot 2, rot 5, blau 6, blau 4, Rakete 4, rot 3, grün 2, rot 8, rot 9, gelb 4
+  - Rakete 1, gelb 2, blau 3, gelb 6, rot 4, grün 7, blau 2, gelb 7, Rakete 2, grün
+    3
+  - grün 1, grün 8, grün 6, grün 4, blau 9, Rakete 3, blau 7, rot 6, gelb 9, gelb
+    5
+  - gelb 1, gelb 3, grün 9, grün 5, blau 5, gelb 8, rot 7, rot 1, blau 8, blau 1
+  :auftraege:
+  - gelb 8, grün 6
+  - blau 5, blau 2
+  - rot 2
+  - rot 5
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *7
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *25
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *27
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 2, Rakete 3, grün 9
+  - :anspieler: 0
+    :karten: rot 9, rot 4, rot 6, rot 7
+  - :anspieler: 0
+    :karten: rot 5, Rakete 1, grün 4, rot 1
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 1
+    :karten: gelb 6, gelb 9, gelb 1, gelb 4
+  - :anspieler: 2
+    :karten: grün 8, grün 5, grün 2, grün 7
+  - :anspieler: 2
+    :karten: grün 1, blau 1, blau 6, grün 3
+  - :anspieler: 1
+    :karten: blau 3, blau 9, blau 5, blau 4
+    :vermasselte_auftraege: blau 5
+  - :anspieler: 2
+    :karten: gelb 5, gelb 8, rot 3, gelb 2
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 3
+    :karten: blau 8, rot 8, blau 2, blau 7
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 3
+    :karten: gelb 3, rot 2, gelb 7, grün 6
+    :vermasselte_auftraege: grün 6, rot 2
+  :resultat: :verloren
+- :karten:
+  - blau 1, grün 3, grün 9, rot 2, grün 7, rot 4, grün 4, Rakete 4, Rakete 2, rot
+    3
+  - grün 8, blau 4, grün 6, grün 5, gelb 2, rot 8, rot 1, rot 7, blau 2, blau 5
+  - Rakete 3, gelb 8, blau 7, gelb 7, grün 1, blau 8, blau 6, rot 5, gelb 1, gelb
+    5
+  - blau 9, gelb 9, blau 3, gelb 6, rot 9, gelb 4, Rakete 1, gelb 3, grün 2, rot 6
+  :auftraege:
+  - rot 1, blau 9
+  - blau 4, grün 9
+  - rot 2
+  - gelb 8
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *18
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *33
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: &34 !ruby/object:Karte
+      wert: 6
+      farbe: *1
+      hash: -2858221329383081045
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *22
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: grün 9, grün 8, grün 1, grün 2
+    :vermasselte_auftraege: grün 9
+  - :anspieler: 0
+    :karten: rot 2, rot 8, rot 5, rot 9
+    :vermasselte_auftraege: rot 2
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 2, grün 6, Rakete 3
+  - :anspieler: 2
+    :karten: gelb 1, gelb 9, Rakete 4, gelb 2
+  - :anspieler: 0
+    :karten: blau 1, blau 5, blau 8, blau 3
+  - :anspieler: 2
+    :karten: gelb 8, gelb 3, grün 7, blau 2
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 2
+    :karten: gelb 7, gelb 4, grün 4, rot 1
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 2
+    :karten: blau 7, blau 9, rot 3, blau 4
+    :vermasselte_auftraege: blau 9, blau 4
+  - :anspieler: 3
+    :karten: gelb 6, grün 3, grün 5, gelb 5
+  - :anspieler: 3
+    :karten: rot 6, rot 4, rot 7, blau 6
+  :resultat: :verloren
+- :karten:
+  - Rakete 2, gelb 9, Rakete 1, gelb 1, grün 5, rot 3, blau 9, gelb 2, grün 8, grün
+    3
+  - rot 2, blau 6, Rakete 3, gelb 7, rot 5, grün 4, grün 1, rot 7, rot 4, blau 1
+  - rot 9, blau 8, blau 3, grün 7, gelb 8, gelb 6, blau 2, blau 7, grün 6, rot 6
+  - gelb 4, grün 9, blau 5, Rakete 4, gelb 3, grün 2, rot 1, blau 4, rot 8, gelb 5
+  :auftraege:
+  - rot 8, gelb 7
+  - gelb 8
+  - rot 7
+  - blau 1, rot 5
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: &36 !ruby/object:Karte
+      wert: 6
+      farbe: *2
+      hash: -960720552237651662
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *34
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *35
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *15
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: rot 8, rot 3, rot 5, rot 9
+    :vermasselte_auftraege: rot 8, rot 5
+  - :anspieler: 2
+    :karten: blau 7, blau 4, blau 9, blau 1
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 0
+    :karten: gelb 9, gelb 7, gelb 6, gelb 3
+    :erfuellte_auftraege: gelb 7
+  - :anspieler: 0
+    :karten: grün 3, grün 1, grün 6, grün 9
+  - :anspieler: 3
+    :karten: blau 5, gelb 1, blau 6, blau 2
+  - :anspieler: 1
+    :karten: rot 7, rot 6, rot 1, grün 8
+    :vermasselte_auftraege: rot 7
+  - :anspieler: 1
+    :karten: rot 2, blau 8, Rakete 4, grün 5
+  - :anspieler: 3
+    :karten: gelb 4, gelb 2, rot 4, gelb 8
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 2
+    :karten: blau 3, grün 2, Rakete 1, Rakete 3
+  - :anspieler: 1
+    :karten: grün 4, grün 7, gelb 5, Rakete 2
+  :resultat: :verloren
+- :karten:
+  - blau 9, grün 2, rot 1, rot 2, gelb 5, gelb 6, grün 5, blau 7, grün 7, rot 4
+  - gelb 3, grün 1, grün 6, blau 6, blau 3, rot 7, rot 5, gelb 1, rot 6, gelb 2
+  - blau 4, rot 9, Rakete 3, rot 3, grün 8, blau 2, Rakete 1, blau 1, grün 9, blau
+    8
+  - grün 4, Rakete 4, Rakete 2, gelb 7, gelb 4, blau 5, rot 8, gelb 9, gelb 8, grün
+    3
+  :auftraege:
+  - blau 3, blau 2
+  - gelb 9
+  - grün 6
+  - blau 8, gelb 6
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *11
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *30
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: Rakete 2, blau 9, grün 6, Rakete 1
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 3
+    :karten: blau 5, blau 7, blau 3, blau 4
+    :erfuellte_auftraege: blau 3
+  - :anspieler: 0
+    :karten: grün 7, grün 1, grün 8, grün 3
+  - :anspieler: 2
+    :karten: grün 9, grün 4, grün 5, gelb 3
+  - :anspieler: 2
+    :karten: blau 2, rot 8, rot 4, blau 6
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 1
+    :karten: rot 5, rot 3, Rakete 4, rot 1
+  - :anspieler: 3
+    :karten: gelb 9, gelb 5, gelb 1, rot 9
+    :vermasselte_auftraege: gelb 9
+  - :anspieler: 3
+    :karten: gelb 4, gelb 6, gelb 2, Rakete 3
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 2
+    :karten: blau 1, gelb 7, rot 2, rot 6
+  - :anspieler: 2
+    :karten: blau 8, gelb 8, grün 2, rot 7
+    :vermasselte_auftraege: blau 8
+  :resultat: :verloren
+- :karten:
+  - grün 3, grün 7, grün 4, grün 8, blau 7, rot 5, blau 2, grün 1, gelb 3, rot 1
+  - rot 6, rot 2, rot 3, grün 9, rot 7, gelb 2, gelb 1, grün 6, blau 9, Rakete 4
+  - gelb 7, rot 4, rot 8, blau 3, gelb 6, Rakete 2, blau 4, gelb 9, grün 2, Rakete
+    3
+  - blau 8, gelb 5, blau 5, gelb 8, blau 6, rot 9, blau 1, Rakete 1, grün 5, gelb
+    4
+  :auftraege:
+  - rot 2
+  - blau 9, gelb 4
+  - grün 7, rot 5
+  - gelb 6
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *24
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *18
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *12
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: blau 9, blau 3, blau 5, blau 2
+    :erfuellte_auftraege: blau 9
+  - :anspieler: 1
+    :karten: gelb 2, gelb 6, gelb 4, gelb 3
+    :vermasselte_auftraege: gelb 4, gelb 6
+  - :anspieler: 2
+    :karten: gelb 7, gelb 8, grün 4, gelb 1
+  - :anspieler: 3
+    :karten: grün 5, grün 3, grün 6, grün 2
+  - :anspieler: 1
+    :karten: rot 3, rot 8, rot 9, rot 5
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 3
+    :karten: gelb 5, rot 1, rot 7, gelb 9
+  - :anspieler: 2
+    :karten: blau 4, blau 6, blau 7, grün 9
+  - :anspieler: 0
+    :karten: grün 7, Rakete 4, Rakete 3, blau 1
+    :vermasselte_auftraege: grün 7
+  - :anspieler: 1
+    :karten: rot 2, rot 4, blau 8, grün 8
+    :vermasselte_auftraege: rot 2
+  - :anspieler: 2
+    :karten: Rakete 2, Rakete 1, grün 1, rot 6
+  :resultat: :verloren
+- :karten:
+  - grün 2, gelb 2, blau 8, gelb 7, grün 7, gelb 9, rot 5, gelb 3, rot 4, rot 1
+  - rot 2, blau 4, blau 2, Rakete 1, rot 7, grün 6, Rakete 3, grün 8, grün 9, blau
+    5
+  - Rakete 4, grün 5, gelb 1, Rakete 2, grün 4, blau 3, gelb 4, gelb 8, blau 1, rot
+    6
+  - rot 9, gelb 6, blau 6, rot 3, grün 1, rot 8, grün 3, gelb 5, blau 7, blau 9
+  :auftraege:
+  - blau 6
+  - blau 1
+  - blau 9, gelb 3
+  - grün 1, rot 4
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *23
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *10
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *32
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *33
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: grün 5, grün 1, grün 2, grün 8
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 1
+    :karten: rot 2, rot 6, rot 8, rot 4
+    :erfuellte_auftraege: rot 4
+  - :anspieler: 3
+    :karten: gelb 6, gelb 7, grün 6, gelb 4
+  - :anspieler: 0
+    :karten: grün 7, grün 9, grün 4, grün 3
+  - :anspieler: 1
+    :karten: blau 5, blau 3, blau 9, blau 8
+    :vermasselte_auftraege: blau 9
+  - :anspieler: 3
+    :karten: blau 7, rot 1, blau 2, blau 1
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 3
+    :karten: gelb 5, gelb 3, Rakete 1, gelb 8
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 1
+    :karten: blau 4, gelb 1, blau 6, gelb 2
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 3
+    :karten: rot 9, rot 5, rot 7, Rakete 2
+  - :anspieler: 2
+    :karten: Rakete 4, rot 3, gelb 9, Rakete 3
+  :resultat: :verloren
+- :karten:
+  - blau 1, rot 3, grün 2, rot 1, gelb 2, Rakete 2, grün 7, gelb 7, gelb 5, blau 7
+  - gelb 4, gelb 9, rot 2, rot 9, grün 6, gelb 8, grün 9, rot 8, blau 9, gelb 3
+  - blau 2, blau 6, grün 8, rot 7, rot 4, blau 4, Rakete 3, rot 5, gelb 1, grün 3
+  - blau 3, blau 8, grün 1, gelb 6, Rakete 4, blau 5, rot 6, grün 5, grün 4, Rakete
+    1
+  :auftraege:
+  - grün 2, grün 6
+  - blau 2
+  - blau 3
+  - grün 9, gelb 1
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *28
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *25
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *9
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *13
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: grün 1, grün 7, grün 6, grün 8
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 2
+    :karten: blau 4, blau 5, blau 1, blau 9
+  - :anspieler: 1
+    :karten: rot 2, rot 7, rot 6, rot 1
+  - :anspieler: 2
+    :karten: blau 2, blau 3, blau 7, gelb 9
+    :vermasselte_auftraege: blau 2, blau 3
+  - :anspieler: 0
+    :karten: gelb 2, gelb 4, gelb 1, gelb 6
+    :erfuellte_auftraege: gelb 1
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 2, gelb 3, Rakete 3
+  - :anspieler: 2
+    :karten: grün 3, grün 4, grün 2, grün 9
+    :vermasselte_auftraege: grün 2, grün 9
+  - :anspieler: 1
+    :karten: rot 9, rot 5, Rakete 4, rot 3
+  - :anspieler: 3
+    :karten: blau 8, gelb 5, rot 8, blau 6
+  - :anspieler: 3
+    :karten: grün 5, gelb 7, gelb 8, rot 4
+  :resultat: :verloren
+- :karten:
+  - blau 1, Rakete 4, rot 5, grün 7, grün 3, blau 8, grün 4, grün 5, Rakete 1, Rakete
+    3
+  - rot 8, grün 2, rot 6, gelb 7, blau 7, gelb 6, gelb 1, grün 6, rot 1, gelb 2
+  - rot 7, Rakete 2, grün 8, blau 9, gelb 8, gelb 4, gelb 3, blau 3, blau 2, rot 3
+  - rot 4, grün 1, rot 9, grün 9, gelb 9, blau 4, blau 6, blau 5, gelb 5, rot 2
+  :auftraege:
+  - grün 1, blau 3
+  - rot 2, blau 9
+  - grün 9
+  - blau 4
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *25
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *28
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 0
+    :karten: Rakete 1, rot 6, Rakete 2, blau 5
+  - :anspieler: 2
+    :karten: rot 3, rot 9, rot 5, rot 1
+  - :anspieler: 3
+    :karten: grün 1, grün 5, grün 6, grün 8
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 2
+    :karten: gelb 4, gelb 9, Rakete 4, gelb 1
+  - :anspieler: 0
+    :karten: grün 3, grün 2, gelb 3, grün 9
+    :vermasselte_auftraege: grün 9
+  - :anspieler: 3
+    :karten: gelb 5, Rakete 3, gelb 2, gelb 8
+  - :anspieler: 0
+    :karten: blau 1, blau 7, blau 2, blau 6
+  - :anspieler: 1
+    :karten: rot 8, rot 7, rot 4, grün 7
+  - :anspieler: 1
+    :karten: gelb 7, blau 9, blau 4, blau 8
+    :vermasselte_auftraege: blau 4
+    :erfuellte_auftraege: blau 9
+  - :anspieler: 1
+    :karten: gelb 6, blau 3, rot 2, grün 4
+    :vermasselte_auftraege: blau 3
+    :erfuellte_auftraege: rot 2
+  :resultat: :verloren
+- :karten:
+  - gelb 8, gelb 9, blau 6, grün 2, gelb 4, grün 5, Rakete 4, rot 7, grün 8, rot 1
+  - blau 9, Rakete 2, rot 4, rot 3, blau 2, blau 1, blau 5, rot 6, rot 5, grün 6
+  - Rakete 3, grün 9, grün 3, gelb 6, Rakete 1, grün 4, gelb 5, rot 2, gelb 7, grün
+    1
+  - blau 4, blau 7, gelb 3, gelb 2, grün 7, blau 8, gelb 1, rot 9, rot 8, blau 3
+  :auftraege:
+  - blau 6, gelb 6
+  - rot 2, gelb 3
+  - gelb 8
+  - rot 7
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *23
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *36
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *19
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 6, blau 1, Rakete 3, blau 7
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 2
+    :karten: rot 2, rot 9, rot 7, rot 4
+    :vermasselte_auftraege: rot 2
+    :erfuellte_auftraege: rot 7
+  - :anspieler: 3
+    :karten: gelb 2, gelb 8, rot 6, gelb 5
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 2, Rakete 1, gelb 3
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 0
+    :karten: rot 1, rot 3, gelb 7, rot 8
+  - :anspieler: 3
+    :karten: blau 8, grün 5, blau 5, grün 3
+  - :anspieler: 3
+    :karten: gelb 1, gelb 9, grün 6, gelb 6
+    :erfuellte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: grün 8, blau 2, grün 9, grün 7
+  - :anspieler: 2
+    :karten: grün 4, blau 3, grün 2, blau 9
+  - :anspieler: 2
+    :karten: grün 1, blau 4, gelb 4, rot 5
+  :resultat: :verloren
+- :karten:
+  - gelb 1, gelb 9, grün 4, grün 7, rot 4, grün 9, rot 8, rot 2, grün 8, grün 1
+  - blau 5, gelb 8, rot 7, rot 5, grün 3, Rakete 1, blau 6, gelb 7, rot 9, gelb 4
+  - rot 3, Rakete 2, rot 1, blau 3, blau 8, blau 1, gelb 2, blau 4, grün 6, blau 9
+  - gelb 6, blau 7, rot 6, blau 2, grün 5, Rakete 4, gelb 5, gelb 3, grün 2, Rakete
+    3
+  :auftraege:
+  - grün 3, rot 3
+  - gelb 9
+  - gelb 4
+  - rot 6, rot 9
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *36
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *23
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *8
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *7
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: blau 7, rot 8, blau 6, blau 4
+  - :anspieler: 3
+    :karten: Rakete 4, gelb 9, Rakete 1, Rakete 2
+    :vermasselte_auftraege: gelb 9
+  - :anspieler: 3
+    :karten: Rakete 3, grün 4, gelb 4, blau 1
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 3
+    :karten: rot 6, rot 2, rot 9, rot 3
+    :vermasselte_auftraege: rot 3, rot 6, rot 9
+  - :anspieler: 1
+    :karten: rot 7, rot 1, gelb 5, rot 4
+  - :anspieler: 1
+    :karten: grün 3, grün 6, grün 2, grün 9
+    :erfuellte_auftraege: grün 3
+  - :anspieler: 0
+    :karten: gelb 1, gelb 8, gelb 2, gelb 6
+  - :anspieler: 1
+    :karten: rot 5, blau 3, grün 5, grün 7
+  - :anspieler: 1
+    :karten: blau 5, blau 8, blau 2, grün 1
+  - :anspieler: 2
+    :karten: blau 9, gelb 3, grün 8, gelb 7
+  :resultat: :verloren
+- :karten:
+  - Rakete 1, blau 5, rot 4, gelb 2, rot 7, rot 9, grün 6, blau 8, gelb 6, gelb 7
+  - blau 4, gelb 3, grün 9, Rakete 3, blau 2, grün 1, gelb 1, gelb 8, rot 1, grün
+    4
+  - gelb 9, blau 6, blau 9, grün 8, rot 5, Rakete 4, rot 6, grün 2, gelb 5, rot 2
+  - blau 3, grün 3, Rakete 2, grün 7, blau 1, gelb 4, rot 3, rot 8, blau 7, grün 5
+  :auftraege:
+  - blau 4
+  - grün 1
+  - blau 2, gelb 4
+  - rot 2, blau 1
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *22
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *21
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *15
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *29
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: gelb 5, gelb 4, gelb 6, gelb 8
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 1
+    :karten: Rakete 3, Rakete 4, Rakete 2, Rakete 1
+  - :anspieler: 2
+    :karten: rot 2, rot 8, rot 4, rot 1
+    :erfuellte_auftraege: rot 2
+  - :anspieler: 3
+    :karten: blau 3, blau 5, blau 2, blau 6
+    :erfuellte_auftraege: blau 2
+  - :anspieler: 2
+    :karten: grün 8, grün 5, grün 6, grün 9
+  - :anspieler: 1
+    :karten: gelb 3, gelb 9, grün 7, gelb 7
+  - :anspieler: 2
+    :karten: rot 5, rot 3, rot 9, grün 4
+  - :anspieler: 0
+    :karten: blau 8, blau 4, blau 9, blau 7
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 2
+    :karten: grün 2, grün 3, gelb 2, grün 1
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 3
+    :karten: blau 1, rot 7, gelb 1, rot 6
+    :erfuellte_auftraege: blau 1
+  :resultat: :verloren
+- :karten:
+  - grün 6, grün 7, gelb 8, grün 8, Rakete 2, blau 8, gelb 4, rot 5, blau 2, blau
+    7
+  - rot 3, grün 4, gelb 7, rot 6, gelb 1, blau 1, blau 6, gelb 5, rot 4, rot 7
+  - rot 8, grün 5, blau 5, grün 2, Rakete 4, gelb 9, blau 3, grün 9, Rakete 1, grün
+    1
+  - blau 9, Rakete 3, blau 4, gelb 3, gelb 6, grün 3, rot 1, rot 9, rot 2, gelb 2
+  :auftraege:
+  - grün 8
+  - gelb 2
+  - blau 9, rot 4
+  - rot 8, rot 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *16
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *37
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *38
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *30
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 2
+    :karten: Rakete 4, Rakete 3, Rakete 2, blau 1
+  - :anspieler: 2
+    :karten: blau 3, blau 9, blau 7, blau 6
+    :vermasselte_auftraege: blau 9
+  - :anspieler: 3
+    :karten: gelb 3, gelb 4, gelb 1, gelb 9
+  - :anspieler: 2
+    :karten: Rakete 1, grün 3, gelb 8, rot 7
+  - :anspieler: 2
+    :karten: grün 1, gelb 6, grün 6, grün 4
+  - :anspieler: 0
+    :karten: blau 8, gelb 7, blau 5, blau 4
+  - :anspieler: 0
+    :karten: rot 5, rot 4, rot 8, rot 1
+    :vermasselte_auftraege: rot 8, rot 5
+    :erfuellte_auftraege: rot 4
+  - :anspieler: 2
+    :karten: grün 9, gelb 2, grün 8, gelb 5
+    :vermasselte_auftraege: grün 8, gelb 2
+  - :anspieler: 2
+    :karten: grün 5, rot 2, grün 7, rot 6
+  - :anspieler: 0
+    :karten: blau 2, rot 3, grün 2, rot 9
+  :resultat: :verloren
+- :karten:
+  - blau 7, Rakete 2, rot 4, gelb 7, blau 3, blau 1, gelb 6, rot 3, grün 9, grün 3
+  - gelb 3, grün 7, gelb 5, grün 1, rot 9, gelb 4, blau 6, grün 4, Rakete 3, grün
+    5
+  - rot 1, rot 6, grün 2, blau 9, blau 4, rot 8, Rakete 1, gelb 2, gelb 1, Rakete
+    4
+  - gelb 9, grün 8, gelb 8, blau 5, rot 5, grün 6, rot 7, blau 2, blau 8, rot 2
+  :auftraege:
+  - grün 2
+  - blau 5
+  - grün 1, gelb 1
+  - grün 5, blau 8
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *39
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *23
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *15
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *5
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: grün 2, grün 6, grün 3, grün 7
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 1
+    :karten: blau 6, blau 4, blau 5, blau 3
+    :erfuellte_auftraege: blau 5
+  - :anspieler: 1
+    :karten: grün 1, rot 8, grün 8, grün 9
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: blau 7, gelb 5, blau 9, blau 8
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 2
+    :karten: Rakete 1, rot 5, Rakete 2, Rakete 3
+  - :anspieler: 1
+    :karten: grün 5, rot 1, gelb 8, gelb 6
+    :vermasselte_auftraege: grün 5
+  - :anspieler: 1
+    :karten: grün 4, Rakete 4, rot 2, gelb 7
+  - :anspieler: 2
+    :karten: rot 6, rot 7, rot 3, rot 9
+  - :anspieler: 1
+    :karten: gelb 3, gelb 1, gelb 9, rot 4
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 3
+    :karten: blau 2, blau 1, gelb 4, gelb 2
+  :resultat: :verloren
+- :karten:
+  - blau 1, blau 5, gelb 8, gelb 6, gelb 5, rot 9, grün 5, grün 3, rot 2, Rakete 3
+  - blau 7, gelb 9, rot 1, Rakete 1, grün 6, rot 8, blau 3, grün 4, blau 2, gelb 3
+  - rot 4, grün 7, blau 4, blau 6, gelb 4, grün 2, blau 9, grün 8, rot 6, blau 8
+  - gelb 1, grün 9, Rakete 2, rot 3, gelb 2, rot 7, gelb 7, Rakete 4, grün 1, rot
+    5
+  :auftraege:
+  - rot 2, rot 8
+  - blau 9
+  - gelb 8
+  - grün 5, rot 1
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *16
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *34
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *15
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: gelb 7, gelb 6, gelb 9, gelb 4
+  - :anspieler: 1
+    :karten: blau 2, blau 8, rot 7, blau 5
+  - :anspieler: 2
+    :karten: blau 9, rot 3, blau 1, blau 7
+    :vermasselte_auftraege: blau 9
+  - :anspieler: 2
+    :karten: grün 7, grün 9, grün 5, grün 4
+    :erfuellte_auftraege: grün 5
+  - :anspieler: 3
+    :karten: grün 1, grün 3, grün 6, grün 8
+  - :anspieler: 2
+    :karten: rot 6, rot 5, rot 2, rot 8
+    :vermasselte_auftraege: rot 2, rot 8
+  - :anspieler: 1
+    :karten: rot 1, rot 4, Rakete 2, rot 9
+    :erfuellte_auftraege: rot 1
+  - :anspieler: 3
+    :karten: gelb 1, gelb 5, gelb 3, grün 2
+  - :anspieler: 0
+    :karten: gelb 8, Rakete 1, blau 6, gelb 2
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 1
+    :karten: blau 3, blau 4, Rakete 4, Rakete 3
+  :resultat: :verloren
+- :karten:
+  - blau 5, gelb 9, gelb 6, grün 7, rot 8, gelb 8, gelb 7, grün 4, blau 8, rot 4
+  - gelb 5, grün 9, grün 6, rot 2, rot 5, grün 8, blau 4, Rakete 3, gelb 4, grün 5
+  - rot 7, Rakete 2, blau 7, Rakete 4, grün 1, rot 3, gelb 1, rot 9, gelb 2, rot 1
+  - blau 3, blau 6, gelb 3, Rakete 1, rot 6, blau 1, blau 2, grün 3, blau 9, grün
+    2
+  :auftraege:
+  - rot 9
+  - gelb 3
+  - gelb 6, rot 8
+  - grün 2, grün 4
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *29
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *8
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *12
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *19
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: rot 7, rot 6, rot 4, rot 2
+  - :anspieler: 2
+    :karten: rot 9, blau 1, rot 8, rot 5
+    :vermasselte_auftraege: rot 9
+    :erfuellte_auftraege: rot 8
+  - :anspieler: 2
+    :karten: rot 3, blau 3, blau 8, grün 5
+  - :anspieler: 2
+    :karten: grün 1, grün 2, grün 4, grün 9
+    :vermasselte_auftraege: grün 2, grün 4
+  - :anspieler: 1
+    :karten: grün 6, Rakete 2, grün 3, grün 7
+  - :anspieler: 2
+    :karten: Rakete 4, Rakete 1, gelb 7, Rakete 3
+  - :anspieler: 2
+    :karten: blau 7, blau 9, blau 5, blau 4
+  - :anspieler: 3
+    :karten: gelb 3, gelb 8, gelb 5, gelb 1
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 0
+    :karten: gelb 6, gelb 4, gelb 2, blau 6
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: gelb 9, grün 8, rot 1, blau 2
+  :resultat: :verloren
+- :karten:
+  - rot 1, grün 4, blau 7, blau 5, grün 8, rot 7, Rakete 2, rot 6, Rakete 4, rot 8
+  - gelb 8, grün 7, gelb 6, Rakete 1, grün 2, blau 4, blau 6, blau 9, rot 2, grün
+    1
+  - grün 6, gelb 5, blau 3, gelb 1, rot 4, gelb 2, gelb 9, gelb 7, blau 8, rot 5
+  - grün 3, rot 3, grün 9, gelb 3, grün 5, rot 9, gelb 4, blau 2, Rakete 3, blau 1
+  :auftraege:
+  - gelb 2, blau 9
+  - rot 5, gelb 7
+  - rot 7
+  - gelb 6
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *27
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *12
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *37
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *6
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 5, blau 4, blau 3, blau 2
+  - :anspieler: 0
+    :karten: grün 8, grün 1, grün 6, grün 5
+  - :anspieler: 0
+    :karten: rot 7, rot 2, rot 4, rot 9
+    :vermasselte_auftraege: rot 7
+  - :anspieler: 3
+    :karten: gelb 4, Rakete 2, gelb 8, gelb 5
+  - :anspieler: 0
+    :karten: blau 7, blau 6, blau 8, blau 1
+  - :anspieler: 2
+    :karten: gelb 7, gelb 3, grün 4, gelb 6
+    :vermasselte_auftraege: gelb 7, gelb 6
+  - :anspieler: 2
+    :karten: rot 5, rot 3, rot 8, grün 2
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 1, gelb 1, Rakete 3
+  - :anspieler: 0
+    :karten: rot 6, grün 7, gelb 9, grün 3
+  - :anspieler: 0
+    :karten: rot 1, blau 9, gelb 2, grün 9
+    :erfuellte_auftraege: gelb 2, blau 9
+  :resultat: :verloren
+- :karten:
+  - gelb 1, Rakete 4, grün 3, rot 4, blau 2, gelb 9, gelb 6, gelb 3, rot 3, Rakete
+    1
+  - gelb 5, grün 5, grün 6, grün 7, grün 9, Rakete 3, blau 4, grün 4, rot 6, grün
+    8
+  - rot 7, blau 3, blau 6, gelb 2, grün 2, gelb 8, blau 7, rot 5, blau 9, blau 1
+  - rot 8, blau 8, rot 2, grün 1, rot 9, rot 1, blau 5, Rakete 2, gelb 4, gelb 7
+  :auftraege:
+  - blau 6, grün 7
+  - blau 4, grün 2
+  - rot 5
+  - grün 8
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *40
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *16
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *20
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 0
+    :karten: rot 4, rot 6, rot 7, rot 9
+  - :anspieler: 3
+    :karten: Rakete 2, Rakete 4, Rakete 3, grün 2
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 0
+    :karten: Rakete 1, gelb 5, blau 1, blau 5
+  - :anspieler: 0
+    :karten: rot 3, grün 5, rot 5, rot 1
+    :erfuellte_auftraege: rot 5
+  - :anspieler: 2
+    :karten: gelb 2, gelb 4, gelb 1, blau 4
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 3
+    :karten: rot 2, gelb 3, grün 8, gelb 8
+    :erfuellte_auftraege: grün 8
+  - :anspieler: 3
+    :karten: rot 8, gelb 6, grün 9, blau 9
+  - :anspieler: 3
+    :karten: grün 1, grün 3, grün 6, blau 7
+  - :anspieler: 1
+    :karten: grün 4, blau 3, gelb 7, blau 2
+  - :anspieler: 1
+    :karten: grün 7, blau 6, blau 8, gelb 9
+    :vermasselte_auftraege: blau 6, grün 7
+  :resultat: :verloren
+- :karten:
+  - rot 3, rot 1, rot 2, Rakete 1, blau 6, blau 8, grün 8, grün 5, grün 7, rot 8
+  - Rakete 3, blau 1, gelb 8, gelb 9, blau 9, grün 2, blau 7, gelb 4, grün 1, gelb
+    6
+  - blau 2, rot 9, blau 3, gelb 3, grün 4, grün 3, blau 4, rot 6, blau 5, Rakete 2
+  - Rakete 4, grün 9, grün 6, gelb 2, rot 5, gelb 1, rot 4, gelb 5, gelb 7, rot 7
+  :auftraege:
+  - rot 6, gelb 8
+  - blau 7
+  - rot 1
+  - rot 9, rot 4
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *36
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *28
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *20
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *13
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 3
+    :karten: gelb 2, grün 5, gelb 6, gelb 3
+  - :anspieler: 1
+    :karten: blau 7, blau 4, gelb 1, blau 8
+    :vermasselte_auftraege: blau 7
+  - :anspieler: 0
+    :karten: blau 6, blau 9, blau 2, gelb 5
+  - :anspieler: 1
+    :karten: gelb 9, blau 5, gelb 7, Rakete 1
+  - :anspieler: 0
+    :karten: rot 2, gelb 8, rot 9, rot 4
+    :vermasselte_auftraege: gelb 8, rot 9, rot 4
+  - :anspieler: 2
+    :karten: grün 4, grün 9, grün 8, grün 2
+  - :anspieler: 3
+    :karten: Rakete 4, grün 7, Rakete 3, Rakete 2
+  - :anspieler: 3
+    :karten: grün 6, rot 3, grün 1, grün 3
+  - :anspieler: 3
+    :karten: rot 7, rot 8, gelb 4, rot 6
+    :erfuellte_auftraege: rot 6
+  - :anspieler: 0
+    :karten: rot 1, blau 1, blau 3, rot 5
+    :vermasselte_auftraege: rot 1
+  :resultat: :verloren
+- :karten:
+  - grün 8, Rakete 1, grün 3, grün 4, gelb 6, rot 3, Rakete 2, gelb 1, gelb 2, rot
+    7
+  - gelb 7, rot 1, blau 1, rot 6, gelb 3, rot 9, blau 2, rot 8, blau 5, Rakete 3
+  - gelb 4, grün 2, blau 3, gelb 9, blau 9, gelb 8, blau 6, blau 4, rot 2, blau 8
+  - Rakete 4, grün 1, gelb 5, grün 9, grün 6, rot 4, blau 7, grün 5, grün 7, rot 5
+  :auftraege:
+  - blau 3, blau 6
+  - blau 1
+  - rot 1
+  - rot 2, rot 3
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *8
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *35
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: grün 6, grün 8, rot 1, grün 2
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 0
+    :karten: rot 7, rot 8, rot 2, rot 4
+    :vermasselte_auftraege: rot 2
+  - :anspieler: 1
+    :karten: blau 2, blau 4, blau 7, grün 3
+  - :anspieler: 3
+    :karten: grün 1, grün 4, gelb 7, blau 8
+  - :anspieler: 0
+    :karten: rot 3, rot 9, blau 6, rot 5
+    :vermasselte_auftraege: blau 6, rot 3
+  - :anspieler: 1
+    :karten: blau 1, blau 9, grün 9, Rakete 1
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 0
+    :karten: gelb 2, gelb 3, gelb 9, gelb 5
+  - :anspieler: 2
+    :karten: gelb 4, grün 7, gelb 1, blau 5
+  - :anspieler: 2
+    :karten: gelb 8, Rakete 4, gelb 6, Rakete 3
+  - :anspieler: 3
+    :karten: grün 5, Rakete 2, rot 6, blau 3
+    :erfuellte_auftraege: blau 3
+  :resultat: :verloren
+- :karten:
+  - Rakete 3, rot 7, grün 4, gelb 7, rot 2, grün 5, rot 3, blau 5, rot 8, rot 1
+  - blau 7, blau 6, Rakete 4, gelb 5, gelb 6, grün 1, gelb 2, grün 7, grün 8, gelb
+    4
+  - blau 8, grün 2, blau 9, rot 6, blau 3, gelb 1, grün 3, Rakete 2, grün 6, blau
+    4
+  - gelb 3, gelb 9, blau 1, gelb 8, rot 4, Rakete 1, rot 9, grün 9, blau 2, rot 5
+  :auftraege:
+  - grün 5
+  - rot 1, blau 8
+  - grün 3, rot 7
+  - grün 7
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *13
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *37
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 1
+    :karten: grün 8, grün 3, grün 9, grün 5
+    :vermasselte_auftraege: grün 5, grün 3
+  - :anspieler: 3
+    :karten: blau 2, blau 5, blau 7, blau 8
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 2
+    :karten: grün 6, Rakete 1, grün 4, grün 1
+  - :anspieler: 3
+    :karten: gelb 8, gelb 7, gelb 5, gelb 1
+  - :anspieler: 3
+    :karten: gelb 3, rot 1, gelb 2, blau 3
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 3
+    :karten: rot 9, rot 8, gelb 6, rot 6
+  - :anspieler: 3
+    :karten: gelb 9, rot 3, gelb 4, blau 4
+  - :anspieler: 3
+    :karten: blau 1, rot 7, blau 6, blau 9
+    :erfuellte_auftraege: rot 7
+  - :anspieler: 2
+    :karten: grün 2, rot 4, Rakete 3, grün 7
+    :vermasselte_auftraege: grün 7
+  - :anspieler: 0
+    :karten: rot 2, Rakete 4, Rakete 2, rot 5
+  :resultat: :verloren
+- :karten:
+  - rot 7, rot 9, grün 4, blau 1, gelb 1, Rakete 1, blau 9, rot 3, rot 4, gelb 5
+  - blau 8, blau 3, blau 5, gelb 4, grün 2, blau 4, rot 5, gelb 9, rot 1, blau 2
+  - Rakete 2, rot 2, grün 6, blau 6, rot 6, grün 1, grün 5, gelb 2, gelb 3, Rakete
+    4
+  - grün 9, gelb 6, grün 7, gelb 7, gelb 8, grün 3, rot 8, grün 8, Rakete 3, blau
+    7
+  :auftraege:
+  - gelb 8
+  - rot 6
+  - gelb 3, gelb 2
+  - blau 2, rot 1
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *39
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *37
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *10
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 2
+    :karten: grün 5, grün 8, grün 4, grün 2
+  - :anspieler: 3
+    :karten: Rakete 3, Rakete 1, blau 2, Rakete 2
+    :erfuellte_auftraege: blau 2
+  - :anspieler: 3
+    :karten: blau 7, blau 9, blau 4, blau 6
+  - :anspieler: 0
+    :karten: rot 9, rot 1, rot 2, rot 8
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 0
+    :karten: rot 4, rot 5, rot 6, gelb 8
+    :vermasselte_auftraege: gelb 8, rot 6
+  - :anspieler: 2
+    :karten: gelb 3, gelb 7, gelb 5, gelb 9
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 1
+    :karten: blau 5, grün 1, grün 9, blau 1
+  - :anspieler: 1
+    :karten: blau 3, gelb 2, gelb 6, rot 7
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 1
+    :karten: gelb 4, grün 6, grün 3, gelb 1
+  - :anspieler: 1
+    :karten: blau 8, Rakete 4, grün 7, rot 3
+  :resultat: :verloren
+- :karten:
+  - Rakete 4, blau 2, grün 5, blau 4, grün 9, blau 9, grün 1, Rakete 3, rot 1, grün
+    6
+  - rot 4, blau 8, rot 3, gelb 2, gelb 9, blau 3, rot 6, gelb 3, grün 2, rot 8
+  - grün 4, grün 7, gelb 6, blau 1, rot 5, rot 2, rot 9, blau 6, Rakete 1, gelb 1
+  - grün 8, gelb 4, gelb 7, gelb 5, blau 5, gelb 8, Rakete 2, grün 3, rot 7, blau
+    7
+  :auftraege:
+  - blau 4, rot 8
+  - gelb 6, rot 1
+  - grün 2
+  - blau 1
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *14
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *32
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *39
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 9, blau 3, blau 1, blau 5
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 0
+    :karten: Rakete 4, grün 2, Rakete 1, Rakete 2
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 0
+    :karten: grün 9, gelb 9, grün 4, grün 3
+  - :anspieler: 0
+    :karten: grün 5, gelb 2, grün 7, grün 8
+  - :anspieler: 3
+    :karten: gelb 4, Rakete 3, gelb 3, gelb 1
+  - :anspieler: 0
+    :karten: rot 1, rot 8, rot 9, rot 7
+    :vermasselte_auftraege: rot 8, rot 1
+  - :anspieler: 2
+    :karten: gelb 6, gelb 5, grün 6, rot 6
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 2
+    :karten: blau 6, blau 7, blau 4, blau 8
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 1
+    :karten: rot 3, rot 2, gelb 8, blau 2
+  - :anspieler: 1
+    :karten: rot 4, rot 5, gelb 7, grün 1
+  :resultat: :verloren
+- :karten:
+  - blau 2, blau 5, blau 1, grün 5, Rakete 1, rot 9, blau 3, blau 9, gelb 1, gelb
+    2
+  - Rakete 4, gelb 5, gelb 7, rot 5, grün 3, Rakete 2, Rakete 3, grün 4, grün 8, grün
+    2
+  - rot 3, blau 7, grün 6, grün 1, blau 8, rot 6, gelb 8, grün 7, blau 6, gelb 9
+  - rot 4, gelb 3, rot 8, gelb 4, grün 9, rot 1, rot 7, blau 4, rot 2, gelb 6
+  :auftraege:
+  - grün 9
+  - rot 3, grün 4
+  - gelb 4, gelb 9
+  - grün 7
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *7
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *36
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *13
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 1
+    :karten: Rakete 2, rot 6, rot 2, Rakete 1
+  - :anspieler: 1
+    :karten: grün 3, grün 7, grün 9, grün 5
+    :vermasselte_auftraege: grün 9
+    :erfuellte_auftraege: grün 7
+  - :anspieler: 3
+    :karten: gelb 4, gelb 2, gelb 7, gelb 9
+    :erfuellte_auftraege: gelb 4, gelb 9
+  - :anspieler: 2
+    :karten: blau 7, blau 4, blau 1, grün 4
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 2
+    :karten: rot 3, rot 7, rot 9, rot 5
+    :vermasselte_auftraege: rot 3
+  - :anspieler: 0
+    :karten: blau 3, grün 2, blau 6, gelb 3
+  - :anspieler: 2
+    :karten: gelb 8, gelb 6, gelb 1, gelb 5
+  - :anspieler: 2
+    :karten: grün 1, rot 4, blau 9, grün 8
+  - :anspieler: 1
+    :karten: Rakete 3, blau 8, rot 8, blau 5
+  - :anspieler: 1
+    :karten: Rakete 4, grün 6, rot 1, blau 2
+  :resultat: :verloren
+- :karten:
+  - gelb 1, gelb 8, rot 1, Rakete 1, gelb 9, grün 2, blau 1, rot 5, grün 1, blau 2
+  - grün 7, grün 3, gelb 2, gelb 7, blau 9, blau 3, blau 6, gelb 3, Rakete 2, rot
+    3
+  - blau 4, Rakete 3, blau 5, gelb 4, rot 2, grün 5, rot 4, gelb 6, grün 9, blau 7
+  - rot 9, rot 8, grün 6, grün 8, grün 4, blau 8, rot 7, Rakete 4, gelb 5, rot 6
+  :auftraege:
+  - rot 6, gelb 3
+  - rot 8
+  - gelb 2
+  - blau 4, rot 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *20
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *28
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *16
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *12
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: grün 6, grün 2, grün 3, grün 5
+  - :anspieler: 3
+    :karten: blau 8, blau 2, blau 6, blau 5
+  - :anspieler: 3
+    :karten: rot 9, rot 1, rot 3, rot 2
+  - :anspieler: 3
+    :karten: Rakete 4, Rakete 1, Rakete 2, Rakete 3
+  - :anspieler: 3
+    :karten: grün 4, grün 1, grün 7, grün 9
+  - :anspieler: 2
+    :karten: blau 4, grün 8, blau 1, blau 3
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 2
+    :karten: rot 4, rot 8, rot 5, gelb 7
+    :vermasselte_auftraege: rot 8
+    :erfuellte_auftraege: rot 5
+  - :anspieler: 3
+    :karten: gelb 5, gelb 8, gelb 2, gelb 6
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 0
+    :karten: gelb 1, gelb 3, gelb 4, rot 7
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 2
+    :karten: blau 7, rot 6, gelb 9, blau 9
+    :vermasselte_auftraege: rot 6
+  :resultat: :verloren
+- :karten:
+  - blau 1, grün 3, rot 9, blau 4, grün 2, gelb 6, Rakete 2, blau 9, blau 3, gelb
+    7
+  - rot 1, rot 5, rot 2, Rakete 3, grün 4, blau 8, rot 7, blau 7, gelb 8, blau 6
+  - grün 6, gelb 9, gelb 4, grün 1, grün 7, blau 2, blau 5, gelb 5, Rakete 4, gelb
+    2
+  - rot 8, grün 5, grün 8, gelb 1, Rakete 1, rot 6, rot 4, rot 3, grün 9, gelb 3
+  :auftraege:
+  - blau 9
+  - gelb 3
+  - grün 2, gelb 8
+  - blau 7, grün 6
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *13
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *40
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *39
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *16
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: gelb 2, gelb 3, gelb 6, gelb 8
+    :vermasselte_auftraege: gelb 8
+    :erfuellte_auftraege: gelb 3
+  - :anspieler: 1
+    :karten: rot 2, blau 5, rot 4, rot 9
+  - :anspieler: 0
+    :karten: blau 3, blau 8, blau 2, grün 5
+  - :anspieler: 1
+    :karten: blau 6, grün 6, rot 8, blau 4
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 1
+    :karten: Rakete 3, Rakete 4, Rakete 1, Rakete 2
+  - :anspieler: 2
+    :karten: gelb 5, gelb 1, gelb 7, grün 4
+  - :anspieler: 0
+    :karten: grün 2, rot 7, grün 1, grün 9
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 3
+    :karten: rot 3, blau 1, rot 1, grün 7
+  - :anspieler: 3
+    :karten: rot 6, blau 9, rot 5, gelb 9
+    :vermasselte_auftraege: blau 9
+  - :anspieler: 3
+    :karten: grün 8, grün 3, blau 7, gelb 4
+    :erfuellte_auftraege: blau 7
+  :resultat: :verloren
+- :karten:
+  - Rakete 3, grün 3, blau 1, Rakete 1, blau 7, rot 7, grün 7, blau 9, gelb 1, gelb
+    5
+  - grün 1, grün 8, blau 8, gelb 2, rot 1, rot 4, grün 9, rot 2, rot 3, blau 3
+  - blau 5, blau 2, grün 5, rot 6, rot 5, blau 4, grün 4, gelb 9, gelb 8, rot 9
+  - blau 6, Rakete 4, grün 6, Rakete 2, gelb 7, gelb 6, rot 8, grün 2, gelb 3, gelb
+    4
+  :auftraege:
+  - gelb 2, gelb 3
+  - blau 5
+  - rot 4
+  - blau 1, grün 3
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *7
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *34
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *37
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: grün 6, grün 7, grün 1, grün 5
+  - :anspieler: 0
+    :karten: rot 7, rot 3, rot 6, rot 8
+  - :anspieler: 3
+    :karten: Rakete 4, Rakete 1, blau 8, grün 4
+  - :anspieler: 3
+    :karten: blau 6, blau 9, blau 3, blau 5
+    :vermasselte_auftraege: blau 5
+  - :anspieler: 0
+    :karten: gelb 5, gelb 2, gelb 9, gelb 7
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 2
+    :karten: rot 9, grün 2, gelb 1, rot 4
+    :erfuellte_auftraege: rot 4
+  - :anspieler: 2
+    :karten: blau 4, Rakete 2, blau 1, grün 9
+    :erfuellte_auftraege: blau 1
+  - :anspieler: 3
+    :karten: gelb 6, grün 3, rot 2, gelb 8
+    :vermasselte_auftraege: grün 3
+  - :anspieler: 2
+    :karten: blau 2, gelb 3, blau 7, grün 8
+    :erfuellte_auftraege: gelb 3
+  - :anspieler: 0
+    :karten: Rakete 3, rot 1, rot 5, gelb 4
+  :resultat: :verloren
+- :karten:
+  - grün 4, gelb 5, gelb 8, grün 7, blau 8, rot 4, gelb 9, rot 8, grün 6, rot 5
+  - blau 7, rot 6, grün 5, Rakete 4, blau 5, gelb 1, rot 7, rot 9, grün 3, blau 2
+  - gelb 6, gelb 2, blau 9, Rakete 2, gelb 4, grün 1, rot 3, gelb 7, rot 2, blau 6
+  - Rakete 1, rot 1, blau 4, gelb 3, grün 2, Rakete 3, grün 8, grün 9, blau 1, blau
+    3
+  :auftraege:
+  - blau 9
+  - gelb 7, gelb 2
+  - gelb 9, gelb 5
+  - rot 8
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *19
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *12
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *34
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 1
+    :karten: grün 5, grün 1, grün 2, grün 7
+  - :anspieler: 0
+    :karten: rot 4, rot 6, rot 3, rot 1
+  - :anspieler: 1
+    :karten: Rakete 4, Rakete 2, Rakete 1, rot 5
+  - :anspieler: 1
+    :karten: grün 3, gelb 4, grün 9, grün 6
+  - :anspieler: 3
+    :karten: grün 8, grün 4, blau 5, rot 2
+  - :anspieler: 3
+    :karten: gelb 3, gelb 5, gelb 1, gelb 6
+    :erfuellte_auftraege: gelb 5
+  - :anspieler: 2
+    :karten: gelb 2, Rakete 3, gelb 8, rot 7
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 3
+    :karten: blau 3, blau 8, blau 7, blau 6
+  - :anspieler: 0
+    :karten: rot 8, rot 9, gelb 7, blau 1
+    :vermasselte_auftraege: rot 8
+    :erfuellte_auftraege: gelb 7
+  - :anspieler: 1
+    :karten: blau 2, blau 9, blau 4, gelb 9
+    :vermasselte_auftraege: blau 9
+    :erfuellte_auftraege: gelb 9
+  :resultat: :verloren
+- :karten:
+  - Rakete 3, gelb 4, rot 3, gelb 8, rot 2, grün 4, grün 2, blau 7, gelb 1, gelb 3
+  - grün 1, rot 6, grün 9, Rakete 2, rot 4, grün 8, rot 7, gelb 6, rot 8, grün 6
+  - rot 5, rot 9, rot 1, Rakete 1, blau 3, gelb 7, Rakete 4, blau 9, blau 5, gelb
+    9
+  - blau 1, blau 2, grün 5, blau 4, grün 7, blau 6, gelb 5, blau 8, gelb 2, grün 3
+  :auftraege:
+  - grün 4
+  - grün 8
+  - rot 9, grün 1
+  - rot 4, blau 1
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *26
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *32
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *19
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 2
+    :karten: rot 5, gelb 2, rot 3, rot 7
+  - :anspieler: 1
+    :karten: grün 1, rot 9, grün 3, grün 2
+    :vermasselte_auftraege: rot 9, grün 1
+  - :anspieler: 3
+    :karten: blau 8, blau 7, rot 8, blau 9
+  - :anspieler: 2
+    :karten: blau 3, blau 6, gelb 8, Rakete 2
+  - :anspieler: 1
+    :karten: rot 6, rot 1, grün 5, rot 2
+  - :anspieler: 1
+    :karten: grün 8, Rakete 4, grün 7, grün 4
+    :vermasselte_auftraege: grün 4, grün 8
+  - :anspieler: 2
+    :karten: gelb 9, gelb 5, gelb 1, gelb 6
+  - :anspieler: 2
+    :karten: Rakete 1, blau 1, Rakete 3, grün 6
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 0
+    :karten: gelb 3, grün 9, gelb 7, blau 4
+  - :anspieler: 2
+    :karten: blau 5, blau 2, gelb 4, rot 4
+    :vermasselte_auftraege: rot 4
+  :resultat: :verloren
+- :karten:
+  - rot 1, Rakete 2, rot 2, grün 8, blau 7, blau 6, grün 1, rot 3, blau 1, gelb 6
+  - rot 6, grün 4, grün 5, blau 5, blau 4, grün 6, gelb 5, Rakete 4, grün 3, Rakete
+    1
+  - gelb 1, gelb 2, grün 2, blau 2, blau 9, rot 7, Rakete 3, grün 9, blau 8, gelb
+    9
+  - gelb 4, gelb 8, grün 7, rot 5, rot 9, rot 4, gelb 3, blau 3, gelb 7, rot 8
+  :auftraege:
+  - gelb 8
+  - blau 4, rot 3
+  - rot 5, grün 6
+  - gelb 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *8
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *34
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *40
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: rot 6, rot 7, rot 4, rot 1
+  - :anspieler: 2
+    :karten: blau 8, blau 3, blau 1, blau 4
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 2
+    :karten: gelb 1, gelb 3, gelb 6, gelb 5
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 0
+    :karten: grün 8, grün 5, grün 2, grün 7
+  - :anspieler: 0
+    :karten: blau 7, blau 5, blau 2, gelb 4
+  - :anspieler: 0
+    :karten: grün 1, grün 6, grün 9, rot 8
+    :erfuellte_auftraege: grün 6
+  - :anspieler: 2
+    :karten: gelb 9, gelb 8, Rakete 2, Rakete 4
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 1
+    :karten: grün 3, blau 9, rot 9, blau 6
+  - :anspieler: 1
+    :karten: grün 4, gelb 2, gelb 7, rot 3
+    :erfuellte_auftraege: rot 3
+  - :anspieler: 1
+    :karten: Rakete 1, Rakete 3, rot 5, rot 2
+    :erfuellte_auftraege: rot 5
+  :resultat: :verloren
+- :karten:
+  - grün 6, grün 4, rot 8, rot 9, Rakete 1, rot 7, grün 8, gelb 3, gelb 2, blau 9
+  - blau 4, gelb 9, gelb 1, grün 9, Rakete 2, gelb 8, blau 7, grün 7, gelb 4, grün
+    1
+  - rot 6, blau 6, blau 1, gelb 5, rot 5, blau 8, gelb 7, rot 3, blau 5, Rakete 3
+  - blau 2, grün 2, rot 1, gelb 6, rot 2, grün 5, rot 4, grün 3, blau 3, Rakete 4
+  :auftraege:
+  - grün 8, rot 1
+  - blau 3
+  - rot 3
+  - gelb 2, blau 1
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *23
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *12
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *13
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *28
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 3
+    :karten: grün 3, grün 8, grün 1, Rakete 3
+    :vermasselte_auftraege: grün 8
+  - :anspieler: 2
+    :karten: rot 3, rot 4, rot 9, gelb 4
+    :vermasselte_auftraege: rot 3
+  - :anspieler: 0
+    :karten: blau 9, blau 4, blau 5, blau 2
+  - :anspieler: 0
+    :karten: rot 7, grün 9, rot 5, rot 2
+  - :anspieler: 0
+    :karten: gelb 3, gelb 8, gelb 5, gelb 6
+  - :anspieler: 1
+    :karten: gelb 1, gelb 7, Rakete 4, gelb 2
+    :erfuellte_auftraege: gelb 2
+  - :anspieler: 3
+    :karten: grün 5, grün 4, grün 7, blau 1
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 1
+    :karten: Rakete 2, blau 8, blau 3, Rakete 1
+    :erfuellte_auftraege: blau 3
+  - :anspieler: 1
+    :karten: gelb 9, blau 6, rot 1, grün 6
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 1
+    :karten: blau 7, rot 6, grün 2, rot 8
+  :resultat: :verloren
+- :karten:
+  - gelb 3, Rakete 4, grün 4, grün 7, blau 5, blau 6, blau 4, Rakete 3, rot 1, rot
+    2
+  - blau 8, blau 2, Rakete 2, grün 1, gelb 4, gelb 6, rot 8, gelb 1, rot 7, gelb 2
+  - grün 5, blau 3, grün 6, gelb 8, grün 8, rot 3, blau 7, blau 9, grün 9, rot 9
+  - Rakete 1, grün 3, grün 2, rot 4, gelb 5, rot 6, rot 5, blau 1, gelb 7, gelb 9
+  :auftraege:
+  - gelb 4, grün 7
+  - grün 9, gelb 3
+  - blau 6
+  - blau 7
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *19
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *23
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *7
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *40
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 5, blau 8, blau 3, blau 1
+  - :anspieler: 1
+    :karten: rot 8, rot 9, rot 5, rot 1
+  - :anspieler: 2
+    :karten: grün 6, grün 2, grün 7, grün 1
+    :erfuellte_auftraege: grün 7
+  - :anspieler: 0
+    :karten: grün 4, gelb 4, grün 9, grün 3
+    :vermasselte_auftraege: gelb 4, grün 9
+  - :anspieler: 2
+    :karten: grün 5, gelb 5, Rakete 3, rot 7
+  - :anspieler: 0
+    :karten: gelb 3, gelb 1, gelb 8, gelb 9
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 4, Rakete 2, blau 7
+    :vermasselte_auftraege: blau 7
+  - :anspieler: 0
+    :karten: blau 4, blau 2, blau 9, rot 4
+  - :anspieler: 2
+    :karten: rot 3, rot 6, rot 2, gelb 2
+  - :anspieler: 3
+    :karten: gelb 7, blau 6, gelb 6, grün 8
+    :vermasselte_auftraege: blau 6
+  :resultat: :verloren
+- :karten:
+  - blau 6, grün 7, gelb 5, rot 5, grün 5, blau 8, grün 8, blau 2, rot 8, grün 9
+  - Rakete 1, blau 4, grün 1, blau 7, blau 5, grün 6, gelb 2, gelb 7, rot 9, gelb
+    6
+  - rot 3, gelb 9, blau 3, Rakete 2, rot 4, Rakete 4, gelb 1, gelb 3, grün 3, gelb
+    4
+  - blau 1, rot 2, grün 4, rot 7, rot 6, grün 2, rot 1, Rakete 3, gelb 8, blau 9
+  :auftraege:
+  - gelb 3
+  - grün 8
+  - gelb 4, grün 4
+  - blau 5, grün 6
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *36
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *9
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *33
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 2
+    :karten: blau 3, blau 9, blau 6, blau 5
+    :erfuellte_auftraege: blau 5
+  - :anspieler: 3
+    :karten: grün 4, grün 9, grün 1, grün 3
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 0
+    :karten: rot 8, rot 9, rot 3, rot 6
+  - :anspieler: 1
+    :karten: gelb 2, gelb 3, gelb 8, gelb 5
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 3
+    :karten: Rakete 3, rot 5, Rakete 1, Rakete 4
+  - :anspieler: 2
+    :karten: gelb 9, blau 1, grün 8, gelb 7
+    :vermasselte_auftraege: grün 8
+  - :anspieler: 2
+    :karten: gelb 4, rot 2, grün 7, gelb 6
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 1
+    :karten: grün 6, Rakete 2, grün 2, grün 5
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 2
+    :karten: rot 4, rot 1, blau 2, blau 7
+  - :anspieler: 2
+    :karten: gelb 1, rot 7, blau 8, blau 4
+  :resultat: :verloren
+- :karten:
+  - Rakete 4, grün 5, blau 1, grün 8, blau 8, gelb 8, grün 4, rot 4, grün 6, blau
+    3
+  - gelb 2, rot 7, blau 4, rot 8, blau 6, Rakete 2, rot 6, gelb 4, rot 3, Rakete 1
+  - rot 2, rot 5, blau 2, blau 7, gelb 9, rot 1, rot 9, gelb 5, grün 9, gelb 1
+  - grün 3, gelb 6, Rakete 3, grün 1, grün 7, gelb 7, gelb 3, blau 5, grün 2, blau
+    9
+  :auftraege:
+  - grün 2, gelb 4
+  - gelb 6, blau 2
+  - blau 6
+  - rot 9
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *14
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *36
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *38
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *17
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 1, blau 4, blau 2, blau 5
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 3
+    :karten: gelb 6, gelb 8, gelb 2, gelb 9
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 2
+    :karten: rot 2, grün 3, rot 4, rot 6
+  - :anspieler: 1
+    :karten: rot 7, rot 1, blau 9, grün 4
+  - :anspieler: 1
+    :karten: gelb 4, gelb 5, gelb 7, grün 5
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 3
+    :karten: grün 1, grün 6, blau 6, grün 9
+    :erfuellte_auftraege: blau 6
+  - :anspieler: 2
+    :karten: gelb 1, gelb 3, Rakete 4, Rakete 1
+  - :anspieler: 0
+    :karten: blau 8, rot 8, blau 7, Rakete 3
+  - :anspieler: 3
+    :karten: grün 2, grün 8, rot 3, rot 9
+    :vermasselte_auftraege: rot 9
+    :erfuellte_auftraege: grün 2
+  - :anspieler: 0
+    :karten: blau 3, Rakete 2, rot 5, grün 7
+  :resultat: :verloren
+- :karten:
+  - blau 9, Rakete 3, blau 7, grün 6, gelb 9, grün 7, grün 2, gelb 2, blau 8, rot
+    9
+  - rot 6, rot 4, gelb 8, gelb 7, Rakete 1, Rakete 2, gelb 3, rot 3, blau 6, rot 5
+  - blau 3, grün 4, grün 8, grün 3, rot 8, blau 5, rot 2, gelb 5, blau 4, Rakete 4
+  - grün 9, gelb 1, grün 1, blau 1, gelb 6, gelb 4, blau 2, rot 1, rot 7, grün 5
+  :auftraege:
+  - gelb 7
+  - blau 7
+  - blau 5, rot 3
+  - rot 8, rot 1
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *36
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *20
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *27
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *33
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: grün 3, grün 1, grün 2, rot 6
+  - :anspieler: 2
+    :karten: Rakete 4, gelb 6, Rakete 3, Rakete 2
+  - :anspieler: 2
+    :karten: blau 5, blau 1, blau 7, blau 6
+    :vermasselte_auftraege: blau 7, blau 5
+  - :anspieler: 0
+    :karten: gelb 9, gelb 7, gelb 5, gelb 1
+    :erfuellte_auftraege: gelb 7
+  - :anspieler: 0
+    :karten: blau 8, rot 3, blau 3, blau 2
+    :vermasselte_auftraege: rot 3
+  - :anspieler: 0
+    :karten: grün 7, Rakete 1, grün 8, grün 9
+  - :anspieler: 1
+    :karten: rot 5, rot 2, rot 1, rot 9
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 0
+    :karten: gelb 2, gelb 8, blau 4, gelb 4
+  - :anspieler: 1
+    :karten: gelb 3, rot 8, rot 7, blau 9
+    :vermasselte_auftraege: rot 8
+  - :anspieler: 1
+    :karten: rot 4, grün 4, grün 5, grün 6
+  :resultat: :verloren
+- :karten:
+  - gelb 4, gelb 3, grün 7, blau 9, rot 4, rot 8, blau 4, blau 2, rot 3, gelb 2
+  - grün 2, rot 2, grün 5, blau 8, rot 5, gelb 8, grün 1, Rakete 3, Rakete 4, rot
+    7
+  - grün 6, blau 6, rot 9, blau 3, gelb 9, Rakete 2, gelb 5, blau 7, blau 5, rot 6
+  - Rakete 1, grün 8, blau 1, gelb 1, grün 3, gelb 7, grün 9, rot 1, grün 4, gelb
+    6
+  :auftraege:
+  - grün 8
+  - gelb 5, rot 4
+  - rot 8, blau 1
+  - grün 2
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *38
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *8
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *16
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: rot 2, rot 9, rot 1, rot 8
+    :erfuellte_auftraege: rot 8
+  - :anspieler: 2
+    :karten: blau 3, blau 1, blau 4, blau 8
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 1
+    :karten: grün 5, grün 6, grün 3, grün 7
+  - :anspieler: 0
+    :karten: gelb 4, gelb 8, gelb 9, gelb 1
+  - :anspieler: 2
+    :karten: Rakete 2, Rakete 1, blau 2, Rakete 4
+  - :anspieler: 1
+    :karten: rot 5, rot 6, gelb 6, rot 3
+  - :anspieler: 2
+    :karten: gelb 5, gelb 7, gelb 3, rot 7
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 3
+    :karten: grün 9, gelb 2, grün 2, blau 6
+    :erfuellte_auftraege: grün 2
+  - :anspieler: 3
+    :karten: grün 8, blau 9, grün 1, blau 7
+    :vermasselte_auftraege: grün 8
+  - :anspieler: 3
+    :karten: grün 4, rot 4, Rakete 3, blau 5
+    :erfuellte_auftraege: rot 4
+  :resultat: :verloren
+- :karten:
+  - gelb 5, gelb 1, grün 6, gelb 8, gelb 6, blau 5, gelb 7, rot 3, grün 3, Rakete
+    4
+  - blau 4, Rakete 1, gelb 9, gelb 4, blau 8, gelb 2, Rakete 3, rot 1, rot 9, blau
+    3
+  - grün 4, blau 2, grün 2, blau 6, blau 9, blau 1, rot 8, grün 1, rot 4, gelb 3
+  - grün 8, grün 5, grün 9, Rakete 2, blau 7, grün 7, rot 6, rot 7, rot 2, rot 5
+  :auftraege:
+  - grün 3, grün 1
+  - gelb 7, rot 4
+  - gelb 6
+  - grün 5
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *9
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *18
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *19
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *40
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 0
+    :karten: gelb 6, gelb 2, gelb 3, grün 9
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: gelb 5, gelb 4, grün 2, grün 8
+  - :anspieler: 0
+    :karten: gelb 1, gelb 9, blau 9, Rakete 2
+  - :anspieler: 3
+    :karten: rot 7, rot 3, rot 1, rot 8
+  - :anspieler: 2
+    :karten: grün 4, grün 7, grün 3, Rakete 1
+    :vermasselte_auftraege: grün 3
+  - :anspieler: 1
+    :karten: blau 8, blau 6, blau 7, blau 5
+  - :anspieler: 1
+    :karten: Rakete 3, grün 1, rot 6, Rakete 4
+    :erfuellte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: gelb 8, rot 9, blau 2, rot 2
+  - :anspieler: 0
+    :karten: gelb 7, blau 3, blau 1, grün 5
+    :vermasselte_auftraege: gelb 7, grün 5
+  - :anspieler: 0
+    :karten: grün 6, blau 4, rot 4, rot 5
+    :vermasselte_auftraege: rot 4
+  :resultat: :verloren
+- :karten:
+  - rot 8, rot 6, Rakete 3, Rakete 1, grün 3, grün 4, grün 9, blau 3, gelb 2, gelb
+    5
+  - gelb 7, grün 6, blau 8, rot 9, rot 7, blau 7, blau 9, grün 7, gelb 4, rot 2
+  - gelb 1, Rakete 2, grün 2, blau 6, blau 5, rot 1, grün 8, blau 2, blau 1, gelb
+    6
+  - gelb 8, grün 5, gelb 9, grün 1, Rakete 4, gelb 3, rot 4, rot 3, blau 4, rot 5
+  :auftraege:
+  - grün 1, gelb 1
+  - gelb 9
+  - rot 5
+  - blau 2, gelb 2
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *27
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *33
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *26
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *28
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: blau 4, blau 3, blau 7, blau 2
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 1
+    :karten: rot 9, rot 1, rot 4, rot 8
+  - :anspieler: 1
+    :karten: grün 6, grün 2, grün 5, grün 4
+  - :anspieler: 1
+    :karten: rot 7, grün 8, rot 5, rot 6
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 1
+    :karten: blau 8, blau 6, gelb 8, gelb 5
+  - :anspieler: 1
+    :karten: gelb 4, gelb 6, gelb 9, gelb 2
+    :vermasselte_auftraege: gelb 9
+    :erfuellte_auftraege: gelb 2
+  - :anspieler: 3
+    :karten: rot 3, grün 3, rot 2, blau 5
+  - :anspieler: 3
+    :karten: grün 1, grün 9, grün 7, blau 1
+    :erfuellte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: Rakete 1, gelb 7, Rakete 2, Rakete 4
+  - :anspieler: 3
+    :karten: gelb 3, Rakete 3, blau 9, gelb 1
+    :erfuellte_auftraege: gelb 1
+  :resultat: :verloren
+- :karten:
+  - rot 8, gelb 7, grün 3, gelb 6, grün 6, grün 7, rot 2, gelb 5, gelb 9, gelb 2
+  - rot 7, blau 1, grün 8, blau 4, gelb 3, grün 2, blau 7, rot 6, grün 1, grün 5
+  - Rakete 3, gelb 1, blau 6, rot 3, Rakete 4, blau 5, blau 3, grün 9, blau 2, Rakete
+    1
+  - Rakete 2, gelb 8, rot 9, rot 1, rot 5, gelb 4, grün 4, rot 4, blau 9, blau 8
+  :auftraege:
+  - gelb 5
+  - rot 7
+  - rot 3, gelb 1
+  - rot 6, gelb 7
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *28
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *26
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: rot 3, rot 5, rot 8, rot 6
+    :vermasselte_auftraege: rot 3, rot 6
+  - :anspieler: 0
+    :karten: gelb 6, gelb 3, gelb 1, gelb 8
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 3
+    :karten: rot 4, rot 2, rot 7, Rakete 4
+    :vermasselte_auftraege: rot 7
+  - :anspieler: 2
+    :karten: blau 3, blau 9, gelb 2, blau 1
+  - :anspieler: 3
+    :karten: grün 4, grün 3, grün 5, grün 9
+  - :anspieler: 2
+    :karten: blau 2, blau 8, gelb 7, blau 7
+    :erfuellte_auftraege: gelb 7
+  - :anspieler: 3
+    :karten: rot 9, gelb 9, blau 4, blau 6
+  - :anspieler: 3
+    :karten: rot 1, grün 6, grün 8, Rakete 1
+  - :anspieler: 2
+    :karten: blau 5, Rakete 2, gelb 5, grün 1
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 3
+    :karten: gelb 4, grün 7, grün 2, Rakete 3
+  :resultat: :verloren
+- :karten:
+  - rot 9, Rakete 2, blau 5, grün 6, rot 5, grün 9, rot 2, rot 3, blau 4, blau 8
+  - grün 3, Rakete 4, grün 7, blau 3, gelb 6, gelb 1, rot 8, blau 1, gelb 2, gelb
+    9
+  - gelb 3, grün 5, grün 1, gelb 5, rot 4, blau 6, grün 2, rot 1, Rakete 3, rot 7
+  - gelb 4, blau 9, grün 4, blau 2, gelb 8, grün 8, Rakete 1, blau 7, rot 6, gelb
+    7
+  :auftraege:
+  - blau 8
+  - gelb 2, grün 4
+  - rot 6, rot 7
+  - grün 2
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *10
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *7
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *38
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: gelb 9, gelb 3, gelb 8, rot 2
+  - :anspieler: 1
+    :karten: blau 1, blau 6, blau 9, blau 8
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 3
+    :karten: gelb 7, grün 6, gelb 6, gelb 5
+  - :anspieler: 3
+    :karten: blau 2, blau 5, blau 3, Rakete 3
+  - :anspieler: 2
+    :karten: grün 5, grün 4, grün 9, grün 3
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 0
+    :karten: rot 5, rot 8, rot 7, rot 6
+    :vermasselte_auftraege: rot 6, rot 7
+  - :anspieler: 1
+    :karten: gelb 2, rot 4, gelb 4, Rakete 2
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 0
+    :karten: rot 9, Rakete 4, rot 1, blau 7
+  - :anspieler: 1
+    :karten: grün 7, grün 1, grün 8, blau 4
+  - :anspieler: 3
+    :karten: Rakete 1, rot 3, gelb 1, grün 2
+    :erfuellte_auftraege: grün 2
+  :resultat: :verloren
+- :karten:
+  - Rakete 3, grün 3, rot 5, rot 2, grün 2, rot 4, gelb 5, blau 9, grün 9, rot 6
+  - gelb 7, grün 4, rot 7, Rakete 4, gelb 6, gelb 3, gelb 8, gelb 1, blau 1, blau
+    8
+  - rot 9, rot 3, gelb 4, blau 5, gelb 2, blau 3, grün 1, grün 8, blau 4, rot 8
+  - blau 2, gelb 9, grün 7, blau 6, grün 5, grün 6, Rakete 1, Rakete 2, rot 1, blau
+    7
+  :auftraege:
+  - grün 6
+  - grün 1, rot 9
+  - gelb 6, rot 4
+  - rot 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *33
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *15
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *38
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *12
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 1
+    :karten: blau 1, blau 5, blau 6, blau 9
+  - :anspieler: 0
+    :karten: rot 5, rot 7, rot 9, rot 1
+    :vermasselte_auftraege: rot 9, rot 5
+  - :anspieler: 2
+    :karten: gelb 4, gelb 9, gelb 5, gelb 3
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 3, Rakete 4, grün 1
+    :erfuellte_auftraege: grün 1
+  - :anspieler: 1
+    :karten: gelb 6, gelb 2, blau 2, rot 4
+    :vermasselte_auftraege: gelb 6, rot 4
+  - :anspieler: 1
+    :karten: gelb 1, blau 3, grün 6, grün 3
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 1
+    :karten: blau 8, blau 4, blau 7, rot 6
+  - :anspieler: 1
+    :karten: gelb 8, rot 8, grün 7, grün 2
+  - :anspieler: 1
+    :karten: gelb 7, rot 3, grün 5, rot 2
+  - :anspieler: 1
+    :karten: grün 4, grün 8, Rakete 2, grün 9
+  :resultat: :verloren
+- :karten:
+  - grün 1, gelb 9, blau 6, rot 7, blau 4, Rakete 2, Rakete 4, blau 2, rot 8, gelb
+    5
+  - grün 8, Rakete 3, blau 7, grün 9, rot 6, grün 3, blau 1, blau 8, blau 9, rot 5
+  - gelb 1, rot 2, gelb 4, grün 6, grün 4, gelb 3, gelb 7, gelb 8, rot 4, grün 2
+  - blau 3, grün 5, blau 5, rot 1, gelb 2, Rakete 1, gelb 6, grün 7, rot 9, rot 3
+  :auftraege:
+  - grün 3, rot 1
+  - blau 6, rot 8
+  - rot 5
+  - grün 4
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *37
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *39
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *38
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *10
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 3, gelb 1, Rakete 1
+  - :anspieler: 0
+    :karten: gelb 5, grün 9, gelb 8, gelb 6
+  - :anspieler: 2
+    :karten: gelb 4, gelb 2, gelb 9, grün 3
+    :erfuellte_auftraege: grün 3
+  - :anspieler: 0
+    :karten: blau 2, blau 8, gelb 3, blau 5
+  - :anspieler: 1
+    :karten: rot 5, rot 4, rot 9, rot 8
+    :vermasselte_auftraege: rot 8, rot 5
+  - :anspieler: 3
+    :karten: blau 3, blau 4, blau 7, grün 2
+  - :anspieler: 1
+    :karten: rot 6, rot 2, rot 1, rot 7
+    :erfuellte_auftraege: rot 1
+  - :anspieler: 0
+    :karten: grün 1, grün 8, grün 4, grün 7
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 1
+    :karten: blau 9, gelb 7, rot 3, blau 6
+    :erfuellte_auftraege: blau 6
+  - :anspieler: 1
+    :karten: blau 1, grün 6, grün 5, Rakete 2
+  :resultat: :verloren
+- :karten:
+  - rot 8, Rakete 3, gelb 8, grün 7, grün 3, Rakete 4, grün 1, grün 2, blau 9, blau
+    8
+  - grün 8, grün 4, gelb 4, rot 7, gelb 5, rot 5, gelb 7, gelb 9, grün 6, blau 4
+  - blau 5, grün 5, gelb 1, gelb 2, gelb 6, rot 2, rot 4, blau 2, rot 6, blau 3
+  - rot 1, blau 6, Rakete 2, grün 9, Rakete 1, rot 9, blau 7, gelb 3, rot 3, blau
+    1
+  :auftraege:
+  - rot 6, blau 7
+  - gelb 5, gelb 1
+  - grün 9
+  - blau 4
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *24
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *33
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *15
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 0
+    :karten: Rakete 3, gelb 4, rot 4, Rakete 2
+  - :anspieler: 0
+    :karten: blau 9, blau 4, blau 5, blau 1
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 0
+    :karten: gelb 8, gelb 5, gelb 1, gelb 3
+    :vermasselte_auftraege: gelb 5, gelb 1
+  - :anspieler: 0
+    :karten: rot 8, rot 7, rot 2, rot 1
+  - :anspieler: 0
+    :karten: grün 3, grün 8, grün 5, grün 9
+    :vermasselte_auftraege: grün 9
+  - :anspieler: 3
+    :karten: rot 9, grün 7, rot 5, rot 6
+    :vermasselte_auftraege: rot 6
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 4, grün 6, blau 2
+  - :anspieler: 0
+    :karten: grün 1, grün 4, gelb 2, blau 7
+    :vermasselte_auftraege: blau 7
+  - :anspieler: 1
+    :karten: gelb 9, gelb 6, blau 6, grün 2
+  - :anspieler: 1
+    :karten: gelb 7, blau 3, rot 3, blau 8
+  :resultat: :verloren
+- :karten:
+  - Rakete 3, rot 4, blau 2, gelb 7, blau 5, grün 1, blau 4, gelb 4, rot 8, blau 1
+  - gelb 8, grün 8, grün 6, grün 9, gelb 6, grün 5, blau 6, blau 9, grün 2, gelb 5
+  - rot 9, blau 7, rot 1, Rakete 2, grün 7, grün 4, rot 7, rot 2, gelb 2, Rakete 4
+  - gelb 3, rot 3, gelb 1, rot 6, grün 3, gelb 9, blau 8, blau 3, Rakete 1, rot 5
+  :auftraege:
+  - blau 8
+  - gelb 3
+  - gelb 4, blau 3
+  - grün 8, gelb 7
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *8
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *12
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *32
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *22
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: rot 2, rot 5, rot 4, blau 9
+  - :anspieler: 3
+    :karten: grün 3, grün 1, grün 2, grün 7
+  - :anspieler: 2
+    :karten: rot 9, rot 3, rot 8, grün 9
+  - :anspieler: 2
+    :karten: grün 4, gelb 1, blau 2, grün 6
+  - :anspieler: 1
+    :karten: gelb 5, gelb 2, gelb 3, gelb 4
+    :vermasselte_auftraege: gelb 4
+    :erfuellte_auftraege: gelb 3
+  - :anspieler: 1
+    :karten: grün 5, rot 1, blau 8, blau 1
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 1
+    :karten: blau 6, blau 7, blau 3, blau 4
+    :erfuellte_auftraege: blau 3
+  - :anspieler: 2
+    :karten: Rakete 2, Rakete 1, Rakete 3, grün 8
+    :vermasselte_auftraege: grün 8
+  - :anspieler: 0
+    :karten: gelb 7, gelb 6, Rakete 4, gelb 9
+    :vermasselte_auftraege: gelb 7
+  - :anspieler: 2
+    :karten: rot 7, rot 6, blau 5, gelb 8
+  :resultat: :verloren
+- :karten:
+  - gelb 5, Rakete 3, grün 7, grün 2, gelb 4, grün 4, Rakete 4, gelb 2, gelb 7, rot
+    5
+  - gelb 6, rot 8, grün 1, Rakete 2, rot 3, blau 5, blau 2, rot 2, rot 7, grün 5
+  - blau 3, gelb 3, blau 9, blau 8, grün 8, rot 4, blau 6, rot 1, blau 4, grün 6
+  - blau 7, gelb 1, rot 9, gelb 9, gelb 8, Rakete 1, blau 1, rot 6, grün 3, grün 9
+  :auftraege:
+  - grün 2, grün 9
+  - gelb 4, blau 9
+  - blau 2
+  - grün 1
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *40
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *13
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *31
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *22
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 2, grün 8, Rakete 1
+  - :anspieler: 0
+    :karten: gelb 5, gelb 6, gelb 3, gelb 8
+  - :anspieler: 3
+    :karten: blau 1, grün 4, blau 2, blau 9
+    :vermasselte_auftraege: blau 9
+    :erfuellte_auftraege: blau 2
+  - :anspieler: 2
+    :karten: rot 4, rot 9, rot 5, rot 8
+  - :anspieler: 3
+    :karten: gelb 1, gelb 7, rot 7, rot 1
+  - :anspieler: 0
+    :karten: Rakete 3, rot 3, blau 4, blau 7
+  - :anspieler: 0
+    :karten: gelb 4, grün 1, blau 6, gelb 9
+    :vermasselte_auftraege: gelb 4
+    :erfuellte_auftraege: grün 1
+  - :anspieler: 3
+    :karten: grün 9, grün 2, grün 5, grün 6
+    :vermasselte_auftraege: grün 2, grün 9
+  - :anspieler: 3
+    :karten: grün 3, grün 7, blau 5, blau 3
+  - :anspieler: 0
+    :karten: gelb 2, rot 2, blau 8, rot 6
+  :resultat: :verloren
+- :karten:
+  - gelb 8, rot 9, Rakete 2, gelb 2, rot 8, rot 4, rot 5, gelb 5, blau 8, blau 2
+  - gelb 9, grün 8, grün 9, rot 1, grün 7, Rakete 4, gelb 7, blau 6, rot 3, blau 3
+  - grün 5, blau 7, grün 3, gelb 6, blau 4, rot 6, blau 9, rot 7, grün 1, grün 6
+  - grün 2, blau 1, gelb 4, rot 2, blau 5, gelb 1, gelb 3, Rakete 3, Rakete 1, grün
+    4
+  :auftraege:
+  - grün 6
+  - blau 7, rot 7
+  - gelb 9, gelb 1
+  - rot 9
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *29
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *28
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *5
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *18
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 1
+    :karten: grün 8, grün 1, grün 2, gelb 2
+  - :anspieler: 1
+    :karten: gelb 7, gelb 6, gelb 1, gelb 8
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 0
+    :karten: rot 5, rot 1, rot 7, rot 2
+    :vermasselte_auftraege: rot 7
+  - :anspieler: 2
+    :karten: blau 9, blau 5, blau 2, blau 3
+  - :anspieler: 2
+    :karten: grün 5, grün 4, rot 8, grün 9
+  - :anspieler: 1
+    :karten: Rakete 4, grün 6, Rakete 1, Rakete 2
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 1
+    :karten: blau 6, blau 7, blau 1, blau 8
+    :vermasselte_auftraege: blau 7
+  - :anspieler: 0
+    :karten: rot 9, rot 3, rot 6, gelb 4
+    :vermasselte_auftraege: rot 9
+  - :anspieler: 0
+    :karten: gelb 5, gelb 9, blau 4, gelb 3
+    :vermasselte_auftraege: gelb 9
+  - :anspieler: 1
+    :karten: grün 7, grün 3, Rakete 3, rot 4
+  :resultat: :verloren
+- :karten:
+  - blau 5, Rakete 1, Rakete 3, gelb 1, grün 6, blau 3, grün 7, rot 8, grün 4, grün
+    2
+  - rot 1, rot 2, grün 3, blau 9, blau 8, blau 4, rot 4, grün 5, Rakete 4, blau 7
+  - gelb 3, gelb 7, blau 2, gelb 4, grün 8, Rakete 2, grün 9, grün 1, blau 1, blau
+    6
+  - gelb 5, gelb 9, rot 6, rot 3, gelb 2, gelb 6, rot 9, rot 5, rot 7, gelb 8
+  :auftraege:
+  - blau 1
+  - grün 5, rot 6
+  - rot 5, rot 4
+  - rot 9
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *18
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *40
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *21
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: blau 8, blau 1, rot 7, blau 3
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 1
+    :karten: Rakete 4, Rakete 2, gelb 6, Rakete 3
+  - :anspieler: 1
+    :karten: rot 1, blau 2, rot 5, rot 8
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 0
+    :karten: grün 4, grün 3, grün 8, rot 3
+  - :anspieler: 2
+    :karten: blau 6, gelb 5, blau 5, blau 7
+  - :anspieler: 1
+    :karten: blau 9, gelb 4, gelb 8, Rakete 1
+  - :anspieler: 0
+    :karten: grün 2, grün 5, grün 1, gelb 2
+    :erfuellte_auftraege: grün 5
+  - :anspieler: 1
+    :karten: rot 2, gelb 7, rot 6, grün 7
+    :vermasselte_auftraege: rot 6
+  - :anspieler: 3
+    :karten: gelb 9, gelb 1, blau 4, gelb 3
+  - :anspieler: 3
+    :karten: rot 9, grün 6, rot 4, grün 9
+    :vermasselte_auftraege: rot 4
+    :erfuellte_auftraege: rot 9
+  :resultat: :verloren
+- :karten:
+  - gelb 9, rot 4, Rakete 1, Rakete 4, rot 1, blau 6, grün 4, gelb 3, grün 2, blau
+    8
+  - grün 1, rot 5, blau 2, grün 7, rot 7, gelb 2, rot 8, Rakete 2, grün 6, rot 6
+  - grün 9, Rakete 3, gelb 6, grün 5, blau 7, gelb 5, grün 3, blau 5, grün 8, gelb
+    4
+  - gelb 1, blau 1, blau 4, gelb 8, rot 9, blau 3, gelb 7, rot 2, rot 3, blau 9
+  :auftraege:
+  - gelb 6, grün 4
+  - rot 3, rot 7
+  - rot 1
+  - gelb 1
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *34
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *13
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *26
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *14
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 8, blau 2, blau 5, blau 4
+  - :anspieler: 0
+    :karten: grün 2, grün 6, grün 5, gelb 7
+  - :anspieler: 1
+    :karten: gelb 2, gelb 6, gelb 8, gelb 3
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 3
+    :karten: rot 9, rot 1, rot 6, blau 7
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 3
+    :karten: blau 9, blau 6, grün 7, gelb 4
+  - :anspieler: 3
+    :karten: blau 1, grün 4, Rakete 2, Rakete 3
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 2
+    :karten: gelb 5, gelb 1, gelb 9, rot 7
+    :vermasselte_auftraege: rot 7, gelb 1
+  - :anspieler: 0
+    :karten: rot 4, rot 5, grün 8, rot 3
+    :erfuellte_auftraege: rot 3
+  - :anspieler: 1
+    :karten: grün 1, grün 9, blau 3, Rakete 1
+  - :anspieler: 0
+    :karten: Rakete 4, rot 8, grün 3, rot 2
+  :resultat: :verloren
+- :karten:
+  - blau 9, gelb 5, grün 3, gelb 8, blau 8, gelb 6, gelb 4, blau 5, grün 9, Rakete
+    2
+  - grün 1, grün 7, rot 7, gelb 1, grün 5, Rakete 4, grün 4, grün 2, blau 2, blau
+    1
+  - Rakete 3, rot 5, rot 1, blau 7, rot 2, blau 3, grün 6, gelb 2, blau 4, gelb 3
+  - blau 6, rot 3, grün 8, rot 4, rot 8, gelb 7, gelb 9, Rakete 1, rot 6, rot 9
+  :auftraege:
+  - grün 5
+  - gelb 3, gelb 5
+  - gelb 8, blau 3
+  - gelb 2
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *34
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *29
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *31
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *10
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 1
+    :karten: rot 7, rot 1, rot 9, gelb 6
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 2, Rakete 4, Rakete 3
+  - :anspieler: 1
+    :karten: gelb 1, gelb 3, gelb 7, gelb 8
+    :vermasselte_auftraege: gelb 3, gelb 8
+  - :anspieler: 0
+    :karten: grün 3, grün 1, grün 6, grün 8
+  - :anspieler: 3
+    :karten: rot 4, blau 5, grün 5, rot 5
+    :vermasselte_auftraege: grün 5
+  - :anspieler: 2
+    :karten: gelb 2, gelb 9, gelb 5, grün 4
+    :vermasselte_auftraege: gelb 5
+    :erfuellte_auftraege: gelb 2
+  - :anspieler: 3
+    :karten: blau 6, blau 9, blau 1, blau 7
+  - :anspieler: 0
+    :karten: blau 8, blau 2, blau 4, rot 3
+  - :anspieler: 0
+    :karten: gelb 4, grün 2, blau 3, rot 8
+    :vermasselte_auftraege: blau 3
+  - :anspieler: 0
+    :karten: grün 9, grün 7, rot 2, rot 6
+  :resultat: :verloren
+- :karten:
+  - blau 2, blau 5, grün 5, rot 1, blau 9, grün 3, blau 8, gelb 6, Rakete 2, Rakete
+    3
+  - grün 2, rot 8, gelb 5, grün 8, blau 6, gelb 7, grün 9, rot 4, gelb 1, gelb 4
+  - grün 4, grün 1, rot 9, grün 6, blau 1, gelb 3, gelb 2, rot 5, blau 4, rot 3
+  - rot 7, Rakete 1, Rakete 4, blau 7, gelb 9, blau 3, grün 7, rot 2, gelb 8, rot
+    6
+  :auftraege:
+  - grün 4, gelb 7
+  - gelb 5
+  - grün 8
+  - blau 8, gelb 4
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *18
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *37
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: blau 3, blau 2, blau 6, blau 1
+  - :anspieler: 1
+    :karten: gelb 5, gelb 3, gelb 9, gelb 6
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 3
+    :karten: Rakete 1, Rakete 2, grün 8, rot 3
+    :vermasselte_auftraege: grün 8
+  - :anspieler: 0
+    :karten: grün 5, grün 9, grün 1, grün 7
+  - :anspieler: 1
+    :karten: gelb 7, gelb 2, gelb 8, blau 5
+    :vermasselte_auftraege: gelb 7
+  - :anspieler: 3
+    :karten: rot 2, rot 1, rot 4, rot 9
+  - :anspieler: 2
+    :karten: blau 4, blau 7, blau 9, gelb 4
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 0
+    :karten: grün 3, grün 2, grün 6, rot 7
+  - :anspieler: 2
+    :karten: rot 5, rot 6, Rakete 3, rot 8
+  - :anspieler: 0
+    :karten: blau 8, gelb 1, grün 4, Rakete 4
+    :vermasselte_auftraege: grün 4
+    :erfuellte_auftraege: blau 8
+  :resultat: :verloren
+- :karten:
+  - grün 1, rot 2, Rakete 1, rot 8, gelb 5, grün 4, blau 7, rot 5, blau 5, grün 3
+  - blau 4, gelb 9, Rakete 4, Rakete 3, rot 6, rot 9, grün 7, grün 9, blau 9, rot
+    7
+  - blau 6, grün 5, gelb 7, blau 3, blau 1, grün 8, grün 2, gelb 2, gelb 4, rot 4
+  - gelb 8, gelb 1, grün 6, gelb 6, Rakete 2, rot 3, blau 8, blau 2, rot 1, gelb 3
+  :auftraege:
+  - blau 7
+  - gelb 5, gelb 4
+  - grün 2, grün 3
+  - blau 9
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *10
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *31
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *29
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *7
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 1
+    :karten: blau 4, blau 3, blau 2, blau 5
+  - :anspieler: 0
+    :karten: grün 4, grün 9, grün 5, grün 6
+  - :anspieler: 1
+    :karten: blau 9, blau 1, blau 8, blau 7
+    :vermasselte_auftraege: blau 7, blau 9
+  - :anspieler: 1
+    :karten: rot 9, rot 4, rot 1, rot 8
+  - :anspieler: 1
+    :karten: gelb 9, gelb 4, gelb 3, gelb 5
+    :erfuellte_auftraege: gelb 5, gelb 4
+  - :anspieler: 1
+    :karten: rot 6, grün 8, rot 3, rot 2
+  - :anspieler: 1
+    :karten: grün 7, grün 2, gelb 6, grün 1
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 1
+    :karten: Rakete 3, gelb 7, Rakete 2, Rakete 1
+  - :anspieler: 1
+    :karten: rot 7, blau 6, gelb 8, rot 5
+  - :anspieler: 1
+    :karten: Rakete 4, gelb 2, gelb 1, grün 3
+    :vermasselte_auftraege: grün 3
+  :resultat: :verloren
+- :karten:
+  - rot 4, grün 1, blau 9, rot 7, gelb 6, blau 1, gelb 3, rot 5, rot 6, gelb 1
+  - Rakete 2, gelb 5, gelb 7, Rakete 4, grün 8, blau 5, gelb 4, rot 1, Rakete 3, rot
+    9
+  - blau 6, grün 3, grün 4, gelb 9, gelb 2, grün 5, blau 3, rot 2, grün 7, rot 3
+  - blau 2, grün 2, rot 8, blau 4, gelb 8, grün 6, blau 8, grün 9, blau 7, Rakete
+    1
+  :auftraege:
+  - grün 2
+  - rot 2, grün 1
+  - rot 9, gelb 5
+  - blau 8
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *13
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *23
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *40
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *16
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 1
+    :karten: gelb 5, gelb 2, gelb 8, gelb 3
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 3
+    :karten: grün 9, grün 1, grün 8, grün 3
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 3
+    :karten: blau 7, blau 1, blau 5, blau 3
+  - :anspieler: 3
+    :karten: Rakete 1, rot 6, Rakete 2, rot 2
+    :erfuellte_auftraege: rot 2
+  - :anspieler: 1
+    :karten: Rakete 3, grün 7, grün 2, blau 9
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 1
+    :karten: gelb 4, gelb 9, blau 2, gelb 1
+  - :anspieler: 2
+    :karten: grün 5, grün 6, gelb 6, rot 1
+  - :anspieler: 3
+    :karten: blau 8, rot 4, Rakete 4, blau 6
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 1
+    :karten: gelb 7, rot 3, blau 4, rot 7
+  - :anspieler: 1
+    :karten: rot 9, grün 4, rot 8, rot 5
+    :vermasselte_auftraege: rot 9
+  :resultat: :verloren
+- :karten:
+  - blau 6, rot 8, grün 3, rot 9, blau 2, Rakete 1, gelb 3, blau 7, blau 8, blau 9
+  - blau 3, grün 7, grün 1, gelb 8, grün 2, Rakete 3, gelb 7, rot 1, gelb 9, gelb
+    6
+  - grün 8, blau 1, Rakete 2, grün 4, blau 4, rot 7, rot 6, rot 3, grün 9, Rakete
+    4
+  - grün 5, rot 2, gelb 4, grün 6, gelb 5, gelb 2, rot 5, blau 5, gelb 1, rot 4
+  :auftraege:
+  - grün 1
+  - blau 7
+  - grün 4, gelb 5
+  - gelb 6, rot 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *31
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *27
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *22
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *9
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: rot 7, rot 2, rot 9, rot 1
+  - :anspieler: 0
+    :karten: blau 9, blau 3, blau 4, blau 5
+  - :anspieler: 0
+    :karten: blau 2, Rakete 3, blau 1, gelb 1
+  - :anspieler: 1
+    :karten: grün 2, grün 8, grün 6, grün 3
+  - :anspieler: 2
+    :karten: Rakete 2, rot 5, Rakete 1, gelb 7
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 2
+    :karten: rot 6, rot 4, rot 8, grün 1
+    :erfuellte_auftraege: grün 1
+  - :anspieler: 0
+    :karten: blau 6, grün 7, grün 9, gelb 5
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 0
+    :karten: gelb 3, gelb 8, rot 3, gelb 4
+  - :anspieler: 1
+    :karten: gelb 6, Rakete 4, gelb 2, blau 7
+    :vermasselte_auftraege: blau 7, gelb 6
+  - :anspieler: 2
+    :karten: grün 4, grün 5, blau 8, gelb 9
+    :vermasselte_auftraege: grün 4
+  :resultat: :verloren
+- :karten:
+  - grün 5, blau 9, rot 9, blau 8, blau 6, gelb 8, grün 4, Rakete 4, grün 9, blau
+    3
+  - gelb 3, grün 2, rot 4, rot 2, gelb 2, gelb 1, rot 5, grün 8, grün 1, Rakete 1
+  - Rakete 3, blau 7, blau 4, rot 8, grün 3, rot 7, blau 2, gelb 7, gelb 6, rot 6
+  - grün 6, blau 5, gelb 4, gelb 5, rot 3, grün 7, rot 1, gelb 9, Rakete 2, blau 1
+  :auftraege:
+  - blau 7, rot 7
+  - blau 4, blau 2
+  - blau 8
+  - rot 5
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *17
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *37
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *28
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *22
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 0
+    :karten: grün 9, grün 1, grün 3, grün 6
+  - :anspieler: 0
+    :karten: rot 9, rot 2, rot 7, rot 1
+    :erfuellte_auftraege: rot 7
+  - :anspieler: 0
+    :karten: blau 3, grün 8, blau 4, blau 5
+    :vermasselte_auftraege: blau 4
+  - :anspieler: 3
+    :karten: gelb 4, gelb 8, gelb 1, gelb 7
+  - :anspieler: 0
+    :karten: blau 6, grün 2, blau 2, blau 1
+    :vermasselte_auftraege: blau 2
+  - :anspieler: 0
+    :karten: Rakete 4, Rakete 1, Rakete 3, Rakete 2
+  - :anspieler: 0
+    :karten: grün 5, rot 5, blau 7, grün 7
+    :vermasselte_auftraege: blau 7
+    :erfuellte_auftraege: rot 5
+  - :anspieler: 3
+    :karten: gelb 9, blau 8, gelb 2, gelb 6
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 3
+    :karten: gelb 5, grün 4, gelb 3, rot 8
+  - :anspieler: 3
+    :karten: rot 3, blau 9, rot 4, rot 6
+  :resultat: :verloren
+- :karten:
+  - rot 3, grün 6, blau 3, blau 7, gelb 4, grün 4, gelb 9, blau 6, gelb 2, gelb 1
+  - blau 5, gelb 5, grün 2, gelb 6, blau 1, grün 9, blau 8, rot 7, blau 2, rot 4
+  - Rakete 1, rot 5, grün 8, grün 1, rot 8, grün 5, rot 6, Rakete 3, blau 4, rot 9
+  - Rakete 4, Rakete 2, rot 2, grün 7, rot 1, gelb 3, gelb 8, grün 3, blau 9, gelb
+    7
+  :auftraege:
+  - blau 4, blau 6
+  - grün 3
+  - blau 9
+  - rot 8, rot 5
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *30
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *19
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *26
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *36
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: gelb 8, gelb 9, gelb 6, grün 1
+  - :anspieler: 0
+    :karten: grün 4, grün 2, grün 5, grün 7
+  - :anspieler: 3
+    :karten: blau 9, blau 6, blau 5, blau 4
+    :vermasselte_auftraege: blau 4, blau 6, blau 9
+  - :anspieler: 3
+    :karten: gelb 7, gelb 1, gelb 5, rot 6
+  - :anspieler: 3
+    :karten: gelb 3, gelb 4, rot 4, rot 9
+  - :anspieler: 0
+    :karten: blau 7, blau 2, rot 5, Rakete 4
+    :erfuellte_auftraege: rot 5
+  - :anspieler: 3
+    :karten: rot 2, rot 3, rot 7, rot 8
+    :vermasselte_auftraege: rot 8
+  - :anspieler: 2
+    :karten: Rakete 1, Rakete 2, blau 3, blau 1
+  - :anspieler: 3
+    :karten: grün 3, grün 6, grün 9, grün 8
+    :erfuellte_auftraege: grün 3
+  - :anspieler: 1
+    :karten: blau 8, Rakete 3, rot 1, gelb 2
+  :resultat: :verloren
+- :karten:
+  - rot 3, grün 4, grün 1, blau 9, rot 5, gelb 3, gelb 9, rot 8, grün 8, grün 3
+  - gelb 8, blau 2, gelb 5, blau 8, rot 6, rot 2, Rakete 4, rot 9, gelb 7, grün 5
+  - blau 5, Rakete 1, Rakete 3, gelb 6, grün 9, blau 3, blau 6, gelb 2, rot 1, Rakete
+    2
+  - grün 7, gelb 1, blau 7, grün 2, blau 4, grün 6, rot 7, blau 1, rot 4, gelb 4
+  :auftraege:
+  - grün 1
+  - rot 6, gelb 5
+  - grün 8, grün 9
+  - gelb 4
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *25
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *39
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *34
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *28
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 1
+    :karten: gelb 5, gelb 6, gelb 1, gelb 9
+    :vermasselte_auftraege: gelb 5
+  - :anspieler: 0
+    :karten: rot 8, rot 9, rot 1, rot 4
+  - :anspieler: 1
+    :karten: gelb 7, gelb 2, gelb 4, gelb 3
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 1
+    :karten: grün 5, grün 9, grün 6, grün 8
+    :erfuellte_auftraege: grün 8, grün 9
+  - :anspieler: 2
+    :karten: Rakete 1, rot 7, blau 9, Rakete 4
+  - :anspieler: 1
+    :karten: blau 8, blau 3, blau 7, grün 4
+  - :anspieler: 1
+    :karten: blau 2, blau 5, blau 1, rot 5
+  - :anspieler: 2
+    :karten: Rakete 2, grün 7, rot 3, gelb 8
+  - :anspieler: 2
+    :karten: blau 6, blau 4, grün 3, rot 6
+    :vermasselte_auftraege: rot 6
+  - :anspieler: 2
+    :karten: Rakete 3, grün 2, grün 1, rot 2
+    :vermasselte_auftraege: grün 1
+  :resultat: :verloren
+- :karten:
+  - blau 2, grün 7, grün 1, gelb 8, blau 5, rot 3, rot 4, rot 5, Rakete 3, blau 3
+  - blau 7, blau 6, gelb 3, grün 8, blau 9, grün 4, gelb 4, rot 7, gelb 6, gelb 5
+  - Rakete 4, grün 3, gelb 2, grün 5, gelb 1, rot 9, rot 1, grün 2, rot 8, Rakete
+    1
+  - rot 6, rot 2, grün 9, blau 1, Rakete 2, gelb 9, grün 6, gelb 7, blau 8, blau 4
+  :auftraege:
+  - rot 9
+  - grün 2
+  - gelb 6, grün 5
+  - rot 1, rot 6
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *40
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *32
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *34
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *17
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 2
+    :karten: grün 2, grün 6, grün 7, grün 4
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 0
+    :karten: blau 3, blau 7, grün 5, blau 1
+    :vermasselte_auftraege: grün 5
+  - :anspieler: 1
+    :karten: gelb 6, gelb 1, gelb 7, gelb 8
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: grün 1, grün 8, grün 3, grün 9
+  - :anspieler: 3
+    :karten: Rakete 2, Rakete 3, blau 6, Rakete 4
+  - :anspieler: 2
+    :karten: rot 8, rot 6, rot 4, rot 7
+    :vermasselte_auftraege: rot 6
+  - :anspieler: 2
+    :karten: Rakete 1, blau 4, blau 5, gelb 4
+  - :anspieler: 2
+    :karten: gelb 2, gelb 9, rot 3, gelb 3
+  - :anspieler: 3
+    :karten: rot 2, rot 5, blau 9, rot 1
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 0
+    :karten: blau 2, gelb 5, rot 9, blau 8
+    :vermasselte_auftraege: rot 9
+  :resultat: :verloren
+- :karten:
+  - gelb 1, blau 3, blau 6, blau 2, gelb 3, rot 9, blau 1, gelb 2, Rakete 3, rot 8
+  - rot 5, rot 4, gelb 8, grün 7, blau 4, rot 3, gelb 6, Rakete 1, Rakete 4, rot 1
+  - grün 3, rot 7, grün 2, grün 5, gelb 7, grün 4, grün 8, rot 6, blau 8, blau 9
+  - gelb 5, grün 1, rot 2, blau 5, Rakete 2, gelb 4, grün 6, gelb 9, grün 9, blau
+    7
+  :auftraege:
+  - blau 3
+  - blau 8, blau 6
+  - rot 3, gelb 4
+  - grün 9
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *27
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *26
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *10
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: Rakete 4, rot 7, Rakete 2, Rakete 3
+  - :anspieler: 1
+    :karten: gelb 8, gelb 7, gelb 4, gelb 1
+    :vermasselte_auftraege: gelb 4
+  - :anspieler: 1
+    :karten: rot 3, rot 6, rot 2, rot 9
+    :vermasselte_auftraege: rot 3
+  - :anspieler: 0
+    :karten: gelb 2, gelb 6, grün 3, gelb 5
+  - :anspieler: 1
+    :karten: Rakete 1, grün 5, blau 7, blau 2
+  - :anspieler: 1
+    :karten: rot 4, grün 4, grün 1, rot 8
+  - :anspieler: 0
+    :karten: blau 1, blau 4, blau 9, blau 5
+  - :anspieler: 2
+    :karten: grün 2, grün 9, gelb 3, grün 7
+    :erfuellte_auftraege: grün 9
+  - :anspieler: 3
+    :karten: grün 6, blau 6, rot 5, grün 8
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 2
+    :karten: blau 8, gelb 9, blau 3, rot 1
+    :vermasselte_auftraege: blau 3, blau 8
+  :resultat: :verloren
+- :karten:
+  - gelb 9, blau 6, blau 4, gelb 8, gelb 2, rot 3, grün 1, rot 6, blau 9, Rakete 4
+  - grün 5, gelb 4, rot 8, rot 4, grün 3, gelb 6, rot 5, gelb 7, rot 1, blau 2
+  - rot 2, gelb 5, grün 4, blau 1, Rakete 1, gelb 1, grün 7, grün 8, rot 9, blau 8
+  - grün 2, blau 7, blau 5, Rakete 2, rot 7, grün 9, blau 3, gelb 3, Rakete 3, grün
+    6
+  :auftraege:
+  - gelb 3, gelb 8
+  - gelb 2, gelb 6
+  - blau 3
+  - rot 3
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *26
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *15
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *11
+    :art: :einzige
+  :stiche:
+  - :anspieler: 0
+    :karten: blau 4, blau 2, blau 1, blau 7
+  - :anspieler: 3
+    :karten: grün 9, grün 1, grün 5, grün 7
+  - :anspieler: 3
+    :karten: Rakete 2, Rakete 4, gelb 6, Rakete 1
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: gelb 9, gelb 7, gelb 1, gelb 3
+    :erfuellte_auftraege: gelb 3
+  - :anspieler: 0
+    :karten: rot 6, rot 5, rot 9, rot 7
+  - :anspieler: 2
+    :karten: blau 8, blau 3, blau 6, grün 3
+    :erfuellte_auftraege: blau 3
+  - :anspieler: 2
+    :karten: gelb 5, grün 6, gelb 2, gelb 4
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 2
+    :karten: grün 4, grün 2, gelb 8, rot 1
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 2
+    :karten: grün 8, blau 5, blau 9, rot 4
+  - :anspieler: 2
+    :karten: rot 2, Rakete 3, rot 3, rot 8
+    :erfuellte_auftraege: rot 3
+  :resultat: :verloren
+- :karten:
+  - gelb 4, rot 8, blau 5, gelb 8, grün 6, gelb 2, gelb 1, blau 7, Rakete 1, grün
+    7
+  - rot 2, Rakete 3, grün 4, blau 4, grün 2, rot 6, grün 8, grün 3, rot 4, rot 3
+  - rot 5, gelb 7, gelb 6, gelb 9, blau 6, Rakete 4, blau 9, gelb 3, Rakete 2, grün
+    9
+  - blau 2, grün 5, blau 3, rot 9, blau 8, rot 7, gelb 5, rot 1, grün 1, blau 1
+  :auftraege:
+  - grün 5
+  - blau 6
+  - gelb 4, gelb 9
+  - blau 7, gelb 1
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *34
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *29
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *21
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *35
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: Rakete 2, rot 9, Rakete 1, Rakete 3
+  - :anspieler: 1
+    :karten: grün 2, grün 9, grün 1, grün 7
+  - :anspieler: 2
+    :karten: rot 5, rot 1, rot 8, rot 2
+  - :anspieler: 0
+    :karten: gelb 2, grün 4, gelb 9, gelb 5
+    :erfuellte_auftraege: gelb 9
+  - :anspieler: 2
+    :karten: Rakete 4, blau 2, gelb 8, grün 3
+  - :anspieler: 2
+    :karten: gelb 7, blau 3, gelb 4, grün 8
+    :erfuellte_auftraege: gelb 4
+  - :anspieler: 2
+    :karten: gelb 6, blau 1, gelb 1, blau 4
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 2
+    :karten: blau 6, blau 8, blau 5, rot 3
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 3
+    :karten: grün 5, grün 6, rot 4, gelb 3
+    :erfuellte_auftraege: grün 5
+  - :anspieler: 0
+    :karten: blau 7, rot 6, blau 9, rot 7
+    :vermasselte_auftraege: blau 7
+  :resultat: :verloren
+- :karten:
+  - rot 2, gelb 7, rot 1, gelb 9, grün 8, Rakete 2, blau 7, Rakete 1, rot 3, rot 5
+  - blau 2, blau 6, blau 5, grün 7, rot 9, blau 4, grün 1, gelb 5, rot 6, gelb 3
+  - rot 8, grün 6, grün 5, gelb 8, grün 9, gelb 4, rot 7, blau 9, Rakete 3, grün 2
+  - gelb 1, grün 4, Rakete 4, blau 8, gelb 6, blau 3, blau 1, grün 3, rot 4, gelb
+    2
+  :auftraege:
+  - grün 5, blau 6
+  - grün 3
+  - rot 4
+  - grün 8, gelb 6
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *23
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *25
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *38
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 3
+    :karten: blau 1, blau 7, blau 4, blau 9
+  - :anspieler: 2
+    :karten: grün 5, grün 4, grün 8, grün 1
+    :vermasselte_auftraege: grün 8
+    :erfuellte_auftraege: grün 5
+  - :anspieler: 0
+    :karten: rot 1, rot 6, rot 7, rot 4
+    :erfuellte_auftraege: rot 4
+  - :anspieler: 2
+    :karten: gelb 4, gelb 2, gelb 7, gelb 3
+  - :anspieler: 0
+    :karten: rot 5, rot 9, rot 8, gelb 1
+  - :anspieler: 1
+    :karten: gelb 5, gelb 8, gelb 6, gelb 9
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 0
+    :karten: rot 3, blau 6, Rakete 3, grün 3
+    :vermasselte_auftraege: blau 6, grün 3
+  - :anspieler: 2
+    :karten: grün 6, blau 3, Rakete 1, grün 7
+  - :anspieler: 0
+    :karten: rot 2, blau 5, grün 9, blau 8
+  - :anspieler: 0
+    :karten: Rakete 2, blau 2, grün 2, Rakete 4
+  :resultat: :verloren
+- :karten:
+  - blau 7, Rakete 3, rot 1, gelb 3, gelb 1, blau 6, grün 7, Rakete 2, grün 2, grün
+    6
+  - rot 9, grün 8, rot 7, rot 6, blau 3, rot 2, blau 5, rot 5, grün 5, blau 2
+  - Rakete 1, blau 4, gelb 5, rot 8, gelb 4, gelb 6, gelb 9, rot 3, blau 8, blau 9
+  - gelb 2, grün 4, gelb 7, rot 4, grün 1, Rakete 4, gelb 8, grün 3, blau 1, grün
+    9
+  :auftraege:
+  - grün 6, gelb 2
+  - grün 7
+  - gelb 4
+  - grün 4, gelb 3
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *28
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *38
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *22
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 3
+    :karten: rot 4, rot 1, rot 9, rot 8
+  - :anspieler: 1
+    :karten: blau 3, blau 9, blau 1, blau 7
+  - :anspieler: 2
+    :karten: blau 4, grün 3, blau 6, blau 2
+  - :anspieler: 0
+    :karten: grün 2, grün 5, gelb 6, grün 1
+  - :anspieler: 1
+    :karten: rot 7, rot 3, gelb 7, gelb 3
+    :vermasselte_auftraege: gelb 3
+  - :anspieler: 1
+    :karten: grün 8, Rakete 1, grün 9, grün 6
+    :vermasselte_auftraege: grün 6
+  - :anspieler: 2
+    :karten: gelb 9, gelb 8, gelb 1, rot 5
+  - :anspieler: 2
+    :karten: gelb 5, gelb 2, Rakete 2, rot 6
+    :erfuellte_auftraege: gelb 2
+  - :anspieler: 0
+    :karten: grün 7, rot 2, gelb 4, grün 4
+    :vermasselte_auftraege: grün 7, gelb 4, grün 4
+  - :anspieler: 0
+    :karten: Rakete 3, blau 5, blau 8, Rakete 4
+  :resultat: :verloren
+- :karten:
+  - gelb 9, grün 5, gelb 1, blau 5, gelb 5, rot 5, rot 4, grün 4, grün 1, Rakete 1
+  - grün 3, blau 3, blau 4, grün 8, rot 8, Rakete 3, blau 1, gelb 3, rot 1, blau 9
+  - rot 7, grün 9, gelb 7, gelb 6, rot 9, rot 6, grün 2, grün 7, gelb 2, blau 2
+  - Rakete 4, blau 6, rot 3, blau 8, Rakete 2, gelb 8, rot 2, grün 6, gelb 4, blau
+    7
+  :auftraege:
+  - grün 1, grün 5
+  - gelb 4
+  - grün 7
+  - rot 1, gelb 9
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *34
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *10
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *18
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *7
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: blau 8, blau 5, blau 1, blau 2
+  - :anspieler: 3
+    :karten: grün 6, grün 5, grün 3, grün 2
+    :vermasselte_auftraege: grün 5
+  - :anspieler: 3
+    :karten: gelb 8, gelb 1, gelb 3, gelb 2
+  - :anspieler: 3
+    :karten: blau 7, Rakete 1, blau 9, rot 9
+  - :anspieler: 0
+    :karten: gelb 5, Rakete 3, gelb 6, gelb 4
+    :erfuellte_auftraege: gelb 4
+  - :anspieler: 1
+    :karten: rot 1, rot 7, rot 3, rot 5
+    :vermasselte_auftraege: rot 1
+  - :anspieler: 2
+    :karten: rot 6, rot 2, rot 4, rot 8
+  - :anspieler: 1
+    :karten: blau 3, grün 7, blau 6, grün 4
+    :vermasselte_auftraege: grün 7
+  - :anspieler: 3
+    :karten: Rakete 2, gelb 9, blau 4, gelb 7
+    :erfuellte_auftraege: gelb 9
+  - :anspieler: 3
+    :karten: Rakete 4, grün 1, grün 8, grün 9
+    :vermasselte_auftraege: grün 1
+  :resultat: :verloren
+- :karten:
+  - blau 5, blau 8, Rakete 2, gelb 6, blau 4, grün 7, rot 1, Rakete 3, gelb 9, rot
+    3
+  - grün 5, blau 7, blau 6, grün 9, blau 3, blau 9, gelb 3, grün 8, Rakete 4, Rakete
+    1
+  - rot 9, blau 2, grün 6, grün 2, grün 4, rot 7, rot 6, blau 1, rot 5, gelb 2
+  - gelb 8, rot 2, grün 1, gelb 7, gelb 4, gelb 1, rot 8, grün 3, gelb 5, rot 4
+  :auftraege:
+  - grün 7
+  - rot 7, gelb 5
+  - grün 1, gelb 6
+  - grün 3
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *6
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *38
+    :art: :einzige
+  - :spieler_index: 3
+    :karte: *32
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *5
+    :art: :einzige
+  :stiche:
+  - :anspieler: 1
+    :karten: grün 5, grün 4, grün 1, grün 7
+    :vermasselte_auftraege: grün 1
+    :erfuellte_auftraege: grün 7
+  - :anspieler: 0
+    :karten: gelb 6, gelb 3, gelb 2, gelb 7
+    :vermasselte_auftraege: gelb 6
+  - :anspieler: 3
+    :karten: rot 4, rot 1, Rakete 4, rot 9
+  - :anspieler: 1
+    :karten: grün 8, grün 6, grün 3, Rakete 3
+    :vermasselte_auftraege: grün 3
+  - :anspieler: 0
+    :karten: rot 3, grün 9, rot 6, rot 8
+  - :anspieler: 3
+    :karten: rot 2, blau 4, blau 6, rot 5
+  - :anspieler: 2
+    :karten: blau 2, gelb 4, blau 8, blau 9
+  - :anspieler: 1
+    :karten: Rakete 1, grün 2, gelb 8, Rakete 2
+  - :anspieler: 0
+    :karten: blau 5, blau 7, blau 1, gelb 1
+  - :anspieler: 1
+    :karten: blau 3, rot 7, gelb 5, gelb 9
+    :erfuellte_auftraege: rot 7, gelb 5
+  :resultat: :verloren
+- :karten:
+  - grün 3, blau 6, grün 5, grün 9, rot 2, gelb 6, blau 8, Rakete 2, grün 1, blau
+    3
+  - gelb 4, gelb 7, blau 9, rot 9, rot 6, blau 4, Rakete 3, grün 4, rot 8, grün 8
+  - Rakete 4, gelb 3, rot 4, gelb 1, rot 3, blau 1, rot 5, blau 7, blau 2, gelb 8
+  - grün 7, rot 7, blau 5, gelb 9, rot 1, grün 6, grün 2, Rakete 1, gelb 5, gelb 2
+  :auftraege:
+  - gelb 9
+  - rot 4
+  - gelb 1, blau 1
+  - gelb 2, gelb 8
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *37
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *35
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *39
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *7
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 2
+    :karten: blau 1, blau 5, blau 8, blau 9
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 1
+    :karten: gelb 7, gelb 3, gelb 2, gelb 6
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 1
+    :karten: Rakete 3, Rakete 4, Rakete 1, Rakete 2
+  - :anspieler: 2
+    :karten: gelb 1, gelb 9, grün 1, gelb 4
+    :vermasselte_auftraege: gelb 9, gelb 1
+  - :anspieler: 3
+    :karten: grün 6, grün 9, grün 4, rot 3
+  - :anspieler: 0
+    :karten: blau 3, blau 4, blau 7, grün 7
+  - :anspieler: 2
+    :karten: rot 5, rot 1, rot 2, rot 9
+  - :anspieler: 1
+    :karten: grün 8, rot 4, grün 2, grün 3
+    :erfuellte_auftraege: rot 4
+  - :anspieler: 1
+    :karten: rot 8, gelb 8, rot 7, grün 5
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 1
+    :karten: rot 6, blau 2, gelb 5, blau 6
+  :resultat: :verloren
+- :karten:
+  - blau 2, blau 8, Rakete 3, blau 5, grün 1, rot 9, Rakete 1, gelb 6, gelb 5, grün
+    8
+  - grün 7, blau 1, blau 7, rot 6, blau 3, gelb 4, rot 7, grün 5, gelb 9, gelb 2
+  - rot 2, rot 1, grün 6, Rakete 2, Rakete 4, blau 6, gelb 1, gelb 7, grün 3, blau
+    4
+  - gelb 3, rot 5, rot 4, grün 2, gelb 8, grün 4, rot 8, grün 9, rot 3, blau 9
+  :auftraege:
+  - blau 3
+  - blau 1
+  - gelb 9, gelb 7
+  - blau 4, grün 2
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *39
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *31
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *28
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *26
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 2
+    :karten: gelb 7, gelb 3, gelb 6, gelb 9
+    :vermasselte_auftraege: gelb 9, gelb 7
+  - :anspieler: 1
+    :karten: gelb 2, gelb 1, gelb 8, gelb 5
+  - :anspieler: 3
+    :karten: rot 3, rot 9, rot 6, rot 1
+  - :anspieler: 0
+    :karten: blau 8, blau 3, blau 6, blau 9
+    :vermasselte_auftraege: blau 3
+  - :anspieler: 3
+    :karten: grün 4, grün 8, grün 7, grün 6
+  - :anspieler: 0
+    :karten: blau 2, blau 1, blau 4, rot 5
+    :vermasselte_auftraege: blau 1, blau 4
+  - :anspieler: 2
+    :karten: Rakete 2, grün 2, Rakete 3, grün 5
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 0
+    :karten: Rakete 1, gelb 4, Rakete 4, rot 8
+  - :anspieler: 2
+    :karten: rot 2, rot 4, blau 5, rot 7
+  - :anspieler: 1
+    :karten: blau 7, grün 3, grün 9, grün 1
+  :resultat: :verloren
+- :karten:
+  - gelb 9, blau 3, Rakete 2, gelb 6, rot 1, rot 8, grün 5, grün 2, rot 9, grün 7
+  - rot 5, gelb 8, Rakete 1, grün 9, rot 7, rot 6, blau 8, gelb 2, Rakete 3, grün
+    3
+  - blau 9, gelb 5, blau 2, rot 4, grün 1, blau 6, gelb 7, blau 1, Rakete 4, grün
+    8
+  - rot 2, gelb 3, grün 4, blau 5, blau 4, gelb 4, grün 6, blau 7, rot 3, gelb 1
+  :auftraege:
+  - rot 5
+  - grün 6
+  - grün 1, gelb 1
+  - blau 6, blau 8
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *19
+    :art: :tiefste
+  - :spieler_index: 1
+    :karte: *24
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *17
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *40
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: blau 9, blau 7, blau 3, blau 8
+    :vermasselte_auftraege: blau 8
+  - :anspieler: 2
+    :karten: grün 8, grün 4, grün 5, grün 9
+  - :anspieler: 1
+    :karten: grün 3, grün 1, grün 6, grün 7
+    :vermasselte_auftraege: grün 6, grün 1
+  - :anspieler: 0
+    :karten: rot 1, rot 5, rot 4, rot 3
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 1
+    :karten: rot 6, blau 6, rot 2, rot 8
+    :vermasselte_auftraege: blau 6
+  - :anspieler: 0
+    :karten: gelb 6, gelb 2, gelb 5, gelb 1
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 0
+    :karten: Rakete 2, Rakete 3, Rakete 4, gelb 3
+  - :anspieler: 2
+    :karten: blau 1, blau 4, gelb 9, rot 7
+  - :anspieler: 3
+    :karten: blau 5, grün 2, gelb 8, blau 2
+  - :anspieler: 3
+    :karten: gelb 4, rot 9, Rakete 1, gelb 7
+  :resultat: :verloren
+- :karten:
+  - gelb 1, rot 5, grün 3, grün 1, grün 8, Rakete 3, rot 6, gelb 8, Rakete 1, blau
+    9
+  - grün 6, rot 2, gelb 2, rot 7, grün 2, blau 7, blau 3, blau 1, grün 4, rot 9
+  - rot 3, gelb 6, Rakete 4, blau 2, rot 8, blau 4, gelb 4, grün 5, gelb 5, grün 7
+  - grün 9, Rakete 2, rot 4, gelb 7, blau 8, blau 6, gelb 3, gelb 9, blau 5, rot 1
+  :auftraege:
+  - rot 5
+  - grün 6
+  - rot 1, grün 7
+  - blau 1, rot 2
+  :kommunikationen:
+  - :spieler_index: 0
+    :karte: *7
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *8
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *35
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *38
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 2
+    :karten: gelb 6, gelb 3, gelb 1, gelb 2
+  - :anspieler: 2
+    :karten: blau 2, blau 8, blau 9, blau 1
+    :vermasselte_auftraege: blau 1
+  - :anspieler: 0
+    :karten: rot 5, rot 7, rot 8, rot 4
+    :vermasselte_auftraege: rot 5
+  - :anspieler: 2
+    :karten: blau 4, blau 5, grün 8, blau 3
+  - :anspieler: 3
+    :karten: gelb 9, gelb 8, rot 9, gelb 4
+  - :anspieler: 3
+    :karten: Rakete 2, Rakete 1, blau 7, Rakete 4
+  - :anspieler: 2
+    :karten: gelb 5, gelb 7, grün 3, grün 4
+  - :anspieler: 3
+    :karten: rot 1, rot 6, rot 2, rot 3
+    :vermasselte_auftraege: rot 1, rot 2
+  - :anspieler: 0
+    :karten: grün 1, grün 2, grün 5, grün 9
+  - :anspieler: 3
+    :karten: blau 6, Rakete 3, grün 6, grün 7
+    :vermasselte_auftraege: grün 6, grün 7
+  :resultat: :verloren
+- :karten:
+  - blau 1, Rakete 4, rot 8, blau 7, grün 7, gelb 6, gelb 9, gelb 7, blau 8, rot 2
+  - grün 4, grün 9, rot 5, grün 1, grün 3, grün 2, grün 6, Rakete 3, blau 5, rot 9
+  - gelb 3, blau 2, Rakete 1, gelb 5, blau 4, rot 4, rot 7, rot 6, blau 3, grün 5
+  - gelb 1, gelb 8, rot 3, gelb 4, blau 6, rot 1, grün 8, gelb 2, Rakete 2, blau 9
+  :auftraege:
+  - grün 2, rot 3
+  - gelb 8, blau 1
+  - blau 7
+  - grün 4
+  :kommunikationen:
+  - :spieler_index: 2
+    :karte: *33
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *37
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *23
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *21
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 0
+    :karten: gelb 9, rot 9, gelb 3, gelb 8
+    :vermasselte_auftraege: gelb 8
+  - :anspieler: 0
+    :karten: blau 7, blau 5, blau 4, blau 9
+    :vermasselte_auftraege: blau 7
+  - :anspieler: 3
+    :karten: grün 8, grün 7, grün 1, grün 5
+  - :anspieler: 3
+    :karten: Rakete 2, Rakete 4, Rakete 3, Rakete 1
+  - :anspieler: 0
+    :karten: rot 8, rot 5, rot 7, rot 3
+    :erfuellte_auftraege: rot 3
+  - :anspieler: 0
+    :karten: rot 2, grün 4, rot 4, rot 1
+    :vermasselte_auftraege: grün 4
+  - :anspieler: 2
+    :karten: rot 6, blau 6, gelb 6, grün 2
+    :vermasselte_auftraege: grün 2
+  - :anspieler: 2
+    :karten: blau 3, gelb 2, blau 8, grün 9
+  - :anspieler: 0
+    :karten: gelb 7, grün 3, gelb 5, gelb 4
+  - :anspieler: 0
+    :karten: blau 1, grün 6, blau 2, gelb 1
+    :vermasselte_auftraege: blau 1
+  :resultat: :verloren
+- :karten:
+  - blau 9, Rakete 2, rot 8, grün 2, blau 3, gelb 5, grün 9, grün 4, gelb 3, rot 4
+  - gelb 6, grün 1, gelb 7, gelb 8, rot 6, blau 1, Rakete 3, rot 3, grün 7, blau 4
+  - gelb 4, blau 7, rot 1, grün 3, grün 8, gelb 2, rot 9, rot 7, grün 5, rot 2
+  - gelb 1, blau 2, gelb 9, blau 6, blau 5, Rakete 4, grün 6, blau 8, Rakete 1, rot
+    5
+  :auftraege:
+  - blau 2, gelb 1
+  - gelb 9
+  - grün 8
+  - blau 7, rot 7
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *10
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *25
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *13
+    :art: :einzige
+  - :spieler_index: 2
+    :karte: *30
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 3
+    :karten: Rakete 4, Rakete 2, Rakete 3, gelb 4
+  - :anspieler: 3
+    :karten: blau 6, blau 3, blau 4, blau 7
+    :vermasselte_auftraege: blau 7
+  - :anspieler: 2
+    :karten: rot 7, rot 5, rot 4, rot 3
+    :vermasselte_auftraege: rot 7
+  - :anspieler: 2
+    :karten: grün 8, grün 6, grün 9, grün 7
+    :vermasselte_auftraege: grün 8
+  - :anspieler: 0
+    :karten: grün 2, grün 1, grün 5, gelb 1
+    :vermasselte_auftraege: gelb 1
+  - :anspieler: 2
+    :karten: grün 3, gelb 9, grün 4, rot 6
+    :vermasselte_auftraege: gelb 9
+  - :anspieler: 0
+    :karten: rot 8, gelb 8, rot 9, blau 8
+  - :anspieler: 2
+    :karten: gelb 2, Rakete 1, gelb 3, gelb 7
+  - :anspieler: 3
+    :karten: blau 5, blau 9, blau 1, rot 2
+  - :anspieler: 0
+    :karten: gelb 5, gelb 6, rot 1, blau 2
+    :vermasselte_auftraege: blau 2
+  :resultat: :verloren
+- :karten:
+  - blau 7, rot 1, gelb 4, rot 8, gelb 7, gelb 9, grün 7, gelb 2, grün 3, blau 2
+  - rot 4, Rakete 3, rot 2, blau 9, blau 5, rot 5, rot 6, grün 5, gelb 5, rot 9
+  - blau 1, gelb 1, gelb 6, Rakete 2, grün 1, grün 8, blau 4, Rakete 1, grün 2, rot
+    7
+  - gelb 8, blau 3, grün 6, grün 4, blau 8, gelb 3, rot 3, Rakete 4, grün 9, blau
+    6
+  :auftraege:
+  - rot 2, gelb 2
+  - gelb 5
+  - blau 7
+  - gelb 6, grün 1
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *32
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *31
+    :art: :einzige
+  - :spieler_index: 1
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 2
+    :karte: *38
+    :art: :einzige
+  :stiche:
+  - :anspieler: 3
+    :karten: grün 6, grün 3, grün 5, grün 8
+  - :anspieler: 2
+    :karten: gelb 6, gelb 3, gelb 9, gelb 5
+    :vermasselte_auftraege: gelb 5, gelb 6
+  - :anspieler: 0
+    :karten: gelb 2, blau 5, gelb 1, gelb 8
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 3
+    :karten: Rakete 4, blau 7, Rakete 3, Rakete 2
+    :vermasselte_auftraege: blau 7
+  - :anspieler: 3
+    :karten: blau 8, blau 2, blau 9, blau 4
+  - :anspieler: 1
+    :karten: rot 9, rot 7, rot 3, rot 8
+  - :anspieler: 1
+    :karten: rot 5, grün 1, grün 9, rot 1
+    :vermasselte_auftraege: grün 1
+  - :anspieler: 1
+    :karten: rot 4, Rakete 1, grün 4, gelb 7
+  - :anspieler: 2
+    :karten: grün 2, blau 3, grün 7, rot 2
+    :erfuellte_auftraege: rot 2
+  - :anspieler: 0
+    :karten: gelb 4, rot 6, blau 1, blau 6
+  :resultat: :verloren
+- :karten:
+  - grün 6, blau 9, rot 1, rot 9, grün 7, rot 3, grün 2, rot 4, blau 7, grün 1
+  - rot 7, grün 5, gelb 8, Rakete 3, Rakete 1, blau 5, gelb 1, rot 5, gelb 2, grün
+    4
+  - grün 8, gelb 6, gelb 4, rot 8, gelb 3, Rakete 4, blau 1, blau 8, rot 2, blau 4
+  - grün 3, blau 6, blau 3, gelb 7, gelb 5, gelb 9, rot 6, Rakete 2, grün 9, blau
+    2
+  :auftraege:
+  - gelb 3
+  - gelb 8
+  - blau 9, grün 4
+  - rot 7, gelb 5
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *37
+    :art: :einzige
+  - :spieler_index: 0
+    :karte: *17
+    :art: :hoechste
+  - :spieler_index: 3
+    :karte: *5
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *30
+    :art: :einzige
+  :stiche:
+  - :anspieler: 2
+    :karten: blau 8, blau 6, blau 9, blau 5
+    :vermasselte_auftraege: blau 9
+  - :anspieler: 0
+    :karten: blau 7, rot 7, blau 4, blau 2
+    :vermasselte_auftraege: rot 7
+  - :anspieler: 0
+    :karten: rot 9, rot 5, rot 8, rot 6
+  - :anspieler: 0
+    :karten: grün 6, grün 4, grün 8, grün 3
+    :erfuellte_auftraege: grün 4
+  - :anspieler: 2
+    :karten: gelb 6, gelb 7, rot 3, gelb 2
+  - :anspieler: 3
+    :karten: gelb 9, grün 2, gelb 1, gelb 4
+  - :anspieler: 3
+    :karten: Rakete 2, rot 4, Rakete 1, Rakete 4
+  - :anspieler: 2
+    :karten: rot 2, grün 9, rot 1, Rakete 3
+  - :anspieler: 1
+    :karten: gelb 8, gelb 3, gelb 5, grün 7
+    :vermasselte_auftraege: gelb 3, gelb 5
+    :erfuellte_auftraege: gelb 8
+  - :anspieler: 1
+    :karten: grün 5, blau 1, blau 3, grün 1
+  :resultat: :verloren
+- :karten:
+  - grün 9, gelb 2, blau 4, grün 8, gelb 6, rot 8, grün 1, grün 7, Rakete 2, grün
+    6
+  - blau 6, rot 9, Rakete 1, blau 8, Rakete 4, blau 1, Rakete 3, blau 3, gelb 9, gelb
+    8
+  - gelb 1, gelb 4, gelb 5, grün 5, rot 2, blau 5, rot 5, blau 2, gelb 3, grün 4
+  - rot 6, blau 7, rot 3, blau 9, grün 2, rot 7, grün 3, rot 4, rot 1, gelb 7
+  :auftraege:
+  - blau 3
+  - blau 7, blau 4
+  - blau 2, gelb 2
+  - blau 6
+  :kommunikationen:
+  - :spieler_index: 3
+    :karte: *29
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *30
+    :art: :tiefste
+  - :spieler_index: 0
+    :karte: *26
+    :art: :hoechste
+  - :spieler_index: 1
+    :karte: *24
+    :art: :hoechste
+  :stiche:
+  - :anspieler: 1
+    :karten: Rakete 3, grün 5, gelb 7, Rakete 2
+  - :anspieler: 1
+    :karten: gelb 9, gelb 4, rot 3, gelb 6
+  - :anspieler: 1
+    :karten: blau 1, blau 2, blau 9, blau 4
+    :vermasselte_auftraege: blau 4, blau 2
+  - :anspieler: 3
+    :karten: rot 7, rot 8, rot 9, rot 5
+  - :anspieler: 1
+    :karten: Rakete 1, gelb 1, grün 3, grün 8
+  - :anspieler: 1
+    :karten: blau 3, blau 5, blau 7, grün 6
+    :vermasselte_auftraege: blau 3, blau 7
+  - :anspieler: 3
+    :karten: grün 2, grün 1, gelb 8, grün 4
+  - :anspieler: 2
+    :karten: gelb 3, rot 1, gelb 2, Rakete 4
+    :vermasselte_auftraege: gelb 2
+  - :anspieler: 1
+    :karten: blau 8, rot 2, rot 4, grün 7
+  - :anspieler: 1
+    :karten: blau 6, gelb 5, rot 6, grün 9
+    :vermasselte_auftraege: blau 6
+  :resultat: :verloren
+- :karten:
+  - grün 6, gelb 6, rot 7, blau 1, rot 9, grün 7, grün 5, Rakete 3, blau 3, Rakete
+    1
+  - rot 2, rot 5, gelb 2, blau 8, gelb 7, grün 3, rot 1, gelb 1, grün 4, rot 8
+  - grün 9, blau 6, gelb 8, blau 4, grün 8, grün 1, rot 3, grün 2, rot 4, gelb 4
+  - gelb 3, Rakete 2, gelb 9, rot 6, blau 5, blau 7, Rakete 4, blau 9, blau 2, gelb
+    5
+  :auftraege:
+  - rot 5, blau 7
+  - blau 4
+  - rot 2
+  - grün 8, blau 9
+  :kommunikationen:
+  - :spieler_index: 1
+    :karte: *16
+    :art: :hoechste
+  - :spieler_index: 0
+    :karte: *20
+    :art: :hoechste
+  - :spieler_index: 2
+    :karte: *38
+    :art: :tiefste
+  - :spieler_index: 3
+    :karte: *8
+    :art: :tiefste
+  :stiche:
+  - :anspieler: 3
+    :karten: rot 6, rot 9, rot 1, rot 3
+  - :anspieler: 0
+    :karten: grün 5, grün 4, grün 9, blau 2
+  - :anspieler: 2
+    :karten: grün 1, gelb 9, grün 6, grün 3
+  - :anspieler: 0
+    :karten: Rakete 3, gelb 7, gelb 4, Rakete 2
+  - :anspieler: 0
+    :karten: rot 7, rot 8, rot 4, gelb 3
+  - :anspieler: 1
+    :karten: gelb 1, gelb 8, gelb 5, gelb 6
+  - :anspieler: 2
+    :karten: blau 6, blau 9, blau 1, blau 8
+    :erfuellte_auftraege: blau 9
+  - :anspieler: 3
+    :karten: blau 7, blau 3, rot 2, blau 4
+    :vermasselte_auftraege: blau 7, blau 4, rot 2
+  - :anspieler: 3
+    :karten: Rakete 4, Rakete 1, gelb 2, grün 2
+  - :anspieler: 3
+    :karten: blau 5, grün 7, rot 5, grün 8
+    :vermasselte_auftraege: rot 5
+    :erfuellte_auftraege: grün 8
+  :resultat: :verloren

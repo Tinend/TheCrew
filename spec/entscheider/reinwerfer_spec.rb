@@ -30,7 +30,7 @@ end
 
 RSpec.describe Reinwerfer do
   subject(:reinwerfer) do
-    reinwerfer = described_class.new
+    reinwerfer = described_class.new(zufalls_generator: Random.new(42))
     reinwerfer.sehe_spiel_informations_sicht(spiel_informations_sicht)
     reinwerfer
   end
