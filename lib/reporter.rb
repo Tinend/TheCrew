@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Diese Klasse berichtet über alles, was im Spiel passiert.
 class Reporter
   def berichte_start_situation(karten:, auftraege:)
@@ -11,7 +13,7 @@ class Reporter
   def berichte_stich(stich:, vermasselte_auftraege:, erfuellte_auftraege:)
     raise NotImplementedError
   end
-  
+
   def berichte_gewonnen
     raise NotImplementedError
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'reporter'
 
 # Diese Klasse berichtet Sachen, die im Spiel passieren, via `puts`.
@@ -26,11 +28,11 @@ class PutsReporter < Reporter
       puts "Folgender Auftrag wurde nicht erfüllt: #{vermasselt}" if vermasselte_auftraege.length == 1
       puts "Folgende Aufträge wurden nicht erfüllt: #{vermasselt}" if vermasselte_auftraege.length > 1
     end
-    unless erfuellte_auftraege.empty?
-      erfuellt = erfuellte_auftraege.join(' ')
-      puts "Folgender Auftrag wurde erfüllt: #{erfuellt}" if erfuellte_auftraege.length == 1
-      puts "Folgende Aufträge wurden erfüllt: #{erfuellt}" if erfuellte_auftraege.length > 1
-    end
+    return if erfuellte_auftraege.empty?
+
+    erfuellt = erfuellte_auftraege.join(' ')
+    puts "Folgender Auftrag wurde erfüllt: #{erfuellt}" if erfuellte_auftraege.length == 1
+    puts "Folgende Aufträge wurden erfüllt: #{erfuellt}" if erfuellte_auftraege.length > 1
   end
 
   def berichte_gewonnen

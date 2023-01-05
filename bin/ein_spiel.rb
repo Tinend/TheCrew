@@ -47,8 +47,8 @@ GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
                            Module.const_get entscheider_setzer
                          end
 
-
 zufalls_generator = Random.new(SEED)
-spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: zufalls_generator, entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: PutsReporter.new)
-resultat = spiel.spiele
-
+spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: zufalls_generator,
+                                      entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE,
+                                      reporter: PutsReporter.new)
+spiel.spiele

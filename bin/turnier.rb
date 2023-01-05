@@ -47,4 +47,8 @@ ENTSCHEIDER = EntscheiderListe.entscheider_klassen.reject do |entscheider|
 end
 
 puts "Es gibt #{ANZAHL_AUFTRAEGE} Aufträge und jeder Spieler spielt #{ANZAHL_SPIELE} Runden."
-TurnierOrganisator.organisiere_turnier(anzahl_spieler: ANZAHL_SPIELER, anzahl_spiele: ANZAHL_SPIELE, seed: SEED, entscheider_klassen: ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: TurnierReporter.new)
+einstellungen = TurnierOrganisator::TurnierEinstellungen.new(anzahl_spieler: ANZAHL_SPIELER,
+                                                             anzahl_spiele: ANZAHL_SPIELE,
+                                                             anzahl_auftraege: ANZAHL_AUFTRAEGE)
+TurnierOrganisator.organisiere_turnier(turnier_einstellungen: einstellungen, seed: SEED,
+                                       entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new)

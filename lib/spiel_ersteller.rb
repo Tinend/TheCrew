@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'spiel_information'
 require_relative 'auftrag'
 require_relative 'auftrag_verwalter'
@@ -21,6 +23,6 @@ module SpielErsteller
     auftrag_verwalter.auftraege_ziehen(anzahl: anzahl_auftraege, zufalls_generator: zufalls_generator)
     auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
     richter = Richter.new(spiel_information: spiel_information)
-    spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information, reporter: reporter)
+    Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information, reporter: reporter)
   end
 end

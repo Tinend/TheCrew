@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Modul für Entscheider, die die SpielInformationsSicht benutzen.
 module SpielInformationsSichtBenutzender
   def sehe_spiel_informations_sicht(spiel_informations_sicht)

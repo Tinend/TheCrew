@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Modul für Entscheider, die zufällig kommunizieren.
 module ZufallsKommunizierender
   def kommuniziert?

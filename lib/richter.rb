@@ -55,6 +55,6 @@ class Richter
       :gewonnen
     elsif @verloren
       :verloren
-    end      
+    end
   end
 end

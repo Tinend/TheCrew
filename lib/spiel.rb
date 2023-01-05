@@ -34,8 +34,7 @@ class Spiel
     while kommunizieren; end
   end
 
-  def stich_ausgeben(stich)
-  end
+  def stich_ausgeben(stich); end
 
   def runde
     iterativ_kommunizieren
@@ -50,7 +49,8 @@ class Spiel
     end
     @spiel_information.stich_fertig(stich)
     @richter.stechen(stich)
-    @reporter.berichte_stich(stich: stich, vermasselte_auftraege: @richter.vermasselt_letzter_stich, erfuellte_auftraege: @richter.erfuellt_letzter_stich)
+    @reporter.berichte_stich(stich: stich, vermasselte_auftraege: @richter.vermasselt_letzter_stich,
+                             erfuellte_auftraege: @richter.erfuellt_letzter_stich)
     @richter.alle_karten_ausgespielt if @spiel_information.existiert_blanker_spieler?
     @ausspiel_recht_index = stich.sieger_index
   end
