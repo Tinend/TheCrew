@@ -6,12 +6,14 @@ require_relative '../entscheider'
 require_relative '../stich'
 require_relative '../karte'
 require_relative 'saeuger_auftrag_nehmer'
+require_relative 'spiel_informations_sicht_benutzender'
 
 # Entscheider, der immer zufällig entschiedet, was er spielt.
 # Wenn er eine Karte reinwerfen kann, die jemand anderem hilft,
 # tut er das.
 class Reinwerfer < Entscheider
   include SaeugerAuftragNehmer
+  include SpielInformationsSichtBenutzender
 
   # Ab diesem Wert sollten alleinstehende oder tiefste Karten immer kommuniziert werden.
   MIN_WARN_KOMMUNIZIER_WERT = 8
@@ -187,21 +189,21 @@ class Reinwerfer < Entscheider
 
   def waehle_karte(stich, waehlbare_karten)
     return waehlbare_karten.first if waehlbare_karten.length == 1
-    return waehlbare_karten.sample if stich.empty?
+    return waehlbare_karten.sample(random: @zufalls_generator) if stich.empty?
 
     # Wenn dieser Stich eh schon tötlich ist, wenn er nicht durchkommt.
     if toetlicher_stich?(stich)
       # Wenn möglich eine Auftragskarte rein schmeissen.
       hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
-      return hilfreiche_karten.sample unless hilfreiche_karten.empty?
+      return hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
 
       # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
       gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
-      return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
+      return gefaehrliche_karten.sample(random: @zufalls_generator) unless gefaehrliche_karten.empty?
 
       # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt.
       nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
-      return nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
+      return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
     end
 
     # Wenn der Sieger bleiben sollte, solange die Spieler danach vernünftig sind.
@@ -210,7 +212,7 @@ class Reinwerfer < Entscheider
     # Wenn möglich eine Auftragskarte rein schmeissen.
     if sollte_bleiben
       hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
-      return hilfreiche_karten.sample unless hilfreiche_karten.empty?
+      return hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
     end
 
     # Wenn Spieler danach eine gute Chance haben, den Stich zu nehmen.
@@ -219,53 +221,49 @@ class Reinwerfer < Entscheider
     # Wenn möglich eine Auftragskarte für einen späteren Spieler rein schmeissen.
     nehmende_karten.each do |nehmende_karte|
       hilfreiche_karten = hilfreiche_karten_fuer_nehmende_karte(stich, nehmende_karte, waehlbare_karten)
-      return hilfreiche_karten.sample unless hilfreiche_karten.empty?
+      return hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
     if sollte_bleiben
       gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
-      return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
+      return gefaehrliche_karten.sample(random: @zufalls_generator) unless gefaehrliche_karten.empty?
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann unter der Annahme, dass ein späterer Spieler übernimmt, macht man das.
     nehmende_karten.each do |nehmende_karte|
       gefaehrliche_karten = gefaehrliche_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
-      return gefaehrliche_karten.sample unless gefaehrliche_karten.empty?
+      return gefaehrliche_karten.sample(random: @zufalls_generator) unless gefaehrliche_karten.empty?
     end
 
     # Wenn man selber einen Auftrag erfüllen könnte.
     selbst_helfende_karten = auftrags_nehmende_karten(waehlbare_karten, stich)
-    return selbst_helfende_karten.sample unless selbst_helfende_karten.empty?
+    return selbst_helfende_karten.sample(random: @zufalls_generator) unless selbst_helfende_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass der Stich Sieger bleibt.
     if sollte_bleiben
       nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
-      return nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
+      return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
     end
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass ein späterer Spieler übernimmt.
     nehmende_karten.each do |nehmende_karte|
       nicht_destruktive_karten = undestruktive_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
-      return nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
+      return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
     end
 
     # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist.
     nicht_destruktive_karten = waehlbare_karten - alle_auftrags_karten
-    return nicht_destruktive_karten.sample unless nicht_destruktive_karten.empty?
+    return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die eine eigene Auftragskarte ist.
     nicht_andere_destruktive_karten = waehlbare_karten - auftrags_karten_anderer(0)
-    return nicht_andere_destruktive_karten.sample unless nicht_andere_destruktive_karten.empty?
+    return nicht_andere_destruktive_karten.sample(random: @zufalls_generator) unless nicht_andere_destruktive_karten.empty?
 
-    waehlbare_karten.sample
-  end
-
-  def sehe_spiel_informations_sicht(spiel_informations_sicht)
-    @spiel_informations_sicht = spiel_informations_sicht
+    waehlbare_karten.sample(random: @zufalls_generator)
   end
 
   def waehle_kommunikation(kommunizierbares)
-    (kommunizierbares & gefaehrliche_hohe_unausweichliche_karten).sample
+    (kommunizierbares & gefaehrliche_hohe_unausweichliche_karten).sample(random: @zufalls_generator)
   end
 end

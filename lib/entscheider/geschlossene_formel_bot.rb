@@ -3,11 +3,13 @@
 
 require_relative '../entscheider'
 require_relative 'saeuger_auftrag_nehmer'
+require_relative 'spiel_informations_sicht_benutzender'
 
 # Aufträge: Wenn er ihn hat, bevorzugt groß, wenn er ihn nicht hat, bevorzugt tief
 # Grundlage für die meisten Entscheider mit Tiernamen
 class GeschlosseneFormelBot < Entscheider
   include SaeugerAuftragNehmer
+  include SpielInformationsSichtBenutzender
 
   def waehle_karte(stich, waehlbare_karten)
     waehlbare_karten.max_by { |karte| geschlossene_formel_wert(karte, stich) }
@@ -21,9 +23,5 @@ class GeschlosseneFormelBot < Entscheider
 
   def geschlossene_formel_wert(karte, _stich)
     karten_wert(karte) * ((@spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length * 2) - 1)
-  end
-
-  def sehe_spiel_informations_sicht(spiel_informations_sicht)
-    @spiel_informations_sicht = spiel_informations_sicht
   end
 end

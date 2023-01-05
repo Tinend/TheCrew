@@ -6,15 +6,13 @@ require_relative '../farbe'
 require_relative 'rhinoceros_farbe'
 require_relative 'rhinoceros_auftrag'
 require_relative 'saeuger_auftrag_nehmer'
+require_relative 'spiel_informations_sicht_benutzender'
 
 # Rennt geradewegs auf die Aufträge zu
 # Analysiert Aufträge um sich einen Vorteil zu verschaffen.
 class Rhinoceros < Entscheider
   include SaeugerAuftragNehmer
-
-  def sehe_spiel_informations_sicht(spiel_informations_sicht)
-    @spiel_informations_sicht = spiel_informations_sicht
-  end
+  include SpielInformationsSichtBenutzender
 
   def anspielen(waehlbare_karten)
     waehlbare_karten.max_by { |karte| anspiel_wert_karte(karte) }
