@@ -11,7 +11,7 @@ require_relative 'spiel'
 module SpielErsteller
   def self.erstelle_spiel(anzahl_spieler:, entscheider_klasse:, zufalls_generator:, anzahl_auftraege:, reporter:)
     spiel_information = SpielInformation.new(anzahl_spieler: anzahl_spieler)
-    spieler = Array.new(ANZAHL_SPIELER) do |i|
+    spieler = Array.new(anzahl_spieler) do |i|
       entscheider = entscheider_klasse.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)))
       Spieler.new(entscheider: entscheider, spiel_informations_sicht: spiel_information.fuer_spieler(i))
     end

@@ -8,7 +8,7 @@ module TurnierOrganisator
       persoenlicher_zufalls_generator = zufalls_generator.dup
       punkte = 0
       anzahl_spiele.times do
-        spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: persoenlicher_zufalls_generator, entscheider_klasse: entscheider_klasse, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: reporter)
+        spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: anzahl_spieler, zufalls_generator: persoenlicher_zufalls_generator, entscheider_klasse: entscheider_klasse, anzahl_auftraege: anzahl_auftraege, reporter: reporter)
         resultat = spiel.spiele
         punkte += 1 if resultat == :gewonnen
       end

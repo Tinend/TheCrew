@@ -5,13 +5,7 @@
 libx = File.join(File.dirname(__FILE__), '..', 'lib')
 $LOAD_PATH.unshift(libx) unless $LOAD_PATH.include?(libx)
 
-require 'entscheider/zufalls_entscheider'
-require 'entscheider/hase'
-require 'entscheider/saeuger'
-require 'entscheider/archaeon'
-require 'entscheider/rhinoceros'
-require 'entscheider/reinwerfer'
-require 'entscheider/geschlossene_formel_bot'
+require 'entscheider_liste'
 require 'turnier_organisator'
 require 'turnier_hilfe'
 require 'turnier_reporter'
@@ -46,8 +40,7 @@ ANZAHL_SPIELE = if anzahl_spiele_setzer.nil?
                 else
                   anzahl_spiele_setzer[3..].to_i
                 end
-ENTSCHEIDER = [Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon, ZufallsEntscheider,
-               GeschlosseneFormelBot].delete_if do |entscheider|
+ENTSCHEIDER = EntscheiderListe.entscheider_klassen.reject do |entscheider|
   entscheider_setzer.any? do |es|
     es[3..] == entscheider.to_s
   end

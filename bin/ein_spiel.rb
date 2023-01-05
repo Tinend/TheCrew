@@ -4,13 +4,7 @@
 libx = File.join(File.dirname(__FILE__), '..', 'lib')
 $LOAD_PATH.unshift(libx) unless $LOAD_PATH.include?(libx)
 
-require 'entscheider/zufalls_entscheider'
-require 'entscheider/hase'
-require 'entscheider/saeuger'
-require 'entscheider/archaeon'
-require 'entscheider/rhinoceros'
-require 'entscheider/reinwerfer'
-require 'entscheider/geschlossene_formel_bot'
+require 'entscheider_liste'
 require 'ein_spiel_hilfe'
 require 'spiel_ersteller'
 require 'puts_reporter'
@@ -42,7 +36,7 @@ ANZAHL_AUFTRAEGE = if auftrag_setzer.nil?
                    else
                      auftrag_setzer.to_i
                    end
-ENTSCHEIDER_MOEGLICH = %w[Reinwerfer Rhinoceros Hase Saeuger Archaeon ZufallsEntscheider GeschlosseneFormelBot].freeze
+ENTSCHEIDER_MOEGLICH = EntscheiderListe.entscheider_klassen.map(&:to_s)
 unless entscheider_setzer.nil? || ENTSCHEIDER_MOEGLICH.include?(entscheider_setzer)
   raise 'Diesen Entscheider gibt es nicht!'
 end
@@ -54,7 +48,7 @@ GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
                          end
 
 
-zufalls_generator = Random.new(seed)
+zufalls_generator = Random.new(SEED)
 spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: zufalls_generator, entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: PutsReporter.new)
 resultat = spiel.spiele
 
