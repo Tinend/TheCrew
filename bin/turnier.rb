@@ -12,9 +12,9 @@ require 'entscheider/archaeon'
 require 'entscheider/rhinoceros'
 require 'entscheider/reinwerfer'
 require 'entscheider/geschlossene_formel_bot'
-require 'spiel_ersteller'
+require 'turnier_organisator'
 require 'turnier_hilfe'
-require 'leerer_reporter'
+require 'turnier_reporter'
 
 seed_setzer = nil
 auftrag_setzer = nil
@@ -53,16 +53,5 @@ ENTSCHEIDER = [Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon, ZufallsEntscheid
   end
 end
 
-zufalls_generator = Random.new(SEED)
-
 puts "Es gibt #{ANZAHL_AUFTRAEGE} Aufträge und jeder Spieler spielt #{ANZAHL_SPIELE} Runden."
-ENTSCHEIDER.each do |entscheider|
-  persoenlicher_zufalls_generator = zufalls_generator.dup
-  punkte = 0
-  ANZAHL_SPIELE.times do
-    spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: zufalls_generator, entscheider_klasse: entscheider, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: LeererReporter.new)
-    resultat = spiel.spiele
-    punkte += 1 if resultat == :gewonnen
-  end
-  puts "#{entscheider} hat #{punkte} Punkte geholt."
-end
+TurnierOrganisator.organisiere_turnier(anzahl_spieler: ANZAHL_SPIELER, anzahl_spiele: ANZAHL_SPIELE, seed: SEED, entscheider_klassen: ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: TurnierReporter.new)

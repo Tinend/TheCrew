@@ -19,4 +19,9 @@ class Reporter
   def berichte_verloren
     raise NotImplementedError
   end
+
+  # Berichtet die Anzahl Punkte, die ein Entscheider nach mehreren Spielen gemacht hat
+  def berichte_punkte(entscheider:, punkte:)
+    raise NotImplementedError
+  end
 end

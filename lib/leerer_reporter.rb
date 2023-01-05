@@ -16,4 +16,7 @@ class LeererReporter < Reporter
 
   def berichte_verloren
   end
+
+  def berichte_punkte(entscheider:, punkte:)
+  end
 end
