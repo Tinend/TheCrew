@@ -14,6 +14,7 @@ require 'entscheider/reinwerfer'
 require 'entscheider/geschlossene_formel_bot'
 require 'spiel_ersteller'
 require 'turnier_hilfe'
+require 'leerer_reporter'
 
 seed_setzer = nil
 auftrag_setzer = nil
@@ -59,8 +60,8 @@ ENTSCHEIDER.each do |entscheider|
   persoenlicher_zufalls_generator = zufalls_generator.dup
   punkte = 0
   ANZAHL_SPIELE.times do
-    spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, seed: SEED, entscheider_klasse: entscheider, anzahl_auftraege: ANZAHL_AUFTRAEGE, ausgeben: false)
-    resultat = spiel.spiele(ausgeben: false)
+    spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, seed: SEED, entscheider_klasse: entscheider, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: LeererReporter.new)
+    resultat = spiel.spiele
     punkte += 1 if resultat == :gewonnen
   end
   puts "#{entscheider} hat #{punkte} Punkte geholt."

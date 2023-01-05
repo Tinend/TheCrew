@@ -13,6 +13,7 @@ require 'entscheider/reinwerfer'
 require 'entscheider/geschlossene_formel_bot'
 require 'ein_spiel_hilfe'
 require 'spiel_ersteller'
+require 'puts_reporter'
 
 seed_setzer = nil
 auftrag_setzer = nil
@@ -53,6 +54,6 @@ GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
                          end
 
 
-spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, seed: SEED, entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, ausgeben: true)
+spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, seed: SEED, entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: PutsReporter.new)
 resultat = spiel.spiele
 
