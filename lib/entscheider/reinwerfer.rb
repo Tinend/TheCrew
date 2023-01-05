@@ -16,10 +16,6 @@ class Reinwerfer < Entscheider
   # Ab diesem Wert sollten alleinstehende oder tiefste Karten immer kommuniziert werden.
   MIN_WARN_KOMMUNIZIER_WERT = 8
 
-  def waehl_auftrag(auftraege)
-    auftraege.sample
-  end
-
   def spieler_indizes_danach(stich)
     (1...@spiel_informations_sicht.anzahl_spieler - stich.length).to_a
   end
