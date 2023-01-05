@@ -54,6 +54,7 @@ GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
                          end
 
 
-spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, seed: SEED, entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: PutsReporter.new)
+zufalls_generator = Random.new(seed)
+spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: zufalls_generator, entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: PutsReporter.new)
 resultat = spiel.spiele
 

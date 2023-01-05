@@ -60,7 +60,7 @@ ENTSCHEIDER.each do |entscheider|
   persoenlicher_zufalls_generator = zufalls_generator.dup
   punkte = 0
   ANZAHL_SPIELE.times do
-    spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, seed: SEED, entscheider_klasse: entscheider, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: LeererReporter.new)
+    spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: zufalls_generator, entscheider_klasse: entscheider, anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: LeererReporter.new)
     resultat = spiel.spiele
     punkte += 1 if resultat == :gewonnen
   end

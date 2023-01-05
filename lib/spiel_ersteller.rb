@@ -9,8 +9,7 @@ require_relative 'spiel'
 
 # Modul das alle Teile des Spieles erstellt, um dann schliesslich ein Spiel zu erstellen.
 module SpielErsteller
-  def self.erstelle_spiel(anzahl_spieler:, entscheider_klasse:, seed: Random.new_seed, anzahl_auftraege:, reporter:)
-    zufalls_generator = Random.new(seed)
+  def self.erstelle_spiel(anzahl_spieler:, entscheider_klasse:, zufalls_generator:, anzahl_auftraege:, reporter:)
     spiel_information = SpielInformation.new(anzahl_spieler: anzahl_spieler)
     spieler = Array.new(ANZAHL_SPIELER) do |i|
       entscheider = entscheider_klasse.new(zufalls_generator: zufalls_generator)
