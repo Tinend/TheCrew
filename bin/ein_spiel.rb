@@ -4,8 +4,6 @@
 libx = File.join(File.dirname(__FILE__), '..', 'lib')
 $LOAD_PATH.unshift(libx) unless $LOAD_PATH.include?(libx)
 
-require 'richter'
-require 'spiel_information'
 require 'entscheider/zufalls_entscheider'
 require 'entscheider/hase'
 require 'entscheider/saeuger'
@@ -14,12 +12,7 @@ require 'entscheider/rhinoceros'
 require 'entscheider/reinwerfer'
 require 'entscheider/geschlossene_formel_bot'
 require 'ein_spiel_hilfe'
-require 'spieler'
-require 'spiel'
-require 'auftrag_verwalter'
-require 'karten_verwalter'
-require 'auftrag'
-require 'karte'
+require 'spiel_ersteller'
 
 seed_setzer = nil
 auftrag_setzer = nil
@@ -59,23 +52,7 @@ GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
                            Module.const_get entscheider_setzer
                          end
 
-zufalls_generator = Random.new(SEED)
 
-spiel_information = SpielInformation.new(anzahl_spieler: ANZAHL_SPIELER)
-spieler = Array.new(ANZAHL_SPIELER) do |i|
-  Spieler.new(entscheider: GEWAEHLTER_ENTSCHEIDER.new, spiel_informations_sicht: spiel_information.fuer_spieler(i))
-end
-karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spiel_information: spiel_information)
-karten_verwalter.verteilen(zufalls_generator: zufalls_generator)
-auftraege = Karte.alle_normalen.map { |karte| Auftrag.new(karte) }
-auftrag_verwalter = AuftragVerwalter.new(auftraege: auftraege, spieler: spieler)
-auftrag_verwalter.auftraege_ziehen(anzahl: ANZAHL_AUFTRAEGE, zufalls_generator: zufalls_generator)
-auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
-richter = Richter.new(spiel_information: spiel_information)
-spiel = Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information)
-spiel.runde until richter.gewonnen || richter.verloren
-if richter.verloren
-  puts 'Leider wurde das Spiel verloren'
-elsif richter.gewonnen
-  puts 'Herzliche Gratulation!'
-end
+spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, seed: SEED, entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE, ausgeben: true)
+resultat = spiel.spiele
+

@@ -58,6 +58,7 @@ class Spiel
   end
 
   def runde(ausgeben: true)
+    raise if ausgeben
     iterativ_kommunizieren(ausgeben)
     stich = Stich.new
     @spieler.each_index do |i|
@@ -73,5 +74,19 @@ class Spiel
     stich_ausgeben(stich) if ausgeben
     @richter.alle_karten_ausgespielt if @spiel_information.existiert_blanker_spieler?
     @ausspiel_recht_index = stich.sieger_index
+  end
+
+  def spiele(ausgeben: true)
+    raise if ausgeben
+    runde(ausgeben: ausgeben) until @richter.gewonnen || @richter.verloren
+
+    if ausgeben
+      if @richter.verloren
+        puts 'Leider wurde das Spiel verloren'
+      elsif @richter.gewonnen
+        puts 'Herzliche Gratulation!'
+      end
+    end
+    @richter.resultat
   end
 end
