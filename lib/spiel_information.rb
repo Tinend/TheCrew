@@ -116,12 +116,24 @@ class SpielInformation
       stich_cache(:unerfuellte_auftraege) { @spiel_information.unerfuellte_auftraege.rotate(@spieler_index) }
     end
 
+    def unerfuellte_auftraege_nicht_auf_eigener_hand
+      unerfuellte_auftraege.collect {|auftrag_array|
+        auftrag_array.select {|auftrag| karten.any? {|karte| karte == auftrag.karte}}
+      }
+    end
+    
     def unerfuellte_auftraege_mit_farbe(farbe)
       unerfuellte_auftraege.collect do |auftrag_liste|
         auftrag_liste.select { |auftrag| auftrag.farbe == farbe }
       end
     end
 
+    def unerfuellte_auftraege_nicht_auf_eigener_hand_mit_farbe(farbe)
+      unerfuellte_auftraege_mit_farbe(farbe).collect {|auftrag_array|
+        auftrag_array.select {|auftrag| ! karten.any? {|karte| karte == auftrag.karte}}
+      }
+    end
+    
     def kommunikationen
       stich_cache(:kommunikationen) { @spiel_information.kommunikationen.rotate(@spieler_index) }
     end

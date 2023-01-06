@@ -33,6 +33,10 @@ class Karte
     @alle ||= alle_normalen + alle_truempfe
   end
 
+  def self.alle_mit_farbe(farbe)
+    @alle_normalen.select {|karte| karte.farbe == farbe}
+  end
+  
   def to_s
     @farbe.faerben(wert.to_s)
   end

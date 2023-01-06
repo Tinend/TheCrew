@@ -68,17 +68,17 @@ class RhinocerosFarbe
   end
 
   def abspiel_wert_trumpf(stich)
-    return 2000 if hat_eigenen_auftrag?(stich)
-    return -2000 if hat_fremden_auftrag?(stich)
+    return 9000 if hat_eigenen_auftrag?(stich)
+    return -11000 if hat_fremden_auftrag?(stich)
 
     -1000
   end
 
   def abspiel_abwerfen(_stich)
     return 0 if farb_auftrag_pro_spieler.sum.zero?
-    return -1000 if farb_auftrag_pro_spieler[0].positive?
+    return -10 if farb_auftrag_pro_spieler[0].positive?
 
-    1000
+    10
   end
 
   def abspiel_wert(stich)

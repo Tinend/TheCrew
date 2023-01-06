@@ -3,12 +3,12 @@
 
 require_relative '../entscheider'
 require_relative '../farbe'
-require_relative 'rhinoceros_farbe'
-require_relative 'rhinoceros_auftrag'
 require_relative 'saeuger_auftrag_nehmer'
+require 'colorize'
+
 
 # Rennt geradewegs auf die Aufträge zu
-# Analysiert Aufträge um sich einen Vorteil zu verschaffen.
+# Geht 100 Fälle durch und wählt geeigneten aus
 class Rhinoceros < Entscheider
   include SaeugerAuftragNehmer
 
@@ -20,18 +20,113 @@ class Rhinoceros < Entscheider
     waehlbare_karten.max_by { |karte| anspiel_wert_karte(karte) }
   end
 
+  def eigenen_unerfuellten_auftrag_anspielen(karte)
+    if karte.wert >= 6
+      return karte.wert * 1000
+    else
+      return karte.wert
+    end
+  end
+
+  def anderen_unerfuellten_auftrag_anspielen(karte)
+    if karte.wert <= 7
+      return 100 - karte.wert * 10
+    else
+      return 6900 - 1000 * karte.wert
+    end
+  end
+  
+  def anspielen_auftrag_holen(karte)
+    if @spiel_informations_sicht.unerfuellte_auftraege[0].any? do |auftrag|
+        (auftrag.farbe == karte.farbe) && (auftrag.karte.wert <= karte.wert)
+      end
+      return 100 * karte.wert - 490
+    else
+      return karte.wert - 100
+    end
+  end
+  
+  def lange_farbe?(farbe)
+    karten = Karte.alle_mit_farbe(farbe)
+    karten.select {|karte| ! @spiel_informations_sicht.ist_gegangen?(karte)}
+    karten.length < @spiel_informations_sicht.karten_mit_farbe(farbe).length * @spiel_informations_sicht.anzahl_spieler - 1
+  end
+
+  def auftrag_farbe_mit_holbarem_auftrag_anspielen(karte)
+    if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[1..].flatten.length == 0
+      return anspielen_auftrag_holen(karte)
+    elsif lange_farbe?(karte.farbe)
+      return 10 - karte.wert
+    else
+      return anspielen_auftrag_holen(karte)
+    end    
+  end
+  
+  def auftrag_farbe_anspielen(karte)
+    if @spiel_informations_sicht.unerfuellte_auftraege_nicht_auf_eigener_hand_mit_farbe(karte.farbe)[0].length != 0
+      return auftrag_farbe_mit_holbarem_auftrag_anspielen(karte)
+    elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length.zero?
+      return 30 - karte.wert
+    elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[1..].flatten.length != 0
+      return 30 - karte.wert
+    elsif lange_farbe?(karte.farbe)
+      return karte.wert + 10
+    else
+      return karte.wert - 5
+    end
+    
+  end
+  
+  def blank_machen_anspielen(karte)
+    if karte.trumpf?
+      return - 100 * karte.wert
+    elsif lange_farbe?(karte.farbe)
+      return karte.wert
+    else
+      return -karte.wert
+    end
+  end
+
+  def stich_abgeben_anspielen(karte)
+    if karte.trumpf?
+      return - 100 * karte.wert
+    else
+      return 5 - karte.wert
+    end
+  end
+
+  def abgedeckt(auftrag)
+    @spiel_informations_sicht.karten_mit_farbe(auftrag.farbe).any? {|karte| karte.wert >= auftrag.wert && karte.wert >= 7}
+  end
+  
   # wie gut eine Karte zum Anspielen geeignet ist
   def anspiel_wert_karte(karte)
-    wert = @farben[karte.farbe].anspielen_wert
-    wert += 10 if @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.karte == karte }
-    if @spiel_informations_sicht.unerfuellte_auftraege[0].any? do |auftrag|
-         (auftrag.farbe == karte.farbe) && (auftrag.karte.wert <= karte.wert)
-       end
-      wert += karte.wert * 2
+    if @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.karte == karte}
+      return eigenen_unerfuellten_auftrag_anspielen(karte)
+    elsif @spiel_informations_sicht.unerfuellte_auftraege.flatten.any? { |auftrag| auftrag.karte == karte}
+      return anderen_unerfuellten_auftrag_anspielen(karte)
+    elsif ! @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe).empty?
+      return auftrag_farbe_anspielen(karte)
+    elsif @spiel_informations_sicht.unerfuellte_auftraege[0].any? {|auftrag| ! abgedeckt(auftrag)}
+      return blank_machen_anspielen(karte)
     else
-      wert -= karte.wert
+      return stich_abgeben_anspielen(karte)
     end
-    wert
+    #    elsif @spiel_informations_sicht.unerfuellte_auftraege[0].any? do |auftrag|
+    #         (auftrag.farbe == karte.farbe) && (auftrag.karte.wert <= karte.wert)
+    # anspielen_auftrag_holen(karte)
+    #       end
+    #end
+    #wert = 0
+    #wert += 10 if @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.karte == karte }
+    #if @spiel_informations_sicht.unerfuellte_auftraege[0].any? do |auftrag|
+    #    (auftrag.farbe == karte.farbe) && (auftrag.karte.wert <= karte.wert)
+    #  end
+    #  wert += karte.wert * 2
+    #else
+    #  wert -= karte.wert
+    #end
+    #wert
   end
 
   def hat_fremden_auftrag?(stich)
@@ -180,7 +275,7 @@ class Rhinoceros < Entscheider
 
   # wie gut eine Karte zum drauflegen geeignet ist
   def abspiel_wert_karte(karte, stich)
-    wert = @farben[karte.farbe].abspiel_wert(stich) * 10
+    wert = 0
     spieler_index = finde_auftrag(stich)
     if !spieler_index.nil? && spieler_index.zero?
       wert += braucht_stich_selbst_wert(karte: karte, stich: stich)
@@ -228,54 +323,4 @@ class Rhinoceros < Entscheider
     end
   end
 
-  def vorbereitungs_phase
-    farben_erstellen
-    auftraege_erstellen
-    auftraege_analysieren
-  end
-
-  def farben_erstellen
-    @farben = Farbe::NORMALE_FARBEN.to_h do |farbe|
-      [farbe, RhinocerosFarbe.new(
-        farbe: farbe,
-        anzahl: 9,
-        eigene_anzahl: karten.count do |k|
-          k.farbe == farbe
-        end,
-        spiel_informations_sicht: @spiel_informations_sicht
-      )]
-    end
-    @farben[Farbe::RAKETE] = RhinocerosFarbe.new(
-      farbe: Farbe::RAKETE,
-      anzahl: 4,
-      eigene_anzahl: karten.count(&:trumpf?),
-      spiel_informations_sicht: @spiel_informations_sicht
-    )
-    @farben.each do |farbe_farbe|
-      farbe_farbe[1].eigene_karten_erhalten(karten.select { |karte| karte.farbe == farbe_farbe[1].farbe })
-    end
-  end
-
-  def auftraege_erstellen
-    @auftraege = []
-    @spiel_informations_sicht.auftraege.each_with_index do |auftrag_liste, spieler_index|
-      @auftraege += auftrag_liste.collect.with_index do |auftrag, wahl_index|
-        RhinocerosAuftrag.new(
-          auftrag: auftrag,
-          spieler_index: spieler_index,
-          wahl_index: wahl_index,
-          hat_selber: karten.include?(auftrag.karte)
-        )
-      end
-    end
-  end
-
-  def auftraege_analysieren
-    @auftraege.each do |auftrag|
-      @farben[auftrag.farbe].auftrag_erhalten(auftrag)
-    end
-    @farben.each do |farbe_farbe|
-      farbe_farbe[1].analysieren
-    end
-  end
 end
