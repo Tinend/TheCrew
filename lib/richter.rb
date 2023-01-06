@@ -49,4 +49,12 @@ class Richter
   def alle_karten_ausgespielt
     @verloren = true
   end
+
+  def resultat
+    if @gewonnen
+      :gewonnen
+    elsif @verloren
+      :verloren
+    end
+  end
 end

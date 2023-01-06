@@ -10,7 +10,7 @@ require 'entscheider/zufalls_entscheider'
 
 RSpec.describe Spieler do
   subject(:spieler) do
-    described_class.new(entscheider: ZufallsEntscheider.new,
+    described_class.new(entscheider: ZufallsEntscheider.new(zufalls_generator: Random.new(42)),
                         spiel_informations_sicht: spiel_information.fuer_spieler(0))
   end
 

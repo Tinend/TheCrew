@@ -12,6 +12,10 @@ class Auftrag
 
   attr_reader :karte, :erfuellt
 
+  def self.alle
+    Karte.alle_normalen.map { |karte| new(karte) }
+  end
+
   def erfuellen(karte)
     return unless karte == @karte
 

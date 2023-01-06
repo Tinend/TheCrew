@@ -1,0 +1,15 @@
+---
+- - entscheider: Reinwerfer
+    punkte: 3
+  - entscheider: Rhinoceros
+    punkte: 15
+  - entscheider: Hase
+    punkte: 1
+  - entscheider: Saeuger
+    punkte: 0
+  - entscheider: Archaeon
+    punkte: 0
+  - entscheider: ZufallsEntscheider
+    punkte: 0
+  - entscheider: GeschlosseneFormelBot
+    punkte: 0

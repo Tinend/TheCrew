@@ -3,41 +3,43 @@
 
 require_relative '../entscheider'
 require_relative 'saeuger_auftrag_nehmer'
+require_relative 'spiel_informations_sicht_benutzender'
 
 # Aufträge: Wenn er ihn hat, bevorzugt groß, wenn er ihn nicht hat, bevorzugt tief
 # Wirft höchste Karte wenn er Auftrag hat, tiefste Karte wenn anderer Auftrag hat und Auftrag, wenn möglich
 class Hase < Entscheider
   include SaeugerAuftragNehmer
+  include SpielInformationsSichtBenutzender
 
   def finde_max_karte_aus_auswahl(auftrag:, moegliche_karten:)
     moegliche_karten.select { |karte| !karte.trumpf? && karte.schlaegt?(auftrag.karte) }.max_by(&:wert)
   end
 
   def anspielen(_stich, waehlbare_karten)
-    return anderen_auftrag_anspielen(waehlbare_karten) if @spiel_informations_sicht.auftraege[0].length.zero?
+    return anderen_auftrag_anspielen(waehlbare_karten) if eigene_auftraege.empty?
 
-    ziel_auftrag = @spiel_informations_sicht.auftraege[0].sample
+    ziel_auftrag = eigene_auftraege.sample(random: @zufalls_generator)
     if waehlbare_karten.include?(ziel_auftrag.karte)
       ziel_auftrag.karte
     elsif waehlbare_karten.any? { |karte| karte.schlaegt?(ziel_auftrag.karte) && !karte.trumpf? }
       finde_max_karte_aus_auswahl(auftrag: ziel_auftrag, moegliche_karten: waehlbare_karten)
-    elsif waehlbare_karten & @spiel_informations_sicht.auftraege.flatten != []
-      waehle_minimum(waehlbare_karten & @spiel_informations_sicht.auftraege.flatten)
+    elsif waehlbare_karten & alle_auftraege != []
+      waehle_minimum(waehlbare_karten & alle_auftraege)
     else
       waehle_minimum(waehlbare_karten)
     end
   end
 
   def anderen_auftrag_anspielen(waehlbare_karten)
-    if waehlbare_karten & @spiel_informations_sicht.auftraege.flatten != []
-      return waehle_minimum(waehlbare_karten & @spiel_informations_sicht.auftraege.flatten.sample)
+    if waehlbare_karten & alle_auftraege != []
+      return waehle_minimum(waehlbare_karten & alle_auftraege.sample(random: @zufalls_generator))
     end
 
     waehle_minimum(waehlbare_karten)
   end
 
   def auftrag_abspielen(stich, waehlbare_karten)
-    @spiel_informations_sicht.auftraege[0].each do |auftrag|
+    eigene_auftraege.each do |auftrag|
       if auftrag_holen?(auftrag: auftrag, stich: stich, waehlbare_karten: waehlbare_karten)
         return waehlbare_karten.select { |karte| karte.farbe == stich.farbe }.min_by(&:wert)
       elsif auftrag_selber_abspielen?(auftrag: auftrag, stich: stich, waehlbare_karten: waehlbare_karten)
@@ -81,9 +83,5 @@ class Hase < Entscheider
     return anspielen(stich, waehlbare_karten) if stich.empty?
 
     abspielen(stich, waehlbare_karten)
-  end
-
-  def sehe_spiel_informations_sicht(spiel_informations_sicht)
-    @spiel_informations_sicht = spiel_informations_sicht
   end
 end

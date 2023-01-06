@@ -60,11 +60,15 @@ class Spieler
   end
 
   def waehle_karte(stich)
+    raise 'Spieler kann ohne Karten nicht spielen' if karten.empty?
     raise TypeError unless stich.is_a?(Stich::StichSicht)
 
     waehlbare = waehlbare_karten(stich)
     karte = @entscheider.waehle_karte(stich, waehlbare)
-    raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' unless waehlbare.include?(karte)
+    unless waehlbare.include?(karte)
+      raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' \
+            "Waehlbare: #{waehlbare.join(' ')}; gewaehlt: #{karte}"
+    end
 
     karte
   end

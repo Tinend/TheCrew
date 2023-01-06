@@ -1,30 +1,19 @@
 # frozen_string_literal: true
 
 require_relative '../entscheider'
+require_relative 'spiel_informations_sicht_benutzender'
+require_relative 'zufalls_kommunizierender'
 
 # Entscheider, der immer zufällig entschiedet, was er spielt.
 class ZufallsEntscheider < Entscheider
+  include SpielInformationsSichtBenutzender
+  include ZufallsKommunizierender
+
   def waehl_auftrag(auftraege)
-    auftraege.sample
+    auftraege.sample(random: @zufalls_generator)
   end
 
   def waehle_karte(_stich, waehlbare_karten)
-    waehlbare_karten.sample
-  end
-
-  def sehe_spiel_informations_sicht(spiel_informations_sicht)
-    @spiel_informations_sicht = spiel_informations_sicht
-  end
-
-  def karten
-    @spiel_informations_sicht.karten
-  end
-
-  def kommuniziert?
-    rand(karten.length).zero?
-  end
-
-  def waehle_kommunikation(kommunizierbares)
-    kommunizierbares.sample if kommuniziert?
+    waehlbare_karten.sample(random: @zufalls_generator)
   end
 end
