@@ -23,8 +23,6 @@ class Hase < Entscheider
       ziel_auftrag.karte
     elsif waehlbare_karten.any? { |karte| karte.schlaegt?(ziel_auftrag.karte) && !karte.trumpf? }
       finde_max_karte_aus_auswahl(auftrag: ziel_auftrag, moegliche_karten: waehlbare_karten)
-    elsif waehlbare_karten & alle_auftraege != []
-      waehle_minimum(waehlbare_karten & alle_auftraege)
     else
       waehle_minimum(waehlbare_karten)
     end
