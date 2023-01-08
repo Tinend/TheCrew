@@ -1080,7 +1080,7 @@
   - anspieler: 3
     karten: gelb 1, gelb 8, grün 4, rot 9
     erfuellte_auftraege: gelb 1
-  resultat: verloren
+  resultat: gewonnen
 - karten:
   - rot 2, grün 6, gelb 3, gelb 4, blau 9, grün 1, blau 7, Rakete 4, gelb 6, gelb
     7
@@ -1875,7 +1875,7 @@
   - anspieler: 3
     karten: rot 7, gelb 2, gelb 7, grün 9
     erfuellte_auftraege: rot 7
-  resultat: verloren
+  resultat: gewonnen
 - karten:
   - blau 3, gelb 6, gelb 8, blau 5, gelb 9, Rakete 2, blau 8, grün 1, blau 6, rot
     3
