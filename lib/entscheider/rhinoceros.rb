@@ -93,37 +93,28 @@ class Rhinoceros < Entscheider
   end
 
   def abgedeckt(auftrag)
-    @spiel_informations_sicht.karten_mit_farbe(auftrag.farbe).any? {|karte| karte.wert >= auftrag.wert && karte.wert >= 7}
+    @spiel_informations_sicht.karten_mit_farbe(auftrag.farbe).any? {|karte| karte.wert >= auftrag.karte.wert && karte.wert >= 7}
   end
   
   # wie gut eine Karte zum Anspielen geeignet ist
   def anspiel_wert_karte(karte)
     if @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.karte == karte}
+      #puts "#{karte} #{eigenen_unerfuellten_auftrag_anspielen(karte)} 1"
       return eigenen_unerfuellten_auftrag_anspielen(karte)
     elsif @spiel_informations_sicht.unerfuellte_auftraege.flatten.any? { |auftrag| auftrag.karte == karte}
+      #puts "#{karte} #{anderen_unerfuellten_auftrag_anspielen(karte)} 2"
       return anderen_unerfuellten_auftrag_anspielen(karte)
-    elsif ! @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe).empty?
+    elsif ! @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe).flatten.empty?
+      #p @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)
+      #puts "#{karte} #{auftrag_farbe_anspielen(karte)} 3"
       return auftrag_farbe_anspielen(karte)
     elsif @spiel_informations_sicht.unerfuellte_auftraege[0].any? {|auftrag| ! abgedeckt(auftrag)}
+      #puts "#{karte} #{blank_machen_anspielen(karte)} 4"
       return blank_machen_anspielen(karte)
     else
+      #puts "#{karte} #{stich_abgeben_anspielen(karte)} 5"
       return stich_abgeben_anspielen(karte)
     end
-    #    elsif @spiel_informations_sicht.unerfuellte_auftraege[0].any? do |auftrag|
-    #         (auftrag.farbe == karte.farbe) && (auftrag.karte.wert <= karte.wert)
-    # anspielen_auftrag_holen(karte)
-    #       end
-    #end
-    #wert = 0
-    #wert += 10 if @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.karte == karte }
-    #if @spiel_informations_sicht.unerfuellte_auftraege[0].any? do |auftrag|
-    #    (auftrag.farbe == karte.farbe) && (auftrag.karte.wert <= karte.wert)
-    #  end
-    #  wert += karte.wert * 2
-    #else
-    #  wert -= karte.wert
-    #end
-    #wert
   end
 
   def hat_fremden_auftrag?(stich)

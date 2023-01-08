@@ -59,9 +59,9 @@ class Spiel
     start_situation_berichten
     runde until @richter.gewonnen || @richter.verloren
 
-    if @richter.verloren
+    if @richter.spiel_ende_verloren?
       @reporter.berichte_verloren
-    elsif @richter.gewonnen
+    else
       @reporter.berichte_gewonnen
     end
     @richter.resultat

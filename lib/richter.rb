@@ -11,7 +11,7 @@ class Richter
   end
 
   attr_reader :gewonnen, :verloren, :erfuellt_letzter_stich, :vermasselt_letzter_stich
-
+  
   def auftraege(spieler_index)
     @spiel_information.unerfuellte_auftraege[spieler_index]
   end
@@ -50,11 +50,19 @@ class Richter
     @verloren = true
   end
 
+  def spiel_ende_verloren?
+    return false if @gewonnen
+    return true if @verloren
+    return false
+  end
+
   def resultat
     if @gewonnen
-      :gewonnen
+      return :gewonnen
     elsif @verloren
-      :verloren
+      return :verloren
     end
+    raise
   end
+  
 end
