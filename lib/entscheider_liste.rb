@@ -7,6 +7,7 @@ require 'entscheider/archaeon'
 require 'entscheider/rhinoceros'
 require 'entscheider/reinwerfer'
 require 'entscheider/geschlossene_formel_bot'
+require 'entscheider/schimpanse'
 
 # Liste aller Entscheider.
 module EntscheiderListe

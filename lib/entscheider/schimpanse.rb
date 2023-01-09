@@ -6,6 +6,7 @@ require_relative '../farbe'
 require_relative 'saeuger_auftrag_nehmer'
 require_relative 'spiel_informations_sicht_benutzender'
 require_relative 'rhinoceros_abspielen'
+require_relative 'schimpanse_kommunizierender'
 
 # Hangelt sich zwischen den Aufträgen durch
 # Basiert auf Rhinoceros, aber ist weiterentwickelt
@@ -14,6 +15,7 @@ class Schimpanse < Entscheider
   include SaeugerAuftragNehmer
   include SpielInformationsSichtBenutzender
   include RhinocerosAbspielen
+  include SchimpanseKommunizierender
 
   def anspielen(waehlbare_karten)
     waehlbare_karten.max_by { |karte| anspiel_wert_karte(karte) }
