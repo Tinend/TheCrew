@@ -11,7 +11,7 @@ require 'entscheider/geschlossene_formel_bot'
 # Liste aller Entscheider.
 module EntscheiderListe
   def self.entscheider_klassen
-    @entscheider_klassen ||= [Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon, ZufallsEntscheider,
+    @entscheider_klassen ||= [Schimpanse, Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon, ZufallsEntscheider,
                               GeschlosseneFormelBot].freeze
   end
 end
