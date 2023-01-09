@@ -1,9 +1,12 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
+
 # gehört zu Rhinoceros
 # legt eine Karte auf einen Stich
 module RhinocerosAbspielen
+  # rubocop:enable Metrics/ModuleLength
   def ist_auftrag_von_spieler?(karte:, spieler_index:)
     @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].any? { |auftrag| auftrag.karte == karte }
   end
