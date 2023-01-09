@@ -117,11 +117,11 @@ class SpielInformation
     end
 
     def unerfuellte_auftraege_nicht_auf_eigener_hand
-      unerfuellte_auftraege.collect {|auftrag_array|
-        auftrag_array.select {|auftrag| karten.any? {|karte| karte == auftrag.karte}}
-      }
+      unerfuellte_auftraege.collect do |auftrag_array|
+        auftrag_array.select { |auftrag| karten.any? { |karte| karte == auftrag.karte } }
+      end
     end
-    
+
     def unerfuellte_auftraege_mit_farbe(farbe)
       unerfuellte_auftraege.collect do |auftrag_liste|
         auftrag_liste.select { |auftrag| auftrag.farbe == farbe }
@@ -129,11 +129,11 @@ class SpielInformation
     end
 
     def unerfuellte_auftraege_nicht_auf_eigener_hand_mit_farbe(farbe)
-      unerfuellte_auftraege_mit_farbe(farbe).collect {|auftrag_array|
-        auftrag_array.select {|auftrag| ! karten.any? {|karte| karte == auftrag.karte}}
-      }
+      unerfuellte_auftraege_mit_farbe(farbe).collect do |auftrag_array|
+        auftrag_array.reject { |auftrag| karten.any? { |karte| karte == auftrag.karte } }
+      end
     end
-    
+
     def kommunikationen
       stich_cache(:kommunikationen) { @spiel_information.kommunikationen.rotate(@spieler_index) }
     end
