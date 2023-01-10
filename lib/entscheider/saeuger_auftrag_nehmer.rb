@@ -17,10 +17,9 @@ module SaeugerAuftragNehmer
 
   def auftrag_nicht_auf_hand_punke(auftrag:)
     max_karte = finde_max_karte(auftrag: auftrag)
-    #if blank_fuer_auftrag?(auftrag: auftrag) and habe_trumpf?
-    #  7 - auftrag.karte.wert * 0.1
-    #elsif max_karte.nil?
-    if max_karte.nil?
+    if blank_fuer_auftrag?(auftrag: auftrag) and habe_trumpf?
+      7 - auftrag.karte.wert * 0.1
+    elsif max_karte.nil?
       3 - auftrag.karte.wert * 0.1
     else
       max_karte.wert - (auftrag.karte.wert * 0.1)
