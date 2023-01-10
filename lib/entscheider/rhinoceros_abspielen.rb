@@ -139,7 +139,7 @@ module RhinocerosAbspielen
   def keine_auftraege_von_stich_farbe_wert(stich:, karte:)
     puts "#{karte}, 8"
     if !keine_auftraege_mit_farbe?(karte.farbe)
-      keine_auftraege_stich_farbe_auftraege_karten_farbe(stich:, karte:)
+      keine_auftraege_stich_farbe_auftraege_karten_farbe(stich: stich, karte: karte)
     elsif @spiel_informations_sicht.unerfuellte_auftraege[0].length.positive?
       habe_noch_auftraege_wert(stich: stich, karte: karte)
     elsif !karte.schlaegt?(stich.staerkste_karte)
@@ -215,7 +215,7 @@ module RhinocerosAbspielen
       nur_noch_ich_habe_farb_auftraege_wert(karte: karte, stich: stich)
     elsif ich_habe_noch_farb_auftraege?(farbe: stich.farbe)
       ich_und_andere_haben_farb_auftraege_wert(karte: karte, stich: stich)
-    elsif karte.schlaegt?(stich.staerkste_karte)
+    elsif karte.schlaegt?(stich.staerkste_karte) || ich_habe_noch_farb_auftraege?(farbe: karte.farbe)
       - karte.schlag_wert
     elsif karte.trumpf?
       - karte.wert
