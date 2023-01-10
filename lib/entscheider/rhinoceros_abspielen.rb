@@ -16,7 +16,7 @@ module RhinocerosAbspielen
   end
 
   def braucht_stich_selbst_wert(karte:, stich:)
-    # puts "#{karte}, 1"
+    puts "#{karte}, 1"
     if ist_auftrag_von_spieler?(karte: karte, spieler_index: 0) && karte.schlaegt?(stich.staerkste_karte)
       (12 * karte.wert) - 5
     elsif karte.schlaegt?(stich.staerkste_karte) && karte.trumpf?
@@ -29,7 +29,7 @@ module RhinocerosAbspielen
   end
 
   def kein_auftrag_von_auftrag_nehmer(karte:, stich:)
-    # puts "#{karte}, 2"
+    puts "#{karte}, 2"
     if karte.trumpf? && karte.schlaegt?(stich.staerkste_karte)
       - 100 - karte._wert
     elsif karte.schlaegt?(stich.staerkste_karte)
@@ -43,7 +43,7 @@ module RhinocerosAbspielen
 
   # rubocop:disable Lint/DuplicateBranch
   def anderer_braucht_stich_wert(spieler_index:, karte:, stich:)
-    # puts "#{karte}, 3"
+    puts "#{karte}, 3"
     if (stich.gespielte_karten.length + spieler_index >= @spiel_informations_sicht.anzahl_spieler) &&
        karte.schlaegt?(stich.staerkste_karte)
       - 10_000
@@ -78,7 +78,7 @@ module RhinocerosAbspielen
   end
 
   def auftrags_karte_schlaegt_legen_wert(karte:, stich:)
-    # puts "#{karte}, 4"
+    puts "#{karte}, 4"
     if auftrag_nehmer_kommt_noch_dran?(stich: stich, karte: karte)
       - 10_000
     elsif karte.trumpf?
@@ -93,7 +93,7 @@ module RhinocerosAbspielen
   end
 
   def auftraggeber_hat_staerkste_karte_wert(stich)
-    # puts "KARTE, 5"
+    puts "KARTE, 5"
     if (stich.staerkste_karte.wert > 6) || stich.staerkste_karte.trumpf?
       10_000
     else
@@ -102,7 +102,7 @@ module RhinocerosAbspielen
   end
 
   def auftrags_karte_legen_wert(karte:, stich:)
-    # puts "#{karte}, 6"
+    puts "#{karte}, 6"
     if karte.schlaegt?(stich.staerkste_karte)
       auftrags_karte_schlaegt_legen_wert(karte: karte, stich: stich)
     elsif ist_auftrag_von_spieler?(karte: karte, spieler_index: stich.staerkste_gespielte_karte.spieler_index)
@@ -119,7 +119,7 @@ module RhinocerosAbspielen
   end
 
   def habe_noch_auftraege_wert(stich:, karte:)
-    # puts "#{karte}, 7"
+    puts "#{karte}, 7"
     if karte.schlaegt?(stich.staerkste_karte)
       karte.schlag_wert
     else
@@ -127,9 +127,20 @@ module RhinocerosAbspielen
     end
   end
 
-  def keine_auftraege_von_karten_farbe_wert(stich:, karte:)
-    # puts "#{karte}, 8"
-    if @spiel_informations_sicht.unerfuellte_auftraege[0].length.positive?
+  def keine_auftraege_stich_farbe_auftraege_karten_farbe(stich:, karte:)
+    puts "#{karte}, 7.5"
+    if ich_habe_noch_farb_auftraege?(farbe: stich.farbe)
+      - karte.wert
+    else
+      karte.wert
+    end
+  end
+
+  def keine_auftraege_von_stich_farbe_wert(stich:, karte:)
+    puts "#{karte}, 8"
+    if !keine_auftraege_mit_farbe?(karte.farbe)
+      keine_auftraege_stich_farbe_auftraege_karten_farbe(stich:, karte:)
+    elsif @spiel_informations_sicht.unerfuellte_auftraege[0].length.positive?
       habe_noch_auftraege_wert(stich: stich, karte: karte)
     elsif !karte.schlaegt?(stich.staerkste_karte)
       karte.schlag_wert
@@ -139,7 +150,7 @@ module RhinocerosAbspielen
   end
 
   def kein_auftrag_gelegt_wert(karte:, stich:, spieler_index:)
-    # puts "#{karte}, 8.5"
+    puts "#{karte}, 8.5"
     if spieler_index.zero?
       braucht_stich_selbst_wert(karte: karte, stich: stich)
     else
@@ -153,17 +164,23 @@ module RhinocerosAbspielen
     anzahl_farb_auftraege == anzahl_eigene_farb_auftraege
   end
 
+  # rubocop:disable Lint/DuplicateBranch
   def nur_noch_ich_habe_farb_auftraege_wert(karte:, stich:)
-    # puts "#{karte}, 9"
+    puts "#{karte}, 9"
     if karte.schlaegt?(stich.staerkste_karte)
       karte.schlag_wert
-    else
+    elsif ich_habe_noch_farb_auftraege?(farbe: karte.farbe)
+      - karte.schlag_wert - 100
+    elsif keine_auftraege_mit_farbe?(karte.farbe)
       - karte.schlag_wert
+    else
+      karte.schlag_wert
     end
   end
+  # rubocop:enable Lint/DuplicateBranch
 
   def spieler_mit_index_auftrag_wert(karte:, stich:)
-    # puts "#{karte}, 10"
+    puts "#{karte}, 10"
     if karte.schlaegt?(stich.staerkste_karte)
       (6 * karte.schlag_wert) - 3
     else
@@ -175,18 +192,25 @@ module RhinocerosAbspielen
     !@spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[0].empty?
   end
 
+  # rubocop:disable Lint/DuplicateBranch
   def ich_und_andere_haben_farb_auftraege_wert(karte:, stich:)
     if karte.schlaegt?(stich.staerkste_karte)
       karte.schlag_wert
-    else
+    elsif karte.farbe == stich.farbe || keine_auftraege_mit_farbe?(stich.farbe) ||
+          karte.trumpf?
       - karte.schlag_wert
+    elsif ich_habe_noch_farb_auftraege?(farbe: karte.farbe)
+      - karte.schlag_wert - 20
+    else
+      karte.schlag_wert
     end
   end
+  # rubocop:enable Lint/DuplicateBranch
 
   def wahrscheinlich_noch_farb_auftraege_wert(karte:, stich:)
-    # puts "#{karte}, 11"
+    puts "#{karte}, 11"
     if keine_auftraege_mit_farbe?(stich.farbe)
-      keine_auftraege_von_karten_farbe_wert(stich: stich, karte: karte)
+      keine_auftraege_von_stich_farbe_wert(stich: stich, karte: karte)
     elsif nur_noch_ich_habe_farb_auftraege?(farbe: stich.farbe)
       nur_noch_ich_habe_farb_auftraege_wert(karte: karte, stich: stich)
     elsif ich_habe_noch_farb_auftraege?(farbe: stich.farbe)
@@ -209,7 +233,7 @@ module RhinocerosAbspielen
   end
 
   def kein_auftrag_im_stich_wert(karte:, stich:)
-    # puts "#{karte}, 12"
+    puts "#{karte}, 12"
     if keine_eigenen_auftraege_mit_farbe?(karte.farbe) && !karte.schlaegt?(stich.staerkste_karte) &&
        !keine_auftraege_mit_farbe?(karte.farbe)
       karte.schlag_wert
@@ -245,7 +269,7 @@ module RhinocerosAbspielen
   # wie gut eine Karte zum drauflegen geeignet ist
   def abspiel_wert_karte(karte, stich)
     spieler_index = finde_auftrag(stich)
-    # puts "#{karte}, 13"
+    puts "#{karte}, 13"
     if !spieler_index.nil?
       kein_auftrag_gelegt_wert(karte: karte, stich: stich, spieler_index: spieler_index)
     elsif ist_auftrag_von_spieler?(karte: karte, spieler_index: 0)
