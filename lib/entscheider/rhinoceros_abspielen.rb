@@ -31,13 +31,13 @@ module RhinocerosAbspielen
   def kein_auftrag_von_auftrag_nehmer(karte:, stich:)
     # puts "#{karte}, 2"
     if karte.trumpf? && karte.schlaegt?(stich.staerkste_karte)
-      - 100 - karte.schlag_wert
+      - 100 - karte._wert
     elsif karte.schlaegt?(stich.staerkste_karte)
-      - 10 - karte.schlag_wert
+      - 10 - karte.wert
     elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length.zero?
-      karte.schlag_wert
+      karte.wert
     else
-      - karte.schlag_wert
+      - karte.wert
     end
   end
 
@@ -46,10 +46,8 @@ module RhinocerosAbspielen
     if (stich.gespielte_karten.length + spieler_index >= @spiel_informations_sicht.anzahl_spieler) &&
        karte.schlaegt?(stich.staerkste_karte)
       - 10_000
-    elsif karte.trumpf? && karte.schlaegt?(stich.staerkste_karte)
-      - 9000 - karte.wert * 300
-    elsif (karte.wert >= 7) && karte.schlaegt?(stich.staerkste_karte)
-      - 3_000 * (karte.wert - 6)
+    elsif karte.schlag_wert >= 7 && karte.schlaegt?(stich.staerkste_karte)
+      - 3000 * (karte.schlag_wert - 6)
     elsif ist_auftrag_von_spieler?(karte: karte, spieler_index: spieler_index)
       100
     else
@@ -79,12 +77,14 @@ module RhinocerosAbspielen
     # puts "#{karte}, 4"
     if auftrag_nehmer_kommt_noch_dran?(stich: stich, karte: karte)
       - 10_000
+    elsif karte.trumpf?
+      - 8000 - 300 * karte.wert
     elsif karte.wert == 9
       - 7_000
     elsif karte.wert >= 7
       - 30 * (karte.wert - 6)
     else
-      10 - karte.schlag_wert
+      10 - karte.wert
     end
   end
 
@@ -188,8 +188,10 @@ module RhinocerosAbspielen
       ich_und_andere_haben_farb_auftraege_wert(karte: karte, stich: stich)
     elsif karte.schlaegt?(stich.staerkste_karte)
       - karte.schlag_wert
-    else 
-      karte.schlag_wert
+    elsif karte.trumpf?
+      - karte.wert
+    else
+      karte.wert
     end
   end
 
