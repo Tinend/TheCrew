@@ -64,4 +64,9 @@ class Karte
   def hash
     @hash ||= [self.class, @wert, @farbe].hash
   end
+
+  def schlag_wert
+    return @wert + 10 if trumpf?
+    @wert
+  end
 end
