@@ -50,6 +50,8 @@ module RhinocerosAbspielen
       - 3000 * (karte.schlag_wert - 6)
     elsif ist_auftrag_von_spieler?(karte: karte, spieler_index: spieler_index)
       100
+    elsif ist_auftrag?(karte: karte)
+      - 10_000
     else
       kein_auftrag_von_auftrag_nehmer(karte: karte, stich: stich)
     end
@@ -135,6 +137,7 @@ module RhinocerosAbspielen
   end
 
   def kein_auftrag_gelegt_wert(karte:, stich:, spieler_index:)
+    # puts "#{karte}, 8.5"
     if spieler_index.zero?
       braucht_stich_selbst_wert(karte: karte, stich: stich)
     else
@@ -167,7 +170,7 @@ module RhinocerosAbspielen
   end
 
   def ich_habe_noch_farb_auftraege?(farbe:)
-    @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[0].empty?
+    !@spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[0].empty?
   end
 
   def ich_und_andere_haben_farb_auftraege_wert(karte:, stich:)

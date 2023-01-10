@@ -19,6 +19,7 @@ class AuftragVerwalter
 
   def auftraege_verteilen(spiel_information:)
     start = spiel_information.kapitaen_index
+    spiel_information.alle_auftraege_erhalten(@ausgelegte_auftraege.dup)
     @ausgelegte_auftraege.length.times do |i|
       wahl = @spieler[(start + i) % @spieler.length].waehl_auftrag(@ausgelegte_auftraege)
       spiel_information.auftrag_gewaehlt(auftrag: wahl, spieler_index: (start + i) % @spieler.length)
