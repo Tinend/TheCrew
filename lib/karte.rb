@@ -67,6 +67,7 @@ class Karte
 
   def schlag_wert
     return @wert + 10 if trumpf?
+
     @wert
   end
 end

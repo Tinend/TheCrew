@@ -17,30 +17,30 @@ module SaeugerAuftragNehmer
 
   def auftrag_nicht_auf_hand_punke(auftrag:)
     max_karte = finde_max_karte(auftrag: auftrag)
-    if blank_fuer_auftrag?(auftrag: auftrag) and habe_trumpf?
-      7 - auftrag.karte.wert * 0.1
+    if blank_fuer_auftrag?(auftrag: auftrag) && habe_trumpf?
+      7 - (auftrag.karte.wert * 0.1)
     elsif max_karte.nil?
-      3 - auftrag.karte.wert * 0.1
+      3 - (auftrag.karte.wert * 0.1)
     else
       max_karte.wert - (auftrag.karte.wert * 0.1)
     end
   end
-  
+
   def finde_max_karte(auftrag:)
-    hand.select { |karte|
-      @spiel_informations_sicht.alle_auftraege.all?{|auftrag2| auftrag2.karte != karte} &&
-      !karte.trumpf? && karte.schlaegt?(auftrag.karte)
-    }.max_by(&:wert)
+    hand.select do |karte|
+      @spiel_informations_sicht.alle_auftraege.all? { |auftrag2| auftrag2.karte != karte } &&
+        !karte.trumpf? && karte.schlaegt?(auftrag.karte)
+    end.max_by(&:wert)
   end
 
   def blank_fuer_auftrag?(auftrag:)
-    hand.all? {|karte| karte.farbe != auftrag.farbe}
+    hand.all? { |karte| karte.farbe != auftrag.farbe }
   end
 
   def habe_trumpf?
-    hand.any? {|karte| karte.trumpf?}
+    hand.any?(&:trumpf?)
   end
-  
+
   def hand
     @spiel_informations_sicht.karten
   end

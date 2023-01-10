@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 
 # Module für das Anspielen vom Rhinoceros
 module RhinocerosAnspielen
@@ -94,7 +95,7 @@ module RhinocerosAnspielen
     end
   end
   # rubocop:enable Lint/DuplicateBranch:
-  
+
   def blank_machen_anspielen(karte)
     if karte.trumpf?
       - 100 * karte.wert
@@ -112,5 +113,4 @@ module RhinocerosAnspielen
       5 - karte.wert
     end
   end
-
 end

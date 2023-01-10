@@ -21,12 +21,9 @@ class SpielInformation
     @kapitaen_index = nil
   end
 
-  attr_reader :anzahl_spieler, :kapitaen_index, :stiche, :auftraege, :karten, :kommunikationen, :alle_auftraege
+  attr_reader :anzahl_spieler, :kapitaen_index, :stiche, :auftraege, :karten, :kommunikationen
+  attr_accessor :alle_auftraege
 
-  def alle_auftraege_erhalten(alle_auftraege_neu)
-    @alle_auftraege ||= alle_auftraege_neu
-  end
-  
   def auftrag_gewaehlt(spieler_index:, auftrag:)
     @auftraege[spieler_index].push(auftrag)
   end
@@ -88,7 +85,7 @@ class SpielInformation
     def alle_auftraege
       @spiel_information.alle_auftraege
     end
-    
+
     def anzahl_karten(spieler_index:)
       @spiel_information.karten[spieler_index].length
     end
