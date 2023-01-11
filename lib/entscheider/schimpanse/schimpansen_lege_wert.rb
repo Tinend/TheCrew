@@ -3,34 +3,30 @@
 
 # Zum Sortieren von Kommunikation für den Schimpansen
 class SchimpansenLegeWert
-  def initialize(prioritaet:)
+  def initialize
     @werte = [0, 0, 0, 0, 0]
-    @prioritaet = prioritaet
   end
 
   attr_reader :werte, :prioritaet
 
-  def toedlich
+  def toeten
     @werte[0] = -1
   end
 
-  def gefahr(wert)
+  def gefaehrden(wert)
     @werte[1] -= wert
   end
 
-  def warnung(wert)
+  def warnen(wert)
     @werte[2] -= wert
   end
 
-  def nachteil(wert)
+  def benachteiligen(wert)
     @werte[3] -= wert
   end
-  
-  def verbessere(werte:, prioritaet:)
-    return unless @prioritaet < prioritaet
 
-    @prioritaet = prioritaet
-    @werte = werte
+  def nerven(wert)
+    @werte[4] -= wert
   end
 
   def <=>(schimpansen_lege_wert)

@@ -181,5 +181,9 @@ class SpielInformation
     def ist_gegangen?(karte)
       stiche.any? { |s| s.karten.include?(karte) }
     end
+
+    def verbleibende_runden
+      40 / anzahl_spieler - @spiel_information.stiche.length
+    end
   end
 end

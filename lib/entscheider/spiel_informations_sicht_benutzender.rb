@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # Modul für Entscheider, die die SpielInformationsSicht benutzen.
@@ -16,5 +17,9 @@ module SpielInformationsSichtBenutzender
 
   def alle_auftraege
     @spiel_informations_sicht.auftraege.flatten
+  end
+
+  def moegliche_karten_von_spieler_mit_farbe(spieler_index:, farbe:)
+    @spiel_informations_sicht.bekannte_karten_tracker.moegliche_karten_von_spieler_mit_farbe(spieler_index: spieler_index, farbe: farbe)
   end
 end

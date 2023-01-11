@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # Klasse, die dafür zuständig ist, anhand gegangener Karten und Kommunikation
@@ -63,7 +64,7 @@ class BekannteKartenTracker
       raise
     end
   end
-
+  
   def hat_nachher_andere_karte_dieser_farbe_gespielt(spieler_index, kommunikation)
     @spiel_informations_sicht.stiche[kommunikation.gegangene_stiche..].any? do |s, _i|
       s.gespielte_karten.any? do |k|
@@ -75,7 +76,7 @@ class BekannteKartenTracker
 
   def eine_dieser_karten_ist_sicher_drinnen(spieler_index, kommunikation)
     return [] if hat_nachher_andere_karte_dieser_farbe_gespielt(spieler_index, kommunikation)
-
+    
     if kommunikation.hoechste?
       karten_drunter(kommunikation.karte)
     elsif kommunikation.tiefste?
@@ -86,7 +87,7 @@ class BekannteKartenTracker
       raise
     end
   end
-
+  
   def beachte_blankheit
     @spiel_informations_sicht.stiche.each do |s|
       s.gespielte_karten.each do |g|
@@ -95,15 +96,15 @@ class BekannteKartenTracker
       end
     end
   end
-
+  
   def beachte_kommunikationen
     @spiel_informations_sicht.kommunikationen.each_with_index do |kommunikation, spieler_index|
       next unless kommunikation
-
+      
       beachte_kommunikation(spieler_index, kommunikation)
     end
   end
-
+  
   def beachte_kommunikation(spieler_index, kommunikation)
     @moegliche_karten[spieler_index] -= ausgeschlossene_karten(kommunikation)
     @sichere_karten[spieler_index].push(kommunikation.karte)
@@ -113,11 +114,11 @@ class BekannteKartenTracker
     @sichere_karten[spieler_index].push(vielleicht_eindeutige_karte.first) if vielleicht_eindeutige_karte.length == 1
     @sichere_karten[spieler_index].uniq!
   end
-
+  
   def stabilisiere_karten_information
     while entferne_andere_sichere_karten || beachte_eindeutige_besitzer || beachte_eindeutige_karten; end
   end
-
+  
   def beachte_eindeutige_karten
     was_veraendert = false
     @moegliche_karten.each_with_index do |m, i|
@@ -128,16 +129,16 @@ class BekannteKartenTracker
     end
     was_veraendert
   end
-
+  
   def entferne_andere_sichere_karten
     was_veraendert = false
     @sichere_karten.each_with_index do |s, i|
       @moegliche_karten.each_with_index do |m, j|
         next if i == j
-
+        
         reduziert = m - s
         next unless reduziert.length < m.length
-
+        
         was_veraendert = true
         @moegliche_karten[j] = reduziert
       end
@@ -148,20 +149,24 @@ class BekannteKartenTracker
   def beachte_eindeutige_besitzer
     besitzer = {}
     besitzer.default_proc = proc { |hash, key| hash[key] = [] }
-
+    
     @moegliche_karten.each_with_index do |m, i|
       (m - @sichere_karten[i]).each do |k|
         besitzer[k].push(i)
       end
     end
-
+    
     was_veraendert = false
     besitzer.each do |karte, spieler_indizes|
       next unless spieler_indizes.length == 1
-
+      
       was_veraendert = true
       @sichere_karten[spieler_indizes.first].push(karte)
     end
     was_veraendert
+  end
+  
+  def moegliche_karten_von_spieler_mit_farbe(spieler_index:, farbe:)
+    @spiel_informations_sicht.moegliche_karten(spieler_index).select {|karte| karte.farbe == farbe}
   end
 end
