@@ -9,6 +9,7 @@ module RhinocerosAnspielen
 
   # wie gut eine Karte zum Anspielen geeignet ist
   def anspiel_wert_karte(karte)
+    # puts "#{karte} 1"
     if @spiel_informations_sicht.unerfuellte_auftraege.flatten.any? { |auftrag| auftrag.karte == karte }
       unerfuellten_auftrag_anspielen(karte)
     elsif !@spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe).flatten.empty?
@@ -21,6 +22,7 @@ module RhinocerosAnspielen
   end
 
   def anderen_unerfuellten_auftrag_anspielen(karte)
+    # puts "#{karte} 2"
     if karte.wert <= 7
       100 - (karte.wert * 10)
     else
@@ -35,6 +37,7 @@ module RhinocerosAnspielen
   end
 
   def unerfuellten_auftrag_anspielen(karte)
+    # puts "#{karte} 3"
     if @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.karte == karte }
       eigenen_unerfuellten_auftrag_anspielen(karte)
     else
@@ -53,6 +56,7 @@ module RhinocerosAnspielen
   end
 
   def anspielen_auftrag_holen(karte)
+    # puts "#{karte} 4"
     if @spiel_informations_sicht.unerfuellte_auftraege[0].any? do |auftrag|
          (auftrag.farbe == karte.farbe) && (auftrag.karte.wert <= karte.wert)
        end
@@ -63,6 +67,7 @@ module RhinocerosAnspielen
   end
 
   def eigenen_unerfuellten_auftrag_anspielen(karte)
+    # puts "#{karte} 5"
     if karte.wert >= 6
       karte.wert * 1000
     else
@@ -72,16 +77,16 @@ module RhinocerosAnspielen
 
   # rubocop:disable Lint/DuplicateBranch
   def auftrag_farbe_mit_holbarem_auftrag_anspielen(karte)
+    # puts "#{karte} 6"
     if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[1..].flatten.length.zero?
       anspielen_auftrag_holen(karte)
-    elsif lange_farbe?(karte.farbe)
-      10 - karte.wert
     else
       anspielen_auftrag_holen(karte)
     end
   end
 
   def auftrag_farbe_anspielen(karte)
+    # puts "#{karte} 7"
     if !@spiel_informations_sicht.unerfuellte_auftraege_nicht_auf_eigener_hand_mit_farbe(karte.farbe)[0].empty?
       auftrag_farbe_mit_holbarem_auftrag_anspielen(karte)
     elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length.zero?
@@ -97,6 +102,7 @@ module RhinocerosAnspielen
   # rubocop:enable Lint/DuplicateBranch:
 
   def blank_machen_anspielen(karte)
+    # puts "#{karte} 8"
     if karte.trumpf?
       - 100 * karte.wert
     elsif lange_farbe?(karte.farbe)
@@ -107,6 +113,7 @@ module RhinocerosAnspielen
   end
 
   def stich_abgeben_anspielen(karte)
+    # puts "#{karte} 9"
     if karte.trumpf?
       - 100 * karte.wert
     else
