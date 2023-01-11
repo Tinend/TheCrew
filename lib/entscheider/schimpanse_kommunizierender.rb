@@ -76,11 +76,7 @@ module SchimpanseKommunizierender
     kommunikation = kommunizierbares.find do |moegliche_kommunikation|
       moegliche_kommunikation.karte == ziel_karte
     end
-    SchimpanseKommunikation.new(kommunikation: kommunikation, prioritaet: laenge * 100)
-  end
-
-  def trumpf_kommunizieren(_auftrag:, _kommunizierbares:)
-    nicht_kommunizieren_kommunikation
+    SchimpanseKommunikation.new(kommunikation: kommunikation, prioritaet: laenge * 10)
   end
 
   def eigene_auftrags_farbe_unsicher_kommunizieren?(auftrag)
@@ -93,21 +89,25 @@ module SchimpanseKommunizierender
     karten.length.zero? || karten.max.wert <= 5 || karten.max.wert < auftrag.karte.wert
   end
 
+  def schwache_farbe_kommunizieren(auftrag:, kommunizierbares:)
+    ziel_karte = @spiel_informations_sicht.karten_mit_farbe(auftrag.farbe).max
+    kommunikation = kommunizierbares.find do |moegliche_kommunikation|
+      moegliche_kommunikation.karte == ziel_karte
+    end
+    SchimpanseKommunikation.new(kommunikation: kommunikation, prioritaet: 1000)
+  end
+
   def auftrag_nicht_gedeckt_kommunizieren(auftrag:, kommunizierbares:)
     schimpansen_kommunikation = nicht_kommunizieren_kommunikation
     return schimpansen_kommunikation unless eigene_auftrags_farbe_unsicher_kommunizieren?(auftrag)
 
     schimpansen_kommunikation.verbessere(
-      lange_farbe_kommunizieren(auftrag: auftrag, kommunizierbares: kommunizierbares)
+      schwache_farbe_kommunizieren(auftrag: auftrag, kommunizierbares: kommunizierbares)
     )
     schimpansen_kommunikation.verbessere(
       trumpf_kommunizieren(_auftrag: auftrag, _kommunizierbares: kommunizierbares)
     )
     schimpansen_kommunikation
-  end
-
-  def alles_super_kommunizieren(_kommunizierbares)
-    nicht_kommunizieren_kommunikation
   end
 
   def blanker_auftrag_kommunizieren(kommunizierbares)
@@ -142,10 +142,18 @@ module SchimpanseKommunizierender
     SchimpanseKommunikation.new(kommunikation: kommunikation, prioritaet: BLANKER_AUFTRAG_PRIORITAET)
   end
   
-  def karte_ist_auftrag_kommunizieren(_kommunizierbares)
+  def trumpf_kommunizieren(_auftrag:, _kommunizierbares:)
     nicht_kommunizieren_kommunikation
   end
 
+  def alles_super_kommunizieren(_kommunizierbares)
+    nicht_kommunizieren_kommunikation
+  end
+
+  def karte_ist_auftrag_kommunizieren(_kommunizierbares)
+    nicht_kommunizieren_kommunikation
+  end
+  
   def nicht_kommunizieren_kommunikation
     SchimpanseKommunikation.new(kommunikation: false, prioritaet: 0)
   end
@@ -156,7 +164,6 @@ module SchimpanseKommunizierender
     schimpansen_kommunikation.verbessere(blanker_auftrag_kommunizieren(kommunizierbares))
     schimpansen_kommunikation.verbessere(keine_hohe_karte_kommunizieren(kommunizierbares))
     schimpansen_kommunikation.verbessere(alles_super_kommunizieren(kommunizierbares))
-    schimpansen_kommunikation.verbessere(karte_ist_auftrag_kommunizieren(kommunizierbares))
     schimpansen_kommunikation.kommunikation
   end
 end
