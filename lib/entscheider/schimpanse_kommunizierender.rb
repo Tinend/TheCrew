@@ -5,7 +5,8 @@ require_relative 'schimpanse_kommunikation'
 
 # Modul für Schimpanse-Kommunikation
 module SchimpanseKommunizierender
-  BLANKER_AUFTRAG_PRIORITAET = 100
+  BLANKER_AUFTRAG_PRIORITAET = 1000
+  AUFTRAG_NICHT_GEDECKT_PRIORITAET = 100
 
   def karte_gefaerdet_auftraege_kommunizieren(kommunizierbares)
     schimpansen_kommunikation = nicht_kommunizieren_kommunikation
@@ -94,7 +95,7 @@ module SchimpanseKommunizierender
     kommunikation = kommunizierbares.find do |moegliche_kommunikation|
       moegliche_kommunikation.karte == ziel_karte
     end
-    SchimpanseKommunikation.new(kommunikation: kommunikation, prioritaet: 1000)
+    SchimpanseKommunikation.new(kommunikation: kommunikation, prioritaet: AUFTRAG_NICHT_GEDECKT_PRIORITAET)
   end
 
   def auftrag_nicht_gedeckt_kommunizieren(auftrag:, kommunizierbares:)
