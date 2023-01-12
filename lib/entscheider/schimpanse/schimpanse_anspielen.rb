@@ -18,6 +18,7 @@ module SchimpanseAnspielen
     anderen_auftrag_geben_anspielen(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte)
     anderen_auftrag_vermasseln_anspielen(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte)
     selber_blank_machen_anspielen(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte)
+    andere_blank_machen_anspielen(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte)
     schimpansen_lege_wert
   end
 
@@ -57,6 +58,9 @@ module SchimpanseAnspielen
   end
   
   def selber_blank_machen_anspielen(schimpansen_lege_wert:, karte:)
+  end
+
+  def andere_blank_machen_anspielen(schimpansen_lege_wert:, karte:)
   end
 
 end
