@@ -30,10 +30,10 @@ module SchimpanseAnspielen
     }
     wert = (1 - EIGENE_AUFTRAEGE_HOLEN_WERT_BASIS ** relevante_auftrag_zahl) * 2
     toedlich = eigene_auftraege.any? {|auftrag| auftrag.karte == karte}
-    if auftrag_zu_tief_zum_anspielen?(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte)
+    if auftrag_zu_tief_zum_anspielen?(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte, toedlich: toedlich)
       wert += 1 if toedlich
       schimpansen_lege_wert.warnen(-wert)
-      schimpansen_lege_wert.gefaehrden(-wert * zeitdruck)
+      schimpansen_lege_wert.gefaehrden(-wert * zeitdruck_mit_schwelle)
       schimpansen_lege_wert.nerven(-karte.wert * wert)
     elsif toedlich
       schimpansen_lege_wert.toeten
@@ -42,7 +42,8 @@ module SchimpanseAnspielen
     end
   end
   
-  def auftrag_zu_tief_zum_anspielen?(schimpansen_lege_wert:, karte:)
+  def auftrag_zu_tief_zum_anspielen?(schimpansen_lege_wert:, karte:, toedlich:)
+    return false if (2 - zeitdruck) * 7 > karte.wert
     (1..@spiel_informations_sicht.anzahl_spieler - 1).each {|index|
       moegliche_karten = moegliche_karten_von_spieler_mit_farbe(spieler_index: index, farbe: karte.farbe)
       min_karte = moegliche_karten.min
@@ -52,8 +53,21 @@ module SchimpanseAnspielen
   end
   
   def anderen_auftrag_geben_anspielen(schimpansen_lege_wert:, karte:)
+    @spiel_informations_sicht.unerfuellte_auftraege[1..].each do |auftrag_liste|
+      auftrag_liste.each do |auftrag|
+        if auftrag.karte == karte
+          schimpansen_lege_wert.nerven(-2)
+          schimpansen_lege_wert.gefaehrden(-0.2 * zeitdruck_mit_schwelle)
+        elsif auftrag.farbe == karte.farbe
+          schimpansen_lege_wert.nerven(-1)
+          schimpansen_lege_wert.gefaehrden(-0.1 * zeitdruck_mit_schwelle)
+        end
+      end
+    end
   end
 
+  def 
+  
   def anderen_auftrag_vermasseln_anspielen(schimpansen_lege_wert:, karte:)
   end
   
