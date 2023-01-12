@@ -53,20 +53,35 @@ module SchimpanseAnspielen
   end
   
   def anderen_auftrag_geben_anspielen(schimpansen_lege_wert:, karte:)
+    if @spiel_informations_sicht.unerfuellte_auftraege[1..].flatten.any? {|auftrag| auftrag.karte == karte}
+      anderen_auftrags_karte_anspielen(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte)
+    else
+      anderen_auftrag_farbe_anspielen(schimpansen_lege_wert: schimpansen_lege_wert, karte: karte)
+    end
+  end
+
+  def anderen_auftrags_karte_anspielen(schimpansen_lege_wert:, karte:)
     @spiel_informations_sicht.unerfuellte_auftraege[1..].each do |auftrag_liste|
       auftrag_liste.each do |auftrag|
         if auftrag.karte == karte
           schimpansen_lege_wert.nerven(-2)
           schimpansen_lege_wert.gefaehrden(-0.2 * zeitdruck_mit_schwelle)
-        elsif auftrag.farbe == karte.farbe
+          schimpansen_lege_wert.benachteiligen(karte.wert)
+        end
+      end
+    end
+  end
+
+  def anderen_auftrag_farbe_anspielen(schimpansen_lege_wert:, karte:)
+    @spiel_informations_sicht.unerfuellte_auftraege[1..].each do |auftrag_liste|
+      auftrag_liste.each do |auftrag|
+        if auftrag.farbe == karte.farbe
           schimpansen_lege_wert.nerven(-1)
           schimpansen_lege_wert.gefaehrden(-0.1 * zeitdruck_mit_schwelle)
         end
       end
     end
   end
-
-  def 
   
   def anderen_auftrag_vermasseln_anspielen(schimpansen_lege_wert:, karte:)
   end
