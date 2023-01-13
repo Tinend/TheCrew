@@ -1,3 +1,6 @@
+require_relative 'schimpansen_hand'
+require_relative 'schimpansen_karten_wert_berechner'
+
 module SchimpanseLegen
   def waehle_karte(stich, waehlbare_karten)
     haende = Array.new(anzahl_spieler) {|spieler_index|
