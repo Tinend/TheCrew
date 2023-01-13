@@ -60,7 +60,9 @@ class SchimpansenKartenWertBerechner
   end
 
   def auftraege_von_spieler_fuer_spieler_berechnen(karten_spieler_index:, auftrag_spieler_index:)
-    wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index:)
-    @min_auftraege_wkeit[spieler_index] = 1 - (1 - @min_auftraege_wkeit[spieler_index])(1 - wkeit)
+    min_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index:)
+    @min_auftraege_wkeit[spieler_index] = 1 - (1 - @min_auftraege_wkeit[spieler_index])(1 - min_wkeit)
+    max_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index:)
+    @min_auftraege_wkeit[spieler_index] = 1 - (1 - @min_auftraege_wkeit[spieler_index])(1 - min_wkeit)
   end
 end
