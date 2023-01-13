@@ -1,4 +1,38 @@
 # coding: utf-8
 # verwaltet die erwartete Hand eines beliebigen Spielers für den Schimpansen
 class SchimpansenHand
+  def initialize(stich:, spiel_informations_sicht:, spieler_index:)
+    @spieler_index = spieler_index
+    @spiel_informations_sicht = spiel_informations_sicht
+    @stich = stich
+    @moegliche_karten = @spiel_informations_sicht.moegliche_karten(spieler_index)
+  end
+
+  def min_auftraege_lege_wkeit(spieler_index:, karte:)
+    wkeit = 0
+    farbe = stich.farbe
+    farbe = karte.farbe if stich.karten.empty?
+    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index]
+    moegliche_auftraege.select! {|auftrag|
+      @moegliche_karten.any? {|moegliche_karte| moegliche_karte == @auftrag.karte}
+    }
+    moegliche_auftraege.each do |auftrag|
+      auftrag_wkeit = min_wkeit_auftrag_legen(spieler_index: spieler_index, farbe: farbe, auftrag: auftrag)
+      wkeit = 1 - (1 - wkeit) * (1 - auftrag_wkeit)
+    end
+  end
+
+  def min_wkeit_auftrag_legen(spieler_index:, farbe:, auftrag:)
+    hat_auftrag_sicher @spiel_informations_sicht.sichere_karten(spieler_index).any? {|karte| karte == auftrag.karte}
+    if auftrag.farbe == farbe && hat_auftrag_sicher
+       0.75 ** (@moegliche_karten.select{|karte| karte.farbe == auftrag.farbe)}.length - 1)
+    elsif auftrag.farbe == farbe
+      0.75 ** (@moegliche_karten.select{|karte| karte.farbe == auftrag.farbe)}.length - 1) * 0.25
+    else
+      0
+    end
+  end
+
+  def max_auftraege_lege_wkeit(spieler_index:, karte:)
+  end
 end

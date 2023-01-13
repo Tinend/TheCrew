@@ -2,7 +2,7 @@
 # Berechnet wie gut es ist, eine bestimmte Karte zu legen
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
-  def initiative(spiel_informations_sicht:, stich:, karte:, haende:)
+  def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
     @spiel_informations_sicht = spiel_informations_sicht
     @stich = stich
@@ -60,9 +60,9 @@ class SchimpansenKartenWertBerechner
   end
 
   def auftraege_von_spieler_fuer_spieler_berechnen(karten_spieler_index:, auftrag_spieler_index:)
-    min_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index:)
+    min_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index: spieler_index, karte: @karte)
     @min_auftraege_wkeit[spieler_index] = 1 - (1 - @min_auftraege_wkeit[spieler_index])(1 - min_wkeit)
-    max_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index:)
-    @min_auftraege_wkeit[spieler_index] = 1 - (1 - @min_auftraege_wkeit[spieler_index])(1 - min_wkeit)
+    max_wkeit = @haende[karten_spieler_index].max_auftraege_lege_wkeit(spieler_index: spieler_index, karte: @karte)
+    @max_auftraege_wkeit[spieler_index] = 1 - (1 - @max_auftraege_wkeit[spieler_index])(1 - min_wkeit)
   end
 end
