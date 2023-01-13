@@ -14,7 +14,6 @@ require:
  - rubocop-rspec
 AllCops:
   TargetRubyVersion: 3.0
-  Exclude:
   - 'lib/entscheider/reinwerfer.rb'
 Style/Encoding:
   Enabled: false

@@ -252,11 +252,14 @@ class Reinwerfer < Entscheider
     selbst_helfende_karten = auftrags_nehmende_karten(waehlbare_karten, stich)
     return selbst_helfende_karten.sample(random: @zufalls_generator) unless selbst_helfende_karten.empty?
 
+    kleinstes_uebel(stich, waehlbare_karten, nehmende_karten)
+  end
+
+  # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
+  def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten)
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass der Stich Sieger bleibt.
-    if sollte_bleiben
-      nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
-      return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
-    end
+    nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
+    return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme, dass ein späterer Spieler übernimmt.
     nehmende_karten.each do |nehmende_karte|
@@ -264,11 +267,15 @@ class Reinwerfer < Entscheider
       return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
     end
 
-    # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist.
+    # Wenn dieser Punkt erreicht wird, haben wir eh schon verloren. Es ist eigentlich egal, was wir hier machen.
+
+    # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist,
+    # damit der Reinwerfer nicht mehrere Aufträge auf einmal vermasselt (auch wenn das egal ist).
     nicht_destruktive_karten = waehlbare_karten - alle_auftrags_karten
     return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
 
     # Dann wenn möglich eine Karte werfen, die eine eigene Auftragskarte ist.
+    # Der Reinwerfer vermasselt es sich lieber selbst als anderen.
     nicht_andere_destruktive_karten = waehlbare_karten - auftrags_karten_anderer(0)
     return nicht_andere_destruktive_karten.sample(random: @zufalls_generator) unless nicht_andere_destruktive_karten.empty?
 
