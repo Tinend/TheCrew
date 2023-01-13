@@ -187,24 +187,36 @@ class Reinwerfer < Entscheider
     kandidaten
   end
 
+  def anspielen(waehlbare_karten)
+    waehlbare_karten.sample(random: @zufalls_generator)
+  end
+
   def waehle_karte(stich, waehlbare_karten)
     return waehlbare_karten.first if waehlbare_karten.length == 1
-    return waehlbare_karten.sample(random: @zufalls_generator) if stich.empty?
+    return anspielen(waehlbare_karten) if stich.empty?
+    abspielen(stich, waehlbare_karten)
+  end
 
+  def toetlichen_stich_abspielen(stich, waehlbare_karten)
+    # Wenn möglich eine Auftragskarte rein schmeissen.
+    hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
+    return hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
+
+    # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
+    gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
+    return gefaehrliche_karten.sample(random: @zufalls_generator) unless gefaehrliche_karten.empty?
+
+    # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt.
+    nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
+    return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
+
+    # Ansonsten haben wir eh verloren und nehmen eine zufällige Karte.
+    waehlbare_karten.sample(random: @zufalls_generator)
+  end
+
+  def abspielen(stich, waehlbare_karten)
     # Wenn dieser Stich eh schon tötlich ist, wenn er nicht durchkommt.
-    if toetlicher_stich?(stich)
-      # Wenn möglich eine Auftragskarte rein schmeissen.
-      hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
-      return hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
-
-      # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
-      gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten)
-      return gefaehrliche_karten.sample(random: @zufalls_generator) unless gefaehrliche_karten.empty?
-
-      # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt.
-      nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
-      return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
-    end
+    return toetlichen_stich_abspielen(stich, waehlbare_karten) if toetlicher_stich?(stich)
 
     # Wenn der Sieger bleiben sollte, solange die Spieler danach vernünftig sind.
     sollte_bleiben = karte_sollte_bleiben?(stich, stich.staerkste_gespielte_karte)
