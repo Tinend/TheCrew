@@ -6,10 +6,9 @@ require_relative '../farbe'
 require_relative 'saeuger_auftrag_nehmer'
 require_relative 'spiel_informations_sicht_benutzender'
 require_relative 'rhinoceros_abspielen'
-require_relative 'schimpanse/schimpanse_anspielen'
 require_relative 'schimpanse/schimpanse_kommunizierender'
-require_relative 'schimpanse/schimpanse_karten_wert'
 require_relative 'schimpanse/schimpanse_zeitdruck'
+require_relative 'schimpanse/schimpanse_legen'
 require_relative 'spiel_informations_sicht_benutzender'
 
 # Hangelt sich zwischen den Aufträgen durch
@@ -19,16 +18,8 @@ class Schimpanse < Entscheider
   include SaeugerAuftragNehmer
   include SpielInformationsSichtBenutzender
   include RhinocerosAbspielen
-  include SchimpanseAnspielen
+  include SchimpanseLegen
   include SchimpanseKommunizierender
   include SpielInformationsSichtBenutzender
   include SchimpanseZeitdruck
-
-  def waehle_karte(stich, waehlbare_karten)
-    if stich.karten.length.zero?
-      anspielen(waehlbare_karten)
-    else
-      abspielen(stich, waehlbare_karten)
-    end
-  end
 end

@@ -10,30 +10,46 @@ class SchimpansenHand
 
   def min_auftraege_lege_wkeit(spieler_index:, karte:)
     wkeit = 0
-    farbe = stich.farbe
-    farbe = karte.farbe if stich.karten.empty?
+    farbe = @stich.farbe
+    farbe = karte.farbe if @stich.karten.empty?
     moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index]
     moegliche_auftraege.select! {|auftrag|
-      @moegliche_karten.any? {|moegliche_karte| moegliche_karte == @auftrag.karte}
+      @moegliche_karten.any? {|moegliche_karte| moegliche_karte == auftrag.karte}
     }
     moegliche_auftraege.each do |auftrag|
       auftrag_wkeit = min_wkeit_auftrag_legen(spieler_index: spieler_index, farbe: farbe, auftrag: auftrag)
       wkeit = 1 - (1 - wkeit) * (1 - auftrag_wkeit)
     end
+    wkeit
+  end
+
+  def max_auftraege_lege_wkeit(spieler_index:, karte:)
+    wkeit = 0
+    farbe = @stich.farbe
+    farbe = karte.farbe if @stich.karten.empty?
+    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index]
+    moegliche_auftraege.select! {|auftrag|
+      @moegliche_karten.any? {|moegliche_karte| moegliche_karte == auftrag.karte}
+    }
+    moegliche_auftraege.each do |auftrag|
+      auftrag_wkeit = min_wkeit_auftrag_legen(spieler_index: spieler_index, farbe: farbe, auftrag: auftrag)
+      wkeit = 1 - (1 - wkeit) * (1 - auftrag_wkeit)
+    end
+    wkeit
   end
 
   def min_wkeit_auftrag_legen(spieler_index:, farbe:, auftrag:)
     hat_auftrag_sicher = @spiel_informations_sicht.sichere_karten(spieler_index).any? {|karte| karte == auftrag.karte}
     if auftrag.farbe == farbe && hat_auftrag_sicher
-       0.75 ** (@moegliche_karten.select{|karte| karte.farbe == auftrag.farbe)}.length - 1)
+       0.75 ** (@moegliche_karten.select{|karte| karte.farbe == auftrag.farbe}.length - 1)
     elsif auftrag.farbe == farbe
-      0.75 ** (@moegliche_karten.select{|karte| karte.farbe == auftrag.farbe)}.length - 1) * 0.25
+      0.75 ** (@moegliche_karten.select{|karte| karte.farbe == auftrag.farbe}.length - 1) * 0.25
     else
       0
     end
   end
 
-  def max_auftraege_lege_wkeit(spieler_index:, karte:)
+  def max_wkeit_auftraege_lege(spieler_index:, karte:)
     hat_auftrag_sicher = @spiel_informations_sicht.sichere_karten(spieler_index).any? {|karte| karte == auftrag.karte}
     if auftrag.farbe == farbe && hat_auftrag_sicher
       1
@@ -46,7 +62,7 @@ class SchimpansenHand
  
   def min_sieges_wkeit(staerkste_karte)
     return 0 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? {|karte|
-      !karte.schlaegt(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
+      !karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
     hoehere_karten = @moegliche_karten.select {|karte| karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
     tiefere_karten = @moegliche_karten.select {|karte| !karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
     1 - (1 - (1 - 0.75 ** tiefere_karten.length)) * (1 - 0.75 ** hoehere_karten.length)
@@ -54,7 +70,7 @@ class SchimpansenHand
 
   def max_sieges_wkeit(staerkste_karte)
     return 1 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? {|karte|
-      karte.schlaegt(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
+      karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
     hoehere_karten = @moegliche_karten.select {|karte| karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
     tiefere_karten = @moegliche_karten.select {|karte| !karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
     (1 - 0.75 ** hoehere_karten.length)

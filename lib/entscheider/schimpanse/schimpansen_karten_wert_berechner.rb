@@ -31,9 +31,13 @@ class SchimpansenKartenWertBerechner
     resultate = Array.new(anzahl_spieler) {|spieler_index|
       resultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).collect{|sieges_auftrag_wkeit|
         sieges_auftrag_wkeit.reduce(:*)
-      }
-      resultat /= @min_sieges_wkeit[spieler_index]
-      resultat /= @min_auftraege_wkeit[spieler_index]
+      }.reduce(:+)
+      if @min_sieges_wkeit[spieler_index] != 0 && @min_auftraege_wkeit[spieler_index]
+        resultat /= @min_sieges_wkeit[spieler_index]
+        resultat /= @min_auftraege_wkeit[spieler_index]
+      else
+        resultat = 1
+      end
       resultat *= @max_sieges_wkeit[spieler_index]
       resultat *= @max_auftraege_wkeit[spieler_index]
     }
@@ -70,18 +74,18 @@ class SchimpansenKartenWertBerechner
 
   def auftraege_von_spieler_berechnen(spieler_index:)
     (0..anzahl_spieler - 1).each do |auftrag_spieler_index|
-      min_auftraege_von_spieler_fuer_spieler_berechnen(
-        karten_spieler_index: karten_spieler_index,
+      auftraege_von_spieler_fuer_spieler_berechnen(
+        karten_spieler_index: spieler_index,
         auftrag_spieler_index: auftrag_spieler_index
       )
     end
   end
 
   def auftraege_von_spieler_fuer_spieler_berechnen(karten_spieler_index:, auftrag_spieler_index:)
-    min_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index: spieler_index, karte: @karte)
-    @min_auftraege_wkeit[spieler_index] = 1 - (1 - @min_auftraege_wkeit[spieler_index])(1 - min_wkeit)
-    max_wkeit = @haende[karten_spieler_index].max_auftraege_lege_wkeit(spieler_index: spieler_index, karte: @karte)
-    @max_auftraege_wkeit[spieler_index] = 1 - (1 - @max_auftraege_wkeit[spieler_index])(1 - min_wkeit)
+    min_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index: auftrag_spieler_index, karte: @karte)
+    @min_auftraege_wkeit[auftrag_spieler_index] = 1 - (1 - @min_auftraege_wkeit[auftrag_spieler_index]) * (1 - min_wkeit)
+    max_wkeit = @haende[karten_spieler_index].max_auftraege_lege_wkeit(spieler_index: auftrag_spieler_index, karte: @karte)
+    @max_auftraege_wkeit[auftrag_spieler_index] = 1 - (1 - @max_auftraege_wkeit[auftrag_spieler_index]) * (1 - min_wkeit)
   end
 
   def sieges_wkeiten_berechnen
