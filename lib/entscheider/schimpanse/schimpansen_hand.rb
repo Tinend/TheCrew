@@ -12,7 +12,7 @@ class SchimpansenHand
     wkeit = 0
     farbe = @stich.farbe
     farbe = karte.farbe if @stich.karten.empty?
-    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index]
+    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
     moegliche_auftraege.select! {|auftrag|
       @moegliche_karten.any? {|moegliche_karte| moegliche_karte == auftrag.karte}
     }
@@ -27,7 +27,7 @@ class SchimpansenHand
     wkeit = 0
     farbe = @stich.farbe
     farbe = karte.farbe if @stich.karten.empty?
-    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index]
+    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
     moegliche_auftraege.select! {|auftrag|
       @moegliche_karten.any? {|moegliche_karte| moegliche_karte == auftrag.karte}
     }
@@ -59,8 +59,13 @@ class SchimpansenHand
       0
     end
   end
- 
+
+  def gespielt?
+    @spieler_index == 0 or @spieler_index + @stich.karten.length >= @spiel_informations_sicht.anzahl_spieler
+  end
+
   def min_sieges_wkeit(staerkste_karte)
+    return 0 if gespielt?
     return 0 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? {|karte|
       !karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
     hoehere_karten = @moegliche_karten.select {|karte| karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
@@ -69,10 +74,10 @@ class SchimpansenHand
   end
 
   def max_sieges_wkeit(staerkste_karte)
+    return 0 if gespielt?
     return 1 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? {|karte|
       karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
     hoehere_karten = @moegliche_karten.select {|karte| karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
-    tiefere_karten = @moegliche_karten.select {|karte| !karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
     (1 - 0.75 ** hoehere_karten.length)
   end
 end

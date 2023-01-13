@@ -11,7 +11,9 @@ class SchimpansenKartenWertBerechner
     @max_auftraege_wkeit = Array.new(anzahl_spieler, 0.0)    
     @min_sieges_wkeit = Array.new(anzahl_spieler, 0.0)
     @max_sieges_wkeit = Array.new(anzahl_spieler, 0.0)    
-    @moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege
+    @moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege.collect {|auftraege|
+      auftraege.dup
+    }
     @moegliche_auftraege.each do |auftrag_liste|
       auftrag_liste.reject! {|auftrag|
         auftrag.karte == @karte || @stich.karten.any?{|stich_karte| auftrag.karte == stich_karte}
@@ -29,26 +31,30 @@ class SchimpansenKartenWertBerechner
     auftraege_berechnen
     sieges_wkeiten_berechnen
     resultate = Array.new(anzahl_spieler) {|spieler_index|
-      resultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).collect{|sieges_auftrag_wkeit|
+      resultat = -@min_sieges_wkeit.zip(@min_auftraege_wkeit).collect{|sieges_auftrag_wkeit|
         sieges_auftrag_wkeit.reduce(:*)
       }.reduce(:+)
-      if @min_sieges_wkeit[spieler_index] != 0 && @min_auftraege_wkeit[spieler_index]
-        resultat /= @min_sieges_wkeit[spieler_index]
-        resultat /= @min_auftraege_wkeit[spieler_index]
-      else
-        resultat = 1
-      end
-      resultat *= @max_sieges_wkeit[spieler_index]
-      resultat *= @max_auftraege_wkeit[spieler_index]
+      resultat += @min_sieges_wkeit[spieler_index] * @min_auftraege_wkeit[spieler_index]
+      resultat += @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
+      resultat
     }
+    p @min_sieges_wkeit
+    p @max_sieges_wkeit
+    p @min_auftraege_wkeit
+    p @max_auftraege_wkeit
+    p resultate
+    puts "#{@karte} #{resultate.max}"
     resultate.max
   end
 
   # Liest die Aufträge aus dem Stich, wenn diese Karte gelegt wird
   def auftraege_aus_stich_lesen
+    puts
+    p @min_auftraege_wkeit
     @spiel_informations_sicht.unerfuellte_auftraege.each_with_index do |auftrag_liste, spieler_index|
       @stich.karten.each do |karte|
         if auftrag_liste.any? {|auftrag| auftrag.karte == karte}
+          puts karte
           @min_auftraege_wkeit[spieler_index] = 1
           @max_auftraege_wkeit[spieler_index] = 1
         end
@@ -58,6 +64,7 @@ class SchimpansenKartenWertBerechner
         @max_auftraege_wkeit[spieler_index] = 1
       end
     end
+    p @min_auftraege_wkeit
   end
 
   def anzahl_spieler
@@ -91,12 +98,19 @@ class SchimpansenKartenWertBerechner
   def sieges_wkeiten_berechnen
     staerkste_karte = @karte
     staerkste_karte = @stich.staerkste_karte if @stich.karten.length > 0 && !@karte.schlaegt?(@stich.staerkste_karte)
-    @min_sieges_wkeit.collect.with_index {|wkeit, spieler_index|
+    @min_sieges_wkeit.collect!.with_index {|wkeit, spieler_index|
       1 - (1 - wkeit) * (1 - @haende[spieler_index].min_sieges_wkeit(staerkste_karte))
-    } 
-    @max_sieges_wkeit.collect.with_index {|wkeit, spieler_index|
+    }
+    @max_sieges_wkeit.collect!.with_index {|wkeit, spieler_index|
       1 - (1 - wkeit) * (1 - @haende[spieler_index].max_sieges_wkeit(staerkste_karte))
     }
+    if staerkste_karte == @karte
+      staerkster_index = 0
+    else
+      staerkster_index = @stich.karten.find_index(staerkste_karte)
+    end
+    @min_sieges_wkeit[staerkster_index] = [1 - @max_sieges_wkeit.reduce(:+), 0].max
+    @max_sieges_wkeit[staerkster_index] = [1 - @min_sieges_wkeit.reduce(:+) - @min_sieges_wkeit[staerkster_index], 0].max
   end
 end
 
