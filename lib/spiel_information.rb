@@ -178,6 +178,10 @@ class SpielInformation
       auftraege.first
     end
 
+    def eigene_unerfuellte_auftraege
+      unerfuellte_auftraege.first
+    end
+
     def ist_gegangen?(karte)
       stiche.any? { |s| s.karten.include?(karte) }
     end

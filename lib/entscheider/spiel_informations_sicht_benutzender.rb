@@ -15,6 +15,10 @@ module SpielInformationsSichtBenutzender
     @spiel_informations_sicht.eigene_auftraege
   end
 
+  def eigene_unerfuellte_auftraege
+    @spiel_informations_sicht.eigene_auftraege
+  end
+
   def alle_auftraege
     @spiel_informations_sicht.auftraege.flatten
   end
