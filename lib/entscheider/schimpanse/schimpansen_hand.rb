@@ -53,10 +53,12 @@ class SchimpansenHand
     hat_auftrag_sicher = @spiel_informations_sicht.sichere_karten(spieler_index).any? {|karte| karte == auftrag.karte}
     if auftrag.farbe == farbe && hat_auftrag_sicher
       1
-    elsif auftrag.farbe
+    elsif auftrag.farbe == farbe
       0.25
+    elsif hat_auftrag_sicher
+      0.75 ** @moegliche_karten.select{|karte| karte.farbe == auftrag.farbe}.length
     else
-      0
+      0.25 * 0.75 ** @moegliche_karten.select{|karte| karte.farbe == auftrag.farbe}.length
     end
   end
 
