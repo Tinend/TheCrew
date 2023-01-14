@@ -37,24 +37,13 @@ class SchimpansenKartenWertBerechner
       resultat = vorresultat + (1 - @min_sieges_wkeit[spieler_index]) * @min_auftraege_wkeit[spieler_index]
       resultat + @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
     }
-    #resultate = @max_sieges_wkeit.collect.with_index {|max_sieges_wkeit, spieler_index|
-    #  resultat = 0
-    #  @min_auftraege_wkeit.each_with_index do |auftrag_wkeit, index|
-    #    if index == spieler_index
-    #      resultat += @max_auftraege_wkeit[spieler_index] * max_sieges_wkeit
-    #    else
-    #      resultat -= auftrag_wkeit * max_sieges_wkeit
-    #    end
-    #  end
-    #  resultat
-    #}
-    puts "#{@karte} #{resultate.max}"
-    p vorresultat
-    p @min_sieges_wkeit
-    p @max_sieges_wkeit
-    p @min_auftraege_wkeit
-    p @max_auftraege_wkeit
-    p resultate
+    #puts "#{@karte} #{resultate.max}"
+    #p vorresultat
+    #p @min_sieges_wkeit
+    #p @max_sieges_wkeit
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
+    #p resultate
     resultate.max
   end
 
@@ -99,7 +88,7 @@ class SchimpansenKartenWertBerechner
     min_wkeit = @haende[karten_spieler_index].min_auftraege_lege_wkeit(spieler_index: auftrag_spieler_index, karte: @karte)
     @min_auftraege_wkeit[auftrag_spieler_index] = 1 - (1 - @min_auftraege_wkeit[auftrag_spieler_index]) * (1 - min_wkeit)
     max_wkeit = @haende[karten_spieler_index].max_auftraege_lege_wkeit(spieler_index: auftrag_spieler_index, karte: @karte)
-    @max_auftraege_wkeit[auftrag_spieler_index] = 1 - (1 - @max_auftraege_wkeit[auftrag_spieler_index]) * (1 - min_wkeit)
+    @max_auftraege_wkeit[auftrag_spieler_index] = 1 - (1 - @max_auftraege_wkeit[auftrag_spieler_index]) * (1 - max_wkeit)
   end
 
   def sieges_wkeiten_berechnen
