@@ -38,23 +38,20 @@ class SchimpansenKartenWertBerechner
       resultat += @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
       resultat
     }
-    p @min_sieges_wkeit
-    p @max_sieges_wkeit
-    p @min_auftraege_wkeit
-    p @max_auftraege_wkeit
-    p resultate
-    puts "#{@karte} #{resultate.max}"
+    #p @min_sieges_wkeit
+    #p @max_sieges_wkeit
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
+    #p resultate
+    #puts "#{@karte} #{resultate.max}"
     resultate.max
   end
 
   # Liest die Aufträge aus dem Stich, wenn diese Karte gelegt wird
   def auftraege_aus_stich_lesen
-    puts
-    p @min_auftraege_wkeit
     @spiel_informations_sicht.unerfuellte_auftraege.each_with_index do |auftrag_liste, spieler_index|
       @stich.karten.each do |karte|
         if auftrag_liste.any? {|auftrag| auftrag.karte == karte}
-          puts karte
           @min_auftraege_wkeit[spieler_index] = 1
           @max_auftraege_wkeit[spieler_index] = 1
         end
@@ -64,7 +61,6 @@ class SchimpansenKartenWertBerechner
         @max_auftraege_wkeit[spieler_index] = 1
       end
     end
-    p @min_auftraege_wkeit
   end
 
   def anzahl_spieler

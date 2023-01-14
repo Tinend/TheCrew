@@ -70,7 +70,7 @@ class SchimpansenHand
       !karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
     hoehere_karten = @moegliche_karten.select {|karte| karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
     tiefere_karten = @moegliche_karten.select {|karte| !karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
-    1 - (1 - (1 - 0.75 ** tiefere_karten.length)) * (1 - 0.75 ** hoehere_karten.length)
+    (1 - (1 - 0.75 ** tiefere_karten.length)) * (1 - 0.75 ** hoehere_karten.length)
   end
 
   def max_sieges_wkeit(staerkste_karte)
