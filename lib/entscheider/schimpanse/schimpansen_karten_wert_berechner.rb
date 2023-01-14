@@ -37,13 +37,13 @@ class SchimpansenKartenWertBerechner
       resultat = vorresultat + (1 - @min_sieges_wkeit[spieler_index]) * @min_auftraege_wkeit[spieler_index]
       resultat + @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
     }
-    puts "#{@karte} #{resultate.max}"
-    p vorresultat
-    p @min_sieges_wkeit
-    p @max_sieges_wkeit
-    p @min_auftraege_wkeit
-    p @max_auftraege_wkeit
-    p resultate
+    #puts "#{@karte} #{resultate.max}"
+    #p vorresultat
+    #p @min_sieges_wkeit
+    #p @max_sieges_wkeit
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
+    #p resultate
     resultate.max
   end
 

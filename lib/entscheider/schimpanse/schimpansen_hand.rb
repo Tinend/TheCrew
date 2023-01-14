@@ -6,6 +6,8 @@ class SchimpansenHand
     @spiel_informations_sicht = spiel_informations_sicht
     @stich = stich
     @moegliche_karten = @spiel_informations_sicht.moegliche_karten(spieler_index)
+    @sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index)
+    @strikt_moegliche_karten = @moegliche_karten - @sichere_karten
   end
 
   def min_auftraege_lege_wkeit(spieler_index:, karte:)
@@ -70,16 +72,33 @@ class SchimpansenHand
     return 0 if gespielt?
     return 0 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? {|karte|
       !karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
-    hoehere_karten = @moegliche_karten.select {|karte| karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
-    tiefere_karten = @moegliche_karten.select {|karte| !karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
-    (1 - (1 - 0.75 ** tiefere_karten.length)) * (1 - 0.75 ** hoehere_karten.length)
+    moegliche_tiefere_karten = @strikt_moegliche_karten.select {|karte|
+      !karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe
+    }
+    if @sichere_karten.any? {|karte| karte.farbe == staerkste_karte.farbe && karte.schlaegt?(staerkste_karte)}
+      kann_hoeher = 1
+    else
+      moegliche_hoehere_karten = @strikt_moegliche_karten.select {|karte|
+        karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe
+      }
+      kann_hoeher = 1 - 0.75 ** moegliche_hoehere_karten.length
+    end
+    (1 - (1 - 0.75 ** moegliche_tiefere_karten.length)) * kann_hoeher
   end
 
   def max_sieges_wkeit(staerkste_karte)
     return 0 if gespielt?
     return 1 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? {|karte|
       karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe}
-    hoehere_karten = @moegliche_karten.select {|karte| karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe}
-    (1 - 0.75 ** hoehere_karten.length)
+    if @sichere_karten.any? {|karte| karte.farbe == staerkste_karte.farbe && karte.schlaegt?(staerkste_karte)} ||
+       (@sichere_karten.all? {|karte| karte.farbe != staerkste_karte.farbe} &&
+        @sichere_karten.any? {|karte| karte.schlaegt?(staerkste_karte)})
+      1
+    else
+      moegliche_hoehere_karten = @strikt_moegliche_karten.select {|karte|
+        karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe
+      }
+      (1 - 0.75 ** moegliche_hoehere_karten.length)
+    end
   end
 end
