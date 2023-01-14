@@ -20,6 +20,7 @@ class SchimpansenHand
       auftrag_wkeit = min_wkeit_auftrag_legen(spieler_index: spieler_index, farbe: farbe, auftrag: auftrag)
       wkeit = 1 - (1 - wkeit) * (1 - auftrag_wkeit)
     end
+    p [1, wkeit]
     wkeit
   end
 
@@ -35,6 +36,7 @@ class SchimpansenHand
       auftrag_wkeit = max_wkeit_auftrag_legen(spieler_index: spieler_index, farbe: farbe, auftrag: auftrag)
       wkeit = 1 - (1 - wkeit) * (1 - auftrag_wkeit)
     end
+    p [2, wkeit]
     wkeit
   end
 
