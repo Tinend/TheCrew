@@ -6,6 +6,10 @@ module SpielInformationsSichtBenutzender
     @spiel_informations_sicht = spiel_informations_sicht
   end
 
+  def anzahl_spieler
+    @spiel_informations_sicht.anzahl_spieler
+  end
+
   def karten
     @spiel_informations_sicht.karten
   end
