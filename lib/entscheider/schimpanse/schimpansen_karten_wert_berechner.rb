@@ -37,6 +37,17 @@ class SchimpansenKartenWertBerechner
       resultat = vorresultat + @min_sieges_wkeit[spieler_index] * (1 - @min_auftraege_wkeit[spieler_index])
       resultat + @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
     }
+    resultate = @max_sieges_wkeit.collect.with_index {|max_sieges_wkeit, spieler_index|
+      resultat = 0
+      @min_auftraege_wkeit.each_with_index do |auftrag_wkeit, index|
+        if index == spieler_index
+          resultat += @max_auftraege_wkeit[spieler_index] * max_sieges_wkeit
+        else
+          resultat += auftrag_wkeit * max_sieges_wkeit
+        end
+      end
+      resultat
+    }
     #puts "#{@karte} #{resultate.max}"
     #p @min_sieges_wkeit
     #p @max_sieges_wkeit
