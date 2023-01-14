@@ -32,7 +32,7 @@ class SchimpansenHand
       @moegliche_karten.any? {|moegliche_karte| moegliche_karte == auftrag.karte}
     }
     moegliche_auftraege.each do |auftrag|
-      auftrag_wkeit = min_wkeit_auftrag_legen(spieler_index: spieler_index, farbe: farbe, auftrag: auftrag)
+      auftrag_wkeit = max_wkeit_auftrag_legen(spieler_index: spieler_index, farbe: farbe, auftrag: auftrag)
       wkeit = 1 - (1 - wkeit) * (1 - auftrag_wkeit)
     end
     wkeit
@@ -49,7 +49,7 @@ class SchimpansenHand
     end
   end
 
-  def max_wkeit_auftraege_lege(spieler_index:, karte:)
+  def max_wkeit_auftrag_legen(spieler_index:, farbe:, auftrag:)
     hat_auftrag_sicher = @spiel_informations_sicht.sichere_karten(spieler_index).any? {|karte| karte == auftrag.karte}
     if auftrag.farbe == farbe && hat_auftrag_sicher
       1

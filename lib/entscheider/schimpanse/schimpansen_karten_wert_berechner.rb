@@ -34,54 +34,43 @@ class SchimpansenKartenWertBerechner
         (1 - sieges_auftrag_wkeit[0]) * sieges_auftrag_wkeit[1]
       }.reduce(:+)
     resultate = Array.new(anzahl_spieler) {|spieler_index|
-      resultat = vorresultat + @min_sieges_wkeit[spieler_index] * (1 - @min_auftraege_wkeit[spieler_index])
+      resultat = vorresultat + (1 - @min_sieges_wkeit[spieler_index]) * @min_auftraege_wkeit[spieler_index]
       resultat + @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
     }
-    resultate = @max_sieges_wkeit.collect.with_index {|max_sieges_wkeit, spieler_index|
-      resultat = 0
-      @min_auftraege_wkeit.each_with_index do |auftrag_wkeit, index|
-        if index == spieler_index
-          resultat += @max_auftraege_wkeit[spieler_index] * max_sieges_wkeit
-        else
-          resultat += auftrag_wkeit * max_sieges_wkeit
-        end
-      end
-      resultat
-    }
-    #puts "#{@karte} #{resultate.max}"
-    #p @min_sieges_wkeit
-    #p @max_sieges_wkeit
-    #p @min_auftraege_wkeit
-    #p @max_auftraege_wkeit
-    #p resultate
+    #resultate = @max_sieges_wkeit.collect.with_index {|max_sieges_wkeit, spieler_index|
+    #  resultat = 0
+    #  @min_auftraege_wkeit.each_with_index do |auftrag_wkeit, index|
+    #    if index == spieler_index
+    #      resultat += @max_auftraege_wkeit[spieler_index] * max_sieges_wkeit
+    #    else
+    #      resultat -= auftrag_wkeit * max_sieges_wkeit
+    #    end
+    #  end
+    #  resultat
+    #}
+    puts "#{@karte} #{resultate.max}"
+    p vorresultat
+    p @min_sieges_wkeit
+    p @max_sieges_wkeit
+    p @min_auftraege_wkeit
+    p @max_auftraege_wkeit
+    p resultate
     resultate.max
   end
 
   # Liest die Aufträge aus dem Stich, wenn diese Karte gelegt wird
   def auftraege_aus_stich_lesen
     @spiel_informations_sicht.unerfuellte_auftraege.each_with_index do |auftrag_liste, spieler_index|
-      #print "Auftraege von #{spieler_index}: "
-      auftrag_liste.each do |auftrag|
-        #print auftrag.karte
-        #print " "
-      end
-      #puts
-      #print "Karten im Stich:"
       @stich.karten.each do |karte|
-        #print " #{karte}"
         if auftrag_liste.any? {|auftrag| auftrag.karte == karte}
-          #print "!"
           @min_auftraege_wkeit[spieler_index] += 1
           @max_auftraege_wkeit[spieler_index] += 1
         end
       end
-      #print " #{@karte}"
       if auftrag_liste.any? {|auftrag| auftrag.karte == @karte}
-        #print "!"
         @min_auftraege_wkeit[spieler_index] += 1
         @max_auftraege_wkeit[spieler_index] += 1
       end
-      #puts
     end
   end
 
