@@ -30,36 +30,47 @@ class SchimpansenKartenWertBerechner
   def wert
     auftraege_berechnen
     sieges_wkeiten_berechnen
-    resultate = Array.new(anzahl_spieler) {|spieler_index|
-      resultat = -@min_sieges_wkeit.zip(@min_auftraege_wkeit).collect{|sieges_auftrag_wkeit|
-        sieges_auftrag_wkeit.reduce(:*)
+    vorresultat = -@min_sieges_wkeit.zip(@min_auftraege_wkeit).collect{|sieges_auftrag_wkeit|
+        (1 - sieges_auftrag_wkeit[0]) * sieges_auftrag_wkeit[1]
       }.reduce(:+)
-      resultat += @min_sieges_wkeit[spieler_index] * @min_auftraege_wkeit[spieler_index]
-      resultat += @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
-      resultat
+    resultate = Array.new(anzahl_spieler) {|spieler_index|
+      resultat = vorresultat + @min_sieges_wkeit[spieler_index] * (1 - @min_auftraege_wkeit[spieler_index])
+      resultat + @max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index]
     }
+    #puts "#{@karte} #{resultate.max}"
     #p @min_sieges_wkeit
     #p @max_sieges_wkeit
     #p @min_auftraege_wkeit
     #p @max_auftraege_wkeit
     #p resultate
-    #puts "#{@karte} #{resultate.max}"
     resultate.max
   end
 
   # Liest die Aufträge aus dem Stich, wenn diese Karte gelegt wird
   def auftraege_aus_stich_lesen
     @spiel_informations_sicht.unerfuellte_auftraege.each_with_index do |auftrag_liste, spieler_index|
+      #print "Auftraege von #{spieler_index}: "
+      auftrag_liste.each do |auftrag|
+        #print auftrag.karte
+        #print " "
+      end
+      #puts
+      #print "Karten im Stich:"
       @stich.karten.each do |karte|
+        #print " #{karte}"
         if auftrag_liste.any? {|auftrag| auftrag.karte == karte}
-          @min_auftraege_wkeit[spieler_index] = 1
-          @max_auftraege_wkeit[spieler_index] = 1
+          #print "!"
+          @min_auftraege_wkeit[spieler_index] += 1
+          @max_auftraege_wkeit[spieler_index] += 1
         end
       end
+      #print " #{@karte}"
       if auftrag_liste.any? {|auftrag| auftrag.karte == @karte}
-        @min_auftraege_wkeit[spieler_index] = 1
-        @max_auftraege_wkeit[spieler_index] = 1
+        #print "!"
+        @min_auftraege_wkeit[spieler_index] += 1
+        @max_auftraege_wkeit[spieler_index] += 1
       end
+      #puts
     end
   end
 
@@ -103,10 +114,10 @@ class SchimpansenKartenWertBerechner
     if staerkste_karte == @karte
       staerkster_index = 0
     else
-      staerkster_index = @stich.karten.find_index(staerkste_karte)
+      staerkster_index = @stich.karten.find_index(staerkste_karte) - @stich.karten.length
     end
     @min_sieges_wkeit[staerkster_index] = [1 - @max_sieges_wkeit.reduce(:+), 0].max
-    @max_sieges_wkeit[staerkster_index] = [1 - @min_sieges_wkeit.reduce(:+) - @min_sieges_wkeit[staerkster_index], 0].max
+    @max_sieges_wkeit[staerkster_index] = [1 - @min_sieges_wkeit.reduce(:+) + @min_sieges_wkeit[staerkster_index], 0].max
   end
 end
 
