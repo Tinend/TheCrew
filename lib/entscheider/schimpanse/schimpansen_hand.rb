@@ -5,8 +5,8 @@ class SchimpansenHand
     @spieler_index = spieler_index
     @spiel_informations_sicht = spiel_informations_sicht
     @stich = stich
-    @moegliche_karten = @spiel_informations_sicht.moegliche_karten(spieler_index)
-    @sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index)
+    @moegliche_karten = @spiel_informations_sicht.moegliche_karten(spieler_index).dup
+    @sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index).dup
     @strikt_moegliche_karten = @moegliche_karten - @sichere_karten
   end
 

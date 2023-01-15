@@ -22,7 +22,7 @@ class BekannteKartenTracker
     Array.new(@spiel_informations_sicht.anzahl_spieler) do |i|
       case i
       when 0
-        @spiel_informations_sicht.karten
+        @spiel_informations_sicht.karten.dup
       when kapitaen_index
         ungegangene_karten - @spiel_informations_sicht.karten
       else
@@ -36,7 +36,7 @@ class BekannteKartenTracker
     Array.new(@spiel_informations_sicht.anzahl_spieler) do |i|
       case i
       when 0
-        @spiel_informations_sicht.karten
+        @spiel_informations_sicht.karten.dup
       when kapitaen_index
         [Karte.max_trumpf]
       else
@@ -106,6 +106,7 @@ class BekannteKartenTracker
   end
   
   def beachte_kommunikation(spieler_index, kommunikation)
+    return if spieler_index == 0
     @moegliche_karten[spieler_index] -= ausgeschlossene_karten(kommunikation)
     @sichere_karten[spieler_index].push(kommunikation.karte)
     vielleicht_eindeutige_karte = eine_dieser_karten_ist_sicher_drinnen(spieler_index,
