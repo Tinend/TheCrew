@@ -10,7 +10,7 @@ class SchimpansenHand
     @moegliche_karten = @spiel_informations_sicht.moegliche_karten(spieler_index).dup
     @sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index).dup
     @strikt_moegliche_karten = @moegliche_karten - @sichere_karten
-    kommunikation_verwenden
+    #kommunikation_verwenden
   end
 
   def kommunikation_verwenden
@@ -138,7 +138,7 @@ class SchimpansenHand
 
   def max_sieges_wkeit(staerkste_karte)
     return 0 if gespielt?
-    return 1 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? do |karte|
+    return 1 if @sichere_karten.any? do |karte|
                   karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe
                 end
 

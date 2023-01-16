@@ -5,6 +5,9 @@
 
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
+
+  AUFTRAG_FARB_WERT = 0.1
+
   def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
     @spiel_informations_sicht = spiel_informations_sicht
@@ -38,17 +41,28 @@ class SchimpansenKartenWertBerechner
       resultat = vorresultat + ((1 - @min_sieges_wkeit[spieler_index]) * @min_auftraege_wkeit[spieler_index])
       resultat + (@max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index])
     end
-    # puts "#{@karte} #{resultate.max}"
-    # p vorresultat
-    # p @min_sieges_wkeit
-    # p @max_sieges_wkeit
-    # p @min_auftraege_wkeit
-    # p @max_auftraege_wkeit
-    # p @blank_werte.sum * BLANK_WERT
-    # p resultate
-    resultate.max
+    #puts "#{@karte} #{resultate.max}"
+    #p vorresultat
+    #p @min_sieges_wkeit
+    #p @max_sieges_wkeit
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
+    #p resultate
+    resultate.max + auftrag_farb_wert_berechnen
   end
 
+  def auftrag_farb_wert_berechnen
+    if @spiel_informations_sicht.unerfuellte_auftraege[0].any? {|auftrag| auftrag.farbe == @karte.farbe} &&
+       @stich.length == 0
+      AUFTRAG_FARB_WERT
+    elsif @spiel_informations_sicht.unerfuellte_auftraege[0].any? {|auftrag| auftrag.farbe == @karte.farbe} &&
+       @stich.length != 0
+      -AUFTRAG_FARB_WERT
+    else
+      0
+    end
+  end
+  
   # mich selbst eingeschlossen
   def anzahl_ungespielte_spieler
     anzahl_spieler - @stich.length
