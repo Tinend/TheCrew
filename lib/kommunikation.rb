@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # Stellt die Kommunikation eines Spielers, dass eine bestimmte Karte seine höchste, tiefste oder einzige Karte ist, dar.

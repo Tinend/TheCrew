@@ -8,6 +8,35 @@ class SchimpansenHand
     @moegliche_karten = @spiel_informations_sicht.moegliche_karten(spieler_index).dup
     @sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index).dup
     @strikt_moegliche_karten = @moegliche_karten - @sichere_karten
+    kommunikation_verwenden
+  end
+
+  def kommunikation_verwenden
+    return if @spieler_index == 0
+    Farbe::NORMALE_FARBEN.each do |farbe|
+      kommunkikation_mit_farbe_verwenden(farbe)
+    end
+  end
+
+  def kommunkikation_mit_farbe_verwenden(farbe)
+    return if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe).empty?
+    nicht_kommuniziert_verwenden(farbe) if @spiel_informations_sicht.kommunikationen[@spieler_index].nil?
+    kommuniziert_verwenden(farbe) if !@spiel_informations_sicht.kommunikationen[@spieler_index].nil?
+  end
+
+  def nicht_kommuniziert_verwenden(farbe)
+    @moegliche_karten.push(Karte.new(wert: 6.5, farbe: farbe))
+    @moegliche_karten.push(Karte.new(wert: 3.5, farbe: farbe))
+    @sichere_karten.push(Karte.new(wert: 6.5, farbe: farbe))
+    @sichere_karten.push(Karte.new(wert: 3.5, farbe: farbe))
+  end
+
+  def kommuniziert_verwenden(farbe)
+    kommunikation = @spiel_informations_sicht.kommunikationen[@spieler_index]
+    stiche = @spiel_informations_sicht.stiche
+    return if kommunikation.karte.farbe == farbe ||
+              stiche[kommunikation.gegangene_stiche..].any? {|stich| stich.karten.any? {|karte| karte.farbe == farbe}}
+    nicht_kommuniziert_verwenden(farbe)
   end
 
   def min_auftraege_lege_wkeit(spieler_index:, karte:)
