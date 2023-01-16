@@ -24,6 +24,8 @@ module SpielInformationsSichtBenutzender
   end
 
   def moegliche_karten_von_spieler_mit_farbe(spieler_index:, farbe:)
-    @spiel_informations_sicht.bekannte_karten_tracker.moegliche_karten_von_spieler_mit_farbe(spieler_index: spieler_index, farbe: farbe)
+    @spiel_informations_sicht.bekannte_karten_tracker.moegliche_karten_von_spieler_mit_farbe(
+      spieler_index: spieler_index, farbe: farbe
+    )
   end
 end

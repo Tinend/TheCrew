@@ -9,7 +9,6 @@ require_relative 'rhinoceros_abspielen'
 require_relative 'schimpanse/schimpanse_kommunizierender'
 require_relative 'schimpanse/schimpanse_zeitdruck'
 require_relative 'schimpanse/schimpanse_legen'
-require_relative 'spiel_informations_sicht_benutzender'
 
 # Hangelt sich zwischen den Aufträgen durch
 # Basiert auf Rhinoceros, aber ist weiterentwickelt

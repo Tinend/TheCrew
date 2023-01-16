@@ -187,7 +187,7 @@ class SpielInformation
     end
 
     def verbleibende_runden
-      40 / anzahl_spieler - @spiel_information.stiche.length
+      (40 / anzahl_spieler) - @spiel_information.stiche.length
     end
   end
 end

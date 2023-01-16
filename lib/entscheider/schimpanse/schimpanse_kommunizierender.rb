@@ -3,8 +3,11 @@
 
 require_relative 'schimpanse_kommunikation'
 
+# rubocop:disable Metrics/ModuleLength
+
 # Modul für Schimpanse-Kommunikation
 module SchimpanseKommunizierender
+  # rubocop:enable Metrics/ModuleLength
   BLANKER_AUFTRAG_PRIORITAET = 1000
   AUFTRAG_NICHT_GEDECKT_PRIORITAET = 100
 
@@ -122,9 +125,9 @@ module SchimpanseKommunizierender
   end
 
   def zwei_spieler_haben_auftraege_mit_farbe?(farbe:)
-    anzahl_spieler = @spiel_informations_sicht.auftraege_mit_farbe(farbe).count {|auftraege|
+    anzahl_spieler = @spiel_informations_sicht.auftraege_mit_farbe(farbe).count do |auftraege|
       !auftraege.empty?
-    }
+    end
     anzahl_spieler >= 2
   end
 
@@ -132,17 +135,18 @@ module SchimpanseKommunizierender
     karten_mit_farbe = @spiel_informations_sicht.karten_mit_farbe(farbe)
     zwei_spieler_haben_auftraege_mit_farbe?(farbe: farbe) &&
       karten_mit_farbe.length == 1 &&
-      @spiel_informations_sicht.auftraege.flatten.any? {|auftrag| karten_mit_farbe[0] == auftrag.karte}
+      @spiel_informations_sicht.auftraege.flatten.any? { |auftrag| karten_mit_farbe[0] == auftrag.karte }
   end
-  
+
   def blanker_auftrag_mit_farbe_kommunizieren(kommunizierbares:, farbe:)
     return nicht_kommunizieren_kommunikation unless muss_blanken_auftrag_mit_karte_kommunizieren(farbe: farbe)
+
     kommunikation = kommunizierbares.find do |moegliche_kommunikation|
       moegliche_kommunikation.karte == @spiel_informations_sicht.karten_mit_farbe(farbe)[0]
     end
     SchimpanseKommunikation.new(kommunikation: kommunikation, prioritaet: BLANKER_AUFTRAG_PRIORITAET)
   end
-  
+
   def trumpf_kommunizieren(_auftrag:, _kommunizierbares:)
     nicht_kommunizieren_kommunikation
   end
@@ -154,7 +158,7 @@ module SchimpanseKommunizierender
   def karte_ist_auftrag_kommunizieren(_kommunizierbares)
     nicht_kommunizieren_kommunikation
   end
-  
+
   def nicht_kommunizieren_kommunikation
     SchimpanseKommunikation.new(kommunikation: false, prioritaet: 0)
   end

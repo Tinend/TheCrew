@@ -16,28 +16,28 @@
     karten: gelb 6, gelb 5, gelb 1, gelb 7
     vermasselte_auftraege: gelb 6
   - anspieler: 3
+    karten: blau 9, blau 3, blau 5, blau 7
+    erfuellte_auftraege: blau 5
+  - anspieler: 3
     karten: grün 1, grün 6, grün 8, grün 7
     erfuellte_auftraege: grün 1
   - anspieler: 1
-    karten: blau 5, blau 1, blau 9, blau 3
-    erfuellte_auftraege: blau 5
-  - anspieler: 3
-    karten: rot 2, rot 9, rot 5, rot 8
-    erfuellte_auftraege: rot 2
+    karten: blau 8, blau 1, blau 4, gelb 3
+    erfuellte_auftraege: blau 4
+  - anspieler: 1
+    karten: rot 3, rot 1, rot 6, rot 9
   - anspieler: 0
-    karten: rot 4, rot 3, rot 1, rot 6
-  - anspieler: 3
-    karten: gelb 2, gelb 3, grün 3, gelb 9
+    karten: rot 4, rot 5, rot 8, rot 7
+  - anspieler: 2
+    karten: gelb 9, gelb 2, gelb 4, grün 3
     erfuellte_auftraege: gelb 2
   - anspieler: 2
-    karten: blau 7, blau 6, gelb 4, blau 8
-  - anspieler: 1
-    karten: grün 2, grün 4, grün 9, Rakete 4
+    karten: gelb 8, grün 9, Rakete 4, blau 2
   - anspieler: 0
-    karten: Rakete 2, Rakete 1, gelb 8, rot 7
+    karten: Rakete 2, Rakete 1, grün 5, rot 2
+    erfuellte_auftraege: rot 2
   - anspieler: 0
-    karten: Rakete 3, blau 2, grün 5, blau 4
-    vermasselte_auftraege: blau 4
+    karten: Rakete 3, grün 2, grün 4, blau 6
   resultat: verloren
 - karten:
   - Rakete 2, rot 3, rot 5, gelb 7, gelb 2, gelb 6, gelb 4, blau 4, rot 6, blau 7
@@ -57,28 +57,18 @@
     karten: grün 9, grün 8, grün 2, blau 7
     erfuellte_auftraege: grün 2
   - anspieler: 1
-    karten: rot 7, rot 1, rot 8, rot 6
-    vermasselte_auftraege: rot 8, rot 7
-  - anspieler: 3
-    karten: gelb 9, gelb 7, gelb 1, gelb 5
-    erfuellte_auftraege: gelb 7
-  - anspieler: 3
-    karten: blau 2, blau 4, blau 5, blau 8
-    erfuellte_auftraege: blau 2
+    karten: rot 9, rot 1, rot 8, rot 6
+    erfuellte_auftraege: rot 8
+  - anspieler: 1
+    karten: rot 7, Rakete 3, blau 2, rot 5
+    erfuellte_auftraege: blau 2, rot 7
   - anspieler: 2
     karten: grün 6, grün 5, Rakete 2, grün 7
     erfuellte_auftraege: grün 6
   - anspieler: 0
-    karten: rot 3, rot 9, Rakete 3, gelb 8
-  - anspieler: 2
-    karten: grün 1, grün 3, gelb 6, Rakete 4
-  - anspieler: 1
-    karten: blau 9, blau 3, blau 1, rot 5
-  - anspieler: 1
-    karten: rot 4, gelb 3, grün 4, gelb 4
-  - anspieler: 1
-    karten: rot 2, blau 6, Rakete 1, gelb 2
-  resultat: verloren
+    karten: gelb 7, gelb 1, gelb 5, gelb 9
+    erfuellte_auftraege: gelb 7
+  resultat: gewonnen
 - karten:
   - grün 7, rot 2, blau 8, rot 3, Rakete 4, rot 9, gelb 7, rot 7, gelb 5, grün 1
   - blau 1, blau 9, gelb 1, blau 7, grün 8, blau 6, gelb 2, gelb 3, blau 4, rot 8
@@ -94,30 +84,31 @@
   kommunikationen: []
   stiche:
   - anspieler: 0
+    karten: rot 9, rot 8, rot 5, rot 1
+    erfuellte_auftraege: rot 1
+  - anspieler: 0
     karten: blau 8, blau 7, blau 3, blau 5
     erfuellte_auftraege: blau 7
   - anspieler: 0
     karten: grün 7, grün 8, grün 4, grün 9
     erfuellte_auftraege: grün 7
   - anspieler: 3
-    karten: rot 1, rot 9, rot 8, rot 5
-    erfuellte_auftraege: rot 1
-  - anspieler: 0
-    karten: rot 7, blau 1, rot 4, gelb 9
-    vermasselte_auftraege: rot 4, rot 7
-  - anspieler: 0
-    karten: rot 2, gelb 1, rot 6, grün 6
+    karten: grün 2, grün 1, blau 1, grün 3
+  - anspieler: 2
+    karten: rot 6, gelb 9, rot 3, blau 9
     erfuellte_auftraege: rot 6
   - anspieler: 2
-    karten: blau 2, gelb 6, gelb 7, blau 9
+    karten: rot 4, grün 6, rot 2, gelb 1
+    vermasselte_auftraege: rot 4
+  - anspieler: 2
+    karten: blau 2, gelb 6, gelb 7, blau 6
   - anspieler: 1
     karten: gelb 2, gelb 8, gelb 4, gelb 5
   - anspieler: 2
-    karten: grün 3, grün 2, grün 1, gelb 3
-  - anspieler: 2
-    karten: Rakete 1, Rakete 3, Rakete 4, blau 4
+    karten: Rakete 1, Rakete 3, Rakete 4, gelb 3
   - anspieler: 0
-    karten: rot 3, blau 6, Rakete 2, grün 5
+    karten: rot 7, blau 4, Rakete 2, grün 5
+    vermasselte_auftraege: rot 7
   resultat: verloren
 - karten:
   - gelb 6, rot 5, blau 7, blau 4, rot 7, blau 2, rot 9, rot 3, gelb 4, grün 8
@@ -144,21 +135,21 @@
     vermasselte_auftraege: rot 4
     erfuellte_auftraege: rot 1
   - anspieler: 0
-    karten: rot 3, grün 9, rot 8, rot 6
+    karten: rot 3, grün 2, rot 8, rot 6
     erfuellte_auftraege: rot 8
   - anspieler: 2
-    karten: grün 1, grün 3, grün 8, grün 2
-  - anspieler: 0
-    karten: rot 5, grün 6, grün 4, gelb 8
-  - anspieler: 0
-    karten: rot 7, gelb 5, blau 5, grün 7
-  - anspieler: 0
-    karten: blau 2, Rakete 4, blau 6, Rakete 3
+    karten: grün 1, grün 3, grün 8, grün 9
   - anspieler: 1
-    karten: grün 5, blau 8, gelb 3, blau 4
-    erfuellte_auftraege: grün 5
+    karten: grün 5, grün 4, grün 7, rot 7
+    vermasselte_auftraege: grün 5
+  - anspieler: 3
+    karten: gelb 3, gelb 4, gelb 5, gelb 7
+  - anspieler: 2
+    karten: blau 8, gelb 8, blau 4, Rakete 4
   - anspieler: 1
-    karten: Rakete 1, gelb 7, Rakete 2, gelb 4
+    karten: grün 6, blau 5, Rakete 2, rot 5
+  - anspieler: 3
+    karten: Rakete 3, blau 2, Rakete 1, blau 6
   resultat: verloren
 - karten:
   - blau 6, gelb 3, grün 7, grün 4, Rakete 1, gelb 5, gelb 2, rot 9, rot 4, rot 5
@@ -174,6 +165,9 @@
   kommunikationen: []
   stiche:
   - anspieler: 1
+    karten: gelb 9, gelb 4, gelb 7, gelb 5
+    erfuellte_auftraege: gelb 7
+  - anspieler: 1
     karten: grün 8, grün 3, grün 5, grün 7
     erfuellte_auftraege: grün 5
   - anspieler: 1
@@ -186,10 +180,7 @@
     karten: rot 1, rot 6, rot 9, rot 3
     erfuellte_auftraege: rot 1
   - anspieler: 0
-    karten: gelb 2, gelb 9, gelb 4, gelb 7
-    erfuellte_auftraege: gelb 7
-  - anspieler: 1
-    karten: gelb 1, blau 5, gelb 8, gelb 5
+    karten: gelb 2, gelb 1, blau 5, gelb 8
     erfuellte_auftraege: gelb 8
   resultat: gewonnen
 - karten:
@@ -221,16 +212,16 @@
     karten: grün 7, gelb 8, grün 3, grün 2
     erfuellte_auftraege: grün 3
   - anspieler: 3
-    karten: grün 4, gelb 7, rot 6, grün 6
+    karten: grün 4, gelb 7, blau 1, grün 6
   - anspieler: 2
-    karten: rot 5, gelb 9, blau 7, rot 3
-  - anspieler: 2
-    karten: rot 7, blau 5, blau 3, rot 4
+    karten: rot 5, gelb 9, blau 7, rot 6
+  - anspieler: 1
+    karten: rot 4, rot 7, blau 5, blau 3
     vermasselte_auftraege: rot 4
   - anspieler: 2
     karten: gelb 6, gelb 5, gelb 2, gelb 3
   - anspieler: 2
-    karten: Rakete 2, Rakete 1, Rakete 3, blau 1
+    karten: Rakete 2, Rakete 1, Rakete 3, rot 3
   - anspieler: 0
     karten: gelb 1, gelb 4, Rakete 4, blau 4
   resultat: verloren
@@ -418,29 +409,21 @@
     karten: rot 9, rot 2, rot 8, rot 6
     erfuellte_auftraege: rot 6
   - anspieler: 1
-    karten: blau 4, blau 6, grün 8, blau 9
-    erfuellte_auftraege: blau 6
-  - anspieler: 0
-    karten: blau 5, blau 8, blau 7, Rakete 3
-    erfuellte_auftraege: blau 5
-  - anspieler: 3
-    karten: gelb 1, rot 5, gelb 3, gelb 9
+    karten: gelb 8, gelb 9, gelb 1, rot 5
     erfuellte_auftraege: gelb 1
   - anspieler: 2
-    karten: gelb 6, gelb 4, rot 4, gelb 7
-    vermasselte_auftraege: gelb 4
-  - anspieler: 1
-    karten: gelb 8, gelb 5, gelb 2, grün 4
-    erfuellte_auftraege: gelb 2
-  - anspieler: 1
-    karten: grün 1, grün 9, grün 2, rot 3
+    karten: gelb 6, gelb 4, rot 4, gelb 3
+    erfuellte_auftraege: gelb 4
   - anspieler: 2
-    karten: blau 1, rot 7, blau 2, grün 5
+    karten: blau 6, grün 8, blau 9, blau 8
+    erfuellte_auftraege: blau 6
   - anspieler: 0
-    karten: blau 3, grün 3, grün 6, rot 1
-  - anspieler: 0
-    karten: Rakete 2, Rakete 4, grün 7, Rakete 1
-  resultat: verloren
+    karten: blau 5, blau 4, blau 1, Rakete 3
+    erfuellte_auftraege: blau 5
+  - anspieler: 3
+    karten: gelb 2, grün 4, gelb 7, gelb 5
+    erfuellte_auftraege: gelb 2
+  resultat: gewonnen
 - karten:
   - grün 6, grün 9, blau 5, blau 8, blau 3, gelb 8, blau 9, Rakete 3, gelb 2, blau
     1
@@ -456,20 +439,27 @@
   kommunikationen: []
   stiche:
   - anspieler: 1
-    karten: rot 1, rot 9, rot 5, blau 9
+    karten: gelb 9, gelb 5, gelb 6, gelb 8
+    erfuellte_auftraege: gelb 8
+  - anspieler: 1
+    karten: rot 7, rot 4, rot 5, blau 9
+    erfuellte_auftraege: rot 4
+  - anspieler: 1
+    karten: rot 1, rot 9, rot 3, blau 8
     erfuellte_auftraege: rot 1
   - anspieler: 2
     karten: grün 7, grün 5, grün 6, grün 1
     erfuellte_auftraege: grün 7
   - anspieler: 2
-    karten: rot 4, rot 3, gelb 8, rot 7
-    erfuellte_auftraege: gelb 8, rot 4
-  - anspieler: 1
-    karten: gelb 1, gelb 3, gelb 7, gelb 2
-    erfuellte_auftraege: gelb 1
-  - anspieler: 3
-    karten: grün 2, grün 9, gelb 9, grün 4
+    karten: grün 4, grün 2, grün 9, blau 7
     erfuellte_auftraege: grün 4
+  - anspieler: 0
+    karten: gelb 2, gelb 4, gelb 3, gelb 7
+  - anspieler: 3
+    karten: blau 2, blau 1, blau 6, blau 4
+  - anspieler: 1
+    karten: gelb 1, rot 8, Rakete 2, blau 5
+    erfuellte_auftraege: gelb 1
   resultat: gewonnen
 - karten:
   - gelb 9, blau 3, rot 4, rot 6, gelb 2, Rakete 1, gelb 3, grün 7, blau 6, grün 4
@@ -592,21 +582,21 @@
     karten: rot 6, rot 9, rot 5, rot 8
     erfuellte_auftraege: rot 6
   - anspieler: 0
-    karten: gelb 3, gelb 6, gelb 4, gelb 8
-    vermasselte_auftraege: gelb 3
-  - anspieler: 3
-    karten: rot 1, rot 7, rot 2, rot 3
+    karten: grün 9, blau 1, grün 8, gelb 8
+    vermasselte_auftraege: grün 8
   - anspieler: 0
-    karten: grün 4, gelb 5, grün 8, blau 7
-    erfuellte_auftraege: grün 8
-  - anspieler: 2
-    karten: gelb 2, rot 4, grün 9, gelb 1
-  - anspieler: 2
-    karten: gelb 7, Rakete 1, grün 6, Rakete 2
+    karten: grün 6, gelb 1, gelb 9, blau 7
+  - anspieler: 0
+    karten: gelb 3, gelb 6, gelb 4, rot 4
+    erfuellte_auftraege: gelb 3
   - anspieler: 1
-    karten: blau 1, blau 3, Rakete 3, blau 4
+    karten: rot 2, rot 3, rot 1, rot 7
+  - anspieler: 0
+    karten: grün 5, gelb 5, gelb 7, Rakete 1
   - anspieler: 3
-    karten: Rakete 4, grün 5, blau 5, gelb 9
+    karten: Rakete 3, grün 4, Rakete 2, gelb 2
+  - anspieler: 3
+    karten: Rakete 4, blau 4, blau 5, blau 3
   resultat: verloren
 - karten:
   - gelb 3, blau 8, rot 5, rot 4, grün 6, rot 3, blau 1, grün 7, blau 5, blau 2
@@ -632,19 +622,19 @@
     karten: grün 1, grün 4, grün 6, gelb 2
     vermasselte_auftraege: grün 1
   - anspieler: 0
-    karten: blau 2, blau 9, blau 7, blau 4
-    erfuellte_auftraege: blau 2
-  - anspieler: 1
-    karten: blau 6, grün 9, blau 3, blau 8
+    karten: blau 8, blau 6, blau 7, blau 3
     erfuellte_auftraege: blau 3, blau 6
   - anspieler: 0
-    karten: rot 3, rot 2, grün 8, rot 7
+    karten: blau 2, blau 9, grün 9, blau 4
+    erfuellte_auftraege: blau 2
+  - anspieler: 1
+    karten: rot 1, grün 8, rot 7, rot 5
   - anspieler: 3
     karten: gelb 4, grün 7, gelb 1, gelb 6
   - anspieler: 2
-    karten: grün 2, Rakete 4, rot 5, rot 1
+    karten: grün 2, Rakete 4, blau 5, rot 2
   - anspieler: 3
-    karten: gelb 5, blau 5, Rakete 2, grün 5
+    karten: gelb 5, rot 3, Rakete 2, grün 5
   - anspieler: 1
     karten: Rakete 3, grün 3, Rakete 1, blau 1
   resultat: verloren
@@ -730,28 +720,28 @@
     karten: grün 9, grün 5, grün 7, grün 8
     erfuellte_auftraege: grün 5
   - anspieler: 1
+    karten: blau 8, blau 3, blau 9, blau 7
+    erfuellte_auftraege: blau 9
+  - anspieler: 3
+    karten: gelb 1, gelb 4, gelb 2, gelb 6
+    erfuellte_auftraege: gelb 1
+  - anspieler: 2
+    karten: blau 2, gelb 9, blau 1, blau 4
+    vermasselte_auftraege: blau 2
+    erfuellte_auftraege: blau 1
+  - anspieler: 1
     karten: rot 7, rot 5, rot 1, rot 6
     vermasselte_auftraege: rot 7
   - anspieler: 1
-    karten: gelb 2, gelb 6, gelb 1, gelb 5
-    erfuellte_auftraege: gelb 1
-  - anspieler: 2
-    karten: blau 2, blau 9, blau 7, blau 4
-    vermasselte_auftraege: blau 2
-    erfuellte_auftraege: blau 9
-  - anspieler: 3
-    karten: rot 8, rot 2, blau 8, rot 3
-  - anspieler: 3
-    karten: rot 9, gelb 7, blau 6, rot 4
+    karten: blau 5, grün 1, rot 9, Rakete 3
+  - anspieler: 0
+    karten: rot 2, blau 6, rot 4, rot 8
   - anspieler: 3
     karten: grün 2, grün 3, grün 4, grün 6
   - anspieler: 2
-    karten: blau 3, gelb 9, blau 1, blau 5
-    erfuellte_auftraege: blau 1
+    karten: rot 3, gelb 8, gelb 5, Rakete 2
   - anspieler: 1
-    karten: Rakete 2, Rakete 1, gelb 8, Rakete 3
-  - anspieler: 0
-    karten: gelb 4, Rakete 4, grün 1, gelb 3
+    karten: Rakete 4, Rakete 1, gelb 3, gelb 7
   resultat: verloren
 - karten:
   - rot 2, rot 9, rot 1, gelb 6, gelb 4, gelb 2, rot 6, gelb 5, rot 8, blau 9
@@ -769,20 +759,20 @@
   kommunikationen: []
   stiche:
   - anspieler: 3
+    karten: grün 9, gelb 6, grün 4, grün 1
+    erfuellte_auftraege: grün 4
+  - anspieler: 3
     karten: blau 1, blau 9, blau 4, blau 8
     erfuellte_auftraege: blau 9, blau 8
   - anspieler: 0
     karten: gelb 2, gelb 7, gelb 9, gelb 3
     erfuellte_auftraege: gelb 9
   - anspieler: 2
-    karten: grün 1, grün 9, rot 9, grün 4
-    erfuellte_auftraege: grün 4
-  - anspieler: 3
-    karten: grün 2, rot 8, grün 8, gelb 8
-    erfuellte_auftraege: grün 8
-  - anspieler: 1
-    karten: gelb 1, blau 7, Rakete 4, gelb 6
+    karten: gelb 8, Rakete 4, gelb 5, gelb 1
     erfuellte_auftraege: gelb 1
+  - anspieler: 3
+    karten: grün 2, rot 9, grün 8, blau 7
+    erfuellte_auftraege: grün 8
   resultat: gewonnen
 - karten:
   - gelb 8, blau 6, blau 5, grün 6, rot 2, blau 9, grün 9, blau 1, rot 9, grün 5
@@ -882,27 +872,27 @@
     karten: gelb 7, gelb 5, gelb 8, gelb 3
     vermasselte_auftraege: gelb 5, gelb 7
   - anspieler: 1
-    karten: blau 1, blau 4, rot 7, blau 7
-    erfuellte_auftraege: blau 1
-  - anspieler: 0
-    karten: rot 9, grün 6, rot 5, rot 6
-    erfuellte_auftraege: rot 9
-  - anspieler: 0
-    karten: blau 3, blau 9, blau 8, rot 2
-    vermasselte_auftraege: blau 8
+    karten: blau 9, blau 4, rot 7, blau 3
     erfuellte_auftraege: blau 3
   - anspieler: 1
-    karten: blau 2, rot 1, gelb 9, rot 8
-  - anspieler: 1
-    karten: blau 5, rot 4, gelb 4, gelb 6
-  - anspieler: 1
-    karten: blau 6, grün 5, gelb 2, rot 3
-  - anspieler: 1
-    karten: grün 3, grün 9, grün 2, grün 1
+    karten: blau 1, blau 8, rot 6, blau 7
+    vermasselte_auftraege: blau 1
+    erfuellte_auftraege: blau 8
   - anspieler: 2
-    karten: grün 7, Rakete 4, Rakete 2, grün 4
+    karten: rot 1, rot 2, rot 9, grün 6
+    erfuellte_auftraege: rot 9
+  - anspieler: 0
+    karten: gelb 1, blau 6, grün 9, gelb 9
   - anspieler: 3
-    karten: Rakete 1, gelb 1, Rakete 3, grün 8
+    karten: grün 2, grün 1, grün 3, grün 5
+  - anspieler: 2
+    karten: rot 4, Rakete 4, rot 3, Rakete 3
+  - anspieler: 3
+    karten: gelb 4, gelb 6, blau 5, grün 8
+  - anspieler: 0
+    karten: rot 8, grün 4, rot 5, Rakete 1
+  - anspieler: 3
+    karten: gelb 2, Rakete 2, blau 2, grün 7
   resultat: verloren
 - karten:
   - grün 8, rot 7, rot 9, blau 5, rot 5, blau 8, gelb 8, grün 3, Rakete 4, grün 4
@@ -934,7 +924,7 @@
     karten: blau 6, blau 5, blau 2, gelb 4
     vermasselte_auftraege: blau 6
   - anspieler: 3
-    karten: blau 9, grün 8, blau 4, grün 9
+    karten: blau 9, grün 8, blau 4, gelb 1
   - anspieler: 3
     karten: rot 1, rot 5, Rakete 2, rot 2
   - anspieler: 1
@@ -943,7 +933,7 @@
     karten: grün 7, Rakete 3, grün 4, grün 2
     vermasselte_auftraege: grün 7
   - anspieler: 3
-    karten: Rakete 1, Rakete 4, gelb 5, gelb 1
+    karten: Rakete 1, Rakete 4, gelb 5, grün 9
   resultat: verloren
 - karten:
   - gelb 5, grün 2, gelb 6, grün 7, rot 9, grün 4, gelb 7, blau 6, Rakete 2, rot 5
@@ -1023,31 +1013,31 @@
   kommunikationen: []
   stiche:
   - anspieler: 2
-    karten: gelb 1, gelb 8, gelb 9, gelb 7
-    vermasselte_auftraege: gelb 8
-  - anspieler: 0
-    karten: rot 2, rot 5, rot 3, rot 7
-    vermasselte_auftraege: rot 2
-  - anspieler: 3
-    karten: blau 9, blau 6, blau 2, blau 1
+    karten: blau 8, blau 9, blau 6, blau 2
     erfuellte_auftraege: blau 9
   - anspieler: 3
-    karten: grün 5, grün 3, grün 9, grün 8
-    erfuellte_auftraege: grün 9
-  - anspieler: 1
-    karten: rot 1, rot 4, blau 5, rot 9
+    karten: gelb 8, gelb 9, gelb 7, gelb 3
+    vermasselte_auftraege: gelb 8
+  - anspieler: 0
+    karten: rot 9, rot 1, rot 3, rot 7
     erfuellte_auftraege: rot 1
   - anspieler: 0
-    karten: blau 4, grün 7, blau 8, gelb 2
+    karten: rot 2, rot 5, rot 4, grün 5
+    vermasselte_auftraege: rot 2
+  - anspieler: 1
+    karten: grün 9, grün 8, blau 5, grün 3
+    erfuellte_auftraege: grün 9
+  - anspieler: 1
+    karten: gelb 4, gelb 1, gelb 6, rot 8
+  - anspieler: 3
+    karten: gelb 5, rot 6, grün 7, blau 1
+  - anspieler: 3
+    karten: gelb 2, blau 3, grün 6, blau 7
+  - anspieler: 3
+    karten: Rakete 1, grün 2, grün 4, Rakete 4
+  - anspieler: 2
+    karten: Rakete 3, Rakete 2, blau 4, grün 1
     erfuellte_auftraege: blau 4
-  - anspieler: 2
-    karten: gelb 3, gelb 6, rot 8, gelb 4
-  - anspieler: 3
-    karten: gelb 5, rot 6, grün 6, blau 7
-  - anspieler: 3
-    karten: Rakete 1, blau 3, grün 4, Rakete 4
-  - anspieler: 2
-    karten: Rakete 3, Rakete 2, grün 2, grün 1
   resultat: verloren
 - karten:
   - grün 2, blau 9, grün 5, Rakete 4, rot 1, gelb 9, gelb 6, gelb 7, rot 5, blau 3
@@ -1066,28 +1056,28 @@
     karten: blau 9, blau 1, blau 2, blau 5
     erfuellte_auftraege: blau 1
   - anspieler: 0
-    karten: rot 5, rot 2, rot 3, rot 9
-    erfuellte_auftraege: rot 5
-  - anspieler: 3
-    karten: gelb 1, gelb 9, Rakete 3, gelb 3
+    karten: gelb 9, Rakete 3, gelb 3, gelb 5
   - anspieler: 1
     karten: blau 8, rot 7, grün 7, blau 3
     erfuellte_auftraege: rot 7
   - anspieler: 1
-    karten: rot 4, rot 8, grün 6, rot 1
-    erfuellte_auftraege: rot 8
-  - anspieler: 2
-    karten: gelb 2, gelb 4, gelb 6, blau 4
+    karten: rot 2, rot 8, rot 9, rot 1
+    vermasselte_auftraege: rot 8
+  - anspieler: 3
+    karten: gelb 1, gelb 6, grün 9, gelb 2
   - anspieler: 0
-    karten: gelb 7, blau 7, grün 8, gelb 5
+    karten: rot 5, rot 4, rot 3, gelb 8
+    vermasselte_auftraege: rot 5
+    erfuellte_auftraege: gelb 8
+  - anspieler: 0
+    karten: gelb 7, blau 7, grün 8, gelb 4
     vermasselte_auftraege: gelb 7
   - anspieler: 0
-    karten: grün 2, grün 9, grün 1, grün 4
-  - anspieler: 1
-    karten: blau 6, Rakete 1, grün 3, Rakete 4
-  - anspieler: 0
-    karten: grün 5, rot 6, Rakete 2, gelb 8
-    vermasselte_auftraege: gelb 8
+    karten: grün 2, rot 6, grün 1, grün 6
+  - anspieler: 3
+    karten: grün 3, grün 5, blau 4, Rakete 2
+  - anspieler: 2
+    karten: Rakete 1, grün 4, Rakete 4, blau 6
   resultat: verloren
 - karten:
   - gelb 6, gelb 5, grün 7, rot 2, gelb 1, Rakete 2, rot 1, rot 3, rot 8, rot 6
@@ -1144,31 +1134,30 @@
   kommunikationen: []
   stiche:
   - anspieler: 1
-    karten: rot 9, rot 7, rot 1, rot 5
-    erfuellte_auftraege: rot 5
+    karten: gelb 9, gelb 5, gelb 4, rot 5
+    erfuellte_auftraege: gelb 4, rot 5
   - anspieler: 1
-    karten: rot 2, rot 4, grün 8, rot 8
+    karten: rot 2, rot 4, rot 1, rot 8
     erfuellte_auftraege: rot 2
   - anspieler: 0
     karten: grün 7, grün 3, grün 6, grün 5
     vermasselte_auftraege: grün 7
   - anspieler: 0
-    karten: grün 1, grün 9, grün 2, gelb 4
-    erfuellte_auftraege: gelb 4
+    karten: grün 1, grün 9, grün 2, grün 8
   - anspieler: 1
-    karten: gelb 6, gelb 5, gelb 8, blau 7
+    karten: gelb 6, rot 7, gelb 8, blau 7
     erfuellte_auftraege: gelb 6
   - anspieler: 3
     karten: blau 1, blau 3, blau 2, blau 9
     erfuellte_auftraege: blau 9
   - anspieler: 2
-    karten: rot 6, blau 4, rot 3, gelb 9
+    karten: rot 6, blau 4, rot 3, rot 9
+  - anspieler: 1
+    karten: gelb 2, Rakete 2, gelb 3, blau 6
   - anspieler: 2
-    karten: blau 8, gelb 3, blau 6, gelb 7
+    karten: blau 8, gelb 1, blau 5, gelb 7
   - anspieler: 2
-    karten: grün 4, gelb 1, blau 5, gelb 2
-  - anspieler: 2
-    karten: Rakete 2, Rakete 1, Rakete 3, Rakete 4
+    karten: grün 4, Rakete 1, Rakete 3, Rakete 4
   resultat: verloren
 - karten:
   - gelb 5, gelb 7, grün 8, rot 4, rot 8, blau 9, blau 7, blau 5, rot 6, grün 7
@@ -1199,16 +1188,16 @@
     vermasselte_auftraege: blau 1
     erfuellte_auftraege: blau 9
   - anspieler: 0
-    karten: blau 7, grün 9, gelb 8, gelb 6
+    karten: blau 7, grün 9, gelb 8, gelb 1
   - anspieler: 0
     karten: grün 8, grün 4, rot 7, Rakete 3
   - anspieler: 3
-    karten: gelb 1, gelb 5, grün 3, gelb 2
-  - anspieler: 0
-    karten: rot 6, rot 2, rot 1, Rakete 2
+    karten: gelb 6, gelb 5, grün 1, gelb 2
+    erfuellte_auftraege: grün 1
   - anspieler: 3
-    karten: Rakete 1, rot 8, grün 1, Rakete 4
-    vermasselte_auftraege: grün 1
+    karten: Rakete 1, rot 8, rot 2, Rakete 4
+  - anspieler: 2
+    karten: rot 1, Rakete 2, rot 6, grün 3
   resultat: verloren
 - karten:
   - blau 4, gelb 9, gelb 5, grün 7, gelb 7, grün 2, rot 8, rot 4, gelb 1, rot 3
@@ -1228,13 +1217,13 @@
     karten: grün 9, grün 5, grün 7, grün 3
     erfuellte_auftraege: grün 9
   - anspieler: 2
-    karten: blau 3, blau 6, blau 4, blau 9
-    erfuellte_auftraege: blau 3
-  - anspieler: 1
-    karten: blau 2, blau 8, rot 9, gelb 9
+    karten: blau 8, blau 6, blau 4, blau 2
     erfuellte_auftraege: blau 2
   - anspieler: 2
-    karten: grün 1, grün 8, grün 2, grün 6
+    karten: blau 3, rot 9, gelb 9, blau 9
+    erfuellte_auftraege: blau 3
+  - anspieler: 1
+    karten: grün 6, grün 4, grün 8, grün 2
     vermasselte_auftraege: grün 6
     erfuellte_auftraege: grün 2
   - anspieler: 3
@@ -1245,7 +1234,7 @@
   - anspieler: 3
     karten: gelb 2, gelb 7, gelb 6, rot 5
   - anspieler: 0
-    karten: rot 3, gelb 8, grün 4, rot 7
+    karten: rot 3, gelb 8, grün 1, rot 7
   - anspieler: 3
     karten: Rakete 2, rot 4, Rakete 1, Rakete 4
   - anspieler: 2
@@ -1336,32 +1325,26 @@
   kommunikationen: []
   stiche:
   - anspieler: 0
+    karten: rot 8, rot 4, rot 7, rot 3
+    erfuellte_auftraege: rot 3
+  - anspieler: 0
     karten: grün 3, grün 9, grün 8, grün 1
     erfuellte_auftraege: grün 3
   - anspieler: 1
     karten: gelb 4, gelb 6, gelb 5, Rakete 4
     erfuellte_auftraege: gelb 4
   - anspieler: 0
-    karten: rot 6, rot 4, rot 7, rot 1
-    vermasselte_auftraege: rot 6
-  - anspieler: 2
-    karten: gelb 9, gelb 2, blau 9, gelb 8
+    karten: rot 6, Rakete 1, grün 7, rot 1
+    erfuellte_auftraege: rot 6
+  - anspieler: 1
+    karten: gelb 3, gelb 9, gelb 2, blau 9
     erfuellte_auftraege: gelb 9
   - anspieler: 2
     karten: grün 2, Rakete 2, grün 6, grün 5
   - anspieler: 3
-    karten: rot 9, rot 2, blau 7, grün 7
+    karten: rot 9, rot 5, gelb 8, gelb 7
     erfuellte_auftraege: rot 9
-  - anspieler: 3
-    karten: rot 3, rot 8, gelb 3, gelb 7
-    erfuellte_auftraege: rot 3
-  - anspieler: 0
-    karten: rot 5, Rakete 1, blau 4, blau 8
-  - anspieler: 1
-    karten: blau 1, blau 2, blau 5, blau 6
-  - anspieler: 0
-    karten: Rakete 3, blau 3, grün 4, gelb 1
-  resultat: verloren
+  resultat: gewonnen
 - karten:
   - grün 5, gelb 4, rot 6, gelb 7, grün 9, Rakete 1, blau 2, grün 8, Rakete 2, rot
     4
@@ -1377,30 +1360,30 @@
   kommunikationen: []
   stiche:
   - anspieler: 1
+    karten: blau 8, blau 1, blau 4, blau 2
+    vermasselte_auftraege: blau 2
+    erfuellte_auftraege: blau 1, blau 4
+  - anspieler: 1
     karten: grün 1, gelb 6, grün 2, grün 9
     erfuellte_auftraege: grün 1
   - anspieler: 0
-    karten: blau 2, blau 5, blau 9, blau 3
-    erfuellte_auftraege: blau 2
-  - anspieler: 2
-    karten: blau 1, blau 4, grün 8, blau 8
-    erfuellte_auftraege: blau 1, blau 4
-  - anspieler: 1
-    karten: gelb 3, gelb 2, gelb 9, gelb 4
+    karten: gelb 4, gelb 3, gelb 2, gelb 9
     erfuellte_auftraege: gelb 4
   - anspieler: 3
     karten: rot 1, rot 4, grün 7, rot 9
   - anspieler: 2
-    karten: rot 2, rot 7, rot 6, blau 6
+    karten: blau 9, blau 3, grün 8, blau 6
+  - anspieler: 2
+    karten: blau 7, rot 8, gelb 7, blau 5
+  - anspieler: 2
+    karten: rot 2, rot 7, rot 6, grün 4
     vermasselte_auftraege: rot 2
   - anspieler: 3
-    karten: rot 3, gelb 7, grün 4, rot 5
+    karten: rot 3, grün 5, grün 3, rot 5
   - anspieler: 2
-    karten: gelb 1, gelb 8, grün 5, grün 3
-  - anspieler: 3
-    karten: rot 8, Rakete 1, Rakete 3, gelb 5
+    karten: gelb 1, gelb 8, Rakete 1, Rakete 3
   - anspieler: 1
-    karten: Rakete 4, blau 7, grün 6, Rakete 2
+    karten: Rakete 4, gelb 5, grün 6, Rakete 2
   resultat: verloren
 - karten:
   - blau 2, rot 8, gelb 3, rot 5, grün 2, grün 8, gelb 8, blau 7, grün 1, rot 3
@@ -1424,23 +1407,23 @@
     karten: blau 9, blau 8, blau 7, blau 6
     erfuellte_auftraege: blau 9
   - anspieler: 2
-    karten: rot 7, gelb 7, rot 8, rot 4
+    karten: rot 7, blau 3, rot 8, rot 4
     vermasselte_auftraege: rot 4
     erfuellte_auftraege: rot 8
   - anspieler: 0
     karten: rot 5, Rakete 4, rot 1, blau 5
     erfuellte_auftraege: rot 5
   - anspieler: 1
-    karten: gelb 2, gelb 4, gelb 6, gelb 3
+    karten: gelb 2, gelb 4, gelb 7, gelb 3
     erfuellte_auftraege: gelb 2
   - anspieler: 3
-    karten: blau 3, blau 2, blau 1, Rakete 3
+    karten: grün 4, grün 2, gelb 9, grün 5
   - anspieler: 2
-    karten: grün 3, grün 4, grün 2, gelb 9
+    karten: grün 3, gelb 6, grün 1, blau 4
+  - anspieler: 2
+    karten: gelb 5, Rakete 1, gelb 8, gelb 1
   - anspieler: 3
-    karten: Rakete 1, gelb 8, blau 4, gelb 5
-  - anspieler: 3
-    karten: Rakete 2, grün 1, gelb 1, grün 5
+    karten: Rakete 2, blau 2, blau 1, Rakete 3
   resultat: verloren
 - karten:
   - rot 3, grün 2, rot 6, rot 4, rot 7, blau 4, Rakete 2, gelb 9, grün 3, blau 3
@@ -1465,22 +1448,22 @@
     karten: grün 1, grün 3, rot 1, grün 7
     vermasselte_auftraege: grün 1
   - anspieler: 2
-    karten: gelb 6, gelb 3, rot 7, gelb 1
+    karten: gelb 6, gelb 3, blau 4, gelb 1
     erfuellte_auftraege: gelb 1
   - anspieler: 2
-    karten: grün 4, grün 8, Rakete 2, blau 6
+    karten: grün 4, grün 8, Rakete 2, Rakete 1
   - anspieler: 0
     karten: blau 3, blau 8, rot 9, blau 7
     erfuellte_auftraege: blau 8
   - anspieler: 1
-    karten: blau 5, Rakete 4, blau 9, blau 4
+    karten: blau 5, Rakete 4, blau 9, rot 7
     erfuellte_auftraege: blau 5
   - anspieler: 2
-    karten: grün 6, rot 5, rot 3, blau 1
+    karten: grün 6, rot 5, rot 3, blau 6
   - anspieler: 2
-    karten: gelb 2, blau 2, rot 4, Rakete 1
-  - anspieler: 1
-    karten: Rakete 3, gelb 5, rot 2, rot 6
+    karten: gelb 2, blau 2, rot 4, blau 1
+  - anspieler: 2
+    karten: gelb 5, rot 2, rot 6, Rakete 3
   resultat: verloren
 - karten:
   - blau 4, gelb 4, gelb 3, Rakete 2, gelb 1, Rakete 1, rot 1, blau 3, rot 2, blau
@@ -1518,9 +1501,9 @@
   - anspieler: 3
     karten: gelb 7, gelb 1, grün 6, gelb 5
   - anspieler: 3
-    karten: grün 3, gelb 3, blau 6, gelb 2
+    karten: grün 3, gelb 4, blau 6, gelb 2
   - anspieler: 3
-    karten: Rakete 3, gelb 4, blau 5, gelb 8
+    karten: Rakete 3, gelb 3, blau 5, gelb 8
     vermasselte_auftraege: gelb 8
   resultat: verloren
 - karten:
@@ -1540,6 +1523,9 @@
     karten: rot 9, rot 7, rot 4, rot 5
     erfuellte_auftraege: rot 9
   - anspieler: 2
+    karten: grün 9, grün 1, grün 8, grün 4
+    erfuellte_auftraege: grün 4
+  - anspieler: 2
     karten: grün 2, grün 5, grün 6, grün 3
     vermasselte_auftraege: grün 2
   - anspieler: 0
@@ -1549,12 +1535,9 @@
     karten: gelb 3, gelb 8, gelb 7, gelb 2
     erfuellte_auftraege: gelb 3
   - anspieler: 1
-    karten: grün 4, grün 9, grün 1, grün 8
-    erfuellte_auftraege: grün 4
+    karten: gelb 1, gelb 9, gelb 5, gelb 4
   - anspieler: 2
     karten: grün 7, blau 1, blau 9, blau 8
-  - anspieler: 2
-    karten: gelb 9, gelb 5, gelb 4, gelb 1
   - anspieler: 2
     karten: Rakete 1, blau 3, Rakete 2, blau 7
   - anspieler: 0
@@ -1621,18 +1604,29 @@
     karten: rot 9, rot 5, rot 7, rot 4
     erfuellte_auftraege: rot 5
   - anspieler: 0
+    karten: blau 9, blau 2, blau 4, gelb 8
+    erfuellte_auftraege: blau 4
+  - anspieler: 0
     karten: grün 1, grün 4, grün 9, grün 2
     erfuellte_auftraege: grün 2
   - anspieler: 2
-    karten: blau 4, gelb 8, blau 9, blau 2
-    erfuellte_auftraege: blau 4
-  - anspieler: 0
-    karten: blau 3, blau 6, blau 1, grün 7
-    erfuellte_auftraege: blau 6, grün 7
+    karten: blau 1, rot 2, blau 3, blau 6
+    erfuellte_auftraege: blau 6
   - anspieler: 1
-    karten: grün 3, gelb 7, grün 8, grün 5
+    karten: gelb 1, gelb 3, gelb 4, gelb 9
+  - anspieler: 0
+    karten: grün 5, grün 3, gelb 7, grün 8
     erfuellte_auftraege: grün 8
-  resultat: gewonnen
+  - anspieler: 3
+    karten: grün 7, rot 6, rot 1, blau 7
+    vermasselte_auftraege: grün 7
+  - anspieler: 3
+    karten: grün 6, blau 5, gelb 2, gelb 6
+  - anspieler: 3
+    karten: Rakete 1, Rakete 2, rot 8, gelb 5
+  - anspieler: 0
+    karten: Rakete 4, blau 8, rot 3, Rakete 3
+  resultat: verloren
 - karten:
   - gelb 9, grün 7, rot 2, grün 5, blau 1, grün 8, rot 5, rot 1, rot 8, grün 6
   - blau 8, blau 4, gelb 3, blau 9, gelb 6, gelb 5, rot 3, gelb 8, Rakete 3, Rakete
@@ -1687,24 +1681,24 @@
     vermasselte_auftraege: blau 3
     erfuellte_auftraege: blau 1
   - anspieler: 1
-    karten: blau 5, rot 7, rot 9, Rakete 4
-  - anspieler: 0
-    karten: rot 5, rot 4, rot 2, rot 8
-    erfuellte_auftraege: rot 2
-  - anspieler: 3
-    karten: rot 1, Rakete 2, grün 7, gelb 8
-    erfuellte_auftraege: rot 1
-  - anspieler: 0
-    karten: grün 9, grün 1, grün 4, grün 3
-  - anspieler: 0
-    karten: grün 2, grün 6, grün 8, rot 6
-  - anspieler: 2
-    karten: gelb 6, gelb 1, gelb 9, gelb 2
-  - anspieler: 0
-    karten: grün 5, Rakete 1, gelb 3, rot 3
+    karten: blau 5, gelb 8, rot 3, gelb 9
     erfuellte_auftraege: rot 3
   - anspieler: 1
-    karten: gelb 4, gelb 5, Rakete 3, gelb 7
+    karten: rot 4, rot 7, rot 9, rot 5
+  - anspieler: 3
+    karten: rot 8, Rakete 4, grün 7, rot 2
+    vermasselte_auftraege: rot 2
+  - anspieler: 0
+    karten: grün 9, grün 6, grün 4, grün 3
+  - anspieler: 0
+    karten: grün 2, grün 1, grün 8, Rakete 3
+  - anspieler: 3
+    karten: rot 6, Rakete 2, gelb 4, gelb 3
+  - anspieler: 0
+    karten: grün 5, gelb 2, gelb 5, rot 1
+    erfuellte_auftraege: rot 1
+  - anspieler: 0
+    karten: gelb 7, Rakete 1, gelb 6, gelb 1
   resultat: verloren
 - karten:
   - blau 8, grün 9, blau 6, rot 4, rot 2, rot 1, gelb 9, gelb 4, grün 6, grün 7
@@ -1721,31 +1715,30 @@
   kommunikationen: []
   stiche:
   - anspieler: 2
+    karten: grün 8, grün 3, grün 7, gelb 8
+    erfuellte_auftraege: grün 3, grün 7
+  - anspieler: 2
     karten: rot 7, rot 6, rot 4, rot 3
     vermasselte_auftraege: rot 7
   - anspieler: 2
-    karten: blau 2, blau 9, blau 8, blau 1
-    erfuellte_auftraege: blau 8
-  - anspieler: 3
-    karten: grün 3, grün 6, gelb 8, grün 8
-    erfuellte_auftraege: grün 3
-  - anspieler: 2
-    karten: gelb 6, gelb 3, gelb 9, gelb 1
-  - anspieler: 0
-    karten: grün 9, rot 9, grün 2, grün 5
+    karten: grün 2, grün 5, grün 9, gelb 7
     erfuellte_auftraege: grün 5
   - anspieler: 0
-    karten: rot 1, rot 8, gelb 5, blau 7
+    karten: rot 1, rot 9, gelb 6, gelb 3
     erfuellte_auftraege: rot 1
   - anspieler: 1
-    karten: rot 5, grün 4, Rakete 1, rot 2
+    karten: blau 1, blau 2, blau 9, blau 8
+    erfuellte_auftraege: blau 8
   - anspieler: 3
-    karten: grün 1, grün 7, gelb 7, Rakete 4
-    erfuellte_auftraege: grün 7
-  - anspieler: 2
-    karten: gelb 2, blau 4, gelb 4, Rakete 2
+    karten: blau 7, blau 6, rot 8, blau 3
+  - anspieler: 3
+    karten: grün 1, grün 6, rot 5, grün 4
+  - anspieler: 0
+    karten: rot 2, gelb 1, gelb 5, Rakete 1
+  - anspieler: 3
+    karten: blau 4, gelb 9, Rakete 2, gelb 2
   - anspieler: 1
-    karten: Rakete 3, blau 3, blau 5, blau 6
+    karten: Rakete 3, Rakete 4, blau 5, gelb 4
   resultat: verloren
 - karten:
   - grün 9, Rakete 1, blau 6, blau 4, Rakete 4, grün 5, gelb 6, gelb 9, rot 6, gelb
@@ -1761,20 +1754,20 @@
   kommunikationen: []
   stiche:
   - anspieler: 0
+    karten: gelb 9, gelb 4, gelb 2, gelb 3
+    erfuellte_auftraege: gelb 2, gelb 3
+  - anspieler: 0
     karten: rot 6, rot 7, rot 9, rot 3
     erfuellte_auftraege: rot 6
   - anspieler: 2
     karten: rot 1, rot 8, grün 9, grün 8
     erfuellte_auftraege: rot 1
   - anspieler: 3
-    karten: gelb 3, gelb 9, gelb 4, gelb 2
-    erfuellte_auftraege: gelb 2, gelb 3
-  - anspieler: 0
-    karten: gelb 1, gelb 8, gelb 7, blau 8
-    erfuellte_auftraege: gelb 8
-  - anspieler: 1
-    karten: blau 9, blau 2, blau 3, blau 6
+    karten: blau 3, blau 4, blau 9, blau 2
     erfuellte_auftraege: blau 2
+  - anspieler: 1
+    karten: gelb 8, gelb 7, blau 8, gelb 6
+    erfuellte_auftraege: gelb 8
   resultat: gewonnen
 - karten:
   - rot 9, grün 1, rot 1, grün 4, grün 3, gelb 6, Rakete 3, blau 8, grün 7, blau 2
@@ -1810,9 +1803,9 @@
     karten: rot 1, rot 6, rot 2, rot 5
     vermasselte_auftraege: rot 1
   - anspieler: 1
-    karten: grün 8, Rakete 4, rot 4, grün 7
+    karten: grün 8, Rakete 4, gelb 1, grün 7
   - anspieler: 2
-    karten: Rakete 1, gelb 1, grün 4, gelb 7
+    karten: Rakete 1, rot 4, grün 4, gelb 7
   - anspieler: 2
     karten: Rakete 2, gelb 3, grün 3, gelb 5
   resultat: verloren
@@ -1916,7 +1909,7 @@
     karten: grün 6, grün 4, grün 7, grün 1
     vermasselte_auftraege: grün 6
   - anspieler: 1
-    karten: grün 9, rot 9, grün 5, grün 2
+    karten: grün 9, gelb 1, grün 5, grün 2
     erfuellte_auftraege: grün 2
   - anspieler: 1
     karten: blau 7, blau 2, blau 5, blau 4
@@ -1925,15 +1918,15 @@
     karten: blau 1, blau 9, rot 6, blau 3
     erfuellte_auftraege: blau 9
   - anspieler: 2
-    karten: gelb 1, gelb 2, gelb 5, blau 8
+    karten: gelb 4, gelb 2, gelb 5, blau 8
   - anspieler: 0
     karten: rot 4, rot 3, rot 8, rot 5
   - anspieler: 2
-    karten: gelb 4, grün 3, Rakete 2, grün 8
+    karten: gelb 7, grün 3, Rakete 2, grün 8
   - anspieler: 0
-    karten: rot 7, rot 2, gelb 7, rot 1
-  - anspieler: 0
-    karten: Rakete 1, blau 6, Rakete 3, Rakete 4
+    karten: rot 7, rot 2, rot 9, rot 1
+  - anspieler: 2
+    karten: Rakete 3, Rakete 4, Rakete 1, blau 6
   resultat: verloren
 - karten:
   - blau 8, blau 3, blau 4, grün 5, rot 3, grün 9, rot 8, gelb 6, Rakete 4, gelb 1
@@ -2029,17 +2022,17 @@
     karten: rot 2, rot 6, rot 4, rot 1
     erfuellte_auftraege: rot 4
   - anspieler: 1
-    karten: rot 5, rot 9, rot 8, rot 3
-    erfuellte_auftraege: rot 9
-  - anspieler: 2
-    karten: grün 5, grün 8, gelb 9, grün 2
-    erfuellte_auftraege: grün 8
-  - anspieler: 3
-    karten: grün 1, gelb 8, grün 9, grün 7
+    karten: grün 9, grün 7, grün 1, gelb 9
     erfuellte_auftraege: grün 1
   - anspieler: 1
-    karten: grün 3, blau 9, grün 4, Rakete 4
+    karten: grün 2, grün 5, grün 8, gelb 8
+    erfuellte_auftraege: grün 8
+  - anspieler: 3
+    karten: grün 4, Rakete 4, grün 6, blau 9
     erfuellte_auftraege: grün 4
+  - anspieler: 0
+    karten: rot 3, rot 5, rot 9, rot 8
+    erfuellte_auftraege: rot 9
   resultat: gewonnen
 - karten:
   - grün 7, grün 2, rot 2, rot 5, rot 3, blau 1, Rakete 3, gelb 9, blau 4, Rakete
@@ -2134,24 +2127,24 @@
     vermasselte_auftraege: gelb 4
     erfuellte_auftraege: gelb 3
   - anspieler: 1
-    karten: grün 1, Rakete 1, blau 9, grün 7
+    karten: grün 1, Rakete 1, gelb 2, grün 7
     erfuellte_auftraege: grün 7
   - anspieler: 2
-    karten: gelb 9, gelb 2, rot 9, gelb 7
+    karten: gelb 9, gelb 1, blau 1, gelb 7
   - anspieler: 2
-    karten: gelb 6, gelb 1, rot 8, grün 8
+    karten: gelb 6, blau 3, rot 2, grün 8
   - anspieler: 2
-    karten: blau 2, blau 4, blau 8, grün 6
+    karten: blau 2, blau 9, blau 6, grün 6
+    erfuellte_auftraege: blau 6
+  - anspieler: 3
+    karten: blau 7, blau 8, grün 2, rot 7
+    erfuellte_auftraege: blau 7
   - anspieler: 0
-    karten: blau 6, grün 2, rot 7, blau 3
-    vermasselte_auftraege: blau 6
-  - anspieler: 0
-    karten: rot 2, Rakete 2, rot 1, rot 4
+    karten: blau 5, Rakete 2, rot 1, blau 4
   - anspieler: 1
-    karten: Rakete 3, rot 3, rot 6, blau 1
+    karten: Rakete 3, rot 3, rot 6, rot 9
   - anspieler: 1
-    karten: Rakete 4, rot 5, blau 7, blau 5
-    vermasselte_auftraege: blau 7
+    karten: Rakete 4, rot 5, rot 4, rot 8
   resultat: verloren
 - karten:
   - blau 1, rot 8, gelb 1, blau 7, rot 1, grün 8, rot 5, grün 1, grün 6, grün 3
@@ -2173,21 +2166,21 @@
     karten: grün 2, grün 9, grün 6, grün 4
     erfuellte_auftraege: grün 4, grün 6
   - anspieler: 3
-    karten: gelb 2, rot 8, gelb 4, gelb 8
+    karten: gelb 2, blau 7, gelb 4, gelb 8
     vermasselte_auftraege: gelb 4
   - anspieler: 2
-    karten: blau 9, blau 8, blau 7, blau 2
+    karten: blau 9, blau 8, blau 1, blau 2
   - anspieler: 2
     karten: rot 9, rot 2, rot 1, rot 3
   - anspieler: 2
-    karten: blau 5, blau 4, blau 1, grün 5
+    karten: blau 5, blau 4, rot 8, grün 5
     erfuellte_auftraege: blau 5
   - anspieler: 2
-    karten: blau 3, blau 6, grün 1, Rakete 3
+    karten: blau 3, blau 6, grün 3, Rakete 3
   - anspieler: 1
     karten: rot 4, rot 6, grün 7, rot 5
   - anspieler: 2
-    karten: rot 7, gelb 6, grün 3, Rakete 2
+    karten: rot 7, gelb 6, grün 1, Rakete 2
   - anspieler: 1
     karten: Rakete 1, Rakete 4, gelb 5, grün 8
     vermasselte_auftraege: grün 8
@@ -2210,29 +2203,23 @@
     karten: blau 9, blau 3, blau 2, blau 1
     erfuellte_auftraege: blau 2
   - anspieler: 2
-    karten: grün 7, blau 8, grün 8, grün 6
+    karten: grün 7, rot 8, grün 8, grün 6
   - anspieler: 0
-    karten: rot 9, grün 9, rot 3, rot 8
+    karten: rot 9, grün 9, rot 3, rot 4
     erfuellte_auftraege: rot 9
   - anspieler: 0
-    karten: blau 6, grün 5, blau 7, blau 5
-    vermasselte_auftraege: blau 6
-  - anspieler: 2
-    karten: gelb 1, gelb 6, gelb 3, gelb 2
+    karten: blau 6, grün 5, blau 7, blau 8
+    erfuellte_auftraege: blau 6
+  - anspieler: 3
+    karten: gelb 6, gelb 3, gelb 2, gelb 1
     erfuellte_auftraege: gelb 6
   - anspieler: 3
     karten: gelb 4, rot 7, gelb 9, rot 2
     erfuellte_auftraege: gelb 4
   - anspieler: 1
-    karten: grün 2, grün 3, gelb 5, rot 6
+    karten: grün 2, grün 3, blau 5, rot 6
     erfuellte_auftraege: grün 2
-  - anspieler: 2
-    karten: grün 1, Rakete 3, rot 5, grün 4
-  - anspieler: 3
-    karten: rot 4, rot 1, gelb 8, Rakete 1
-  - anspieler: 2
-    karten: Rakete 4, Rakete 2, blau 4, gelb 7
-  resultat: verloren
+  resultat: gewonnen
 - karten:
   - gelb 6, blau 8, rot 3, blau 2, blau 9, rot 8, gelb 5, gelb 7, grün 8, Rakete 1
   - gelb 2, rot 6, gelb 3, rot 4, grün 5, grün 2, blau 5, gelb 9, blau 1, blau 7
@@ -2287,31 +2274,31 @@
   kommunikationen: []
   stiche:
   - anspieler: 3
-    karten: blau 6, blau 5, blau 7, blau 2
+    karten: grün 7, grün 6, grün 9, grün 2
+    vermasselte_auftraege: grün 2
+  - anspieler: 1
+    karten: rot 9, rot 7, rot 4, rot 6
+    erfuellte_auftraege: rot 4
   - anspieler: 1
     karten: gelb 5, gelb 4, rot 5, gelb 9
     erfuellte_auftraege: gelb 5
   - anspieler: 0
-    karten: rot 8, rot 1, rot 7, rot 4
-    vermasselte_auftraege: rot 4
+    karten: rot 8, rot 2, rot 3, blau 3
     erfuellte_auftraege: rot 8
   - anspieler: 0
-    karten: grün 1, grün 9, grün 2, grün 5
-    vermasselte_auftraege: grün 2
-  - anspieler: 1
-    karten: rot 9, rot 3, grün 7, rot 6
-  - anspieler: 1
-    karten: blau 8, blau 9, blau 3, gelb 8
-  - anspieler: 2
-    karten: blau 1, blau 4, gelb 7, gelb 3
-    erfuellte_auftraege: blau 1
-  - anspieler: 3
-    karten: grün 3, grün 4, grün 8, Rakete 1
+    karten: grün 1, grün 8, Rakete 1, grün 3
     erfuellte_auftraege: grün 8
   - anspieler: 2
-    karten: gelb 1, Rakete 4, gelb 6, rot 2
+    karten: blau 1, blau 6, blau 5, blau 7
+    vermasselte_auftraege: blau 1
+  - anspieler: 1
+    karten: blau 8, blau 2, blau 4, gelb 8
+  - anspieler: 1
+    karten: rot 1, blau 9, Rakete 4, gelb 7
   - anspieler: 3
-    karten: Rakete 2, grün 6, Rakete 3, gelb 2
+    karten: grün 5, grün 4, gelb 3, gelb 2
+  - anspieler: 3
+    karten: Rakete 2, gelb 6, Rakete 3, gelb 1
   resultat: verloren
 - karten:
   - gelb 1, Rakete 4, blau 2, gelb 3, Rakete 2, gelb 4, rot 4, gelb 9, blau 3, rot
@@ -2335,25 +2322,15 @@
     karten: rot 4, rot 7, rot 6, rot 5
     erfuellte_auftraege: rot 4
   - anspieler: 1
-    karten: grün 5, grün 6, grün 9, rot 9
-    erfuellte_auftraege: grün 5
-  - anspieler: 3
-    karten: grün 3, gelb 4, grün 4, grün 1
-    vermasselte_auftraege: grün 3
+    karten: grün 8, grün 1, grün 2, rot 9
     erfuellte_auftraege: grün 1
   - anspieler: 1
-    karten: grün 7, Rakete 3, grün 2, gelb 3
-  - anspieler: 2
-    karten: blau 6, blau 7, blau 3, blau 8
-  - anspieler: 1
-    karten: grün 8, blau 1, rot 8, blau 2
-  - anspieler: 1
-    karten: gelb 8, gelb 5, rot 3, gelb 1
-  - anspieler: 1
-    karten: blau 9, blau 4, rot 2, Rakete 2
-  - anspieler: 0
-    karten: Rakete 4, Rakete 1, blau 5, rot 1
-  resultat: verloren
+    karten: grün 5, grün 6, grün 9, gelb 4
+    erfuellte_auftraege: grün 5
+  - anspieler: 3
+    karten: grün 3, gelb 3, grün 4, Rakete 3
+    erfuellte_auftraege: grün 3
+  resultat: gewonnen
 - karten:
   - grün 6, gelb 2, blau 8, grün 5, blau 3, blau 6, grün 3, rot 7, gelb 7, gelb 1
   - rot 4, blau 2, grün 8, Rakete 1, grün 9, rot 3, gelb 6, rot 8, gelb 8, rot 2
@@ -2419,18 +2396,18 @@
     vermasselte_auftraege: gelb 7
     erfuellte_auftraege: gelb 5
   - anspieler: 3
-    karten: gelb 6, blau 9, grün 9, Rakete 4
+    karten: gelb 6, blau 2, blau 4, Rakete 4
   - anspieler: 2
-    karten: grün 5, grün 8, grün 6, grün 4
-  - anspieler: 3
-    karten: grün 2, Rakete 2, rot 3, grün 3
+    karten: grün 5, grün 8, grün 6, grün 9
+  - anspieler: 1
+    karten: rot 3, blau 8, grün 7, rot 8
     erfuellte_auftraege: rot 3
   - anspieler: 0
-    karten: rot 8, Rakete 3, blau 8, blau 6
-  - anspieler: 1
-    karten: blau 4, blau 1, blau 7, blau 3
+    karten: blau 3, blau 5, blau 1, blau 7
   - anspieler: 3
-    karten: grün 7, blau 2, blau 5, grün 1
+    karten: grün 2, blau 9, grün 4, grün 1
+  - anspieler: 1
+    karten: Rakete 3, grün 3, blau 6, Rakete 2
   resultat: verloren
 - karten:
   - Rakete 1, grün 2, gelb 4, blau 2, blau 7, grün 3, rot 2, gelb 9, grün 4, grün
@@ -2447,31 +2424,30 @@
   kommunikationen: []
   stiche:
   - anspieler: 1
+    karten: rot 9, rot 6, rot 5, rot 2
+    erfuellte_auftraege: rot 6
+  - anspieler: 1
     karten: blau 9, blau 8, blau 6, blau 7
     erfuellte_auftraege: blau 8
   - anspieler: 1
-    karten: rot 7, rot 1, rot 5, rot 2
-    vermasselte_auftraege: rot 7
+    karten: rot 7, rot 1, rot 4, grün 2
+    vermasselte_auftraege: grün 2, rot 7
   - anspieler: 1
-    karten: rot 9, rot 6, rot 4, grün 8
-    erfuellte_auftraege: rot 6
-  - anspieler: 1
-    karten: grün 6, grün 9, grün 1, grün 2
-    erfuellte_auftraege: grün 2
+    karten: grün 6, grün 9, grün 1, grün 8
+  - anspieler: 2
+    karten: grün 7, grün 5, grün 3, rot 8
   - anspieler: 2
     karten: gelb 1, gelb 2, gelb 9, gelb 7
     erfuellte_auftraege: gelb 2
   - anspieler: 0
-    karten: grün 4, rot 8, grün 7, grün 5
+    karten: grün 4, blau 4, blau 5, gelb 8
     vermasselte_auftraege: grün 4
-  - anspieler: 2
-    karten: blau 1, rot 3, blau 2, blau 3
+  - anspieler: 0
+    karten: blau 2, blau 3, blau 1, rot 3
   - anspieler: 1
-    karten: blau 4, blau 5, gelb 3, gelb 4
+    karten: Rakete 2, Rakete 3, gelb 3, Rakete 1
   - anspieler: 2
-    karten: gelb 5, gelb 8, grün 3, Rakete 2
-  - anspieler: 1
-    karten: Rakete 4, Rakete 3, gelb 6, Rakete 1
+    karten: gelb 5, gelb 6, gelb 4, Rakete 4
   resultat: verloren
 - karten:
   - blau 8, blau 3, blau 7, rot 2, gelb 5, rot 6, gelb 1, gelb 6, grün 3, gelb 2
@@ -2498,7 +2474,7 @@
     vermasselte_auftraege: rot 5
     erfuellte_auftraege: rot 4
   - anspieler: 3
-    karten: grün 2, blau 8, grün 8, grün 6
+    karten: grün 2, gelb 5, grün 8, grün 6
     vermasselte_auftraege: grün 6
   - anspieler: 1
     karten: gelb 3, gelb 9, blau 9, gelb 6
@@ -2506,13 +2482,13 @@
   - anspieler: 2
     karten: gelb 8, grün 7, gelb 1, blau 6
   - anspieler: 2
-    karten: gelb 4, grün 5, gelb 5, blau 5
-  - anspieler: 0
-    karten: gelb 2, blau 4, gelb 7, rot 3
+    karten: gelb 4, grün 5, gelb 2, blau 5
   - anspieler: 2
-    karten: Rakete 1, blau 2, blau 3, Rakete 2
+    karten: gelb 7, rot 3, blau 3, blau 4
+  - anspieler: 2
+    karten: Rakete 1, blau 2, blau 7, Rakete 2
   - anspieler: 1
-    karten: Rakete 4, Rakete 3, blau 1, blau 7
+    karten: Rakete 4, Rakete 3, blau 1, blau 8
   resultat: verloren
 - karten:
   - Rakete 3, blau 9, blau 1, grün 9, grün 4, grün 2, rot 9, grün 1, grün 6, gelb
@@ -2568,16 +2544,16 @@
   kommunikationen: []
   stiche:
   - anspieler: 2
-    karten: rot 6, rot 3, rot 9, rot 5
-    erfuellte_auftraege: rot 6
-  - anspieler: 0
-    karten: gelb 5, gelb 8, gelb 2, gelb 9
+    karten: gelb 7, gelb 9, gelb 5, gelb 8
     erfuellte_auftraege: gelb 5
   - anspieler: 3
     karten: blau 4, blau 3, blau 2, Rakete 4
     erfuellte_auftraege: blau 4
   - anspieler: 2
-    karten: gelb 7, grün 7, gelb 6, gelb 1
+    karten: rot 6, rot 3, rot 9, rot 5
+    erfuellte_auftraege: rot 6
+  - anspieler: 0
+    karten: gelb 3, gelb 1, gelb 4, grün 7
     erfuellte_auftraege: gelb 1
   - anspieler: 2
     karten: grün 1, grün 2, grün 6, grün 9
@@ -2586,13 +2562,13 @@
     karten: blau 7, rot 7, blau 1, blau 8
     vermasselte_auftraege: blau 7
   - anspieler: 0
-    karten: gelb 3, blau 9, gelb 4, Rakete 1
+    karten: gelb 6, blau 9, gelb 2, Rakete 1
   - anspieler: 3
     karten: grün 3, grün 8, grün 4, rot 2
   - anspieler: 0
-    karten: rot 8, rot 4, rot 1, grün 5
+    karten: rot 8, rot 4, rot 1, blau 5
   - anspieler: 0
-    karten: Rakete 3, blau 6, Rakete 2, blau 5
+    karten: Rakete 3, blau 6, Rakete 2, grün 5
   resultat: verloren
 - karten:
   - blau 8, rot 6, grün 1, rot 4, gelb 4, Rakete 3, grün 4, gelb 8, grün 6, blau 4
@@ -2641,15 +2617,15 @@
     karten: gelb 2, gelb 8, gelb 4, gelb 6
     erfuellte_auftraege: gelb 4
   - anspieler: 0
-    karten: blau 8, gelb 9, blau 2, blau 4
+    karten: blau 8, rot 1, blau 2, blau 4
     erfuellte_auftraege: blau 2
   - anspieler: 0
-    karten: gelb 1, Rakete 3, blau 1, gelb 3
+    karten: gelb 1, gelb 9, grün 8, gelb 3
   - anspieler: 1
     karten: grün 9, grün 4, grün 5, rot 9
     erfuellte_auftraege: grün 9
   - anspieler: 1
-    karten: grün 1, grün 8, grün 3, rot 8
+    karten: grün 1, grün 7, grün 3, rot 8
     erfuellte_auftraege: grün 1
   resultat: gewonnen
 - karten:
@@ -2668,10 +2644,7 @@
   kommunikationen: []
   stiche:
   - anspieler: 3
-    karten: blau 4, blau 7, blau 1, blau 3
-    erfuellte_auftraege: blau 7
-  - anspieler: 0
-    karten: gelb 1, gelb 9, gelb 6, gelb 5
+    karten: gelb 8, gelb 1, gelb 9, gelb 6
     vermasselte_auftraege: gelb 9, gelb 1
   - anspieler: 1
     karten: rot 9, rot 3, rot 2, rot 6
@@ -2680,18 +2653,21 @@
     karten: rot 7, rot 1, Rakete 4, grün 8
     erfuellte_auftraege: rot 7
   - anspieler: 3
-    karten: gelb 8, gelb 3, blau 9, gelb 2
-  - anspieler: 3
-    karten: grün 5, grün 6, grün 3, grün 9
+    karten: blau 4, blau 7, blau 1, blau 3
+    erfuellte_auftraege: blau 7
+  - anspieler: 0
+    karten: grün 6, grün 3, grün 9, grün 5
     erfuellte_auftraege: grün 6
   - anspieler: 2
-    karten: blau 2, blau 8, Rakete 1, rot 8
+    karten: gelb 2, gelb 5, gelb 7, blau 9
   - anspieler: 0
     karten: grün 1, grün 7, grün 4, gelb 4
   - anspieler: 1
-    karten: rot 4, Rakete 2, blau 5, grün 2
+    karten: rot 4, blau 2, blau 5, Rakete 1
+  - anspieler: 0
+    karten: grün 2, rot 8, Rakete 2, blau 6
   - anspieler: 2
-    karten: Rakete 3, blau 6, gelb 7, rot 5
+    karten: Rakete 3, blau 8, gelb 3, rot 5
   resultat: verloren
 - karten:
   - gelb 4, grün 5, blau 8, Rakete 4, blau 2, rot 7, rot 8, grün 6, blau 6, gelb 5
@@ -2724,13 +2700,13 @@
   - anspieler: 2
     karten: grün 1, gelb 7, grün 6, grün 8
   - anspieler: 1
-    karten: rot 1, Rakete 3, gelb 3, Rakete 4
+    karten: grün 7, grün 2, gelb 3, Rakete 4
   - anspieler: 0
-    karten: blau 2, rot 2, blau 5, gelb 2
+    karten: blau 2, rot 3, blau 5, gelb 2
   - anspieler: 2
-    karten: grün 2, Rakete 1, gelb 4, grün 7
+    karten: blau 4, Rakete 1, blau 6, rot 2
   - anspieler: 3
-    karten: Rakete 2, blau 6, rot 3, blau 4
+    karten: Rakete 2, gelb 4, rot 1, Rakete 3
   resultat: verloren
 - karten:
   - blau 9, rot 6, grün 5, rot 9, grün 7, blau 1, blau 6, blau 5, gelb 5, grün 8
@@ -2763,12 +2739,12 @@
   - anspieler: 0
     karten: blau 6, gelb 7, blau 3, Rakete 4
   - anspieler: 3
-    karten: gelb 9, grün 7, grün 6, gelb 1
+    karten: gelb 9, blau 1, grün 6, gelb 1
     erfuellte_auftraege: gelb 1
   - anspieler: 3
-    karten: gelb 3, blau 1, grün 2, gelb 4
+    karten: gelb 3, grün 5, grün 2, gelb 4
   - anspieler: 2
-    karten: rot 3, rot 4, grün 5, grün 1
+    karten: rot 3, rot 4, grün 7, grün 1
     vermasselte_auftraege: rot 3
   - anspieler: 3
     karten: Rakete 1, blau 5, Rakete 3, Rakete 2
@@ -2829,30 +2805,30 @@
   kommunikationen: []
   stiche:
   - anspieler: 1
-    karten: gelb 5, gelb 9, gelb 3, gelb 6
+    karten: gelb 8, gelb 7, gelb 3, gelb 4
+    erfuellte_auftraege: gelb 4, gelb 7
+  - anspieler: 1
+    karten: gelb 5, gelb 9, gelb 2, gelb 6
     erfuellte_auftraege: gelb 5
   - anspieler: 2
     karten: grün 4, grün 9, grün 1, grün 6
     erfuellte_auftraege: grün 4
   - anspieler: 3
-    karten: gelb 2, gelb 4, gelb 8, gelb 7
-    erfuellte_auftraege: gelb 4, gelb 7
-  - anspieler: 1
-    karten: blau 1, blau 7, blau 9, blau 3
-  - anspieler: 3
     karten: grün 5, grün 8, grün 3, blau 2
     erfuellte_auftraege: grün 8
   - anspieler: 0
-    karten: rot 1, rot 4, Rakete 3, rot 9
+    karten: blau 3, blau 1, blau 7, blau 9
+  - anspieler: 3
+    karten: rot 2, rot 1, rot 4, Rakete 3
   - anspieler: 2
-    karten: blau 6, rot 8, blau 8, rot 6
+    karten: blau 6, rot 9, blau 8, rot 6
     vermasselte_auftraege: blau 8
   - anspieler: 0
-    karten: grün 2, rot 5, Rakete 1, rot 7
+    karten: grün 2, rot 5, Rakete 1, rot 8
   - anspieler: 2
-    karten: blau 5, rot 3, grün 7, gelb 1
+    karten: blau 5, rot 7, grün 7, gelb 1
   - anspieler: 2
-    karten: blau 4, rot 2, Rakete 2, Rakete 4
+    karten: blau 4, rot 3, Rakete 2, Rakete 4
   resultat: verloren
 - karten:
   - Rakete 3, rot 2, grün 5, grün 6, gelb 1, blau 6, rot 3, blau 7, gelb 4, blau 3
@@ -2871,28 +2847,28 @@
     karten: gelb 9, gelb 4, gelb 6, gelb 7
     erfuellte_auftraege: gelb 4
   - anspieler: 3
-    karten: grün 2, grün 6, grün 4, rot 7
+    karten: grün 8, grün 5, grün 3, rot 7
+    erfuellte_auftraege: grün 3
+  - anspieler: 3
+    karten: grün 2, grün 6, grün 4, rot 6
     erfuellte_auftraege: grün 2
   - anspieler: 0
     karten: blau 7, blau 9, blau 4, blau 5
     vermasselte_auftraege: blau 7
     erfuellte_auftraege: blau 9
   - anspieler: 1
-    karten: grün 3, rot 6, grün 8, grün 5
-    erfuellte_auftraege: grün 3
-  - anspieler: 3
-    karten: blau 2, blau 6, blau 8, blau 1
-  - anspieler: 1
     karten: gelb 2, gelb 5, gelb 3, gelb 1
     erfuellte_auftraege: gelb 5
   - anspieler: 2
-    karten: rot 1, grün 7, rot 3, rot 8
+    karten: blau 1, blau 2, blau 6, blau 8
   - anspieler: 1
-    karten: rot 9, rot 5, grün 1, rot 2
+    karten: rot 8, rot 5, grün 7, rot 2
+  - anspieler: 1
+    karten: rot 9, rot 4, grün 1, rot 3
   - anspieler: 1
     karten: grün 9, gelb 8, Rakete 2, Rakete 3
   - anspieler: 0
-    karten: blau 3, Rakete 1, rot 4, Rakete 4
+    karten: blau 3, Rakete 1, rot 1, Rakete 4
   resultat: verloren
 - karten:
   - rot 6, Rakete 3, gelb 6, grün 9, Rakete 2, blau 4, blau 5, blau 7, gelb 2, Rakete
@@ -2947,21 +2923,21 @@
     karten: rot 4, rot 5, rot 2, rot 3
     vermasselte_auftraege: rot 5
   - anspieler: 2
-    karten: grün 4, gelb 7, grün 8, grün 7
-    erfuellte_auftraege: grün 4
-  - anspieler: 0
-    karten: grün 1, rot 8, grün 9, rot 6
+    karten: grün 9, gelb 7, grün 1, grün 7
     erfuellte_auftraege: grün 1
   - anspieler: 2
-    karten: rot 9, rot 1, Rakete 1, rot 7
+    karten: grün 4, rot 6, grün 8, rot 8
+    erfuellte_auftraege: grün 4
   - anspieler: 0
     karten: blau 1, blau 8, blau 4, blau 2
   - anspieler: 1
-    karten: gelb 3, gelb 9, gelb 4, blau 3
-  - anspieler: 2
-    karten: grün 2, gelb 1, grün 6, Rakete 2
+    karten: rot 7, rot 9, rot 1, Rakete 1
+  - anspieler: 0
+    karten: blau 3, gelb 3, gelb 9, gelb 4
+  - anspieler: 0
+    karten: grün 5, Rakete 2, grün 3, gelb 1
   - anspieler: 1
-    karten: Rakete 3, grün 3, Rakete 4, grün 5
+    karten: Rakete 3, grün 2, Rakete 4, grün 6
   resultat: verloren
 - karten:
   - rot 1, gelb 6, Rakete 1, grün 8, blau 1, gelb 3, blau 6, rot 9, grün 3, rot 7
@@ -3017,18 +2993,18 @@
     karten: grün 3, grün 4, grün 2, Rakete 4
     erfuellte_auftraege: grün 3
   - anspieler: 0
-    karten: blau 1, grün 9, Rakete 3, rot 9
+    karten: blau 1, grün 9, Rakete 3, gelb 3
   - anspieler: 2
     karten: rot 1, rot 8, rot 7, grün 8
     erfuellte_auftraege: rot 8
   - anspieler: 3
-    karten: gelb 3, gelb 7, gelb 5, gelb 2
+    karten: rot 4, gelb 9, gelb 5, Rakete 1
+  - anspieler: 2
+    karten: gelb 2, gelb 6, gelb 7, gelb 4
   - anspieler: 0
-    karten: blau 2, gelb 4, Rakete 1, grün 7
-  - anspieler: 2
-    karten: grün 5, gelb 6, gelb 9, grün 1
-  - anspieler: 2
-    karten: grün 6, rot 4, gelb 8, gelb 1
+    karten: blau 2, gelb 1, grün 5, rot 9
+  - anspieler: 0
+    karten: gelb 8, grün 1, grün 6, grün 7
   resultat: verloren
 - karten:
   - gelb 9, blau 6, Rakete 3, gelb 6, blau 7, blau 5, blau 9, grün 6, rot 5, blau
@@ -3058,18 +3034,18 @@
     karten: gelb 6, gelb 3, gelb 7, gelb 5
     vermasselte_auftraege: gelb 5
   - anspieler: 2
-    karten: grün 3, grün 4, Rakete 3, grün 8
+    karten: grün 7, grün 4, Rakete 3, grün 8
     erfuellte_auftraege: grün 8
   - anspieler: 0
     karten: blau 3, rot 4, blau 8, blau 2
   - anspieler: 2
-    karten: grün 7, rot 8, blau 9, gelb 2
+    karten: grün 5, rot 3, blau 9, gelb 2
   - anspieler: 2
-    karten: grün 5, blau 4, blau 7, rot 2
-  - anspieler: 2
-    karten: blau 1, Rakete 4, blau 6, Rakete 1
+    karten: blau 1, blau 4, blau 5, rot 2
+  - anspieler: 0
+    karten: blau 6, rot 1, Rakete 2, Rakete 4
   - anspieler: 3
-    karten: rot 3, blau 5, rot 1, Rakete 2
+    karten: rot 8, blau 7, Rakete 1, grün 3
   resultat: verloren
 - karten:
   - grün 1, rot 8, Rakete 3, gelb 3, gelb 4, gelb 9, rot 6, blau 7, blau 8, rot 7
@@ -3168,8 +3144,10 @@
     karten: rot 8, rot 3, rot 9, rot 6
     vermasselte_auftraege: rot 3
   - anspieler: 0
-    karten: gelb 2, gelb 8, gelb 1, gelb 4
-    vermasselte_auftraege: gelb 8
+    karten: gelb 9, gelb 8, gelb 1, gelb 4
+    erfuellte_auftraege: gelb 8
+  - anspieler: 0
+    karten: gelb 2, Rakete 2, grün 8, gelb 5
     erfuellte_auftraege: gelb 2
   - anspieler: 1
     karten: blau 3, blau 4, blau 8, blau 1
@@ -3178,18 +3156,16 @@
     karten: rot 7, gelb 6, rot 4, rot 2
     erfuellte_auftraege: gelb 6
   - anspieler: 3
-    karten: gelb 5, gelb 9, blau 7, Rakete 4
+    karten: grün 2, grün 4, grün 1, grün 5
   - anspieler: 2
     karten: rot 5, grün 9, blau 9, rot 1
   - anspieler: 2
-    karten: grün 5, grün 3, grün 4, grün 1
+    karten: blau 6, blau 5, gelb 3, blau 7
+    vermasselte_auftraege: gelb 3
+  - anspieler: 1
+    karten: grün 6, Rakete 4, grün 3, Rakete 3
   - anspieler: 2
-    karten: blau 6, blau 5, gelb 3, grün 7
-    erfuellte_auftraege: gelb 3
-  - anspieler: 2
-    karten: grün 8, grün 2, Rakete 3, grün 6
-  - anspieler: 0
-    karten: gelb 7, Rakete 2, Rakete 1, blau 2
+    karten: Rakete 1, blau 2, gelb 7, grün 7
   resultat: verloren
 - karten:
   - gelb 8, grün 6, gelb 4, gelb 3, blau 2, gelb 7, Rakete 4, rot 3, grün 5, rot 8
@@ -3205,31 +3181,31 @@
   kommunikationen: []
   stiche:
   - anspieler: 0
-    karten: grün 5, grün 4, grün 3, grün 9
-    erfuellte_auftraege: grün 5
-  - anspieler: 3
-    karten: gelb 1, gelb 8, gelb 2, gelb 6
-    erfuellte_auftraege: gelb 1
-  - anspieler: 0
-    karten: blau 2, blau 8, blau 7, blau 4
-    erfuellte_auftraege: blau 7
-  - anspieler: 1
-    karten: gelb 9, rot 9, grün 8, gelb 3
+    karten: gelb 8, gelb 9, gelb 6, gelb 1
+    vermasselte_auftraege: gelb 1
     erfuellte_auftraege: gelb 9
+  - anspieler: 1
+    karten: blau 8, blau 7, blau 4, blau 2
+    erfuellte_auftraege: blau 7
   - anspieler: 1
     karten: blau 6, blau 9, rot 7, rot 8
     erfuellte_auftraege: blau 6
   - anspieler: 2
-    karten: blau 1, grün 7, Rakete 4, blau 3
-  - anspieler: 0
-    karten: gelb 4, gelb 5, blau 5, grün 1
-    vermasselte_auftraege: gelb 4
-  - anspieler: 1
-    karten: rot 2, rot 4, rot 1, rot 3
-  - anspieler: 2
-    karten: grün 2, Rakete 1, grün 6, rot 6
+    karten: grün 2, grün 9, grün 5, grün 4
+    erfuellte_auftraege: grün 5
   - anspieler: 3
-    karten: Rakete 3, gelb 7, rot 5, Rakete 2
+    karten: grün 1, grün 6, rot 6, grün 3
+  - anspieler: 0
+    karten: gelb 7, gelb 5, rot 9, grün 8
+  - anspieler: 0
+    karten: gelb 4, gelb 2, blau 5, grün 7
+    erfuellte_auftraege: gelb 4
+  - anspieler: 0
+    karten: rot 3, rot 2, rot 4, rot 1
+  - anspieler: 2
+    karten: blau 1, Rakete 1, Rakete 4, blau 3
+  - anspieler: 0
+    karten: gelb 3, rot 5, Rakete 2, Rakete 3
   resultat: verloren
 - karten:
   - rot 2, rot 4, grün 7, blau 9, rot 5, grün 2, rot 3, grün 5, gelb 9, blau 7
@@ -3359,31 +3335,31 @@
   kommunikationen: []
   stiche:
   - anspieler: 3
-    karten: grün 6, grün 7, grün 5, grün 1
+    karten: gelb 8, gelb 9, gelb 6, gelb 7
+    erfuellte_auftraege: gelb 6
+  - anspieler: 0
+    karten: grün 7, grün 5, grün 1, grün 6
     vermasselte_auftraege: grün 1
     erfuellte_auftraege: grün 7
-  - anspieler: 0
-    karten: gelb 9, gelb 6, gelb 7, gelb 1
-    erfuellte_auftraege: gelb 6
   - anspieler: 0
     karten: grün 2, grün 3, grün 9, rot 6
     erfuellte_auftraege: grün 3
   - anspieler: 2
-    karten: gelb 5, gelb 8, gelb 4, blau 5
-    erfuellte_auftraege: gelb 5
+    karten: gelb 5, gelb 3, gelb 4, blau 5
+    vermasselte_auftraege: gelb 5
+  - anspieler: 2
+    karten: gelb 2, gelb 1, blau 9, rot 1
+  - anspieler: 2
+    karten: blau 2, blau 3, blau 8, blau 1
+  - anspieler: 0
+    karten: grün 4, rot 3, blau 7, Rakete 4
   - anspieler: 3
-    karten: rot 2, rot 8, rot 9, blau 7
+    karten: rot 2, rot 8, rot 9, blau 6
   - anspieler: 1
-    karten: rot 7, blau 6, rot 4, blau 9
+    karten: rot 7, blau 4, rot 4, grün 8
     erfuellte_auftraege: rot 7
   - anspieler: 1
-    karten: rot 1, blau 4, Rakete 4, Rakete 2
-  - anspieler: 3
-    karten: gelb 3, grün 8, rot 5, gelb 2
-  - anspieler: 3
-    karten: blau 3, blau 8, blau 1, blau 2
-  - anspieler: 0
-    karten: grün 4, rot 3, Rakete 1, Rakete 3
+    karten: rot 5, Rakete 1, Rakete 3, Rakete 2
   resultat: verloren
 - karten:
   - blau 3, blau 1, rot 1, grün 3, rot 2, Rakete 2, grün 8, grün 2, Rakete 3, rot
@@ -3450,7 +3426,7 @@
   - anspieler: 2
     karten: blau 2, blau 7, grün 8, blau 9
   - anspieler: 1
-    karten: gelb 2, rot 9, gelb 9, gelb 1
+    karten: gelb 2, rot 2, gelb 9, gelb 1
     erfuellte_auftraege: gelb 9
   - anspieler: 3
     karten: blau 6, grün 5, rot 8, blau 3
@@ -3458,11 +3434,11 @@
   - anspieler: 3
     karten: grün 3, rot 5, gelb 8, grün 7
   - anspieler: 2
-    karten: rot 2, rot 6, Rakete 1, rot 7
+    karten: rot 4, rot 6, Rakete 1, rot 7
   - anspieler: 0
-    karten: Rakete 2, rot 3, rot 4, gelb 5
+    karten: Rakete 2, rot 3, grün 4, gelb 5
   - anspieler: 0
-    karten: Rakete 3, rot 1, grün 4, gelb 6
+    karten: Rakete 3, rot 1, rot 9, gelb 6
   resultat: verloren
 - karten:
   - blau 9, rot 7, grün 2, Rakete 2, grün 7, grün 6, rot 1, gelb 5, Rakete 1, rot
@@ -3487,20 +3463,20 @@
     karten: grün 6, grün 3, grün 1, grün 4
     vermasselte_auftraege: grün 1, grün 6
   - anspieler: 0
-    karten: rot 1, grün 9, rot 5, rot 3
+    karten: rot 1, gelb 2, rot 5, rot 3
     erfuellte_auftraege: rot 5
   - anspieler: 2
     karten: blau 1, blau 5, rot 8, blau 7
   - anspieler: 1
-    karten: grün 8, rot 9, Rakete 4, grün 7
+    karten: grün 9, rot 9, Rakete 4, grün 7
   - anspieler: 3
-    karten: rot 2, rot 7, gelb 2, rot 6
+    karten: rot 2, rot 7, grün 8, rot 6
   - anspieler: 0
-    karten: grün 2, grün 5, gelb 6, blau 2
+    karten: grün 2, grün 5, gelb 6, gelb 8
   - anspieler: 1
-    karten: gelb 3, rot 4, gelb 8, Rakete 1
+    karten: gelb 3, rot 4, gelb 4, Rakete 1
   - anspieler: 0
-    karten: Rakete 2, blau 3, Rakete 3, gelb 4
+    karten: Rakete 2, blau 3, Rakete 3, blau 2
   resultat: verloren
 - karten:
   - Rakete 4, blau 7, blau 3, Rakete 3, rot 5, blau 8, gelb 2, gelb 3, grün 5, gelb
@@ -3516,31 +3492,31 @@
   kommunikationen: []
   stiche:
   - anspieler: 0
-    karten: blau 8, blau 6, gelb 9, blau 1
+    karten: blau 8, blau 6, grün 4, blau 1
     erfuellte_auftraege: blau 1
   - anspieler: 0
     karten: grün 5, grün 9, grün 6, grün 2
     erfuellte_auftraege: grün 6
   - anspieler: 1
-    karten: rot 2, rot 9, rot 6, rot 5
+    karten: rot 7, rot 1, rot 6, rot 5
     vermasselte_auftraege: rot 5
-    erfuellte_auftraege: rot 2
-  - anspieler: 2
-    karten: rot 1, rot 4, blau 7, rot 7
     erfuellte_auftraege: rot 1
   - anspieler: 1
-    karten: rot 3, rot 8, blau 9, Rakete 4
-  - anspieler: 0
-    karten: gelb 6, gelb 5, gelb 1, gelb 4
-  - anspieler: 0
-    karten: gelb 2, gelb 7, gelb 8, grün 3
+    karten: rot 2, rot 9, rot 4, blau 7
+    erfuellte_auftraege: rot 2
   - anspieler: 2
-    karten: grün 1, grün 7, blau 3, blau 4
+    karten: grün 1, grün 7, gelb 6, gelb 7
     erfuellte_auftraege: grün 7
   - anspieler: 3
-    karten: blau 5, Rakete 3, blau 2, Rakete 2
+    karten: grün 3, Rakete 4, Rakete 1, Rakete 2
   - anspieler: 0
-    karten: gelb 3, Rakete 1, grün 4, grün 8
+    karten: gelb 2, gelb 5, gelb 1, gelb 4
+  - anspieler: 1
+    karten: rot 3, rot 8, blau 9, Rakete 3
+  - anspieler: 0
+    karten: blau 3, blau 2, gelb 9, blau 5
+  - anspieler: 3
+    karten: grün 8, gelb 3, blau 4, gelb 8
   resultat: verloren
 - karten:
   - blau 4, rot 9, grün 6, rot 3, rot 8, Rakete 2, blau 9, rot 4, grün 8, rot 2
@@ -3569,18 +3545,18 @@
     karten: blau 4, blau 7, rot 7, gelb 9
     erfuellte_auftraege: blau 7
   - anspieler: 1
-    karten: blau 3, rot 6, gelb 7, Rakete 2
+    karten: blau 3, grün 9, gelb 7, Rakete 2
   - anspieler: 0
-    karten: rot 9, blau 8, rot 1, rot 5
+    karten: rot 9, blau 8, rot 6, rot 5
   - anspieler: 0
-    karten: rot 8, blau 6, grün 9, gelb 6
+    karten: rot 8, blau 6, rot 1, gelb 6
   - anspieler: 0
-    karten: rot 4, gelb 4, grün 5, gelb 3
+    karten: rot 4, gelb 4, grün 1, gelb 3
   - anspieler: 0
     karten: rot 3, Rakete 3, gelb 1, Rakete 4
     vermasselte_auftraege: rot 3
   - anspieler: 3
-    karten: grün 2, rot 2, Rakete 1, grün 1
+    karten: grün 2, rot 2, Rakete 1, grün 5
     vermasselte_auftraege: grün 2
   resultat: verloren
 - karten:
@@ -3610,19 +3586,19 @@
     karten: gelb 9, gelb 7, gelb 4, gelb 5
     erfuellte_auftraege: gelb 9
   - anspieler: 1
-    karten: gelb 2, grün 9, blau 9, gelb 6
+    karten: gelb 2, rot 1, blau 9, gelb 6
   - anspieler: 0
-    karten: grün 2, grün 4, grün 7, grün 5
-  - anspieler: 2
-    karten: rot 3, grün 1, rot 6, rot 4
-  - anspieler: 0
-    karten: grün 3, gelb 3, Rakete 1, grün 8
+    karten: grün 2, grün 4, grün 9, grün 8
     erfuellte_auftraege: grün 8
   - anspieler: 2
-    karten: rot 1, blau 1, grün 6, Rakete 2
-  - anspieler: 1
-    karten: Rakete 3, rot 2, Rakete 4, gelb 1
+    karten: rot 2, grün 5, rot 6, rot 4
+  - anspieler: 0
+    karten: gelb 1, gelb 3, grün 7, grün 1
     vermasselte_auftraege: gelb 1
+  - anspieler: 1
+    karten: Rakete 2, Rakete 1, Rakete 4, grün 3
+  - anspieler: 3
+    karten: blau 1, grün 6, Rakete 3, rot 3
   resultat: verloren
 - karten:
   - rot 3, grün 7, gelb 8, grün 6, rot 4, blau 9, rot 8, gelb 7, blau 3, grün 1
@@ -3682,28 +3658,28 @@
     karten: grün 9, grün 4, grün 3, grün 7
     erfuellte_auftraege: grün 4
   - anspieler: 1
-    karten: gelb 3, gelb 8, gelb 2, gelb 9
-    vermasselte_auftraege: gelb 8
-    erfuellte_auftraege: gelb 3
-  - anspieler: 0
-    karten: gelb 5, gelb 7, grün 8, gelb 1
-    erfuellte_auftraege: gelb 5
-  - anspieler: 1
-    karten: rot 1, rot 9, rot 7, rot 8
+    karten: gelb 7, gelb 8, gelb 2, gelb 6
+    erfuellte_auftraege: gelb 8
+  - anspieler: 2
+    karten: rot 9, rot 7, rot 8, rot 1
     erfuellte_auftraege: rot 7
   - anspieler: 2
     karten: blau 4, blau 9, blau 2, blau 8
     erfuellte_auftraege: blau 9
   - anspieler: 3
-    karten: blau 1, gelb 6, blau 6, blau 5
-  - anspieler: 1
-    karten: gelb 4, Rakete 2, rot 4, rot 6
-  - anspieler: 2
-    karten: rot 2, blau 3, rot 3, blau 7
+    karten: gelb 1, gelb 9, gelb 3, grün 8
+    erfuellte_auftraege: gelb 3
   - anspieler: 0
-    karten: Rakete 1, Rakete 4, rot 5, grün 2
+    karten: gelb 5, gelb 4, grün 6, rot 4
+    vermasselte_auftraege: gelb 5
+  - anspieler: 0
+    karten: rot 3, Rakete 4, rot 5, blau 3
   - anspieler: 1
-    karten: grün 5, grün 6, grün 1, Rakete 3
+    karten: grün 5, blau 5, grün 2, rot 6
+  - anspieler: 1
+    karten: blau 6, rot 2, blau 1, Rakete 1
+  - anspieler: 0
+    karten: Rakete 3, blau 7, Rakete 2, grün 1
   resultat: verloren
 - karten:
   - grün 3, gelb 7, grün 4, rot 5, Rakete 2, grün 6, Rakete 3, rot 8, grün 2, blau
@@ -3729,19 +3705,19 @@
     karten: blau 6, rot 3, rot 8, blau 4
     vermasselte_auftraege: blau 4, blau 6
   - anspieler: 2
-    karten: blau 5, rot 4, Rakete 3, blau 8
+    karten: blau 5, gelb 9, Rakete 3, blau 8
   - anspieler: 0
     karten: grün 6, grün 8, grün 1, grün 9
   - anspieler: 3
-    karten: gelb 9, Rakete 2, grün 5, gelb 4
+    karten: rot 4, rot 5, rot 9, rot 2
+  - anspieler: 1
+    karten: blau 9, gelb 4, grün 7, Rakete 2
   - anspieler: 0
-    karten: grün 4, Rakete 1, rot 2, grün 7
+    karten: grün 4, grün 5, gelb 1, gelb 5
   - anspieler: 1
-    karten: blau 9, gelb 1, gelb 5, grün 2
+    karten: rot 7, rot 1, rot 6, grün 2
   - anspieler: 1
-    karten: rot 7, rot 1, rot 6, rot 5
-  - anspieler: 1
-    karten: rot 9, Rakete 4, gelb 6, grün 3
+    karten: Rakete 1, Rakete 4, gelb 6, grün 3
   resultat: verloren
 - karten:
   - blau 2, Rakete 2, grün 9, blau 4, Rakete 1, rot 8, rot 1, blau 8, rot 7, grün
@@ -3774,12 +3750,12 @@
   - anspieler: 3
     karten: grün 1, grün 9, grün 7, grün 3
   - anspieler: 0
-    karten: rot 7, gelb 7, gelb 8, gelb 6
+    karten: rot 7, gelb 7, gelb 3, gelb 6
   - anspieler: 0
     karten: blau 4, blau 3, Rakete 3, gelb 4
     erfuellte_auftraege: blau 4
   - anspieler: 2
-    karten: gelb 3, gelb 2, Rakete 2, grün 6
+    karten: gelb 5, gelb 2, Rakete 2, grün 6
   - anspieler: 0
-    karten: Rakete 1, Rakete 4, gelb 5, gelb 1
+    karten: Rakete 1, Rakete 4, gelb 8, gelb 1
   resultat: verloren

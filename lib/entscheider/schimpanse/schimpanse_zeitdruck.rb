@@ -5,15 +5,17 @@
 module SchimpanseZeitdruck
   ZEITDRUCK_SCHWELLE = 0.7
   TRUMPF_STECH_ANNAHME_ZEITDRUCK_SCHWELLE = 1
-  
+
   def zeitdruck
     runden = @spiel_informations_sicht.verbleibende_runden
-    return 1000 if runden == 0
+    return 1000 if runden.zero?
+
     @spiel_informations_sicht.unerfuellte_auftraege.flatten.length.to_f / runden
   end
 
   def zeitdruck_mit_schwelle
     return 0 if zeitdruck < ZEITDRUCK_SCHWELLE
+
     zeitdruck
   end
 

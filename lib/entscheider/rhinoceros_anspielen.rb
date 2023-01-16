@@ -78,11 +78,7 @@ module RhinocerosAnspielen
   # rubocop:disable Lint/DuplicateBranch
   def auftrag_farbe_mit_holbarem_auftrag_anspielen(karte)
     # puts "#{karte} 6"
-    if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[1..].flatten.length.zero?
-      anspielen_auftrag_holen(karte)
-    else
-      anspielen_auftrag_holen(karte)
-    end
+    anspielen_auftrag_holen(karte)
   end
 
   def auftrag_farbe_anspielen(karte)

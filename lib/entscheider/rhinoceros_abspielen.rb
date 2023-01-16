@@ -217,12 +217,16 @@ module RhinocerosAbspielen
       ich_und_andere_haben_farb_auftraege_wert(karte: karte, stich: stich)
     elsif karte.schlaegt?(stich.staerkste_karte) || ich_habe_noch_farb_auftraege?(farbe: karte.farbe)
       - karte.schlag_wert
-    elsif karte.trumpf?
-      - karte.wert
-    elsif @spiel_informations_sicht.unerfuellte_auftraege[0].empty?
-      karte.wert
     else
+      karte_schlaegt_nicht_ich_keine_auftrage_mehr(karte)
+    end
+  end
+
+  def karte_schlaegt_nicht_ich_keine_auftrage_mehr(karte)
+    if karte.trumpf? || !@spiel_informations_sicht.unerfuellte_auftraege[0].empty?
       - karte.wert
+    else
+      karte.wert
     end
   end
 
