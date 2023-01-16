@@ -4,8 +4,6 @@
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
 
-  BLANK_WERT = 0.001
-  
   def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
     @spiel_informations_sicht = spiel_informations_sicht
@@ -34,7 +32,6 @@ class SchimpansenKartenWertBerechner
   def wert
     auftraege_berechnen
     sieges_wkeiten_berechnen
-    blank_werte_berechnen
     vorresultat = -@min_sieges_wkeit.zip(@min_auftraege_wkeit).collect{|sieges_auftrag_wkeit|
         (1 - sieges_auftrag_wkeit[0]) * sieges_auftrag_wkeit[1]
       }.reduce(:+)
@@ -48,34 +45,11 @@ class SchimpansenKartenWertBerechner
     #p @max_sieges_wkeit
     #p @min_auftraege_wkeit
     #p @max_auftraege_wkeit
+    #p @blank_werte.sum * BLANK_WERT
     #p resultate
-    resultate.max + @blank_werte.sum * BLANK_WERT
+    resultate.max 
   end
 
-  def blank_werte_berechnen
-    selber_blank_wert_berechnen
-    (1..anzahl_ungespielte_spieler - 1).each do |spieler_index|
-      andere_blank_wert_berechnen(spieler_index)
-    end
-  end
-
-  def selber_blank_wert_berechnen
-    @spiel_informations_sicht.unerfuellte_auftraege.flatten.each do |auftrag|
-      if auftrag.farbe == @karte.farbe &&
-         @spiel_informations_sicht.karten.all? {|karte| karte.wert < auftrag.karte.wert || karte.farbe != auftrag.farbe}
-        @blank_werte[0] = 1
-      elsif auftrag.farbe == @karte.farbe &&
-            @blank_werte[0] == 0 &&
-            @spiel_informations_sicht.karten.any? {|karte| karte.wert >= auftrag.karte.wert && karte.farbe != auftrag.farbe}
-        @blank_werte[0] = -1
-      end
-    end
-  end
-
-  def andere_blank_wert_berechnen(spieler_index)
-    return if @stich.length > 0
-  end
-  
   #mich selbst eingeschlossen
   def anzahl_ungespielte_spieler
     anzahl_spieler - @stich.length
