@@ -78,9 +78,25 @@
 - - entscheider: Schimpanse
     punkte: 23
   - entscheider: Reinwerfer
-    punkte: 5
+    punkte: 6
   - entscheider: Rhinoceros
-    punkte: 28
+    punkte: 24
+  - entscheider: Hase
+    punkte: 0
+  - entscheider: Saeuger
+    punkte: 0
+  - entscheider: Archaeon
+    punkte: 0
+  - entscheider: ZufallsEntscheider
+    punkte: 0
+  - entscheider: GeschlosseneFormelBot
+    punkte: 1
+- - entscheider: Schimpanse
+    punkte: 19
+  - entscheider: Reinwerfer
+    punkte: 10
+  - entscheider: Rhinoceros
+    punkte: 24
   - entscheider: Hase
     punkte: 0
   - entscheider: Saeuger
