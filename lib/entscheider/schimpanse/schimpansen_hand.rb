@@ -10,10 +10,41 @@ class SchimpansenHand
     @moegliche_karten = @spiel_informations_sicht.moegliche_karten(spieler_index).dup
     @sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index).dup
     @strikt_moegliche_karten = @moegliche_karten - @sichere_karten
-    @karten_wkeiten = berechne_karten_wkeiten
+    berechne_karten_wkeiten
   end
 
+  def anzahl_karten
+    @spiel_informations_sicht.anzahl_karten(spieler_index: @spieler_index)
+  end
+  
   def berechne_karten_wkeiten
+    @karten_wkeiten = Hash.new
+    Karte.alle.each do |karte|
+      @karten_wkeiten[karte] = 0
+    end
+    @sichere_karten.each do |karte|
+      @karten_wkeiten[karte] = 1
+    end
+    moegliche_wkeit = (anzahl_karten - @sichere_karten.length).to_f / @strikt_moegliche_karten.length
+    @strikt_moegliche_karten.each do |karte|
+      @karten_wkeiten[karte] = moegliche_wkeit
+    end
+    karten_wkeiten_normieren
+   end
+
+  def karten_wkeiten_normieren # funktioniert noch nicht
+    summe = @karten_wkeiten.reduce(0.0) {|summe_zwischen_ergebnis, karten_wkeit|
+      if karten_wkeit == 1
+        0
+      else
+        summe_zwischen_ergebnis + karten_wkeit[1]
+      end
+    }
+    @karten_wkeiten.each do |element|
+      if element[1] != 1
+        element[1] /=  summe * anzahl_karten
+      end
+    end
   end
 
   def min_auftraege_lege_wkeit(spieler_index:, karte:)
