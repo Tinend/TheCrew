@@ -79,7 +79,7 @@ class SchimpansenHand
   end
 
   def min_wkeit_auftrag_legen(spieler_index:, farbe:, auftrag:)
-    hat_auftrag_sicher = @spiel_informations_sicht.sichere_karten(spieler_index).any? { |karte| karte == auftrag.karte }
+    hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
     if auftrag.farbe == farbe && hat_auftrag_sicher
       0.75**(@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length - 1)
     elsif auftrag.farbe == farbe
@@ -90,7 +90,7 @@ class SchimpansenHand
   end
 
   def max_wkeit_auftrag_legen(spieler_index:, farbe:, auftrag:)
-    hat_auftrag_sicher = @spiel_informations_sicht.sichere_karten(spieler_index).any? { |karte| karte == auftrag.karte }
+    hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
     hat_karte_wert = 0.75**@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length
     if auftrag.farbe == farbe && hat_auftrag_sicher
       1
@@ -109,7 +109,7 @@ class SchimpansenHand
 
   def min_sieges_wkeit(staerkste_karte)
     return 0 if gespielt?
-    return 0 if @spiel_informations_sicht.sichere_karten(@spieler_index).any? do |karte|
+    return 0 if @sichere_karten.any? do |karte|
                   !karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe
                 end
 
@@ -131,9 +131,8 @@ class SchimpansenHand
   end
 
   def sicherer_sieg_gegen_staerkste_karte?(staerkste_karte)
-    @sichere_karten.any? { |karte| karte.farbe == staerkste_karte.farbe && karte.schlaegt?(staerkste_karte) } ||
-      (@sichere_karten.all? { |karte| karte.farbe != staerkste_karte.farbe } &&
-       @sichere_karten.any? { |karte| karte.schlaegt?(staerkste_karte) })
+    (@moegliche_karten.all? { |karte| karte.farbe != staerkste_karte.farbe } &&
+     @sichere_karten.any? { |karte| karte.schlaegt?(staerkste_karte) })
   end
 
   def max_sieges_wkeit(staerkste_karte)
@@ -151,7 +150,7 @@ class SchimpansenHand
   end
 
   def berechne_schlagende_karten(staerkste_karte)
-    @strikt_moegliche_karten.select do |karte|
+    @moegliche_karten.select do |karte|
       karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe
     end
   end

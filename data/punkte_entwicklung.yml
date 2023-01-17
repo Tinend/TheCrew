@@ -125,3 +125,21 @@
     punkte: 0
   - entscheider: GeschlosseneFormelBot
     punkte: 0
+- - entscheider: Schimpanse
+    punkte: 22
+  - entscheider: Cowboy
+    punkte: 7
+  - entscheider: Reinwerfer
+    punkte: 7
+  - entscheider: Rhinoceros
+    punkte: 25
+  - entscheider: Hase
+    punkte: 2
+  - entscheider: Saeuger
+    punkte: 1
+  - entscheider: Archaeon
+    punkte: 0
+  - entscheider: ZufallsEntscheider
+    punkte: 0
+  - entscheider: GeschlosseneFormelBot
+    punkte: 0

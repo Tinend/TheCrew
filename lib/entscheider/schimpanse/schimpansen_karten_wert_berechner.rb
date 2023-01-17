@@ -6,7 +6,7 @@
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
 
-  AUFTRAG_FARB_WERT = 0.1
+  AUFTRAG_FARB_WERT = 0.14
 
   def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
@@ -41,13 +41,13 @@ class SchimpansenKartenWertBerechner
       resultat = vorresultat + ((1 - @min_sieges_wkeit[spieler_index]) * @min_auftraege_wkeit[spieler_index])
       resultat + (@max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index])
     end
-    #puts "#{@karte} #{resultate.max}"
-    #p vorresultat
-    #p @min_sieges_wkeit
-    #p @max_sieges_wkeit
-    #p @min_auftraege_wkeit
-    #p @max_auftraege_wkeit
-    #p resultate
+    puts "#{@karte} #{resultate.max}"
+    p vorresultat
+    p @min_sieges_wkeit
+    p @max_sieges_wkeit
+    p @min_auftraege_wkeit
+    p @max_auftraege_wkeit
+    p resultate
     resultate.max + auftrag_farb_wert_berechnen
   end
 
