@@ -30,7 +30,12 @@ class SchimpansenHand
       @karten_wkeiten[karte] = moegliche_wkeit
     end
     karten_wkeiten_normieren
-   end
+    print "#{@spieler_index}:   "
+    @karten_wkeiten.each do |kw|
+      print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
+    end
+    puts
+  end
 
   def karten_wkeiten_normieren # funktioniert noch nicht
     summe = @karten_wkeiten.reduce(0.0) {|summe_zwischen_ergebnis, karten_wkeit|
