@@ -33,27 +33,27 @@ class SchimpansenHand
     @strikt_moegliche_karten.each do |karte|
       @karten_wkeiten[karte] = moegliche_wkeit
     end
+    #p [moegliche_wkeit, anzahl_karten]
+    #print "#{@spieler_index}:   "
+    #@karten_wkeiten.each do |kw|
+    #  print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
+    #end
+    #puts
     karten_wkeiten_normieren
-    print "#{@spieler_index}:   "
-    @karten_wkeiten.each do |kw|
-      print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
-    end
-    puts
   end
 
   def karten_wkeiten_normieren
+    anzahl_strikt_moegliche_karten = anzahl_karten
     summe = @karten_wkeiten.reduce(0.0) do |summe_zwischen_ergebnis, karten_wkeit|
       if karten_wkeit[1] == 1
-        puts "Sicher: #{karten_wkeit[0]}"
+        anzahl_strikt_moegliche_karten -= 1
         summe_zwischen_ergebnis
       else
-        puts "Möglich: #{karten_wkeit[0]} #{karten_wkeit[1]}" if karten_wkeit[1] > 0
         summe_zwischen_ergebnis + karten_wkeit[1]
       end
     end
-    p [summe, anzahl_karten]
     @karten_wkeiten.each do |element|
-      element[1] /= summe * anzahl_karten if element[1] != 1
+      element[1] /= summe * anzahl_strikt_moegliche_karten if element[1] != 1
     end
   end
 
