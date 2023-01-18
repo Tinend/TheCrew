@@ -38,7 +38,7 @@ class BekannteKartenTracker
       when 0
         @spiel_informations_sicht.karten.dup
       when kapitaen_index
-        [Karte.max_trumpf]
+        [Karte.max_trumpf] - @spiel_informations_sicht.stiche.flat_map(&:karten)
       else
         []
       end
@@ -105,11 +105,15 @@ class BekannteKartenTracker
     end
   end
 
+  def ist_gegangen?(karte)
+    @spiel_informations_sicht.stiche.flat_map(&:karten).include?(karte)
+  end
+
   def beachte_kommunikation(spieler_index, kommunikation)
     return if spieler_index.zero?
 
     @moegliche_karten[spieler_index] -= ausgeschlossene_karten(kommunikation)
-    @sichere_karten[spieler_index].push(kommunikation.karte)
+    @sichere_karten[spieler_index].push(kommunikation.karte) unless ist_gegangen?(kommunikation.karte)
     vielleicht_eindeutige_karte = eine_dieser_karten_ist_sicher_drinnen(spieler_index,
                                                                         kommunikation) &
                                   @moegliche_karten[spieler_index]
