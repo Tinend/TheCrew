@@ -30,23 +30,32 @@ class SchimpansenKartenWertBerechner
     @haende = haende
   end
 
+  def risiko_eingehen_wert
+    1
+  end
+
+  def sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
+    sieges_auftrag_wkeit[1] * (sieges_auftrag_wkeit[0] - (1 - sieges_auftrag_wkeit[0]) * risiko_eingehen_wert)
+  end
+
   def wert
     auftraege_berechnen
     sieges_wkeiten_berechnen
-    vorresultat = -@min_sieges_wkeit.zip(@min_auftraege_wkeit).collect do |sieges_auftrag_wkeit|
-      (1 - sieges_auftrag_wkeit[0]) * sieges_auftrag_wkeit[1]
-    end.reduce(:+)
-    resultate = Array.new(anzahl_spieler) do |spieler_index|
-      resultat = vorresultat + ((1 - @min_sieges_wkeit[spieler_index]) * @min_auftraege_wkeit[spieler_index])
-      resultat + (@max_sieges_wkeit[spieler_index] * @max_auftraege_wkeit[spieler_index])
+    vorresultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).reduce(0) do |summe, sieges_auftrag_wkeit|
+      summe + sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
     end
-    # puts "#{@karte} #{resultate.max}"
-    # p vorresultat
-    # p @min_sieges_wkeit
-    # p @max_sieges_wkeit
-    # p @min_auftraege_wkeit
-    # p @max_auftraege_wkeit
-    # p resultate
+    resultate = Array.new(anzahl_spieler) do |spieler_index|
+      resultat = vorresultat
+      resultat -= sieges_auftrag_wkeit_zu_punkten([@min_sieges_wkeit[spieler_index], @min_auftraege_wkeit[spieler_index]])
+      resultat + sieges_auftrag_wkeit_zu_punkten([@max_sieges_wkeit[spieler_index], @max_auftraege_wkeit[spieler_index]])
+    end
+    puts "#{@karte} #{resultate.max}"
+    p vorresultat
+    p @min_sieges_wkeit
+    p @max_sieges_wkeit
+    p @min_auftraege_wkeit
+    p @max_auftraege_wkeit
+    p resultate
     resultate.max + auftrag_farb_wert_berechnen
   end
 

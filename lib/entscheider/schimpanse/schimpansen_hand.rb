@@ -11,8 +11,18 @@ class SchimpansenHand
     @sichere_karten = @spiel_informations_sicht.sichere_karten(spieler_index).dup
     @strikt_moegliche_karten = @moegliche_karten - @sichere_karten
     berechne_karten_wkeiten
+    erzeuge_blank_wkeiten
   end
 
+  def erzeuge_blank_wkeiten
+    @blank_wkeiten = {}
+    Farbe::FARBEN.each do |farbe|
+      @blank_wkeiten[farbe] = Karte.alle_mit_farbe(farbe).reduce(1) do |wkeit, karte|
+        wkeit * (1 - @karten_wkeiten[karte])
+      end
+    end
+  end
+  
   def anzahl_karten
     @spiel_informations_sicht.anzahl_karten(spieler_index: @spieler_index)
   end
@@ -57,60 +67,116 @@ class SchimpansenHand
     end
   end
 
+  def blank_min_auftraege_legen_wkeit(spieler_index:, karte:, farbe:)
+    @blank_wkeiten[farbe] * @karten_wkeiten.reduce(1) {|wkeit, karten_wkeit|
+      if karten_wkeit[0].farbe != farbe || @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].any? {|auftrag| auftrag.karte == karten_wkeit[0]}
+        wkeit
+      else
+        wkeit * karten_wkeit[1]
+      end
+    }
+  end
+
+  def unblank_min_auftraege_legen_wkeit(spieler_index:, karte:, farbe:)
+    (1 - @blank_wkeiten[farbe]) * @karten_wkeiten.reduce(1) {|wkeit, karten_wkeit|
+      if karten_wkeit[0].farbe == farbe || @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].any? {|auftrag| auftrag.karte == karten_wkeit[0]}
+        wkeit
+      else
+        wkeit * karten_wkeit[1]
+      end
+    }
+  end
+
   def min_auftraege_lege_wkeit(spieler_index:, karte:)
-    wkeit = 0
     farbe = @stich.farbe
     farbe = karte.farbe if @stich.karten.empty?
-    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
-    moegliche_auftraege.select! do |auftrag|
-      @moegliche_karten.any? { |moegliche_karte| moegliche_karte == auftrag.karte }
-    end
-    moegliche_auftraege.each do |auftrag|
-      auftrag_wkeit = min_wkeit_auftrag_legen(farbe: farbe, auftrag: auftrag)
-      wkeit = 1 - ((1 - wkeit) * (1 - auftrag_wkeit))
-    end
+    wkeit = blank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
+    wkeit += unblank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
     wkeit
+  end
+
+  def blank_max_auftraege_legen_wkeit(spieler_index:, karte:, farbe:)
+    @blank_wkeiten[farbe] * @karten_wkeiten.reduce(0) {|wkeit, karten_wkeit|
+      if karten_wkeit[0].farbe == farbe && @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].any? {|auftrag| auftrag.karte == karten_wkeit[0]}
+        1 - (1 - wkeit) * (1 - karten_wkeit[1])
+      else
+        wkeit
+      end
+    }
+  end
+
+  def unblank_max_auftraege_legen_wkeit(spieler_index:, karte:, farbe:)
+    (1 - @blank_wkeiten[farbe]) * @karten_wkeiten.reduce(1) {|wkeit, karten_wkeit|
+      if karten_wkeit[0].farbe != farbe && @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].any? {|auftrag| auftrag.karte == karten_wkeit[0]}
+        1 - (1 - wkeit) * (1 - karten_wkeit[1])
+      else
+        wkeit
+      end
+    }
   end
 
   def max_auftraege_lege_wkeit(spieler_index:, karte:)
-    wkeit = 0
     farbe = @stich.farbe
     farbe = karte.farbe if @stich.karten.empty?
-    moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
-    moegliche_auftraege.select! do |auftrag|
-      @moegliche_karten.any? { |moegliche_karte| moegliche_karte == auftrag.karte }
-    end
-    moegliche_auftraege.each do |auftrag|
-      auftrag_wkeit = max_wkeit_auftrag_legen(farbe: farbe, auftrag: auftrag)
-      wkeit = 1 - ((1 - wkeit) * (1 - auftrag_wkeit))
-    end
+    wkeit = blank_max_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
+    wkeit += unblank_max_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
     wkeit
   end
 
-  def min_wkeit_auftrag_legen(farbe:, auftrag:)
-    hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
-    if auftrag.farbe == farbe && hat_auftrag_sicher
-      0.75**(@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length - 1)
-    elsif auftrag.farbe == farbe
-      (0.75**(@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length - 1)) * 0.25
-    else
-      0
-    end
-  end
+  #def min_auftraege_lege_wkeit(spieler_index:, karte:)
+  #  wkeit = 0
+  #  farbe = @stich.farbe
+  #  farbe = karte.farbe if @stich.karten.empty?
+  #  moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
+  #  moegliche_auftraege.select! do |auftrag|
+  #    @moegliche_karten.any? { |moegliche_karte| moegliche_karte == auftrag.karte }
+  #  end
+  #  moegliche_auftraege.each do |auftrag|
+  #    auftrag_wkeit = min_wkeit_auftrag_legen(farbe: farbe, auftrag: auftrag)
+  #    wkeit = 1 - ((1 - wkeit) * (1 - auftrag_wkeit))
+  #  end
+  #  wkeit
+  #end
 
-  def max_wkeit_auftrag_legen(farbe:, auftrag:)
-    hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
-    hat_karte_wert = 0.75**@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length
-    if auftrag.farbe == farbe && hat_auftrag_sicher
-      1
-    elsif auftrag.farbe == farbe
-      0.25
-    elsif hat_auftrag_sicher
-      hat_karte_wert
-    else
-      0.25 * hat_karte_wert
-    end
-  end
+  #def max_auftraege_lege_wkeit(spieler_index:, karte:)
+  #  wkeit = 0
+  #  farbe = @stich.farbe
+  #  farbe = karte.farbe if @stich.karten.empty?
+  #  moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
+  #  moegliche_auftraege.select! do |auftrag|
+  #    @moegliche_karten.any? { |moegliche_karte| moegliche_karte == auftrag.karte }
+  #  end
+  #  moegliche_auftraege.each do |auftrag|
+  #    auftrag_wkeit = max_wkeit_auftrag_legen(farbe: farbe, auftrag: auftrag)
+  #    wkeit = 1 - ((1 - wkeit) * (1 - auftrag_wkeit))
+  #  end
+  #  wkeit
+  #end
+
+  #def min_wkeit_auftrag_legen(farbe:, auftrag:)
+  #  hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
+  #  if auftrag.farbe == farbe && hat_auftrag_sicher
+  #    0.75**(@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length - 1)
+  #  elsif auftrag.farbe == farbe
+  #    (0.75**(@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length - 1)) * 0.25
+  #  else
+  #    0
+  #  end
+  #end
+
+  #def max_wkeit_auftrag_legen(farbe:, auftrag:)
+  #  hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
+  #  hat_karte_wert = 0.75**@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length
+  #  if auftrag.farbe == farbe && hat_auftrag_sicher
+  #    1
+  #  elsif auftrag.farbe == farbe
+  #    0.25
+  #  elsif hat_auftrag_sicher
+  #    hat_karte_wert
+  #  else
+  #    0.25 * hat_karte_wert
+  #  end
+  #end
 
   def gespielt?
     @spieler_index.zero? or @spieler_index + @stich.karten.length >= @spiel_informations_sicht.anzahl_spieler

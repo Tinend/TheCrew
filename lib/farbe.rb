@@ -52,6 +52,7 @@ class Farbe
   GELB = new(name: 'gelb', staerke: 0, sortier_wert: 0)
 
   NORMALE_FARBEN = [GRUEN, ROT, BLAU, GELB].freeze
+  FARBEN = [RAKETE, GRUEN, ROT, BLAU, GELB].freeze
 
   def faerben(string)
     return string.green if @name == 'grün'
