@@ -64,6 +64,7 @@ class Spieler
     raise TypeError unless stich.is_a?(Stich::StichSicht)
 
     waehlbare = waehlbare_karten(stich)
+    @spiel_informations_sicht.erhalte_aktiven_stich(stich)
     karte = @entscheider.waehle_karte(stich, waehlbare)
     unless waehlbare.include?(karte)
       raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' \

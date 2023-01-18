@@ -18,6 +18,7 @@ class SchimpansenHand
   end
 
   def berechne_karten_wkeiten
+    puts anzahl_karten
     @karten_wkeiten = {}
     Karte.alle.each do |karte|
       @karten_wkeiten[karte] = 0
@@ -25,27 +26,33 @@ class SchimpansenHand
     @sichere_karten.each do |karte|
       @karten_wkeiten[karte] = 1
     end
-    moegliche_wkeit = (anzahl_karten - @sichere_karten.length).to_f / @strikt_moegliche_karten.length
+    if @strikt_moegliche_karten.empty?
+      moegliche_wkeit = 0
+    else
+      moegliche_wkeit = (anzahl_karten - @sichere_karten.length).to_f / @strikt_moegliche_karten.length
+    end
     @strikt_moegliche_karten.each do |karte|
       @karten_wkeiten[karte] = moegliche_wkeit
     end
     karten_wkeiten_normieren
-    # print "#{@spieler_index}:   "
-    # @karten_wkeiten.each do |kw|
-    #  print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
-    # end
-    # puts
+    print "#{@spieler_index}:   "
+    @karten_wkeiten.each do |kw|
+      print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
+    end
+    puts
   end
 
-  # funktioniert noch nicht
   def karten_wkeiten_normieren
     summe = @karten_wkeiten.reduce(0.0) do |summe_zwischen_ergebnis, karten_wkeit|
-      if karten_wkeit == 1
-        0
+      if karten_wkeit[1] == 1
+        puts "Sicher: #{karten_wkeit[0]}"
+        summe_zwischen_ergebnis
       else
+        puts "Möglich: #{karten_wkeit[0]} #{karten_wkeit[1]}" if karten_wkeit[1] > 0
         summe_zwischen_ergebnis + karten_wkeit[1]
       end
     end
+    p [summe, anzahl_karten]
     @karten_wkeiten.each do |element|
       element[1] /= summe * anzahl_karten if element[1] != 1
     end

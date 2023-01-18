@@ -82,6 +82,10 @@ class SpielInformation
       @spieler_index = spieler_index
     end
 
+    def erhalte_aktiven_stich(aktiver_stich)
+      @aktiver_stich = aktiver_stich
+    end
+
     def alle_auftraege
       @spiel_information.alle_auftraege
     end
@@ -155,7 +159,9 @@ class SpielInformation
     end
 
     def bekannte_karten_tracker
-      stich_cache(:bekannte_karten_tracker) { BekannteKartenTracker.new(spiel_informations_sicht: self) }
+      stich_cache(:bekannte_karten_tracker) {
+        BekannteKartenTracker.new(spiel_informations_sicht: self, aktiver_stich: @aktiver_stich)
+      }
     end
 
     def sichere_karten(spieler_index)
