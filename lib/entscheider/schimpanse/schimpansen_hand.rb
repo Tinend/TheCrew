@@ -18,7 +18,6 @@ class SchimpansenHand
   end
 
   def berechne_karten_wkeiten
-    puts anzahl_karten
     @karten_wkeiten = {}
     Karte.alle.each do |karte|
       @karten_wkeiten[karte] = 0
