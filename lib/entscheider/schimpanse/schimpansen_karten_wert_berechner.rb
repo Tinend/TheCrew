@@ -6,6 +6,8 @@
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
   AUFTRAG_FARB_WERT = 0.14
+  DRAN_KOMM_WERT = 0.01
+  EIGENE_AUFTRAEGE_PRIORITAET = 1.5
 
   def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
@@ -17,6 +19,8 @@ class SchimpansenKartenWertBerechner
     @max_sieges_wkeit = Array.new(anzahl_spieler, 0.0)
     @blank_werte = Array.new(anzahl_spieler, 0.0)
     @moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege.collect(&:dup)
+    @min_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
+    @max_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
     @moegliche_auftraege.each do |auftrag_liste|
       auftrag_liste.reject! do |auftrag|
         auftrag.karte == @karte || @stich.karten.any? { |stich_karte| auftrag.karte == stich_karte }
@@ -38,16 +42,27 @@ class SchimpansenKartenWertBerechner
     sieges_auftrag_wkeit[1] * (sieges_auftrag_wkeit[0] - (1 - sieges_auftrag_wkeit[0]) * risiko_eingehen_wert)
   end
 
+  def sieges_dran_komm_wert_zu_punkten(sieges_dran_komm_wert)
+    sieges_dran_komm_wert[1] * (sieges_dran_komm_wert[0] - (1 - sieges_dran_komm_wert[0]) * DRAN_KOMM_WERT)
+  end
+
   def wert
     auftraege_berechnen
     sieges_wkeiten_berechnen
+    dran_komm_werte_berechnen
     vorresultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).reduce(0) do |summe, sieges_auftrag_wkeit|
       summe + sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
+    end
+    vorresultat += @min_sieges_wkeit.zip(@dran_komm_werte).reduce(0) do |summe, sieges_dran_komm_wert|
+      summe + sieges_dran_komm_wert_zu_punkten(sieges_dran_komm_wert)
     end
     resultate = Array.new(anzahl_spieler) do |spieler_index|
       resultat = vorresultat
       resultat -= sieges_auftrag_wkeit_zu_punkten([@min_sieges_wkeit[spieler_index], @min_auftraege_wkeit[spieler_index]])
-      resultat + sieges_auftrag_wkeit_zu_punkten([@max_sieges_wkeit[spieler_index], @max_auftraege_wkeit[spieler_index]])
+      resultat += sieges_auftrag_wkeit_zu_punkten([@max_sieges_wkeit[spieler_index], @max_auftraege_wkeit[spieler_index]])
+      resultat -= sieges_dran_komm_wert_zu_punkten([@min_sieges_wkeit[spieler_index], @dran_komm_werte[spieler_index]])
+      resultat += sieges_dran_komm_wert_zu_punkten([@max_sieges_wkeit[spieler_index], @dran_komm_werte[spieler_index]])
+      resultat
     end
     puts "#{@karte} #{resultate.max}"
     p vorresultat
@@ -69,6 +84,16 @@ class SchimpansenKartenWertBerechner
     else
       0
     end
+  end
+
+  def dran_komm_werte_berechnen
+    @dran_komm_werte = Array.new(anzahl_spieler) { |spieler_index| dran_komm_wert_von_spieler(spieler_index) }
+  end
+
+  def dran_komm_wert_von_spieler(spieler_index)
+    wert = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].length
+    wert = 0.1 if spieler_index == 0 and wert == 0
+    wert
   end
 
   # mich selbst eingeschlossen
@@ -102,6 +127,8 @@ class SchimpansenKartenWertBerechner
     (1..max_spieler_index).each do |spieler_index|
       auftraege_von_spieler_berechnen(spieler_index: spieler_index)
     end
+    @min_auftraege_wkeit[0] *= EIGENE_AUFTRAEGE_PRIORITAET
+    @max_auftraege_wkeit[0] *= EIGENE_AUFTRAEGE_PRIORITAET
   end
 
   def auftraege_von_spieler_berechnen(spieler_index:)

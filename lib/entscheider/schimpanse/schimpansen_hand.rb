@@ -43,12 +43,12 @@ class SchimpansenHand
     @strikt_moegliche_karten.each do |karte|
       @karten_wkeiten[karte] = moegliche_wkeit
     end
-    #p [moegliche_wkeit, anzahl_karten]
-    #print "#{@spieler_index}:   "
-    #@karten_wkeiten.each do |kw|
-    #  print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
-    #end
-    #puts
+    # p [moegliche_wkeit, anzahl_karten]
+    # print "#{@spieler_index}:   "
+    # @karten_wkeiten.each do |kw|
+    # print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
+    # end
+    # puts
     karten_wkeiten_normieren
   end
 
