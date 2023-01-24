@@ -8,6 +8,7 @@ class SchimpansenKartenWertBerechner
   AUFTRAG_FARB_WERT = 0.14
   DRAN_KOMM_WERT = 0.01
   EIGENE_AUFTRAEGE_PRIORITAET = 1.5
+  SCHLAG_WERT_ARRAY_LAENGE = 15
 
   def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
@@ -19,8 +20,8 @@ class SchimpansenKartenWertBerechner
     @max_sieges_wkeit = Array.new(anzahl_spieler, 0.0)
     @blank_werte = Array.new(anzahl_spieler, 0.0)
     @moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege.collect(&:dup)
-    @min_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
-    @max_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
+    # @min_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
+    # @max_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
     @moegliche_auftraege.each do |auftrag_liste|
       auftrag_liste.reject! do |auftrag|
         auftrag.karte == @karte || @stich.karten.any? { |stich_karte| auftrag.karte == stich_karte }
@@ -168,16 +169,95 @@ class SchimpansenKartenWertBerechner
     end
   end
 
+  def schlag_werte_wkeiten_aufsetzen(staerkste_karte:)
+    @min_schlag_werte_wkeiten = Array.new(anzahl_spieler) {|spieler_index|
+      Array.new(SCHLAG_WERT_ARRAY_LAENGE) {|schlag_wert|
+        @haende[spieler_index].min_schlag_wert(schlag_wert: schlag_wert, staerkste_karte: staerkste_karte)
+      }
+    }
+    @max_schlag_werte_wkeiten = Array.new(anzahl_spieler) {|spieler_index|
+      Array.new(SCHLAG_WERT_ARRAY_LAENGE) {|schlag_wert|
+        @haende[spieler_index].max_schlag_wert(schlag_wert: schlag_wert, staerkste_karte: staerkste_karte)
+      }
+    }
+  end
+
+  def schlag_werte_stich_einbeziehen(staerkster_index:, staerkste_karte:)
+    @min_schlag_werte_wkeiten[0] = Array.new(SCHLAG_WERT_ARRAY_LAENGE, 0)
+    @max_schlag_werte_wkeiten[0] = Array.new(SCHLAG_WERT_ARRAY_LAENGE, 0)
+    (anzahl_spieler - 1 - @stich.length..anzahl_spieler - 1).each do |spieler_index|
+      @min_schlag_werte_wkeiten[spieler_index] = Array.new(SCHLAG_WERT_ARRAY_LAENGE, 0)
+      @max_schlag_werte_wkeiten[spieler_index] = Array.new(SCHLAG_WERT_ARRAY_LAENGE, 0)
+    end
+    @min_schlag_werte_wkeiten[staerkster_index][staerkste_karte.schlag_wert] = 1
+    @max_schlag_werte_wkeiten[staerkster_index][staerkste_karte.schlag_wert] = 1
+  end
+
+  def schlag_werte_normieren
+    @min_schlag_werte_wkeiten.each do |schlag_werte|
+      schlag_werte[0] = 1 - schlag_werte.sum
+    end
+    @max_schlag_werte_wkeiten.each do |schlag_werte|
+      schlag_werte[0] = 1 - schlag_werte.sum
+    end
+  end
+
+  def schlag_werte_wkeiten_in_summen_umwandeln
+    summe = 0
+    @min_schlag_werte_wkeiten_summe = @min_schlag_werte_wkeiten.collect {|min_schlag_werte_wkeiten|
+      summe = 0
+      min_schlag_werte_wkeiten.collect {|schlag_wert_wkeit|
+        summe += schlag_wert_wkeit
+      }
+    }
+    @max_schlag_werte_wkeiten_summe = @max_schlag_werte_wkeiten.collect {|max_schlag_werte_wkeiten|
+      summe = 0
+      max_schlag_werte_wkeiten.collect {|schlag_wert_wkeit|
+        summe += schlag_wert_wkeit
+      }
+    }
+  end
+
+  def schlag_werte_wkeiten_berechnen(staerkste_karte:, staerkster_index:)
+    schlag_werte_wkeiten_aufsetzen(staerkste_karte: staerkste_karte)
+    schlag_werte_stich_einbeziehen(staerkste_karte: staerkste_karte, staerkster_index: staerkster_index)
+    schlag_werte_normieren
+    schlag_werte_wkeiten_in_summen_umwandeln
+  end
+
+  def sieges_wkeiten_aus_schlagwert_berechnen
+    @min_sieges_wkeiten = @min_schlag_werte_wkeiten.collect.with_index {|min_schlag_werte_wkeiten, spieler_index|
+      schlag_wert = -1
+      min_schlag_werte_wkeiten.reduce(0) {|summe, wkeit|
+        schlag_wert += 1
+        andere_wkeiten = @min_schlag_werte_wkeiten_summe.reduce(0) {|summe2, wkeit_summe| summe2 += wkeit_summe[schlag_wert]}
+        andere_wkeiten -= @min_schlag_werte_wkeiten_summe[0][schlag_wert]
+        summe + wkeit * andere_wkeiten
+      }
+    }
+    @max_sieges_wkeiten = @max_schlag_werte_wkeiten.collect.with_index {|max_schlag_werte_wkeiten, spieler_index|
+      schlag_wert = -1
+      max_schlag_werte_wkeiten.reduce(0) {|summe, wkeit|
+        schlag_wert += 1
+        andere_wkeiten = @max_schlag_werte_wkeiten_summe.reduce(0) {|summe2, wkeit_summe| summe2 += wkeit_summe[schlag_wert]}
+        andere_wkeiten -= @max_schlag_werte_wkeiten_summe[0][schlag_wert]
+        summe + wkeit * andere_wkeiten
+      }
+    }
+  end
+  
   def sieges_wkeiten_berechnen
     staerkste_karte = berechne_staerkste_karte
-    ueberarbeite_sieges_wkeiten_mit_staerkster_karte(staerkste_karte)
+     #ueberarbeite_sieges_wkeiten_mit_staerkster_karte(staerkste_karte)
     staerkster_index = if staerkste_karte == @karte
                          0
                        else
                          @stich.karten.find_index(staerkste_karte) - @stich.karten.length
                        end
-    @min_sieges_wkeit[staerkster_index] = [1 - @max_sieges_wkeit.reduce(:+), 0].max
-    @max_sieges_wkeit[staerkster_index] =
-      [1 - @min_sieges_wkeit.reduce(:+) + @min_sieges_wkeit[staerkster_index], 0].max
+    schlag_werte_wkeiten_berechnen(staerkster_index: staerkster_index, staerkste_karte: staerkste_karte)
+    sieges_wkeiten_aus_schlagwert_berechnen
+    #@min_sieges_wkeit[staerkster_index] = [1 - @max_sieges_wkeit.reduce(:+), 0].max
+    #@max_sieges_wkeit[staerkster_index] =
+    #  [1 - @min_sieges_wkeit.reduce(:+) + @min_sieges_wkeit[staerkster_index], 0].max
   end
 end

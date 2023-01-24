@@ -123,60 +123,41 @@ class SchimpansenHand
     wkeit
   end
 
-  #def min_auftraege_lege_wkeit(spieler_index:, karte:)
-  #  wkeit = 0
-  #  farbe = @stich.farbe
-  #  farbe = karte.farbe if @stich.karten.empty?
-  #  moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
-  #  moegliche_auftraege.select! do |auftrag|
-  #    @moegliche_karten.any? { |moegliche_karte| moegliche_karte == auftrag.karte }
-  #  end
-  #  moegliche_auftraege.each do |auftrag|
-  #    auftrag_wkeit = min_wkeit_auftrag_legen(farbe: farbe, auftrag: auftrag)
-  #    wkeit = 1 - ((1 - wkeit) * (1 - auftrag_wkeit))
-  #  end
-  #  wkeit
-  #end
+  def min_schlag_wert(schlag_wert:, staerkste_karte:)
+    return 0 if schlag_wert <= staerkste_karte.schlag_wert
+    kleiner_wkeit = 0
+    gleich_wkeit = 1
+    @karten_wkeiten.each do |karten_wkeit|
+      if karten_wkeit[0].farbe == staerkste_karte.farbe && karten_wkeit[0].schlag_wert == schlag_wert
+        gleich_wkeit = karten_wkeit[1]
+      elsif karten_wkeit[0].trumpf? && !staerkste_karte.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
+        gleich_wkeit = karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe]
+      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte
+        kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1])
+      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !staerkste_karte.trumpf?
+        kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe])
+      end
+    end
+    kleiner_wkeit * gleich_wkeit
+  end
 
-  #def max_auftraege_lege_wkeit(spieler_index:, karte:)
-  #  wkeit = 0
-  #  farbe = @stich.farbe
-  #  farbe = karte.farbe if @stich.karten.empty?
-  #  moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].dup
-  #  moegliche_auftraege.select! do |auftrag|
-  #    @moegliche_karten.any? { |moegliche_karte| moegliche_karte == auftrag.karte }
-  #  end
-  #  moegliche_auftraege.each do |auftrag|
-  #    auftrag_wkeit = max_wkeit_auftrag_legen(farbe: farbe, auftrag: auftrag)
-  #    wkeit = 1 - ((1 - wkeit) * (1 - auftrag_wkeit))
-  #  end
-  #  wkeit
-  #end
-
-  #def min_wkeit_auftrag_legen(farbe:, auftrag:)
-  #  hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
-  #  if auftrag.farbe == farbe && hat_auftrag_sicher
-  #    0.75**(@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length - 1)
-  #  elsif auftrag.farbe == farbe
-  #    (0.75**(@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length - 1)) * 0.25
-  #  else
-  #    0
-  #  end
-  #end
-
-  #def max_wkeit_auftrag_legen(farbe:, auftrag:)
-  #  hat_auftrag_sicher = @sichere_karten.any? { |karte| karte == auftrag.karte }
-  #  hat_karte_wert = 0.75**@moegliche_karten.select { |karte| karte.farbe == auftrag.farbe }.length
-  #  if auftrag.farbe == farbe && hat_auftrag_sicher
-  #    1
-  #  elsif auftrag.farbe == farbe
-  #    0.25
-  #  elsif hat_auftrag_sicher
-  #    hat_karte_wert
-  #  else
-  #    0.25 * hat_karte_wert
-  #  end
-  #end
+  def max_schlag_wert(schlag_wert:, staerkste_karte:)
+    return 0 if schlag_wert <= staerkste_karte.schlag_wert
+    groesser_wkeit = 0
+    gleich_wkeit = 1
+    @karten_wkeiten.each do |karten_wkeit|
+      if karten_wkeit[0].farbe == staerkste_karte.farbe && karten_wkeit[0].schlag_wert == schlag_wert
+        gleich_wkeit = karten_wkeit[1]
+      elsif karten_wkeit[0].trumpf? && !staerkste_karte.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
+        gleich_wkeit = karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe]
+      elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte
+        groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1])
+      elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !staerkste_karte.trumpf?
+        groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe])
+      end
+    end
+    groesser_wkeit * gleich_wkeit
+  end
 
   def gespielt?
     @spieler_index.zero? or @spieler_index + @stich.karten.length >= @spiel_informations_sicht.anzahl_spieler
