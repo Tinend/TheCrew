@@ -65,13 +65,13 @@ class SchimpansenKartenWertBerechner
       resultat += sieges_dran_komm_wert_zu_punkten([@max_sieges_wkeit[spieler_index], @dran_komm_werte[spieler_index]])
       resultat
     end
-    puts "#{@karte} #{resultate.max}"
-    p vorresultat
-    p @min_sieges_wkeit
-    p @max_sieges_wkeit
-    p @min_auftraege_wkeit
-    p @max_auftraege_wkeit
-    p resultate
+    #puts "#{@karte} #{resultate.max}"
+    #p vorresultat
+    #p @min_sieges_wkeit
+    #p @max_sieges_wkeit
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
+    #p resultate
     resultate.max + auftrag_farb_wert_berechnen
   end
 
@@ -226,21 +226,23 @@ class SchimpansenKartenWertBerechner
   end
 
   def sieges_wkeiten_aus_schlagwert_berechnen
-    @min_sieges_wkeiten = @min_schlag_werte_wkeiten.collect.with_index {|min_schlag_werte_wkeiten, spieler_index|
+    @min_sieges_wkeit = @min_schlag_werte_wkeiten.collect.with_index {|min_schlag_werte_wkeiten, spieler_index|
       schlag_wert = -1
+      #p min_schlag_werte_wkeiten
+      #p @min_schlag_werte_wkeiten_summe[spieler_index]
       min_schlag_werte_wkeiten.reduce(0) {|summe, wkeit|
         schlag_wert += 1
         andere_wkeiten = @min_schlag_werte_wkeiten_summe.reduce(0) {|summe2, wkeit_summe| summe2 += wkeit_summe[schlag_wert]}
-        andere_wkeiten -= @min_schlag_werte_wkeiten_summe[0][schlag_wert]
+        andere_wkeiten -= @min_schlag_werte_wkeiten_summe[spieler_index][schlag_wert]
         summe + wkeit * andere_wkeiten
       }
     }
-    @max_sieges_wkeiten = @max_schlag_werte_wkeiten.collect.with_index {|max_schlag_werte_wkeiten, spieler_index|
+    @max_sieges_wkeit = @max_schlag_werte_wkeiten.collect.with_index {|max_schlag_werte_wkeiten, spieler_index|
       schlag_wert = -1
       max_schlag_werte_wkeiten.reduce(0) {|summe, wkeit|
         schlag_wert += 1
-        andere_wkeiten = @max_schlag_werte_wkeiten_summe.reduce(0) {|summe2, wkeit_summe| summe2 += wkeit_summe[schlag_wert]}
-        andere_wkeiten -= @max_schlag_werte_wkeiten_summe[0][schlag_wert]
+        andere_wkeiten = @max_schlag_werte_wkeiten_summe[1..].reduce(0) {|summe2, wkeit_summe| summe2 += wkeit_summe[schlag_wert]}
+        andere_wkeiten -= @max_schlag_werte_wkeiten_summe[spieler_index][schlag_wert]
         summe + wkeit * andere_wkeiten
       }
     }

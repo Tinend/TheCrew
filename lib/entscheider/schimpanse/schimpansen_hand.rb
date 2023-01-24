@@ -126,19 +126,19 @@ class SchimpansenHand
   def min_schlag_wert(schlag_wert:, staerkste_karte:)
     return 0 if schlag_wert <= staerkste_karte.schlag_wert
     kleiner_wkeit = 0
-    gleich_wkeit = 1
+    gleich_wkeit = 0
     @karten_wkeiten.each do |karten_wkeit|
       if karten_wkeit[0].farbe == staerkste_karte.farbe && karten_wkeit[0].schlag_wert == schlag_wert
         gleich_wkeit = karten_wkeit[1]
       elsif karten_wkeit[0].trumpf? && !staerkste_karte.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
         gleich_wkeit = karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe]
-      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte
+      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte.farbe
         kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1])
       elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !staerkste_karte.trumpf?
         kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe])
       end
     end
-    kleiner_wkeit * gleich_wkeit
+    (1 - kleiner_wkeit) * gleich_wkeit
   end
 
   def max_schlag_wert(schlag_wert:, staerkste_karte:)
@@ -156,7 +156,7 @@ class SchimpansenHand
         groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe])
       end
     end
-    groesser_wkeit * gleich_wkeit
+    (1 - groesser_wkeit) * gleich_wkeit
   end
 
   def gespielt?
