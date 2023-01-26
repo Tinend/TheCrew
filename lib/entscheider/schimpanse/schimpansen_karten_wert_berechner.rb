@@ -51,7 +51,7 @@ class SchimpansenKartenWertBerechner
   end
 
   def wert
-    puts @karte
+    #puts @karte
     auftraege_berechnen
     sieges_wkeiten_berechnen
     dran_komm_werte_berechnen
