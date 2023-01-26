@@ -43,12 +43,6 @@ class SchimpansenHand
     @strikt_moegliche_karten.each do |karte|
       @karten_wkeiten[karte] = moegliche_wkeit
     end
-    # p [moegliche_wkeit, anzahl_karten]
-    # print "#{@spieler_index}:   "
-    # @karten_wkeiten.each do |kw|
-    # print "#{kw[0]} #{(kw[1] * 100 + 0.5).to_i} "
-    # end
-    # puts
     karten_wkeiten_normieren
   end
 
@@ -123,6 +117,16 @@ class SchimpansenHand
     wkeit
   end
 
+  def nur_trumpf_uebrig_wkeit
+    @blank_wkeiten.reduce(1) {|produkt, farbe|
+      if farbe[0].trumpf?
+        produkt
+      else
+        produkt * farbe[1]
+      end
+    }
+  end
+
   def min_schlag_wert(schlag_wert:, staerkste_karte:)
     return 0 if schlag_wert <= staerkste_karte.schlag_wert || schlag_wert == 10
     kleiner_wkeit = 0
@@ -131,11 +135,11 @@ class SchimpansenHand
       if karten_wkeit[0].farbe == staerkste_karte.farbe && karten_wkeit[0].schlag_wert == schlag_wert
         gleich_wkeit = karten_wkeit[1]
       elsif karten_wkeit[0].trumpf? && !staerkste_karte.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
-        gleich_wkeit = karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe]
+        gleich_wkeit = karten_wkeit[1] * nur_trumpf_uebrig_wkeit
       elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte.farbe
         kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1])
       elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !staerkste_karte.trumpf?
-        kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe])
+        kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1] * nur_trumpf_uebrig_wkeit)
       end
     end
     (1 - kleiner_wkeit) * gleich_wkeit
