@@ -51,7 +51,7 @@ class SchimpansenKartenWertBerechner
   end
 
   def wert
-    puts @karte
+    #puts @karte
     auftraege_berechnen
     sieges_wkeiten_berechnen
     dran_komm_werte_berechnen
@@ -73,6 +73,7 @@ class SchimpansenKartenWertBerechner
     #p vorresultat
     #p @min_sieges_wkeit
     #p @max_sieges_wkeit
+    #puts 1
     #p @min_auftraege_wkeit
     #p @max_auftraege_wkeit
     #p resultate
@@ -120,6 +121,9 @@ class SchimpansenKartenWertBerechner
         @max_auftraege_wkeit[spieler_index] += 1
       end
     end
+    #puts 2
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
   end
 
   def anzahl_spieler
@@ -134,6 +138,9 @@ class SchimpansenKartenWertBerechner
     end
     @min_auftraege_wkeit[0] *= EIGENE_AUFTRAEGE_PRIORITAET
     @max_auftraege_wkeit[0] *= EIGENE_AUFTRAEGE_PRIORITAET
+    #puts 3
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
   end
 
   def auftraege_von_spieler_berechnen(spieler_index:)
@@ -154,6 +161,9 @@ class SchimpansenKartenWertBerechner
                                                                        karte: @karte)
     @max_auftraege_wkeit[auftrag_spieler_index] =
       1 - ((1 - @max_auftraege_wkeit[auftrag_spieler_index]) * (1 - max_wkeit))
+    #p [4, auftrag_spieler_index]
+    #p @min_auftraege_wkeit
+    #p @max_auftraege_wkeit
   end
 
   def berechne_staerkste_karte
