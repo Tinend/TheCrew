@@ -4,6 +4,7 @@
 # Berechnet wie gut es ist, eine bestimmte Karte zu legen
 
 require_relative 'schimpansen_karten_wert_berechner_schlag_wert'
+require_relative 'schimpansen_initiative'
 
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
@@ -12,7 +13,8 @@ class SchimpansenKartenWertBerechner
   EIGENE_AUFTRAEGE_PRIORITAET = 1.5
 
   include SchimpansenKartenWertBerechnerSchlagWert
-
+  include SchimpansenInitiative
+  
   def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
     @spiel_informations_sicht = spiel_informations_sicht
@@ -55,6 +57,7 @@ class SchimpansenKartenWertBerechner
     auftraege_berechnen
     sieges_wkeiten_berechnen
     dran_komm_werte_berechnen
+    initiative_wert_berechnen
     vorresultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).reduce(0) do |summe, sieges_auftrag_wkeit|
       summe + sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
     end
@@ -82,7 +85,7 @@ class SchimpansenKartenWertBerechner
 
   def auftrag_farb_wert_berechnen
     if @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.farbe == @karte.farbe } &&
-       @stich.length.zero?
+       @stich.empty?
       AUFTRAG_FARB_WERT
     elsif @spiel_informations_sicht.unerfuellte_auftraege[0].any? { |auftrag| auftrag.farbe == @karte.farbe } &&
           !@stich.empty?
