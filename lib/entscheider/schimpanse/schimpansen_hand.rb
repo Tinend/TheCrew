@@ -14,6 +14,74 @@ class SchimpansenHand
     erzeuge_blank_wkeiten
   end
 
+  attr_reader :min_schlag_werte, :max_schlag_werte
+
+  def ich_lege_karte(karte)
+    return if @spieler_index != 0
+    if @stich.length == 0
+      @min_schlag_werte[karte.farbe] = Array.new(15,0)
+      @min_schlag_werte[karte.farbe][karte.schlag_wert] = 1
+      @max_schlag_werte[karte.farbe] = Array.new(15,0)
+      @max_schlag_werte[karte.farbe][karte.schlag_wert] = 1
+    elsif karte.schlaegt?(@stich.staerkste_karte)
+      @min_schlag_werte[@stich.farbe] = Array.new(15,0)
+      @min_schlag_werte[@stich.farbe][karte.schlag_wert] = 1
+      @max_schlag_werte[@stich.farbe] = Array.new(15,0)
+      @max_schlag_werte[@stich.farbe][karte.schlag_wert] = 1
+    else
+      @min_schlag_werte[@stich.farbe] = Array.new(15,0)
+      @min_schlag_werte[@stich.farbe][0] = 1
+      @max_schlag_werte[@stich.farbe] = Array.new(15,0)
+      @max_schlag_werte[@stich.farbe][0] = 1
+    end
+  end
+  
+  def erzeuge_schlag_werte(farben:)
+    if @spieler_index == 0
+      @min_schlag_werte = {}
+      @max_schlag_werte = {}
+    elsif gespielt?
+      erzeuge_sichere_schlag_werte(farben: farben)
+    else
+      erzeuge_unsichere_schlag_werte(farben: farben)
+    end
+  end
+
+  def erzeuge_sichere_schlag_werte(farben:)
+    @min_schlag_werte = {}
+    @max_schlag_werte = {}
+    farben.each do |farbe|
+      @min_schlag_werte[farbe] = Array.new(15, 0)
+      @max_schlag_werte[farbe] = Array.new(15, 0)
+      if @stich.sieger_index == @spieler_index
+        @min_schlag_werte[farbe][@stich.staerkste_karte.schlag_wert] = 1
+        @max_schlag_werte[farbe][@stich.staerkste_karte.schlag_wert] = 1
+      else
+        @min_schlag_werte[farbe][0] = 1
+        @max_schlag_werte[farbe][0] = 1
+      end
+    end
+  end
+
+  def erzeuge_unsichere_schlag_werte(farben:)
+    #@karten_wkeiten.each do |karten_wkeit|
+    #  print "#{karten_wkeit[0]} #{karten_wkeit[1]}  "
+    #end
+    #puts
+    @min_schlag_werte = {}
+    @max_schlag_werte = {}
+    farben.each do |farbe|
+      @min_schlag_werte[farbe] = Array.new(15) {|schlag_wert|
+        min_schlag_wert(schlag_wert: schlag_wert, farbe: farbe)
+      }
+      @min_schlag_werte[farbe][0] = 1 - @min_schlag_werte[farbe][1..].sum
+      @max_schlag_werte[farbe] = Array.new(15) {|schlag_wert|
+        max_schlag_wert(schlag_wert: schlag_wert, farbe: farbe)
+      }
+      @max_schlag_werte[farbe][0] = 1 - @max_schlag_werte[farbe][1..].sum
+    end
+  end
+
   def erzeuge_blank_wkeiten
     @blank_wkeiten = {}
     Farbe::FARBEN.each do |farbe|
@@ -129,91 +197,62 @@ class SchimpansenHand
     }
   end
 
-  def min_schlag_wert(schlag_wert:, staerkste_karte:)
-    return 0 if schlag_wert <= staerkste_karte.schlag_wert || schlag_wert == 10
+  def min_schlag_wert(schlag_wert:, farbe:)
+    return 0 if schlag_wert == 10 || @stich.length != 0 && @stich.staerkste_karte.schlag_wert >= schlag_wert
     kleiner_wkeit = 0
     gleich_wkeit = 0
     @karten_wkeiten.each do |karten_wkeit|
-      if karten_wkeit[0].farbe == staerkste_karte.farbe && karten_wkeit[0].schlag_wert == schlag_wert
+      if karten_wkeit[0].farbe == farbe && karten_wkeit[0].schlag_wert == schlag_wert
         gleich_wkeit = karten_wkeit[1]
-      elsif karten_wkeit[0].trumpf? && !staerkste_karte.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
+      elsif karten_wkeit[0].trumpf? && !farbe.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
         gleich_wkeit = karten_wkeit[1] * nur_trumpf_uebrig_wkeit
-      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte.farbe
+      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == farbe
         kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1])
-      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !staerkste_karte.trumpf?
+      elsif schlag_wert > karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !farbe.trumpf?
         kleiner_wkeit = 1 - (1 - kleiner_wkeit) * (1 - karten_wkeit[1] * nur_trumpf_uebrig_wkeit)
       end
     end
     (1 - kleiner_wkeit) * gleich_wkeit
   end
 
-  def max_schlag_wert(schlag_wert:, staerkste_karte:)
-    return 0 if schlag_wert <= staerkste_karte.schlag_wert || schlag_wert == 10
+  def max_schlag_wert(schlag_wert:, farbe:)
+    return 0 if schlag_wert == 10 || @stich.length != 0 && @stich.staerkste_karte.schlag_wert >= schlag_wert
     groesser_wkeit = 0
     gleich_wkeit = 1
     @karten_wkeiten.each do |karten_wkeit|
-      if karten_wkeit[0].farbe == staerkste_karte.farbe && karten_wkeit[0].schlag_wert == schlag_wert
+      if karten_wkeit[0].farbe == farbe && karten_wkeit[0].schlag_wert == schlag_wert
         gleich_wkeit = karten_wkeit[1]
-      elsif karten_wkeit[0].trumpf? && !staerkste_karte.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
-        gleich_wkeit = karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe]
-      elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte.farbe
+      elsif karten_wkeit[0].trumpf? && !farbe.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
+        gleich_wkeit = karten_wkeit[1] * @blank_wkeiten[farbe]
+      elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == farbe
         groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1])
-      elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !staerkste_karte.trumpf?
-        groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe])
+      elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !farbe.trumpf?
+        groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[farbe])
       end
     end
     (1 - groesser_wkeit) * gleich_wkeit
   end
 
+  #def max_schlag_wert(schlag_wert:, staerkste_karte:)
+  #  return 0 if schlag_wert <= staerkste_karte.schlag_wert || schlag_wert == 10
+  #  groesser_wkeit = 0
+  #  gleich_wkeit = 1
+  #  @karten_wkeiten.each do |karten_wkeit|
+  #    if karten_wkeit[0].farbe == staerkste_karte.farbe && karten_wkeit[0].schlag_wert == schlag_wert
+  #      gleich_wkeit = karten_wkeit[1]
+  #    elsif karten_wkeit[0].trumpf? && !staerkste_karte.trumpf? && karten_wkeit[0].schlag_wert == schlag_wert
+  #      gleich_wkeit = karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe]
+  #    elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].farbe == staerkste_karte.farbe
+  #      groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1])
+  #    elsif schlag_wert < karten_wkeit[0].schlag_wert && karten_wkeit[0].trumpf? && !staerkste_karte.trumpf?
+  #      groesser_wkeit = 1 - (1 - groesser_wkeit) * (1 - karten_wkeit[1] * @blank_wkeiten[staerkste_karte.farbe])
+  #    end
+  #  end
+  #  (1 - groesser_wkeit) * gleich_wkeit
+  #end
+
   def gespielt?
     @spieler_index.zero? or @spieler_index + @stich.karten.length >= @spiel_informations_sicht.anzahl_spieler
   end
 
-  def min_sieges_wkeit(staerkste_karte)
-    return 0 if gespielt?
-    return 0 if @sichere_karten.any? do |karte|
-                  !karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe
-                end
-
-    moegliche_tiefere_karten = @strikt_moegliche_karten.select do |karte|
-      !karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe
-    end
-    (1 - (1 - (0.75**moegliche_tiefere_karten.length))) * kann_hoeher_wkeit(staerkste_karte)
-  end
-
-  def kann_hoeher_wkeit(staerkste_karte)
-    if @sichere_karten.any? { |karte| karte.farbe == staerkste_karte.farbe && karte.schlaegt?(staerkste_karte) }
-      1
-    else
-      moegliche_hoehere_karten = @strikt_moegliche_karten.select do |karte|
-        karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe
-      end
-      1 - (0.75**moegliche_hoehere_karten.length)
-    end
-  end
-
-  def sicherer_sieg_gegen_staerkste_karte?(staerkste_karte)
-    (@moegliche_karten.all? { |karte| karte.farbe != staerkste_karte.farbe } &&
-     @sichere_karten.any? { |karte| karte.schlaegt?(staerkste_karte) })
-  end
-
-  def max_sieges_wkeit(staerkste_karte)
-    return 0 if gespielt?
-    return 1 if @sichere_karten.any? do |karte|
-                  karte.schlaegt?(staerkste_karte) && staerkste_karte.farbe == karte.farbe
-                end
-
-    if sicherer_sieg_gegen_staerkste_karte?(staerkste_karte)
-      1
-    else
-      moegliche_hoehere_karten = berechne_schlagende_karten(staerkste_karte)
-      (1 - (0.75**moegliche_hoehere_karten.length))
-    end
-  end
-
-  def berechne_schlagende_karten(staerkste_karte)
-    @moegliche_karten.select do |karte|
-      karte.schlaegt?(staerkste_karte) && karte.farbe == staerkste_karte.farbe
-    end
-  end
 end

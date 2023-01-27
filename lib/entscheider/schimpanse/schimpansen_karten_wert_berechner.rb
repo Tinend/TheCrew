@@ -54,11 +54,11 @@ class SchimpansenKartenWertBerechner
   end
 
   def wert
+    #zeit = Time.now
     #puts @karte
     auftraege_berechnen
     sieges_wkeiten_berechnen
     dran_komm_werte_berechnen
-    # initiative_wert_berechnen
     vorresultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).reduce(0) do |summe, sieges_auftrag_wkeit|
       summe + sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
     end
@@ -80,7 +80,8 @@ class SchimpansenKartenWertBerechner
     #p @min_auftraege_wkeit
     #p @max_auftraege_wkeit
     #p resultate
-    resultate.max + auftrag_farb_wert_berechnen
+    #p Time.now - zeit
+    resultate.max + auftrag_farb_wert_berechnen# - initiative_wert_berechnen
   end
 
   def auftrag_farb_wert_berechnen
