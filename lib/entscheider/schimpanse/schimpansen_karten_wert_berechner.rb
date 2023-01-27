@@ -9,7 +9,8 @@ require_relative 'schimpansen_initiative'
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
   AUFTRAG_FARB_WERT = 0.14
-  DRAN_KOMM_WERT = 0.01
+  #DRAN_KOMM_WERT = 0.01
+  DRAN_KOMM_WERT = 0
   EIGENE_AUFTRAEGE_PRIORITAET = 1.5
 
   include SchimpansenKartenWertBerechnerSchlagWert
@@ -57,7 +58,7 @@ class SchimpansenKartenWertBerechner
     auftraege_berechnen
     sieges_wkeiten_berechnen
     dran_komm_werte_berechnen
-    initiative_wert_berechnen
+    # initiative_wert_berechnen
     vorresultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).reduce(0) do |summe, sieges_auftrag_wkeit|
       summe + sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
     end
@@ -74,9 +75,8 @@ class SchimpansenKartenWertBerechner
     end
     #puts "#{@karte} #{resultate.max}"
     #p vorresultat
-    #p @min_sieges_wkeit
-    #p @max_sieges_wkeit
-    #puts 1
+  #  p @min_sieges_wkeit
+  #  p @max_sieges_wkeit
     #p @min_auftraege_wkeit
     #p @max_auftraege_wkeit
     #p resultate
@@ -164,7 +164,7 @@ class SchimpansenKartenWertBerechner
                                                                        karte: @karte)
     @max_auftraege_wkeit[auftrag_spieler_index] =
       1 - ((1 - @max_auftraege_wkeit[auftrag_spieler_index]) * (1 - max_wkeit))
-    #p [4, auftrag_spieler_index]
+    #p [4, karten_spieler_index, auftrag_spieler_index, min_wkeit, max_wkeit]
     #p @min_auftraege_wkeit
     #p @max_auftraege_wkeit
   end

@@ -65,9 +65,9 @@ class SchimpansenHand
     auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index] -
                 @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[spieler_index]
     return 0 if auftraege.empty?
-    @blank_wkeiten[farbe] * @karten_wkeiten.reduce(0) {|wkeit, karten_wkeit|
+    @blank_wkeiten[farbe] * @karten_wkeiten.reduce(1) {|wkeit, karten_wkeit|
       if karten_wkeit[0].farbe != farbe && !auftraege.any? {|auftrag| auftrag.karte == karten_wkeit[0]}
-        1 - (1 - wkeit) * (1 - karten_wkeit[1])
+        wkeit * (1 - karten_wkeit[1])
       else
         wkeit
       end
@@ -79,7 +79,7 @@ class SchimpansenHand
     return 0 if auftraege.empty?
     (1 - @blank_wkeiten[farbe]) * @karten_wkeiten.reduce(1) {|wkeit, karten_wkeit|
       if karten_wkeit[0].farbe == farbe && !auftraege.any? {|auftrag| auftrag.karte == karten_wkeit[0]}
-        1 - (1 - wkeit) * (1 - karten_wkeit[1])
+        wkeit * (1 - karten_wkeit[1])
       else
         wkeit
       end
@@ -89,34 +89,34 @@ class SchimpansenHand
   def min_auftraege_lege_wkeit(spieler_index:, karte:)
     farbe = @stich.farbe
     farbe = karte.farbe if @stich.karten.empty?
-    wkeit = 1 - blank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
-    wkeit *= 1 - unblank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
-    1 - wkeit
+    wkeit = blank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
+    wkeit *= unblank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
+    wkeit
   end
 
   def blank_max_auftraege_legen_wkeit(spieler_index:, karte:, farbe:)
     auftraege = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index] -
                 @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[spieler_index]
     return 0 if auftraege.empty?
-    @blank_wkeiten[farbe] * auftraege.reduce(0) {|wkeit, auftrag|
-      1 - (1 - wkeit) * (1 - @karten_wkeiten[auftrag.karte])
+    @blank_wkeiten[farbe] * auftraege.reduce(1) {|wkeit, auftrag|
+      wkeit * (1 - @karten_wkeiten[auftrag.karte])
     }
   end
 
   def unblank_max_auftraege_legen_wkeit(spieler_index:, karte:, farbe:)
     auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[spieler_index]
     return 0 if auftraege.empty?
-    (1 - @blank_wkeiten[farbe]) * auftraege.reduce(0) {|wkeit, auftrag|
-      1 - (1 - wkeit) * (1 - @karten_wkeiten[auftrag.karte])
+    (1 - @blank_wkeiten[farbe]) * auftraege.reduce(1) {|wkeit, auftrag|
+      wkeit * (1 - @karten_wkeiten[auftrag.karte])
     }
   end
 
   def max_auftraege_lege_wkeit(spieler_index:, karte:)
     farbe = @stich.farbe
     farbe = karte.farbe if @stich.karten.empty?
-    wkeit = 1 - blank_max_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
-    wkeit *= 1 - unblank_max_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
-    1 - wkeit
+    wkeit = blank_max_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
+    wkeit *= unblank_max_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
+    wkeit
   end
 
   def nur_trumpf_uebrig_wkeit
