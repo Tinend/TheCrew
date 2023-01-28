@@ -87,9 +87,13 @@ class SchimpansenHand
     } * auftraege.reduce(1) {|produkt, auftrag| produkt * @karten_wkeiten[auftrag.karte]}
   end
 
-  def unblank_min_auftraege_legen_wkeit(spieler_index:, karte:, farbe:)
+  def unblank_min_auftraege_legen_wkeit(spieler_index:, farbe:)
     auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[spieler_index]
     return 0 if auftraege.empty?
+    #relevante_karten = Karte.alle_mit_farbe(farbe) - auftraege.collect{|auftrag| auftrag.karte}
+    #relevante_karten.reduce(1) {|produkt, karte|
+    #  produkt * @karten_wkeiten[karte]
+    #} * auftraege.reduce(1) {|produkt, auftrag| produkt * @karten_wkeiten[auftrag.karte]}
     (1 - @blank_wkeiten[farbe]) * @karten_wkeiten.reduce(1) {|wkeit, karten_wkeit|
       if karten_wkeit[0].farbe == farbe && !auftraege.any? {|auftrag| auftrag.karte == karten_wkeit[0]}
         wkeit * (1 - karten_wkeit[1])
@@ -103,7 +107,7 @@ class SchimpansenHand
     farbe = @stich.farbe
     farbe = karte.farbe if @stich.karten.empty?
     wkeit = blank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
-    wkeit *= unblank_min_auftraege_legen_wkeit(spieler_index: spieler_index, karte: karte, farbe: farbe)
+    wkeit *= unblank_min_auftraege_legen_wkeit(spieler_index: spieler_index, farbe: farbe)
     wkeit
   end
 

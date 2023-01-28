@@ -77,14 +77,15 @@ module SchimpansenKartenWertBerechnerSchlagWert
       #p @max_schlag_werte_wkeiten_summe
       hand.min_schlag_werte[farbe].reduce(0) {|summe, wkeit|
         schlag_wert += 1
-        wkeiten_summen = @max_schlag_werte_wkeiten_summe.collect.with_index {|wkeit_summe, index|
+        index = -1
+        andere_wkeiten = @max_schlag_werte_wkeiten_summe.reduce(1) {|produkt, wkeit_summe|
+          index += 1
           if index == spieler_index
-            1
+            produkt
           else
-            wkeit_summe[schlag_wert]
+            produkt * wkeit_summe[schlag_wert]
           end
         }
-        andere_wkeiten = wkeiten_summen.reduce(:*)
         #p [wkeiten_summen, schlag_wert]
         summe + wkeit * andere_wkeiten
       }
@@ -98,14 +99,15 @@ module SchimpansenKartenWertBerechnerSchlagWert
       #p @min_schlag_werte_wkeiten_summe
       hand.max_schlag_werte[farbe].reduce(0) {|summe, wkeit|
         schlag_wert += 1
-        wkeiten_summen = @min_schlag_werte_wkeiten_summe.collect.with_index {|wkeit_summe, index|
+        index = -1
+        andere_wkeiten = @min_schlag_werte_wkeiten_summe.reduce(1) {|produkt, wkeit_summe|
+          index += 1
           if index == spieler_index
-            1
+            produkt
           else
-            wkeit_summe[schlag_wert]
+            produkt * wkeit_summe[schlag_wert]
           end
         }
-        andere_wkeiten = wkeiten_summen.reduce(:*)
         summe + wkeit * andere_wkeiten
       }
     }
