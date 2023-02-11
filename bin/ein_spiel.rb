@@ -10,8 +10,6 @@ require 'spiel_ersteller'
 require 'puts_reporter'
 require 'stackprof'
 
-StackProf.run(mode: :cpu, out: 'test_data/stackprof-output4.dump') do
-  zeit = Time.now
 seed_setzer = nil
 auftrag_setzer = nil
 anzahl_spieler_setzer = nil
@@ -55,5 +53,3 @@ spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_ge
                                       entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE,
                                       reporter: PutsReporter.new)
 spiel.spiele
-puts Time.now - zeit
-end

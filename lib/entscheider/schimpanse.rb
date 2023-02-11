@@ -5,7 +5,6 @@ require_relative '../entscheider'
 require_relative '../farbe'
 require_relative 'saeuger_auftrag_nehmer'
 require_relative 'spiel_informations_sicht_benutzender'
-require_relative 'rhinoceros_abspielen'
 require_relative 'schimpanse/schimpanse_kommunizierender'
 require_relative 'schimpanse/schimpanse_zeitdruck'
 require_relative 'schimpanse/schimpanse_legen'
@@ -16,7 +15,6 @@ require_relative 'schimpanse/schimpanse_legen'
 class Schimpanse < Entscheider
   include SaeugerAuftragNehmer
   include SpielInformationsSichtBenutzender
-  include RhinocerosAbspielen
   include SchimpanseLegen
   include SchimpanseKommunizierender
   include SpielInformationsSichtBenutzender
