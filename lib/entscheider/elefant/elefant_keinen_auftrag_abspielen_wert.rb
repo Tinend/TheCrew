@@ -18,11 +18,11 @@ module ElefantKeinenAuftragAbspielenWert
   end
 
   def eigene_auftrag_farbe_abspielen_wert(karte:)
-    karte.schlag_wert + 10
+    karte.schlag_wert + 10_000
   end
 
   def fremden_auftrag_farbe_abspielen_wert(karte:)
-    10 - karte.schlag_wert
+    10_000 - karte.schlag_wert
   end
 
   def eigen_und_fremd_auftrag_farbe_abspielen_wert(karte:, auftraege_mit_farbe:)

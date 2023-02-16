@@ -26,11 +26,11 @@ module ElefantAnspielen
   end
 
   def eigenen_auftrag_anspielen_wert(karte)
-    20
+    10_020
   end
 
   def fremden_auftrag_anspielen_wert(karte)
-    10
+    10_010
   end
 
 end

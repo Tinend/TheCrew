@@ -3,36 +3,40 @@
 
 require_relative 'elefant_nuetzliches'
 require_relative 'elefant_keinen_auftrag_abspielen_wert'
+require_relative 'elefant_fremden_auftrag_abspielen_wert'
+require_relative 'elefant_eigenen_auftrag_abspielen_wert'
 
 # gehört zu Elefant
 # legt eine Karte auf einen Stich
 module ElefantAbspielen
   include ElefantNuetzliches
   include ElefantKeinenAuftragAbspielenWert
+  include ElefantFremdenAuftragAbspielenWert
+  include ElefantEigenenAuftragAbspielenWert
 
   def abspielen(stich, waehlbare_karten)
-    waehlbare_karten.max_by { |karte| abspielen_karten_wert(karte: karte, stich: stich) }
+    waehlbare_karten.max_by { |karte| karten_abspielen_wert(karte: karte, stich: stich) }
   end
 
   # wie gut eine Karte zum drauflegen geeignet ist
-  def abspielen_karten_wert(karte:, stich:)
+  def karten_abspielen_wert(karte:, stich:)
     spieler_index = finde_auftrag_in_stich(stich)
     if !spieler_index.nil?
-      abspielen_auftrag_gelegt_wert(karte: karte, stich: stich, spieler_index: spieler_index)
+      auftrag_gelegt_abspielen_wert(karte: karte, stich: stich, spieler_index: spieler_index)
     else
-      abspielen_kein_auftrag_gelegt_wert(karte: karte, stich: stich)
+      kein_auftrag_gelegt_abspielen_wert(karte: karte, stich: stich)
     end
   end
   
-  def abspielen_auftrag_gelegt_wert(karte:, stich:, spieler_index:)
+  def auftrag_gelegt_abspielen_wert(karte:, stich:, spieler_index:)
     if spieler_index == 0
-      karte.schlag_wert
+      karte.schlag_wert + 10_000
     else
-      -karte.schlag_wert
+      -karte.schlag_wert + 10_000
     end
   end
 
-  def abspielen_kein_auftrag_gelegt_wert(karte:, stich:)
+  def kein_auftrag_gelegt_abspielen_wert(karte:, stich:)
     karten_auftrag_index = karte_ist_auftrag_von(karte)
     if karten_auftrag_index.nil?
       keinen_auftrag_abspielen_wert(karte: karte, stich: stich)
@@ -43,11 +47,4 @@ module ElefantAbspielen
     end
   end
 
-  def eigenen_auftrag_abspielen_wert(karte:, stich:)
-    20
-  end
-
-  def fremden_auftrag_abspielen_wert(karte:, stich:)
-    10
-  end
 end
