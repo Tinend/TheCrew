@@ -9,7 +9,7 @@ class BekannteKartenTracker
     @spiel_informations_sicht = spiel_informations_sicht
     @sichere_karten = anfangs_sichere_karten
     @moegliche_karten = anfangs_moegliche_karten
-    
+
     beachte_kommunikationen
     beachte_blankheit
     stabilisiere_karten_information

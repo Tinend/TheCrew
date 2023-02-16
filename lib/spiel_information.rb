@@ -159,9 +159,9 @@ class SpielInformation
     end
 
     def bekannte_karten_tracker
-      stich_cache(:bekannte_karten_tracker) {
+      stich_cache(:bekannte_karten_tracker) do
         BekannteKartenTracker.new(spiel_informations_sicht: self, aktiver_stich: @aktiver_stich)
-      }
+      end
     end
 
     def sichere_karten(spieler_index)

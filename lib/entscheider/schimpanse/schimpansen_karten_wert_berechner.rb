@@ -9,13 +9,13 @@ require_relative 'schimpansen_initiative'
 # Für den Schimpansen gemacht
 class SchimpansenKartenWertBerechner
   AUFTRAG_FARB_WERT = 0.14
-  #DRAN_KOMM_WERT = 0.01
+  # DRAN_KOMM_WERT = 0.01
   DRAN_KOMM_WERT = 0
   EIGENE_AUFTRAEGE_PRIORITAET = 1.5
 
   include SchimpansenKartenWertBerechnerSchlagWert
   include SchimpansenInitiative
-  
+
   def initialize(spiel_informations_sicht:, stich:, karte:, haende:)
     @karte = karte
     @spiel_informations_sicht = spiel_informations_sicht
@@ -26,8 +26,6 @@ class SchimpansenKartenWertBerechner
     @max_sieges_wkeit = Array.new(anzahl_spieler, 0.0)
     @blank_werte = Array.new(anzahl_spieler, 0.0)
     @moegliche_auftraege = @spiel_informations_sicht.unerfuellte_auftraege.collect(&:dup)
-    # @min_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
-    # @max_schlag_werte_wkeiten = Array.new(anzahl_spieler) {Array.new(14,0)}
     @moegliche_auftraege.each do |auftrag_liste|
       auftrag_liste.reject! do |auftrag|
         auftrag.karte == @karte || @stich.karten.any? { |stich_karte| auftrag.karte == stich_karte }
@@ -46,42 +44,48 @@ class SchimpansenKartenWertBerechner
   end
 
   def sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
-    sieges_auftrag_wkeit[1] * (sieges_auftrag_wkeit[0] - (1 - sieges_auftrag_wkeit[0]) * risiko_eingehen_wert)
+    sieges_auftrag_wkeit[1] * (sieges_auftrag_wkeit[0] - ((1 - sieges_auftrag_wkeit[0]) * risiko_eingehen_wert))
   end
 
   def sieges_dran_komm_wert_zu_punkten(sieges_dran_komm_wert)
-    sieges_dran_komm_wert[1] * (sieges_dran_komm_wert[0] - (1 - sieges_dran_komm_wert[0]) * DRAN_KOMM_WERT)
+    sieges_dran_komm_wert[1] * (sieges_dran_komm_wert[0] - ((1 - sieges_dran_komm_wert[0]) * DRAN_KOMM_WERT))
   end
 
   def wert
-    #zeit = Time.now
-    #puts @karte
+    # zeit = Time.now
+    # puts @karte
     auftraege_berechnen
     sieges_wkeiten_berechnen
     dran_komm_werte_berechnen
-    vorresultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).reduce(0) do |summe, sieges_auftrag_wkeit|
-      summe + sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
-    end
-    vorresultat += @min_sieges_wkeit.zip(@dran_komm_werte).reduce(0) do |summe, sieges_dran_komm_wert|
-      summe + sieges_dran_komm_wert_zu_punkten(sieges_dran_komm_wert)
-    end
+    vorresultat = berechne_vorresultat
     resultate = Array.new(anzahl_spieler) do |spieler_index|
       resultat = vorresultat
-      resultat -= sieges_auftrag_wkeit_zu_punkten([@min_sieges_wkeit[spieler_index], @min_auftraege_wkeit[spieler_index]])
-      resultat += sieges_auftrag_wkeit_zu_punkten([@max_sieges_wkeit[spieler_index], @max_auftraege_wkeit[spieler_index]])
+      resultat -= sieges_auftrag_wkeit_zu_punkten([@min_sieges_wkeit[spieler_index],
+                                                   @min_auftraege_wkeit[spieler_index]])
+      resultat += sieges_auftrag_wkeit_zu_punkten([@max_sieges_wkeit[spieler_index],
+                                                   @max_auftraege_wkeit[spieler_index]])
       resultat -= sieges_dran_komm_wert_zu_punkten([@min_sieges_wkeit[spieler_index], @dran_komm_werte[spieler_index]])
       resultat += sieges_dran_komm_wert_zu_punkten([@max_sieges_wkeit[spieler_index], @dran_komm_werte[spieler_index]])
       resultat
     end
-    #puts "#{@karte} #{resultate.max}"
-    #p vorresultat
-  #  p @min_sieges_wkeit
-  #  p @max_sieges_wkeit
-    #p @min_auftraege_wkeit
-    #p @max_auftraege_wkeit
-    #p resultate
-    #p Time.now - zeit
-    resultate.max + auftrag_farb_wert_berechnen# - initiative_wert_berechnen
+    # puts "#{@karte} #{resultate.max}"
+    # p vorresultat
+    #  p @min_sieges_wkeit
+    #  p @max_sieges_wkeit
+    # p @min_auftraege_wkeit
+    # p @max_auftraege_wkeit
+    # p resultate
+    # p Time.now - zeit
+    resultate.max + auftrag_farb_wert_berechnen
+  end
+
+  def berechne_vorresultat
+    vorresultat = @min_sieges_wkeit.zip(@min_auftraege_wkeit).reduce(0) do |summe, sieges_auftrag_wkeit|
+      summe + sieges_auftrag_wkeit_zu_punkten(sieges_auftrag_wkeit)
+    end
+    vorresultat + @min_sieges_wkeit.zip(@dran_komm_werte).reduce(0) do |summe, sieges_dran_komm_wert|
+      summe + sieges_dran_komm_wert_zu_punkten(sieges_dran_komm_wert)
+    end
   end
 
   def auftrag_farb_wert_berechnen
@@ -102,7 +106,7 @@ class SchimpansenKartenWertBerechner
 
   def dran_komm_wert_von_spieler(spieler_index)
     wert = @spiel_informations_sicht.unerfuellte_auftraege[spieler_index].length
-    wert = 0.1 if spieler_index == 0 and wert == 0
+    wert = 0.1 if spieler_index.zero? && wert.zero?
     wert
   end
 
@@ -125,9 +129,9 @@ class SchimpansenKartenWertBerechner
         @max_auftraege_wkeit[spieler_index] += 1
       end
     end
-    #puts 2
-    #p @min_auftraege_wkeit
-    #p @max_auftraege_wkeit
+    # puts 2
+    # p @min_auftraege_wkeit
+    # p @max_auftraege_wkeit
   end
 
   def anzahl_spieler
@@ -142,9 +146,9 @@ class SchimpansenKartenWertBerechner
     end
     @min_auftraege_wkeit[0] *= EIGENE_AUFTRAEGE_PRIORITAET
     @max_auftraege_wkeit[0] *= EIGENE_AUFTRAEGE_PRIORITAET
-    #puts 3
-    #p @min_auftraege_wkeit
-    #p @max_auftraege_wkeit
+    # puts 3
+    # p @min_auftraege_wkeit
+    # p @max_auftraege_wkeit
   end
 
   def auftraege_von_spieler_berechnen(spieler_index:)
@@ -165,9 +169,9 @@ class SchimpansenKartenWertBerechner
                                                                        karte: @karte)
     @max_auftraege_wkeit[auftrag_spieler_index] =
       1 - ((1 - @max_auftraege_wkeit[auftrag_spieler_index]) * (1 - max_wkeit))
-    #p [4, karten_spieler_index, auftrag_spieler_index, min_wkeit, max_wkeit]
-    #p @min_auftraege_wkeit
-    #p @max_auftraege_wkeit
+    # p [4, karten_spieler_index, auftrag_spieler_index, min_wkeit, max_wkeit]
+    # p @min_auftraege_wkeit
+    # p @max_auftraege_wkeit
   end
 
   def berechne_staerkste_karte
@@ -188,21 +192,7 @@ class SchimpansenKartenWertBerechner
   end
 
   def sieges_wkeiten_berechnen
-    #puts @karte
-    staerkste_karte = berechne_staerkste_karte
-     #ueberarbeite_sieges_wkeiten_mit_staerkster_karte(staerkste_karte)
-    staerkster_index = if staerkste_karte == @karte
-                         0
-                       else
-                         @stich.karten.find_index(staerkste_karte) - @stich.karten.length
-                       end
-    schlag_werte_wkeiten_berechnen(staerkster_index: staerkster_index, staerkste_karte: staerkste_karte)
-    #@max_schlag_werte_wkeiten.each do |schlag_werte|
-    #  p schlag_werte
-    #end
+    schlag_werte_wkeiten_berechnen
     sieges_wkeiten_aus_schlagwert_berechnen
-    #@min_sieges_wkeit[staerkster_index] = [1 - @max_sieges_wkeit.reduce(:+), 0].max
-    #@max_sieges_wkeit[staerkster_index] =
-    #  [1 - @min_sieges_wkeit.reduce(:+) + @min_sieges_wkeit[staerkster_index], 0].max
   end
 end
