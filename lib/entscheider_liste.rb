@@ -9,11 +9,12 @@ require 'entscheider/reinwerfer'
 require 'entscheider/geschlossene_formel_bot'
 require 'entscheider/schimpanse'
 require 'entscheider/cowboy'
+require 'entscheider/elefant'
 
 # Liste aller Entscheider.
 module EntscheiderListe
   def self.entscheider_klassen
-    @entscheider_klassen ||= [Schimpanse, Cowboy, Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon,
+    @entscheider_klassen ||= [Elefant, Cowboy, Schimpanse, Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon,
                               ZufallsEntscheider, GeschlosseneFormelBot].freeze
   end
 end
