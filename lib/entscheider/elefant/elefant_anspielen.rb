@@ -26,7 +26,11 @@ module ElefantAnspielen
   end
 
   def eigenen_auftrag_anspielen_wert(karte)
-    10_020
+    if jeder_kann_unterbieten?(karte: karte)
+      10_020
+    else
+      -10_000
+    end
   end
 
   def fremden_auftrag_anspielen_wert(karte)

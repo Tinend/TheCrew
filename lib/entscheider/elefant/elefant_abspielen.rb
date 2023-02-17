@@ -43,7 +43,7 @@ module ElefantAbspielen
     elsif karten_auftrag_index == 0
       eigenen_auftrag_abspielen_wert(karte: karte, stich: stich)
     else
-      fremden_auftrag_abspielen_wert(karte: karte, stich: stich)
+      fremden_auftrag_abspielen_wert(karte: karte, stich: stich, ziel_spieler_index: karten_auftrag_index)
     end
   end
 
