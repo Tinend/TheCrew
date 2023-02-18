@@ -15,11 +15,11 @@ module ElefantAbspielen
   include ElefantEigenenAuftragAbspielenWert
 
   def abspielen(stich, waehlbare_karten)
-    waehlbare_karten.max_by { |karte| karten_abspielen_wert(karte: karte, stich: stich) }
+    waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
   end
 
   # wie gut eine Karte zum drauflegen geeignet ist
-  def karten_abspielen_wert(karte:, stich:)
+  def abspielen_wert(karte:, stich:)
     spieler_index = finde_auftrag_in_stich(stich)
     if !spieler_index.nil?
       auftrag_gelegt_abspielen_wert(karte: karte, stich: stich, spieler_index: spieler_index)
@@ -30,10 +30,8 @@ module ElefantAbspielen
   
   def auftrag_gelegt_abspielen_wert(karte:, stich:, spieler_index:)
     if spieler_index == 0
-    #karte.schlag_wert + 10_000
       [0, 1, 0, karte.schlag_wert, 0]
     else
-      #-karte.schlag_wert + 10_000
       [0, 1, 0, -karte.schlag_wert, 0]
     end
   end

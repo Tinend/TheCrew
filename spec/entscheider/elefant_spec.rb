@@ -49,6 +49,7 @@ RSpec.describe Elefant do
     stich
   end
   let(:gelbe_drei_stich_sicht) {gelbe_drei_stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler)}
+  let(:raketen_eins) { Karte.new(farbe: Farbe::RAKETE, wert: 1) }
 
   it "Wählt einzige wählbare Karte" do
     spiel_information.verteil_karten([[gruene_drei], [Karte.max_trumpf], [], [], []])
@@ -145,5 +146,12 @@ RSpec.describe Elefant do
     spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: gruene_drei_auftrag)
     karte = spieler.waehle_karte(leere_stich_sicht)
     expect(karte).to eq(rote_neun)
+  end
+
+  it "Spielt die Raketen 4, wenn er an, wenn er noch einen weiteren Trumpf hat und als einziger Auftrag" do
+    spiel_information.verteil_karten([[Karte.max_trumpf, raketen_eins, gelbe_drei], [], [], [], []])
+    spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_sechs_auftrag)
+    karte = spieler.waehle_karte(leere_stich_sicht)
+    expect(karte).to eq(Karte.max_trumpf)
   end
 end

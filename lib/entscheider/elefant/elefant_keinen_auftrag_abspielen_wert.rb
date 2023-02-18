@@ -12,7 +12,7 @@ module ElefantKeinenAuftragAbspielenWert
     elsif eigene_auftraege_mit_farbe > 0
       eigene_auftrag_stich_farbe_abspielen_wert(karte: karte)
     elsif fremde_auftraege_mit_farbe > 0
-      fremden_auftrag_stich_farbe_abspielen_wert(karte: karte)
+      fremden_auftrag_stich_farbe_abspielen_wert(karte: karte, stich: stich)
     else
       keine_auftrag_stich_farbe_abspielen_wert(karte: karte, stich: stich)
     end
@@ -22,8 +22,14 @@ module ElefantKeinenAuftragAbspielenWert
     [0, 1, 0, karte.schlag_wert, 0]
   end
 
-  def fremden_auftrag_stich_farbe_abspielen_wert(karte:)
-    [0, 1, 0, -karte.schlag_wert, 0]
+  def fremden_auftrag_stich_farbe_abspielen_wert(karte:, stich:)
+    if stich.farbe == karte.farbe and karte.schlaegt?(stich.staerkste_karte)
+      [0, 0, -1, karte.schlag_wert, 0]
+    elsif karte.schlaegt?(stich.staerkste_karte)
+      [0, 0, -2, karte.schlag_wert, 0]
+    else
+      [0, 0, 1, karte.schlag_wert, 0]
+    end
   end
 
   def eigen_und_fremd_auftrag_stich_farbe_abspielen_wert(karte:, auftraege_mit_farbe:)
@@ -40,21 +46,25 @@ module ElefantKeinenAuftragAbspielenWert
 
   def keine_auftrag_stich_farbe_gleiche_farbe_abspielen_wert(karte:, stich:)
     if habe_noch_auftraege?
-      eigene_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte: karte)
+      eigene_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte: karte, stich: stich)
     else
       fremde_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte: karte, stich: stich)
     end
   end
 
-  def eigene_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte:)
-    karte.wert
+  def eigene_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte:, stich:)
+    if karte.schlaegt?(stich.staerkste_karte)
+      [0, 0, 1, -karte.wert, 0]
+    else
+      [0, 0, -1, -karte.wert, 0]
+    end
   end
 
   def fremde_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte:, stich:)
     if karte.schlaegt?(stich.staerkste_karte)
-      -karte.schlag_wert
+      [0, 0, -1, karte.schlag_wert, 0]
     else
-      karte.schlag_wert
+      [0, 0, 1, karte.schlag_wert, 0]
     end
   end
 
@@ -69,7 +79,11 @@ module ElefantKeinenAuftragAbspielenWert
   end
 
   def eigene_auftraege_mit_verlorener_farbe_unterstuetzen_abspielen_wert(karte:)
-    [0, 0, 0, -karte.wert, 0]
+    if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe).empty?
+      [0, 0, 0, -karte.wert, 0]
+    else
+      [0, 0, -1, -karte.wert, 0]
+    end
     #farb_laenge = berechne_farb_laenge(farbe: karte.farbe)
     #if jeder_kann_unterbieten?(karte: karte)
     #  (farb_laenge * 1000 - 1000).to_i + karte.wert
@@ -79,7 +93,11 @@ module ElefantKeinenAuftragAbspielenWert
   end
 
   def fremde_auftraege_mit_verlorener_farbe_unterstuetzen_abspielen_wert(karte:)
-    [0, 0, 0, karte.wert, 0]
+    if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe).flatten.empty?
+      [0, 0, 0, karte.wert, 0]
+    else
+      [0, 0, 1, karte.wert, 0]
+    end
     #farb_laenge = berechne_farb_laenge(farbe: karte.farbe)
     #1200 - karte.wert * 100 - (farb_laenge * 200).to_i
   end

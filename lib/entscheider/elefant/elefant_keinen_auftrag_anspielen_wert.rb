@@ -1,7 +1,12 @@
 # coding: utf-8
 # berechnet Wert für Karten anspielen, wenn
 # Karte kein Auftrag ist
+require_relative 'elefant_trumpf_anspielen_wert'
+
 module ElefantKeinenAuftragAnspielenWert
+
+  include ElefantTrumpfAnspielenWert
+  
   def keinen_auftrag_anspielen_wert(karte)
     auftraege_mit_farbe = auftraege_mit_farbe_berechnen(karte.farbe)
     eigene_auftraege_mit_farbe = auftraege_mit_farbe[0]
@@ -18,6 +23,17 @@ module ElefantKeinenAuftragAnspielenWert
   end
 
   def eigene_auftrag_farbe_anspielen_wert(karte:)
+    if jeder_kann_unterbieten?(karte: karte)
+      eigene_auftrag_farbe_holen_anspielen_wert(karte: karte)
+    elsif kurze_farbe?(farbe: karte.farbe) &&
+          @spiel_informations_sicht.karten_mit_farbe(karte.farbe).length == 1
+      [0, 0, 0, 1, 0]
+    else
+      [0, 0, -1, -karte.wert, 0]
+    end
+  end
+
+  def eigene_auftrag_farbe_holen_anspielen_wert(karte:)
     auftrag = tiefster_eigener_auftrag_auf_fremder_hand_mit_farbe(karte.farbe)
     if auftrag.nil?
       [0, 0, 0, karte.wert, 0]
@@ -47,7 +63,7 @@ module ElefantKeinenAuftragAnspielenWert
 
   def keine_auftrag_farbe_anspielen_wert(karte:)
     if karte.trumpf?
-      [0, 0, -1, 0, 0]
+      trumpf_anspielen_wert(karte: karte)
     elsif habe_noch_auftraege?
       eigene_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte: karte)
     else

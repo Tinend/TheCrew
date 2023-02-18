@@ -17,8 +17,8 @@ class Elefant < Entscheider
   include SpielInformationsSichtBenutzender
   include ElefantAbspielen
   include ElefantAnspielen
-  include ElefantKommunizieren
-  #include BakterieKommunizierender
+  #include ElefantKommunizieren
+  include BakterieKommunizierender
 
   def waehle_karte(stich, waehlbare_karten)
     if stich.karten.length.zero?
