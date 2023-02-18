@@ -6,7 +6,7 @@ module ElefantFremdenAuftragAbspielenWert
     if hat_gespielt?(spieler_index: ziel_spieler_index, stich: stich)
       vielleicht_auftrag_reinwerfen_abspielen_wert(karte: karte, stich: stich, ziel_spieler_index: ziel_spieler_index)
     else
-      10_010
+      [0, 1, 0, 0, 10]
     end
   end
 
@@ -14,15 +14,16 @@ module ElefantFremdenAuftragAbspielenWert
     if stich.sieger_index == ziel_spieler_index
       auftrag_reinwerfen_abspielen_wert(karte: karte, stich: stich, ziel_spieler_index: ziel_spieler_index)
     else
-      -10_000
+      [0, -1, 0, 0, 0]
     end
   end
 
   def auftrag_reinwerfen_abspielen_wert(karte:, stich:, ziel_spieler_index:)
-    if karte.schlaegt?(stich.staerkste_karte)
-      -10_000
+    if !karte.schlaegt?(stich.staerkste_karte) &&
+       jeder_kann_unterbieten?(karte: stich.staerkste_karte, end_index: @spiel_informations_sicht.anzahl_spieler - 1 - stich.length)
+      [0, 1, 0, 0, 10]
     else
-      10_010
+      [0, -1, 0, 0, 0]
     end
   end
 end

@@ -10,11 +10,12 @@ require 'entscheider/geschlossene_formel_bot'
 require 'entscheider/schimpanse'
 require 'entscheider/cowboy'
 require 'entscheider/elefant'
+require 'entscheider/bakterie'
 
 # Liste aller Entscheider.
 module EntscheiderListe
   def self.entscheider_klassen
     @entscheider_klassen ||= [Elefant, Cowboy, Schimpanse, Reinwerfer, Rhinoceros, Hase, Saeuger, Archaeon,
-                              ZufallsEntscheider, GeschlosseneFormelBot].freeze
+                              ZufallsEntscheider, GeschlosseneFormelBot, Bakterie].freeze
   end
 end

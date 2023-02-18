@@ -10,7 +10,7 @@ module ElefantAnspielen
   include ElefantKeinenAuftragAnspielenWert
 
   def anspielen(waehlbare_karten)
-    waehlbare_karten.max_by { |karte| anspielen_wert_karte(karte) }
+    waehlbare_karten.max_by { |karte| anspielen_wert_karte(karte)}
   end
 
   # wie gut eine Karte zum Anspielen geeignet ist
@@ -27,14 +27,14 @@ module ElefantAnspielen
 
   def eigenen_auftrag_anspielen_wert(karte)
     if jeder_kann_unterbieten?(karte: karte)
-      10_020
+      [0, 1, 2, karte.wert, 0]
     else
-      -10_000
+      [0, -1, 0, 0, 0]
     end
   end
 
   def fremden_auftrag_anspielen_wert(karte)
-    10_010
+    [0, 1, 1, 0, 0]
   end
 
 end

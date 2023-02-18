@@ -21,7 +21,7 @@ module ElefantNuetzliches
   end
 
   def auftraege_mit_farbe_berechnen(farbe)
-    @spiel_informations_sicht.unerfuellte_auftraege.collect {|auftrag_liste|
+    @spiel_informations_sicht.unerfuellte_auftraege.collect.with_index {|auftrag_liste, index|
       auftrag_liste.count {|auftrag| auftrag.farbe == farbe}
     }
   end
@@ -54,8 +54,12 @@ module ElefantNuetzliches
     true
   end
 
-  def tiefster_eigener_auftrag_mit_farbe(farbe)
-    @spiel_informations_sicht.auftraege_mit_farbe(farbe)[0].min_by {|auftrag|
+  def tiefster_eigener_auftrag_auf_fremder_hand_mit_farbe(farbe)
+    auftraege = @spiel_informations_sicht.auftraege_mit_farbe(farbe)[0].select{|auftrag|
+      @spiel_informations_sicht.karten.all? {|karte| karte != auftrag.karte}
+    }
+    return nil if auftraege.empty?
+    auftraege.min_by {|auftrag|
       auftrag.karte.wert
     }
   end

@@ -18,28 +18,36 @@ module ElefantKeinenAuftragAnspielenWert
   end
 
   def eigene_auftrag_farbe_anspielen_wert(karte:)
-    auftrag = tiefster_eigener_auftrag_mit_farbe(karte.farbe)
+    auftrag = tiefster_eigener_auftrag_auf_fremder_hand_mit_farbe(karte.farbe)
+    if auftrag.nil?
+      [0, 0, 0, karte.wert, 0]
+    else
+      eigene_auftrag_farbe_fremde_hand_anspielen_wert(karte: karte, auftrag: auftrag)
+    end
+  end
+
+  def eigene_auftrag_farbe_fremde_hand_anspielen_wert(karte:, auftrag:)
     if karte.wert > auftrag.karte.wert
-      karte.wert + 10_000
+      [0, 1, 3, karte.wert, 0]
     elsif habe_hohe_karte_mit_farbe?(farbe: karte.farbe, wert: auftrag.karte.wert) ||
           kurze_farbe?(farbe: karte.farbe)
-      100
+      [0, 0, 1, 0, 0]
     else
-      -100
+      [0, 0, -1, 0, 0]
     end
   end
 
   def fremden_auftrag_farbe_anspielen_wert(karte:)
-    10_000 - karte.wert
+    [0, 1, 0, 0, -karte.wert, 0]
   end
 
   def eigen_und_fremd_auftrag_farbe_anspielen_wert(karte:, auftraege_mit_farbe:)
-    0
+    [0, 0, 0, 0, 0]
   end
 
   def keine_auftrag_farbe_anspielen_wert(karte:)
     if karte.trumpf?
-      -100
+      [0, 0, -1, 0, 0]
     elsif habe_noch_auftraege?
       eigene_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte: karte)
     else
@@ -50,14 +58,14 @@ module ElefantKeinenAuftragAnspielenWert
   def eigene_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte:)
     farb_laenge = berechne_farb_laenge(farbe: karte.farbe)
     if jeder_kann_unterbieten?(karte: karte)
-      (farb_laenge * 1000 - 1000).to_i + karte.wert
+      [0, 0, farb_laenge - 1, karte.wert, 0]
     else
-      (farb_laenge * 100 - 100).to_i + karte.wert
+      [0, 0, farb_laenge * 0.1 - 0.1, karte.wert, 0]
     end
   end
 
   def fremde_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte:)
     farb_laenge = berechne_farb_laenge(farbe: karte.farbe)
-    1000 - karte.wert * 100 - (farb_laenge * 200).to_i
+    [0, 0, 12 - karte.wert - farb_laenge * 2, 0, 0]
   end
 end

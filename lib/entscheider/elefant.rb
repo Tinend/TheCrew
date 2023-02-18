@@ -8,6 +8,7 @@ require_relative 'spiel_informations_sicht_benutzender'
 require_relative 'elefant/elefant_abspielen'
 require_relative 'elefant/elefant_anspielen'
 require_relative 'elefant/elefant_kommunizieren'
+require_relative 'bakterie/bakterie_kommunizierender'
 
 # Rennt geradewegs auf die Aufträge zu
 # Geht 100 Fälle durch und wählt geeigneten aus
@@ -17,6 +18,7 @@ class Elefant < Entscheider
   include ElefantAbspielen
   include ElefantAnspielen
   include ElefantKommunizieren
+  #include BakterieKommunizierender
 
   def waehle_karte(stich, waehlbare_karten)
     if stich.karten.length.zero?

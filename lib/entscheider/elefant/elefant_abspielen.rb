@@ -30,9 +30,11 @@ module ElefantAbspielen
   
   def auftrag_gelegt_abspielen_wert(karte:, stich:, spieler_index:)
     if spieler_index == 0
-      karte.schlag_wert + 10_000
+    #karte.schlag_wert + 10_000
+      [0, 1, 0, karte.schlag_wert, 0]
     else
-      -karte.schlag_wert + 10_000
+      #-karte.schlag_wert + 10_000
+      [0, 1, 0, -karte.schlag_wert, 0]
     end
   end
 
