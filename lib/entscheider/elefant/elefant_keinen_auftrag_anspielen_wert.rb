@@ -6,6 +6,7 @@
 require_relative 'elefant_trumpf_anspielen_wert'
 require_relative 'elefant_multiple_auftrag_farbe_anspielen_wert'
 
+# Berechnet, wie gut eine Karte zum Anspielen ist, wenn sie kein Auftrag ist
 module ElefantKeinenAuftragAnspielenWert
   include ElefantTrumpfAnspielenWert
   include ElefantMultipleAuftragFarbeAnspielenWert

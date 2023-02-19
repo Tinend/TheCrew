@@ -9,7 +9,7 @@ module ElefantKeinenAuftragAbspielenWert
     eigene_auftraege_mit_farbe = auftraege_mit_farbe[0]
     fremde_auftraege_mit_farbe = auftraege_mit_farbe.sum - eigene_auftraege_mit_farbe
     if eigene_auftraege_mit_farbe.positive? && fremde_auftraege_mit_farbe.positive?
-      eigen_und_fremd_auftrag_stich_farbe_abspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
+      eigen_und_fremd_auftrag_stich_farbe_abspielen_wert # (karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
     elsif eigene_auftraege_mit_farbe.positive?
       eigene_auftrag_stich_farbe_abspielen_wert(karte: karte)
     elsif fremde_auftraege_mit_farbe.positive?
@@ -33,7 +33,8 @@ module ElefantKeinenAuftragAbspielenWert
     end
   end
 
-  def eigen_und_fremd_auftrag_stich_farbe_abspielen_wert(karte:, auftraege_mit_farbe:)
+  # (karte:, auftraege_mit_farbe:)
+  def eigen_und_fremd_auftrag_stich_farbe_abspielen_wert
     [0, 0, 0, 0, 0]
   end
 
@@ -41,7 +42,7 @@ module ElefantKeinenAuftragAbspielenWert
     if karte.farbe == stich.farbe
       keine_auftrag_stich_farbe_gleiche_farbe_abspielen_wert(karte: karte, stich: stich)
     else
-      keine_auftrag_stich_farbe_andere_farbe_abspielen_wert(karte: karte, stich: stich)
+      keine_auftrag_stich_farbe_andere_farbe_abspielen_wert(karte: karte)
     end
   end
 
@@ -69,7 +70,7 @@ module ElefantKeinenAuftragAbspielenWert
     end
   end
 
-  def keine_auftrag_stich_farbe_andere_farbe_abspielen_wert(karte:, stich:)
+  def keine_auftrag_stich_farbe_andere_farbe_abspielen_wert(karte:)
     if karte.trumpf?
       [0, 0, -2, 0, 0]
     elsif habe_noch_auftraege?

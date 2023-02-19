@@ -37,21 +37,33 @@ module ElefantNuetzliches
     end
   end
 
-  def spieler_kann_unterbieten?(karte:, spieler_index:)
+  def gibt_sicher_hoehere_karte(karte:, spieler_index:)
     @spiel_informations_sicht.sichere_karten(spieler_index).each do |test_karte|
       return true if karte.farbe == test_karte.farbe && karte.wert > test_karte.wert
     end
-    if karte.wert >= HOHE_KARTE_UNTERBIETEN
-      @spiel_informations_sicht.moegliche_karten(spieler_index).each do |test_karte|
-        return true if karte.farbe == test_karte.farbe && karte.wert > test_karte.wert
-      end
+  end
+
+  def gibt_vielleicht_hoehere_karte(karte:, spieler_index:)
+    @spiel_informations_sicht.moegliche_karten(spieler_index).each do |test_karte|
+      return true if karte.farbe == test_karte.farbe && karte.wert > test_karte.wert
     end
+  end
+
+  def gibt_vielleicht_kleinere_karte(karte:, spieler_index:)
     @spiel_informations_sicht.sichere_karten(spieler_index).each do |test_karte|
       return false if karte.farbe == test_karte.farbe && karte.wert < test_karte.wert
     end
     @spiel_informations_sicht.moegliche_karten(spieler_index).each do |test_karte|
       return false if karte.farbe == test_karte.farbe && karte.wert < test_karte.wert
     end
+  end
+
+  def spieler_kann_unterbieten?(karte:, spieler_index:)
+    return true if gibt_sicher_hoehere_karte(karte: karte, spieler_index: spieler_index) ||
+                   (karte.wert >= HOHE_KARTE_UNTERBIETEN &&
+                   gibt_vielleicht_hoehere_karte(karte: karte, spieler_index: spieler_index))
+    return false if gibt_vielleicht_kleinere_karte(karte: karte, spieler_index: spieler_index)
+
     true
   end
 
