@@ -41,21 +41,24 @@ module ElefantNuetzliches
     @spiel_informations_sicht.sichere_karten(spieler_index).each do |test_karte|
       return true if karte.farbe == test_karte.farbe && karte.wert > test_karte.wert
     end
+    false
   end
 
   def gibt_vielleicht_hoehere_karte(karte:, spieler_index:)
     @spiel_informations_sicht.moegliche_karten(spieler_index).each do |test_karte|
       return true if karte.farbe == test_karte.farbe && karte.wert > test_karte.wert
     end
+    false
   end
 
   def gibt_vielleicht_kleinere_karte(karte:, spieler_index:)
     @spiel_informations_sicht.sichere_karten(spieler_index).each do |test_karte|
-      return false if karte.farbe == test_karte.farbe && karte.wert < test_karte.wert
+      return true if karte.farbe == test_karte.farbe && karte.wert < test_karte.wert
     end
     @spiel_informations_sicht.moegliche_karten(spieler_index).each do |test_karte|
-      return false if karte.farbe == test_karte.farbe && karte.wert < test_karte.wert
+      return true if karte.farbe == test_karte.farbe && karte.wert < test_karte.wert
     end
+    false
   end
 
   def spieler_kann_unterbieten?(karte:, spieler_index:)

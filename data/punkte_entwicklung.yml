@@ -275,3 +275,25 @@
     punkte: 0
   - entscheider: Bakterie
     punkte: 0
+- - entscheider: Elefant
+    punkte: 20
+  - entscheider: Cowboy
+    punkte: 7
+  - entscheider: Schimpanse
+    punkte: 34
+  - entscheider: Reinwerfer
+    punkte: 6
+  - entscheider: Rhinoceros
+    punkte: 32
+  - entscheider: Hase
+    punkte: 1
+  - entscheider: Saeuger
+    punkte: 0
+  - entscheider: Archaeon
+    punkte: 0
+  - entscheider: ZufallsEntscheider
+    punkte: 0
+  - entscheider: GeschlosseneFormelBot
+    punkte: 0
+  - entscheider: Bakterie
+    punkte: 0
