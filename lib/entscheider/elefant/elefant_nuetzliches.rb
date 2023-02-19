@@ -55,7 +55,7 @@ module ElefantNuetzliches
   end
 
   def tiefster_eigener_auftrag_auf_fremder_hand_mit_farbe(farbe)
-    auftraege = @spiel_informations_sicht.auftraege_mit_farbe(farbe)[0].select{|auftrag|
+    auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[0].select{|auftrag|
       @spiel_informations_sicht.karten.all? {|karte| karte != auftrag.karte}
     }
     return nil if auftraege.empty?
@@ -88,5 +88,17 @@ module ElefantNuetzliches
   
   def habe_noch_auftraege?
     !@spiel_informations_sicht.unerfuellte_auftraege[0].empty?
+  end
+
+  def kann_ueberbieten?(karte:, spieler_index:)
+    (1..@spiel_informations_sicht.anzahl_spieler - 1).all? do |index|
+      if index == spieler_index
+        @spiel_informations_sicht.moegliche_karten(spieler_index).any? {|moegliche_karte|
+          moegliche_karte.wert >= 7 && moegliche_karte.farbe == karte.farbe
+        }
+      else
+        spieler_kann_unterbieten?(karte: Karte.new(farbe: karte.farbe, wert: 7), spieler_index: index)
+      end
+    end
   end
 end

@@ -38,7 +38,7 @@ module ElefantAnspielen
        kann_ueberbieten?(karte: karte, spieler_index: auftrag_index)
       [0, 1, 1, 0, 0]
     else
-      [0, -1, 0, 0, 0]
+      [0, -1, -1, 0, 0]
     end
   end
 
@@ -46,17 +46,5 @@ module ElefantAnspielen
     @spiel_informations_sicht.moegliche_karten(spieler_index).all? {|moegliche_karte|
       moegliche_karte.farbe != farbe
     }
-  end
-
-  def kann_ueberbieten?(karte:, spieler_index:)
-    (1..@spiel_informations_sicht.anzahl_spieler - 1).all? do |index|
-      if index == spieler_index
-        @spiel_informations_sicht.moegliche_karten(spieler_index).any? {|moegliche_karte|
-          moegliche_karte.wert >= 7 && moegliche_karte.farbe == karte.farbe
-        }
-      else
-        spieler_kann_unterbieten?(karte: Karte.new(farbe: karte.farbe, wert: 7), spieler_index: index)
-      end
-    end
   end
 end

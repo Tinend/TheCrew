@@ -70,7 +70,7 @@ module ElefantKeinenAuftragAbspielenWert
 
   def keine_auftrag_stich_farbe_andere_farbe_abspielen_wert(karte:, stich:)
     if karte.trumpf?
-      [0, 0, -1, 0, 0]
+      [0, 0, -2, 0, 0]
     elsif habe_noch_auftraege?
       eigene_auftraege_mit_verlorener_farbe_unterstuetzen_abspielen_wert(karte: karte)
     else
@@ -79,17 +79,23 @@ module ElefantKeinenAuftragAbspielenWert
   end
 
   def eigene_auftraege_mit_verlorener_farbe_unterstuetzen_abspielen_wert(karte:)
-    if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe).empty?
+    if @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].empty?
       [0, 0, 0, -karte.wert, 0]
     else
-      [0, 0, -1, -karte.wert, 0]
+      verlorene_farbe_mit_auftrag_abspielen_wert(karte: karte)
     end
-    #farb_laenge = berechne_farb_laenge(farbe: karte.farbe)
-    #if jeder_kann_unterbieten?(karte: karte)
-    #  (farb_laenge * 1000 - 1000).to_i + karte.wert
-    #else
-    #  (farb_laenge * 100 - 100).to_i + karte.wert
-    #end
+  end
+
+  def verlorene_farbe_mit_auftrag_abspielen_wert(karte:)
+    min_auftrag = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].min_by {|auftrag|
+      auftrag.karte.wert
+    }
+    max_karte = @spiel_informations_sicht.karten_mit_farbe(karte.farbe).max
+    if max_karte.wert >= min_auftrag.karte.wert
+      [0, 0, -1, -karte.wert, 0]
+    else
+      [0, 0, 1, 0, 0]
+    end
   end
 
   def fremde_auftraege_mit_verlorener_farbe_unterstuetzen_abspielen_wert(karte:)
@@ -98,7 +104,5 @@ module ElefantKeinenAuftragAbspielenWert
     else
       [0, 0, 1, karte.wert, 0]
     end
-    #farb_laenge = berechne_farb_laenge(farbe: karte.farbe)
-    #1200 - karte.wert * 100 - (farb_laenge * 200).to_i
   end
 end
