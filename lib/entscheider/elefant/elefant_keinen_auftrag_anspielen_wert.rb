@@ -1,21 +1,24 @@
 # coding: utf-8
+# frozen_string_literal: true
+
 # berechnet Wert für Karten anspielen, wenn
 # Karte kein Auftrag ist
 require_relative 'elefant_trumpf_anspielen_wert'
+require_relative 'elefant_multiple_auftrag_farbe_anspielen_wert'
 
 module ElefantKeinenAuftragAnspielenWert
-
   include ElefantTrumpfAnspielenWert
-  
+  include ElefantMultipleAuftragFarbeAnspielenWert
+
   def keinen_auftrag_anspielen_wert(karte)
     auftraege_mit_farbe = auftraege_mit_farbe_berechnen(karte.farbe)
     eigene_auftraege_mit_farbe = auftraege_mit_farbe[0]
     fremde_auftraege_mit_farbe = auftraege_mit_farbe.sum - eigene_auftraege_mit_farbe
-    if eigene_auftraege_mit_farbe > 0 && fremde_auftraege_mit_farbe > 0
-      eigen_und_fremd_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
-    elsif eigene_auftraege_mit_farbe > 0
+    if eigene_auftraege_mit_farbe.positive? && fremde_auftraege_mit_farbe.positive?
+      eigen_und_fremd_auftrag_farbe_anspielen_wert(karte: karte)
+    elsif eigene_auftraege_mit_farbe.positive?
       eigene_auftrag_farbe_anspielen_wert(karte: karte)
-    elsif fremde_auftraege_mit_farbe > 0
+    elsif fremde_auftraege_mit_farbe.positive?
       fremden_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
     else
       keine_auftrag_farbe_anspielen_wert(karte: karte)
@@ -63,19 +66,18 @@ module ElefantKeinenAuftragAnspielenWert
   end
 
   def fremden_auftrag_farbe_anspielen_wert(karte:, auftraege_mit_farbe:)
-    if (1..@spiel_informations_sicht.anzahl_spieler - 1).any? {|spieler_index|
-         auftraege_mit_farbe[spieler_index] > 0 &&
-           kann_ueberbieten?(karte: karte, spieler_index: spieler_index)
-       }
+    if (1..@spiel_informations_sicht.anzahl_spieler - 1).any? do |spieler_index|
+         (auftraege_mit_farbe[spieler_index]).positive? &&
+         kann_ueberbieten?(karte: karte, spieler_index: spieler_index)
+       end
       [0, 1, 0, 0, -karte.wert, 0]
     else
       [0, -1, 0, 0, -karte.wert, 0]
     end
   end
-    
-  def eigen_und_fremd_auftrag_farbe_anspielen_wert(karte:, auftraege_mit_farbe:)
-    #eigene_auftrag_farbe_anspielen_wert(karte: karte)
-    [0, 0, 0, 0, 0]
+
+  def eigen_und_fremd_auftrag_farbe_anspielen_wert(karte:)
+    multiple_auftrag_farbe_anspielen_wert(karte: karte)
   end
 
   def keine_auftrag_farbe_anspielen_wert(karte:)
@@ -93,12 +95,12 @@ module ElefantKeinenAuftragAnspielenWert
     if jeder_kann_unterbieten?(karte: karte)
       [0, 0, farb_laenge - 1, karte.wert, 0]
     else
-      [0, 0, farb_laenge * 0.1 - 0.1, karte.wert, 0]
+      [0, 0, (farb_laenge * 0.1) - 0.1, karte.wert, 0]
     end
   end
 
   def fremde_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte:)
     farb_laenge = berechne_farb_laenge(farbe: karte.farbe)
-    [0, 0, 12 - karte.wert - farb_laenge * 2, 0, 0]
+    [0, 0, 12 - karte.wert - (farb_laenge * 2), 0, 0]
   end
 end

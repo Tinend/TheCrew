@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 
 # berechnet Wert für Karten anspielen, wenn
 # Karte kein Auftrag ist
@@ -7,11 +8,11 @@ module ElefantKeinenAuftragAbspielenWert
     auftraege_mit_farbe = auftraege_mit_farbe_berechnen(stich.farbe)
     eigene_auftraege_mit_farbe = auftraege_mit_farbe[0]
     fremde_auftraege_mit_farbe = auftraege_mit_farbe.sum - eigene_auftraege_mit_farbe
-    if eigene_auftraege_mit_farbe > 0 && fremde_auftraege_mit_farbe > 0
+    if eigene_auftraege_mit_farbe.positive? && fremde_auftraege_mit_farbe.positive?
       eigen_und_fremd_auftrag_stich_farbe_abspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
-    elsif eigene_auftraege_mit_farbe > 0
+    elsif eigene_auftraege_mit_farbe.positive?
       eigene_auftrag_stich_farbe_abspielen_wert(karte: karte)
-    elsif fremde_auftraege_mit_farbe > 0
+    elsif fremde_auftraege_mit_farbe.positive?
       fremden_auftrag_stich_farbe_abspielen_wert(karte: karte, stich: stich)
     else
       keine_auftrag_stich_farbe_abspielen_wert(karte: karte, stich: stich)
@@ -23,7 +24,7 @@ module ElefantKeinenAuftragAbspielenWert
   end
 
   def fremden_auftrag_stich_farbe_abspielen_wert(karte:, stich:)
-    if stich.farbe == karte.farbe and karte.schlaegt?(stich.staerkste_karte)
+    if (stich.farbe == karte.farbe) && karte.schlaegt?(stich.staerkste_karte)
       [0, 0, -1, karte.schlag_wert, 0]
     elsif karte.schlaegt?(stich.staerkste_karte)
       [0, 0, -2, karte.schlag_wert, 0]
@@ -87,9 +88,9 @@ module ElefantKeinenAuftragAbspielenWert
   end
 
   def verlorene_farbe_mit_auftrag_abspielen_wert(karte:)
-    min_auftrag = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].min_by {|auftrag|
+    min_auftrag = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].min_by do |auftrag|
       auftrag.karte.wert
-    }
+    end
     max_karte = @spiel_informations_sicht.karten_mit_farbe(karte.farbe).max
     if max_karte.wert >= min_auftrag.karte.wert
       [0, 0, -1, -karte.wert, 0]

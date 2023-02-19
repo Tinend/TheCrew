@@ -1,12 +1,13 @@
 # coding: utf-8
+# frozen_string_literal: true
+
 # ein paar nützliche Funktionen, die an- und abspielen brauchen
 module ElefantNuetzliches
-
   HOHE_KARTE_UNTERBIETEN = 6
 
   def karte_ist_auftrag_von(karte)
     @spiel_informations_sicht.unerfuellte_auftraege.each_with_index do |auftrags_liste, index|
-      return index if auftrags_liste.any? {|auftrag| auftrag.karte == karte}
+      return index if auftrags_liste.any? { |auftrag| auftrag.karte == karte }
     end
     nil
   end
@@ -21,9 +22,9 @@ module ElefantNuetzliches
   end
 
   def auftraege_mit_farbe_berechnen(farbe)
-    @spiel_informations_sicht.unerfuellte_auftraege.collect.with_index {|auftrag_liste, index|
-      auftrag_liste.count {|auftrag| auftrag.farbe == farbe}
-    }
+    @spiel_informations_sicht.unerfuellte_auftraege.collect.with_index do |auftrag_liste, _index|
+      auftrag_liste.count { |auftrag| auftrag.farbe == farbe }
+    end
   end
 
   def hat_gespielt?(spieler_index:, stich:)
@@ -31,9 +32,9 @@ module ElefantNuetzliches
   end
 
   def jeder_kann_unterbieten?(karte:, end_index: @spiel_informations_sicht.anzahl_spieler - 1)
-    (1..end_index).all? {|spieler_index|
+    (1..end_index).all? do |spieler_index|
       spieler_kann_unterbieten?(karte: karte, spieler_index: spieler_index)
-    }
+    end
   end
 
   def spieler_kann_unterbieten?(karte:, spieler_index:)
@@ -55,19 +56,20 @@ module ElefantNuetzliches
   end
 
   def tiefster_eigener_auftrag_auf_fremder_hand_mit_farbe(farbe)
-    auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[0].select{|auftrag|
-      @spiel_informations_sicht.karten.all? {|karte| karte != auftrag.karte}
-    }
+    auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)[0].select do |auftrag|
+      @spiel_informations_sicht.karten.all? { |karte| karte != auftrag.karte }
+    end
     return nil if auftraege.empty?
-    auftraege.min_by {|auftrag|
+
+    auftraege.min_by do |auftrag|
       auftrag.karte.wert
-    }
+    end
   end
 
   def habe_hohe_karte_mit_farbe?(farbe:, wert:)
-    @spiel_informations_sicht.karten_mit_farbe(farbe).any? {|karte|
+    @spiel_informations_sicht.karten_mit_farbe(farbe).any? do |karte|
       karte.wert >= wert
-    }
+    end
   end
 
   def kurze_farbe?(farbe:)
@@ -80,12 +82,12 @@ module ElefantNuetzliches
 
   def berechne_farb_laenge(farbe:)
     laenge = @spiel_informations_sicht.karten_mit_farbe(farbe).length
-    verbliebene_karten = Karte.alle_mit_farbe(farbe).count {|karte|
+    verbliebene_karten = Karte.alle_mit_farbe(farbe).count do |karte|
       !@spiel_informations_sicht.ist_gegangen?(karte)
-    }
+    end
     laenge * @spiel_informations_sicht.anzahl_spieler.to_f / verbliebene_karten
   end
-  
+
   def habe_noch_auftraege?
     !@spiel_informations_sicht.unerfuellte_auftraege[0].empty?
   end
@@ -93,9 +95,9 @@ module ElefantNuetzliches
   def kann_ueberbieten?(karte:, spieler_index:)
     (1..@spiel_informations_sicht.anzahl_spieler - 1).all? do |index|
       if index == spieler_index
-        @spiel_informations_sicht.moegliche_karten(spieler_index).any? {|moegliche_karte|
+        @spiel_informations_sicht.moegliche_karten(spieler_index).any? do |moegliche_karte|
           moegliche_karte.wert >= 7 && moegliche_karte.farbe == karte.farbe
-        }
+        end
       else
         spieler_kann_unterbieten?(karte: Karte.new(farbe: karte.farbe, wert: 7), spieler_index: index)
       end

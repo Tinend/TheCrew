@@ -10,7 +10,7 @@ module ElefantAnspielen
   include ElefantKeinenAuftragAnspielenWert
 
   def anspielen(waehlbare_karten)
-    waehlbare_karten.max_by { |karte| anspielen_wert(karte)}
+    waehlbare_karten.max_by { |karte| anspielen_wert(karte) }
   end
 
   # wie gut eine Karte zum Anspielen geeignet ist
@@ -18,7 +18,7 @@ module ElefantAnspielen
     karten_auftrag_index = karte_ist_auftrag_von(karte)
     if karten_auftrag_index.nil?
       keinen_auftrag_anspielen_wert(karte)
-    elsif karten_auftrag_index == 0
+    elsif karten_auftrag_index.zero?
       eigenen_auftrag_anspielen_wert(karte)
     else
       fremden_auftrag_anspielen_wert(karte: karte, auftrag_index: karten_auftrag_index)
@@ -43,8 +43,8 @@ module ElefantAnspielen
   end
 
   def ist_blank_auf_farbe?(farbe:, spieler_index:)
-    @spiel_informations_sicht.moegliche_karten(spieler_index).all? {|moegliche_karte|
+    @spiel_informations_sicht.moegliche_karten(spieler_index).all? do |moegliche_karte|
       moegliche_karte.farbe != farbe
-    }
+    end
   end
 end

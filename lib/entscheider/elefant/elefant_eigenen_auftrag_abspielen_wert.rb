@@ -1,4 +1,6 @@
 # coding: utf-8
+# frozen_string_literal: true
+
 # berechnet Wert für Karten anspielen, wenn
 # Karte ein eigener Auftrag ist
 module ElefantEigenenAuftragAbspielenWert

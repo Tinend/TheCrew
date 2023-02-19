@@ -21,15 +21,15 @@ module ElefantAbspielen
   # wie gut eine Karte zum drauflegen geeignet ist
   def abspielen_wert(karte:, stich:)
     spieler_index = finde_auftrag_in_stich(stich)
-    if !spieler_index.nil?
-      auftrag_gelegt_abspielen_wert(karte: karte, stich: stich, spieler_index: spieler_index)
-    else
+    if spieler_index.nil?
       kein_auftrag_gelegt_abspielen_wert(karte: karte, stich: stich)
+    else
+      auftrag_gelegt_abspielen_wert(karte: karte, spieler_index: spieler_index)
     end
   end
-  
-  def auftrag_gelegt_abspielen_wert(karte:, stich:, spieler_index:)
-    if spieler_index == 0
+
+  def auftrag_gelegt_abspielen_wert(karte:, spieler_index:)
+    if spieler_index.zero?
       [0, 1, 0, karte.schlag_wert, 0]
     else
       [0, 1, 0, -karte.schlag_wert, 0]
@@ -40,11 +40,10 @@ module ElefantAbspielen
     karten_auftrag_index = karte_ist_auftrag_von(karte)
     if karten_auftrag_index.nil?
       keinen_auftrag_abspielen_wert(karte: karte, stich: stich)
-    elsif karten_auftrag_index == 0
+    elsif karten_auftrag_index.zero?
       eigenen_auftrag_abspielen_wert(karte: karte, stich: stich)
     else
       fremden_auftrag_abspielen_wert(karte: karte, stich: stich, ziel_spieler_index: karten_auftrag_index)
     end
   end
-
 end

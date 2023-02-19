@@ -12,7 +12,7 @@ RSpec.describe StrukturierteBerichteErsteller do
 
   # rubocop:disable RSpec/MultipleExpectations
   xit 'hat den gleichen generierten und geladenen. Wenn dies fehlschlägt, einfach ' \
-     'bin/erstelle_strukturierten_bericht ausführen und eventuell mit git diff die Diffs anschauen.' do
+      'bin/erstelle_strukturierten_bericht ausführen und eventuell mit git diff die Diffs anschauen.' do
     erstellt = ersteller.erstelle_bericht
     geladen = ersteller.lade_bericht
     expect(erstellt[:punkte_bericht]).to eq(geladen[:punkte_bericht])

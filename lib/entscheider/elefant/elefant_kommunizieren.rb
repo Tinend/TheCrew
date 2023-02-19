@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'elefant_kommunikation'
 
 # handelt die Kommunikation vom Elefanten
@@ -6,7 +8,7 @@ module ElefantKommunizieren
     elefant_kommunikation = nicht_kommunizieren_kommunikation
     elefant_kommunikation.verbessere(karte_gefaerdet_auftraege_kommunizieren(kommunizierbares))
   end
-  
+
   def karte_gefaerdet_auftraege_kommunizieren(kommunizierbares)
     elefant_kommunikation = nicht_kommunizieren_kommunikation
     auftraege_von_anderen = @spiel_informations_sicht.unerfuellte_auftraege[1..].flatten
