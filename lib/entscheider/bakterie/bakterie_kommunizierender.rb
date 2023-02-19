@@ -107,7 +107,7 @@ module BakterieKommunizierender
         auftrag_unerfuellt.karte == karte
       end
     end
-    karten.length.zero? || karten.max.wert <= 5 || karten.max.wert < auftrag.karte.wert
+    karten.empty? || karten.max.wert <= 5 || karten.max.wert < auftrag.karte.wert
   end
 
   def schwache_farbe_kommunizieren(auftrag:, kommunizierbares:)

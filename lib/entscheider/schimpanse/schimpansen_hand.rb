@@ -34,7 +34,7 @@ class SchimpansenHand
     #  @min_schlag_werte[@stich.farbe][karte.schlag_wert] = 1
     #  @max_schlag_werte[@stich.farbe] = Array.new(15, 0)
     #  @max_schlag_werte[@stich.farbe][karte.schlag_wert] = 1
-    if @stich.length.zero? || karte.schlaegt?(@stich.staerkste_karte)
+    if @stich.empty? || karte.schlaegt?(@stich.staerkste_karte)
       @min_schlag_werte[farbe] = Array.new(15, 0)
       @min_schlag_werte[farbe][karte.schlag_wert] = 1
       @max_schlag_werte[farbe] = Array.new(15, 0)
@@ -48,7 +48,7 @@ class SchimpansenHand
   end
 
   def stichfarbe_berechnen(karte)
-    if @stich.length.zero?
+    if @stich.empty?
       karte.farbe
     else
       @stich.farbe

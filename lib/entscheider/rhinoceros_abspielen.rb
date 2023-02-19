@@ -34,7 +34,7 @@ module RhinocerosAbspielen
       - 100 - karte._wert
     elsif karte.schlaegt?(stich.staerkste_karte)
       - 10 - karte.wert
-    elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length.zero?
+    elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].empty?
       karte.wert
     else
       - karte.wert

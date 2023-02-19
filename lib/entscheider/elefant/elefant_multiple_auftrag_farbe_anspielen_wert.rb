@@ -12,7 +12,7 @@ module ElefantMultipleAuftragFarbeAnspielenWert
   end
 
   def will_blanken_auftrag(farbe: karte.farbe)
-    p @spiel_informations_sicht.kommunikationen
+    @spiel_informations_sicht.kommunikationen
   end
   # rubocop:enable Lint/UnusedMethodArgument
 end

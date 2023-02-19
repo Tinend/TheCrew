@@ -85,7 +85,7 @@ module RhinocerosAnspielen
     # puts "#{karte} 7"
     if !@spiel_informations_sicht.unerfuellte_auftraege_nicht_auf_eigener_hand_mit_farbe(karte.farbe)[0].empty?
       auftrag_farbe_mit_holbarem_auftrag_anspielen(karte)
-    elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].length.zero?
+    elsif @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[0].empty?
       30 - karte.wert
     elsif !@spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(karte.farbe)[1..].flatten.empty?
       30 - karte.wert

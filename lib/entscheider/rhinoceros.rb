@@ -17,7 +17,7 @@ class Rhinoceros < Entscheider
   include RhinocerosAnspielen
 
   def waehle_karte(stich, waehlbare_karten)
-    if stich.karten.length.zero?
+    if stich.karten.empty?
       anspielen(waehlbare_karten)
     else
       abspielen(stich, waehlbare_karten)
