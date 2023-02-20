@@ -198,8 +198,8 @@ RSpec.describe Elefant do
     expect(karte).to eq(rote_neun)
   end
 
-  # rubocop:disable RSpec/PendingWithoutReason
-  xit 'Spielt den Auftrag rote Neun aus, auch wenn ein anderer Spieler einen roten Auftrag hat' do
+  it 'Spielt den Auftrag rote Neun aus, auch wenn ein anderer Spieler einen roten Auftrag hat',
+     skip: 'funktioniert noch nicht' do
     spiel_information.verteil_karten([[Karte.max_trumpf, rote_neun, gruene_drei], [], [], [], []])
     spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_fuenf_auftrag)
     spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_sechs_auftrag)
@@ -208,7 +208,7 @@ RSpec.describe Elefant do
     expect(karte).to eq(rote_neun)
   end
 
-  xit 'Spielt rote vier, wenn fremder, roter Auftrag blank ist' do
+  it 'Spielt rote vier, wenn fremder, roter Auftrag blank ist', skip: 'funktioniert noch nicht' do
     spiel_information.verteil_karten([[Karte.max_trumpf, rote_neun, rote_vier, gruene_drei], [], [rote_sechs], [], []])
     spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_fuenf_auftrag)
     spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_sechs_auftrag)
@@ -218,6 +218,5 @@ RSpec.describe Elefant do
     karte = spieler.waehle_karte(leere_stich_sicht)
     expect(karte).to eq(rote_vier)
   end
-  # rubocop:enable RSpec/PendingWithoutReason
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers
