@@ -3,8 +3,9 @@
 # Superklasse von allen Entscheidern, die jeweils einen Bot oder menschlichen darstellen und spielrelevante Infos
 # bekommen und Entscheidungen treffen.
 class Entscheider
-  def initialize(zufalls_generator:)
+  def initialize(zufalls_generator:, statistiker:)
     @zufalls_generator = zufalls_generator
+    @statistiker = statistiker
   end
 
   def waehl_auftrag(auftraege)

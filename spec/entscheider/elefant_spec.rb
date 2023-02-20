@@ -8,11 +8,12 @@ require 'stich'
 require 'spieler'
 require 'spiel_information'
 require 'auftrag'
+require 'statistiker'
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe Elefant do
   subject(:elefant) do
-    elefant = described_class.new(zufalls_generator: Random.new(42))
+    elefant = described_class.new(zufalls_generator: Random.new(42), statistiker: Statistiker.new)
     elefant.sehe_spiel_informations_sicht(spiel_informations_sicht)
     elefant
   end

@@ -79,6 +79,8 @@ class Cowboy < Entscheider
   end
 
   def egoistisch_anspielen(waehlbare_karten)
+    @statistiker.erhoehe_zaehler(:egositisch_anspielen)
+
     # TODO: Wissentlich Aufträge zerstören verhindern.
     durchbringbare = durchbringbare_auftrags_karten(waehlbare_karten)
     durchbringbare.sample(random: @zufalls_generator) unless durchbringbare.empty?
@@ -106,6 +108,8 @@ class Cowboy < Entscheider
   end
 
   def altruistisch_anspielen(waehlbare_karten)
+    @statistiker.erhoehe_zaehler(:altruistisch_anspielen)
+
     hilfreiche_karten = hilfreich_angespielte_auftrags_karten(waehlbare_karten)
     hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
 
@@ -120,6 +124,8 @@ class Cowboy < Entscheider
   end
 
   def toetlichen_bleibenden_stich_abspielen(stich, waehlbare_karten)
+    @statistiker.erhoehe_zaehler(:toetlichen_bleibenden_stich_abspielen)
+
     # Wenn möglich eine Auftragskarte rein schmeissen.
     hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
     return hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
@@ -165,6 +171,8 @@ class Cowboy < Entscheider
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def toetlichen_genommenen_stich_abspielen(stich, nehmen_muesser, waehlbare_karten)
+    @statistiker.erhoehe_zaehler(:toetlichen_genommenen_stich_abspielen)
+
     # Wenn wir selbst nehmen müssen, machen wir das.
     if nehmen_muesser.zero?
       # Wenn wir eine gute Option haben, machen wir das.
@@ -267,6 +275,8 @@ class Cowboy < Entscheider
   # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
   # rubocop:disable Metrics/CyclomaticComplexity
   def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
+    @statistiker.erhoehe_zaehler(:kleinstes_uebel)
+
     # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist und auch nicht schlägt.
     nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
     return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
@@ -297,9 +307,5 @@ class Cowboy < Entscheider
     # Wenn dieser Punkt erreicht wird, haben wir eh schon verloren. Es ist eigentlich egal, was wir hier machen.
     waehlbare_karten.sample(random: @zufalls_generator)
   end
-
   # rubocop:enable Metrics/CyclomaticComplexity
-  def waehle_kommunikation(kommunizierbares)
-    (kommunizierbares & gefaehrliche_hohe_unausweichliche_karten).sample(random: @zufalls_generator)
-  end
 end

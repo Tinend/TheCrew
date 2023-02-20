@@ -210,8 +210,4 @@ class Reinwerfer < Entscheider
   end
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
-
-  def waehle_kommunikation(kommunizierbares)
-    (kommunizierbares & gefaehrliche_hohe_unausweichliche_karten).sample(random: @zufalls_generator)
-  end
 end

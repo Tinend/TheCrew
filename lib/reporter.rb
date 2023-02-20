@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
+require_relative 'statistiker'
+
 # Diese Klasse berichtet über alles, was im Spiel passiert.
 class Reporter
+  def statistiker
+    @statistiker ||= Statistiker.new
+  end
+
+  def resette_statistiker
+    @statistiker = nil
+  end
+
   def berichte_start_situation(karten:, auftraege:)
     raise NotImplementedError
   end
@@ -19,6 +29,10 @@ class Reporter
   end
 
   def berichte_verloren
+    raise NotImplementedError
+  end
+
+  def berichte_statistiken
     raise NotImplementedError
   end
 

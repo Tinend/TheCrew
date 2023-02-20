@@ -18,7 +18,7 @@ class Spieler
     @spiel_informations_sicht.eigene_auftraege
   end
 
-  def kommunizierbares
+  def waehlbare_kommunikationen
     gegangene_stiche = @spiel_informations_sicht.stiche.length
     karten.reject(&:trumpf?).group_by(&:farbe).flat_map do |_k, v|
       max = v.max_by(&:wert)
@@ -35,8 +35,15 @@ class Spieler
   def waehle_kommunikation
     return unless @kann_kommunizieren
 
-    kommunikation = @entscheider.waehle_kommunikation(kommunizierbares)
-    @kann_kommunizieren = false if kommunikation
+    waehlbare = waehlbare_kommunikationen
+    kommunikation = @entscheider.waehle_kommunikation(waehlbare)
+    return unless kommunikation
+
+    unless waehlbare.include?(kommunikation)
+      raise 'Entscheider hat eine unmögliche Kommunikation gewaehlt.' \
+            "Waehlbare: #{waehlbare.join(' ')}; gewaehlt: #{kommunikation}"
+    end
+    @kann_kommunizieren = false
     kommunikation
   end
 

@@ -102,4 +102,11 @@ module GefaehrlicheKartenKommunizierender
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/AbcSize
+
+  def waehle_kommunikation(kommunizierbares)
+    gute_kommunikation = kommunizierbares.filter do |k|
+      !k.hoechste? && gefaehrliche_hohe_unausweichliche_karten.include?(k.karte)
+    end
+    gute_kommunikation.sample(random: @zufalls_generator)
+  end
 end

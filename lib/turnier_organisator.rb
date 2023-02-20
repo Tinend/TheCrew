@@ -26,6 +26,7 @@ module TurnierOrganisator
     entscheider_klassen.each do |entscheider_klasse|
       persoenlicher_zufalls_generator = zufalls_generator.dup
       punkte = 0
+      reporter.resette_statistiker
       turnier_einstellungen.anzahl_spiele.times do
         spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: turnier_einstellungen.anzahl_spieler,
                                               zufalls_generator: persoenlicher_zufalls_generator,
@@ -36,6 +37,7 @@ module TurnierOrganisator
         punkte += 1 if resultat == :gewonnen
       end
       reporter.berichte_punkte(entscheider: entscheider_klasse, punkte: punkte)
+      reporter.berichte_statistiken
     end
   end
 end

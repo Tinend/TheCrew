@@ -14,7 +14,8 @@ module SpielErsteller
   def self.erstelle_spiel(anzahl_spieler:, entscheider_klasse:, zufalls_generator:, anzahl_auftraege:, reporter:)
     spiel_information = SpielInformation.new(anzahl_spieler: anzahl_spieler)
     spieler = Array.new(anzahl_spieler) do |i|
-      entscheider = entscheider_klasse.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)))
+      entscheider = entscheider_klasse.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)),
+                                           statistiker: reporter.statistiker)
       Spieler.new(entscheider: entscheider, spiel_informations_sicht: spiel_information.fuer_spieler(i))
     end
     karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spiel_information: spiel_information)

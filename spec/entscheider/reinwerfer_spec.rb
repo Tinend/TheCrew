@@ -5,6 +5,9 @@ require 'spieler'
 require 'karte'
 require 'auftrag'
 require 'farbe'
+require 'stich'
+require 'spiel_information'
+require 'statistiker'
 
 def lass_reinwerfer_karte_waehlen(spieler, spiel_information, karten, stich_sicht)
   # Wenn der Spieler die schwarze 4 nicht kriegt, geben wir sie einem anderen Spieler
@@ -12,6 +15,14 @@ def lass_reinwerfer_karte_waehlen(spieler, spiel_information, karten, stich_sich
   evtl_mit_max_trumpf = karten.include?(Karte.max_trumpf) ? [] : [Karte.max_trumpf]
   spiel_information.verteil_karten([karten, [], [], [], evtl_mit_max_trumpf])
   spieler.waehle_karte(stich_sicht)
+end
+
+def lass_reinwerfer_kommunikation_waehlen(spieler, spiel_information, karten)
+  # Wenn der Spieler die schwarze 4 nicht kriegt, geben wir sie einem anderen Spieler
+  # damit die Kapitäns Berechnung klappt.
+  evtl_mit_max_trumpf = karten.include?(Karte.max_trumpf) ? [] : [Karte.max_trumpf]
+  spiel_information.verteil_karten([karten, [], [], [], evtl_mit_max_trumpf])
+  spieler.waehle_kommunikation&.karte
 end
 
 def aktivierter_auftrag(auftrags_karte)
@@ -30,7 +41,7 @@ end
 
 RSpec.describe Reinwerfer do
   subject(:reinwerfer) do
-    reinwerfer = described_class.new(zufalls_generator: Random.new(42))
+    reinwerfer = described_class.new(zufalls_generator: Random.new(42), statistiker: Statistiker.new)
     reinwerfer.sehe_spiel_informations_sicht(spiel_informations_sicht)
     reinwerfer
   end
@@ -246,5 +257,40 @@ RSpec.describe Reinwerfer do
                                    ))
     karte = lass_reinwerfer_karte_waehlen(spieler, spiel_information, [gruene(2), gruene(7)], standard_stich_sicht)
     expect(karte).to eq(gruene(7))
+  end
+
+  it 'kommuniziert eine blanke 9, wo jemand anderes einen Auftrag davon hat' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(3)))
+    karte = lass_reinwerfer_kommunikation_waehlen(spieler, spiel_information, [gruene(9)])
+    expect(karte).to eq(gruene(9))
+  end
+
+  it 'kommuniziert eine nicht-blanke 9 nicht, wenn jemand anderes einen Auftrag davon hat' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(3)))
+    karte = lass_reinwerfer_kommunikation_waehlen(spieler, spiel_information, [gruene(2), gruene(9)])
+    expect(karte).to be_nil
+  end
+
+  it 'kommuniziert eine blanke 9 nicht, wenn niemand anderes einen Auftrag davon hat' do
+    karte = lass_reinwerfer_kommunikation_waehlen(spieler, spiel_information, [gruene(9)])
+    expect(karte).to be_nil
+  end
+
+  it 'kommuniziert eine blanke 8, wo jemand anderes einen Auftrag davon hat' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(3)))
+    karte = lass_reinwerfer_kommunikation_waehlen(spieler, spiel_information, [gruene(8)])
+    expect(karte).to eq(gruene(8))
+  end
+
+  it 'kommuniziert eine blanke 8 nicht, wo jemand anderes einen 9er Auftrag davon hat' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(9)))
+    karte = lass_reinwerfer_kommunikation_waehlen(spieler, spiel_information, [gruene(8)])
+    expect(karte).to be_nil
+  end
+
+  it 'kommuniziert eine tiefste 8, wo jemand anderes einen Auftrag davon hat' do
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: aktivierter_auftrag(gruene(3)))
+    karte = lass_reinwerfer_kommunikation_waehlen(spieler, spiel_information, [gruene(8), gruene(9)])
+    expect(karte).to eq(gruene(8))
   end
 end

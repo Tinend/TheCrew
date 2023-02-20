@@ -42,4 +42,8 @@ class PutsReporter < Reporter
   def berichte_verloren
     puts 'Leider wurde das Spiel verloren'
   end
+
+  def berichte_statistiken
+    puts @statistiker.statistiken
+  end
 end
