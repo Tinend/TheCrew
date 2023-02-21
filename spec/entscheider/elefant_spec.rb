@@ -13,7 +13,8 @@ require 'statistiker'
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe Elefant do
   subject(:elefant) do
-    elefant = described_class.new(zufalls_generator: Random.new(42), statistiker: Statistiker.new)
+    elefant = described_class.new(zufalls_generator: Random.new(42),
+                                  zaehler_manager: Statistiker.new.neuer_zaehler_manager)
     elefant.sehe_spiel_informations_sicht(spiel_informations_sicht)
     elefant
   end

@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 require_relative 'reporter'
+require_relative 'statistiken_putser'
 
 # Diese Klasse berichtet Sachen, die im Spiel passieren, via `puts`.
 class PutsReporter < Reporter
+  include StatistikenPutser
+
   def berichte_start_situation(karten:, auftraege:)
     raise ArgumentError if karten.length != auftraege.length
 
@@ -43,7 +46,7 @@ class PutsReporter < Reporter
     puts 'Leider wurde das Spiel verloren'
   end
 
-  def berichte_statistiken
-    puts @statistiker.statistiken
+  def berichte_spiel_statistiken(statistiken)
+    berichte_statistiken('Spiel', statistiken)
   end
 end

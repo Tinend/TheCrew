@@ -16,7 +16,7 @@ RSpec.describe Spieler do
   end
 
   let(:entscheider) do
-    ZufallsEntscheider.new(zufalls_generator: Random.new(42), statistiker: Statistiker.new)
+    ZufallsEntscheider.new(zufalls_generator: Random.new(42), zaehler_manager: Statistiker.new.neuer_zaehler_manager)
   end
   let(:spiel_information) { SpielInformation.new(anzahl_spieler: 3) }
   let(:roter_stich) do

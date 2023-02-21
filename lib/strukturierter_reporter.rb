@@ -65,7 +65,9 @@ class StrukturierterReporter < Reporter
     @spiel_berichte.last['resultat'] = 'verloren'
   end
 
-  def berichte_statistiken; end
+  def berichte_spiel_statistiken(statistiken); end
+
+  def berichte_gesamt_statistiken(gesamt_statistiken:, gewonnen_statistiken:, verloren_statistiken:); end
 
   def berichte_punkte(entscheider:, punkte:)
     @spiel_berichte_pro_entscheider[entscheider.to_s] = @spiel_berichte
