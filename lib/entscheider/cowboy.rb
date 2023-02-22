@@ -84,16 +84,28 @@ class Cowboy < Entscheider
 
     # TODO: Wissentlich Aufträge zerstören verhindern.
     durchbringbare = durchbringbare_auftrags_karten(waehlbare_karten)
-    durchbringbare.sample(random: @zufalls_generator) unless durchbringbare.empty?
+    unless durchbringbare.empty?
+      @zaehler_manager.erhoehe_zaehler(:durchbringbare)
+      durchbringbare.sample(random: @zufalls_generator)
+    end
 
     fordernde = auftrag_fordernde_karten(waehlbare_karten)
-    max_karte(fordernde) unless fordernde.empty?
+    unless fordernde.empty?
+      @zaehler_manager.erhoehe_zaehler(:fordernde)
+      return max_karte(fordernde)
+    end
 
     farb_ziehende = farbe_ziehende_karten(waehlbare_karten)
-    max_karte(farb_ziehende) unless farb_ziehende.empty?
+    unless farb_ziehende.empty?
+      @zaehler_manager.erhoehe_zaehler(:farb_ziehende)
+      return max_karte(farb_ziehende)
+    end
 
     alles_ziehende = alles_ziehende_karten(waehlbare_karten)
-    max_karte(farb_ziehende) unless alles_ziehende.empty?
+    unless alles_ziehende.empty?
+      @zaehler_manager.erhoehe_zaehler(:alles_ziehende)      
+      max_karte(alles_ziehende)
+    end
 
     altruistisch_anspielen(waehlbare_karten)
   end
@@ -161,7 +173,7 @@ class Cowboy < Entscheider
 
   def min_karte(karten)
     nicht_trumpfs = nicht_truempfe(karten)
-    return karten.max_by(&:wert) if nicht_trumpfs.empty?
+    return karten.min_by(&:wert) if nicht_trumpfs.empty?
 
     min_wert = nicht_trumpfs.map(&:wert).min
     nicht_trumpfs.select { |k| k.wert == min_wert }.sample(random: @zufalls_generator)
