@@ -5,6 +5,7 @@ require_relative 'elefant_nuetzliches'
 require_relative 'elefant_keinen_auftrag_abspielen_wert'
 require_relative 'elefant_fremden_auftrag_abspielen_wert'
 require_relative 'elefant_eigenen_auftrag_abspielen_wert'
+require_relative 'elefant_auftrag_gelegt_abspielen_wert'
 
 # gehört zu Elefant
 # legt eine Karte auf einen Stich
@@ -13,6 +14,7 @@ module ElefantAbspielen
   include ElefantKeinenAuftragAbspielenWert
   include ElefantFremdenAuftragAbspielenWert
   include ElefantEigenenAuftragAbspielenWert
+  include ElefantAuftragGelegtAbspielenWert
 
   def abspielen(stich, waehlbare_karten)
     waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
@@ -24,15 +26,7 @@ module ElefantAbspielen
     if spieler_index.nil?
       kein_auftrag_gelegt_abspielen_wert(karte: karte, stich: stich)
     else
-      auftrag_gelegt_abspielen_wert(karte: karte, spieler_index: spieler_index)
-    end
-  end
-
-  def auftrag_gelegt_abspielen_wert(karte:, spieler_index:)
-    if spieler_index.zero?
-      [0, 1, 0, karte.schlag_wert, 0]
-    else
-      [0, 1, 0, -karte.schlag_wert, 0]
+      auftrag_gelegt_abspielen_wert(stich: stich, karte: karte, spieler_index: spieler_index)
     end
   end
 
