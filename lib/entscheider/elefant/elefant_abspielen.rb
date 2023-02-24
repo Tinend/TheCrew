@@ -17,6 +17,7 @@ module ElefantAbspielen
   include ElefantAuftragGelegtAbspielenWert
 
   def abspielen(stich, waehlbare_karten)
+    # waehlbare_karten.max_by { |karte| x = abspielen_wert(karte: karte, stich: stich); puts karte; p x}
     waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
   end
 

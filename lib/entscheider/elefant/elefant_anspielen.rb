@@ -27,7 +27,7 @@ module ElefantAnspielen
 
   def eigenen_auftrag_anspielen_wert(karte)
     if jeder_kann_unterbieten?(karte: karte)
-      [0, 1, 2, karte.wert, 0]
+      [0, 1, 4, karte.wert, 0]
     else
       [0, -1, 0, 0, 0]
     end

@@ -231,8 +231,29 @@ RSpec.describe Elefant do
     stich = Stich.new
     stich.legen(karte: rote_sechs, spieler_index: 4)
     stich_sicht = stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler)
-    karte = spieler.waehle_karte(leere_stich_sicht)
+    karte = spieler.waehle_karte(stich_sicht)
     expect(karte).to eq(rote_drei)
+  end
+
+  it 'Holt einen liegenden Auftrag' do
+    spiel_information.verteil_karten([[rote_neun, rote_drei], [], [Karte.max_trumpf], [], []])
+    spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_sechs_auftrag)
+    stich = Stich.new
+    stich.legen(karte: rote_sechs, spieler_index: 4)
+    stich_sicht = stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler)
+    karte = spieler.waehle_karte(stich_sicht)
+    expect(karte).to eq(rote_neun)
+  end
+
+  it 'Holt einen liegenden Auftrag, auch wenn er andere Aufträge auf der Hand hat' do
+    spiel_information.verteil_karten([[rote_neun, rote_drei, rote_zwei], [], [Karte.max_trumpf], [], []])
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_zwei_auftrag)
+    spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_sechs_auftrag)
+    stich = Stich.new
+    stich.legen(karte: rote_sechs, spieler_index: 4)
+    stich_sicht = stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler)
+    karte = spieler.waehle_karte(stich_sicht)
+    expect(karte).to eq(rote_neun)
   end
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers

@@ -5,10 +5,9 @@
 # wenn mehrere Spieler Aufträge von dieser Farbe hat,
 # aber sie selber kein Auftrag ist
 module ElefantMultipleAuftragFarbeAnspielenWert
-  # rubocop:disable Lint/UnusedMethodArgument
   def multiple_auftrag_farbe_anspielen_wert(karte:, auftraege_mit_farbe:)
     spieler_index = will_blanken_auftrag(farbe: karte.farbe)
-    if spieler_index.nil?
+    if spieler_index.nil? || spieler_index.zero?
       eigene_auftrag_farbe_anspielen_wert(karte: karte)
     else
       fremden_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
@@ -16,14 +15,19 @@ module ElefantMultipleAuftragFarbeAnspielenWert
   end
 
   def will_blanken_auftrag(farbe:)
-    @spiel_informations_sicht.kommunikationen.each_with_index do |kommunikation, spieler_index|
-      if kommunikation != nil && spieler_index != 0 && kommunikation.art == :einzige &&
-         kommunikation.karte.farbe == farbe &&
-         !@spiel_informations_sicht.ist_gegangen?(kommunikation.karte)
-        return spieler_index
-      end
+    @spiel_informations_sicht.kommunikationen.each_with_index do |kommunikation, index|
+      next unless index != 0 &&
+                  einzige_farbkorrekte_aktive_kommunikation?(kommunikation: kommunikation, farbe: farbe)
+
+      spieler_index = karte_ist_auftrag_von(kommunikation.karte)
+      return spieler_index unless spieler_index.nil?
     end
     nil
   end
-  # rubocop:enable Lint/UnusedMethodArgument
+
+  def einzige_farbkorrekte_aktive_kommunikation?(kommunikation:, farbe:)
+    !kommunikation.nil? && kommunikation.art == :einzige &&
+      kommunikation.karte.farbe == farbe &&
+      !@spiel_informations_sicht.ist_gegangen?(kommunikation.karte)
+  end
 end
