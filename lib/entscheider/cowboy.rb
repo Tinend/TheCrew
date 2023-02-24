@@ -14,6 +14,7 @@ require_relative 'spiel_informations_sicht_benutzender'
 # Entscheider, der immer zufällig entschiedet, was er spielt.
 # Wenn er eine Karte reinwerfen kann, die jemand anderem hilft,
 # tut er das.
+# rubocop:disable Metrics/ClassLength
 class Cowboy < Entscheider
   include SaeugerAuftragNehmer
   include SpielInformationsSichtBenutzender
@@ -79,7 +80,7 @@ class Cowboy < Entscheider
   end
 
   def egoistisch_anspielen(waehlbare_karten)
-    @statistiker.erhoehe_zaehler(:egositisch_anspielen)
+    @zaehler_manager.erhoehe_zaehler(:egositisch_anspielen)
 
     # TODO: Wissentlich Aufträge zerstören verhindern.
     durchbringbare = durchbringbare_auftrags_karten(waehlbare_karten)
@@ -108,7 +109,7 @@ class Cowboy < Entscheider
   end
 
   def altruistisch_anspielen(waehlbare_karten)
-    @statistiker.erhoehe_zaehler(:altruistisch_anspielen)
+    @zaehler_manager.erhoehe_zaehler(:altruistisch_anspielen)
 
     hilfreiche_karten = hilfreich_angespielte_auftrags_karten(waehlbare_karten)
     hilfreiche_karten.sample(random: @zufalls_generator) unless hilfreiche_karten.empty?
@@ -124,7 +125,7 @@ class Cowboy < Entscheider
   end
 
   def toetlichen_bleibenden_stich_abspielen(stich, waehlbare_karten)
-    @statistiker.erhoehe_zaehler(:toetlichen_bleibenden_stich_abspielen)
+    @zaehler_manager.erhoehe_zaehler(:toetlichen_bleibenden_stich_abspielen)
 
     # Wenn möglich eine Auftragskarte rein schmeissen.
     hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
@@ -171,7 +172,7 @@ class Cowboy < Entscheider
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def toetlichen_genommenen_stich_abspielen(stich, nehmen_muesser, waehlbare_karten)
-    @statistiker.erhoehe_zaehler(:toetlichen_genommenen_stich_abspielen)
+    @zaehler_manager.erhoehe_zaehler(:toetlichen_genommenen_stich_abspielen)
 
     # Wenn wir selbst nehmen müssen, machen wir das.
     if nehmen_muesser.zero?
@@ -223,15 +224,21 @@ class Cowboy < Entscheider
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def abspielen(stich, waehlbare_karten)
+    @zaehler_manager.erhoehe_zaehler(:abspielen)
+
     # Wenn dieser Stich eh schon tötlich ist, wenn er nicht durchkommt.
     return toetlichen_bleibenden_stich_abspielen(stich, waehlbare_karten) if toetlicher_bleibender_stich?(stich)
 
     # Wenn dieser Stich eh schon tötlich ist, wenn er nicht bei einer bestimmten Person landet.
     nehmen_muesser = nehmen_muesser_sonst_tot(stich)
-    return toetlichen_genommenen_stich_abspielen(stich, nehmen_muesser, waehlbare_karten) if nehmen_muesser
+    if nehmen_muesser
+      @zaehler_manager.erhoehe_zaehler(:nehmen_muesser)
+      return toetlichen_genommenen_stich_abspielen(stich, nehmen_muesser, waehlbare_karten)
+    end
 
     # Wenn man selber einen Auftrag erfüllen könnte.
     selbst_helfende_karten = auftrags_nehmende_karten(waehlbare_karten, stich)
+    @zaehler_manager.erhoehe_zaehler(:selbst_helfende_karten)
     return max_karte(selbst_helfende_karten) unless selbst_helfende_karten.empty?
 
     # Wenn der Sieger bleiben sollte, solange die Spieler danach vernünftig sind.
@@ -240,7 +247,10 @@ class Cowboy < Entscheider
     # Wenn möglich eine Auftragskarte rein schmeissen.
     if sollte_bleiben
       hilfreiche_karten = hilfreiche_karten_fuer_gespielte_karte(stich, waehlbare_karten)
-      return max_karte(hilfreiche_karten) unless hilfreiche_karten.empty?
+      unless hilfreiche_karten.empty?
+        @zaehler_manager.erhoehe_zaehler(:sollte_bleiben_hilfreiche_karten)
+        return max_karte(hilfreiche_karten)
+      end
     end
 
     # Wenn Spieler danach eine gute Chance haben, den Stich zu nehmen.
@@ -249,20 +259,29 @@ class Cowboy < Entscheider
     # Wenn möglich eine Auftragskarte für einen späteren Spieler rein schmeissen.
     nehmende_karten.each do |nehmende_karte|
       hilfreiche_karten = hilfreiche_karten_fuer_nehmende_karte(stich, nehmende_karte, waehlbare_karten)
-      return max_karte(hilfreiche_karten) unless hilfreiche_karten.empty?
+      unless hilfreiche_karten.empty?
+        @zaehler_manager.erhoehe_zaehler(:nehmende_karten_hilfreiche_karten)
+        return max_karte(hilfreiche_karten)
+      end
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann, macht man das.
     if sollte_bleiben
       gefaehrliche_karten = gefaehrliche_nicht_schlagende_karten(stich, waehlbare_karten) - eigennuetzige_karten
-      return max_karte(gefaehrliche_karten) unless gefaehrliche_karten.empty?
+      unless gefaehrliche_karten.empty?
+        @zaehler_manager.erhoehe_zaehler(:sollte_bleiben_gefaehrliche_karten)
+        return max_karte(gefaehrliche_karten) unless gefaehrliche_karten.empty?
+      end
     end
 
     # Wenn man gefährliche Karten für andere Aufträge wegwerfen kann unter der Annahme,
     # dass ein späterer Spieler übernimmt, macht man das.
     nehmende_karten.each do |nehmende_karte|
       gefaehrliche_karten = gefaehrliche_nehmbare_karten(stich, nehmende_karte, waehlbare_karten) - eigennuetzige_karten
-      return max_karte(gefaehrliche_karten) unless gefaehrliche_karten.empty?
+      unless gefaehrliche_karten.empty?
+        @zaehler_manager.erhoehe_zaehler(:nehmende_karten_gefaehrliche_karten)
+        return max_karte(gefaehrliche_karten) unless gefaehrliche_karten.empty?
+      end
     end
 
     kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
@@ -274,38 +293,57 @@ class Cowboy < Entscheider
 
   # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
   # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/MethodLength
   def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
-    @statistiker.erhoehe_zaehler(:kleinstes_uebel)
+    @zaehler_manager.erhoehe_zaehler(:kleinstes_uebel)
 
     # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist und auch nicht schlägt.
     nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
-    return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
+    unless nicht_destruktive_karten.empty?
+      @zaehler_manager.erhoehe_zaehler(:nicht_destruktive_karten)
+      return nicht_destruktive_karten.sample(random: @zufalls_generator)
+    end
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt
     # unter der vertretbaren Annahme, dass der Stich Sieger bleibt.
     if sollte_bleiben
       nicht_destruktive_karten = undestruktive_nicht_schlagende_karten_wenn_bleibt(stich, waehlbare_karten)
-      return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
+      unless nicht_destruktive_karten.empty?
+        @zaehler_manager.erhoehe_zaehler(:sollte_bleiben_nicht_destruktive_karten)
+        return nicht_destruktive_karten.sample(random: @zufalls_generator)
+      end
     end
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt unter der Annahme,
     # dass ein späterer Spieler übernimmt.
     nehmende_karten.each do |nehmende_karte|
       nicht_destruktive_karten = undestruktive_nehmbare_karten(stich, nehmende_karte, waehlbare_karten)
-      return nicht_destruktive_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
+      unless nicht_destruktive_karten.empty?
+        @zaehler_manager.erhoehe_zaehler(:nehmende_karten_nicht_destruktive_karten)
+        return nicht_destruktive_karten.sample(random: @zufalls_generator)
+      end
     end
 
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt
     # unter der unklaren Annahme, dass der Stich Sieger bleibt.
     hoffnungsvoll_bleibende_karten = undestruktive_nicht_schlagende_karten_wenn_bleibt(stich, waehlbare_karten)
-    return hoffnungsvoll_bleibende_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
+    unless hoffnungsvoll_bleibende_karten.empty?
+      @zaehler_manager.erhoehe_zaehler(:hoffnungsvoll_bleibende_karten)
+      return hoffnungsvoll_bleibende_karten.sample(random: @zufalls_generator)
+    end
 
     # Dann wenn möglich eine Karte werfen, die eine Auftragskarte eines Spielers danach ist.
     hoffnungsvoll_geschlagene_karten = auftrags_karten_danach(stich)
-    min_karte(hoffnungsvoll_geschlagene_karten) unless hoffnungsvoll_geschlagene_karten.empty?
+    unless hoffnungsvoll_geschlagene_karten.empty?
+      @zaehler_manager.erhoehe_zaehler(:hoffnungsvoll_geschlagene_karten)
+      min_karte(hoffnungsvoll_geschlagene_karten)
+    end
 
     # Wenn dieser Punkt erreicht wird, haben wir eh schon verloren. Es ist eigentlich egal, was wir hier machen.
+    @zaehler_manager.erhoehe_zaehler(:schon_verloren)
     waehlbare_karten.sample(random: @zufalls_generator)
   end
   # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/MethodLength
 end
+# rubocop:enable Metrics/ClassLength

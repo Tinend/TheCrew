@@ -17,7 +17,7 @@ entscheider_setzer = []
 ARGV.each do |a|
   seed_setzer = a if a[0..1] == '-r'
   auftrag_setzer = a if a[0..1] == '-a'
-  entscheider_setzer.push(a) if a[0..1] == '-x'
+  entscheider_setzer += a[3..].split(',') if a[0..1] == '-x'
   anzahl_spiele_setzer = a if a[0..1] == '-s'
   turnier_hilfe if a[0..1] == '-h'
 end
@@ -42,7 +42,7 @@ ANZAHL_SPIELE = if anzahl_spiele_setzer.nil?
                 end
 ENTSCHEIDER = EntscheiderListe.entscheider_klassen.reject do |entscheider|
   entscheider_setzer.any? do |es|
-    es[3..] == entscheider.to_s
+    es == entscheider.to_s
   end
 end
 

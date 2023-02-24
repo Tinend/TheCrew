@@ -41,7 +41,8 @@ end
 
 RSpec.describe Reinwerfer do
   subject(:reinwerfer) do
-    reinwerfer = described_class.new(zufalls_generator: Random.new(42), statistiker: Statistiker.new)
+    reinwerfer = described_class.new(zufalls_generator: Random.new(42),
+                                     zaehler_manager: Statistiker.new.neuer_zaehler_manager)
     reinwerfer.sehe_spiel_informations_sicht(spiel_informations_sicht)
     reinwerfer
   end

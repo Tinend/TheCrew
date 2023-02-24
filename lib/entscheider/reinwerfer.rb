@@ -167,6 +167,7 @@ class Reinwerfer < Entscheider
   # rubocop:enable Metrics/MethodLength
 
   # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
+  # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/PerceivedComplexity
   def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
@@ -191,7 +192,9 @@ class Reinwerfer < Entscheider
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt
     # unter der unklaren Annahme, dass der Stich Sieger bleibt.
     hoffnungsvoll_bleibende_karten = undestruktive_nicht_schlagende_karten_wenn_bleibt(stich, waehlbare_karten)
-    return hoffnungsvoll_bleibende_karten.sample(random: @zufalls_generator) unless nicht_destruktive_karten.empty?
+    unless hoffnungsvoll_bleibende_karten.empty?
+      return hoffnungsvoll_bleibende_karten.sample(random: @zufalls_generator)
+    end
 
     # Dann wenn möglich eine Karte werfen, die eine Auftragskarte eines Spielers danach ist.
     hoffnungsvoll_geschlagene_karten = auftrags_karten_danach(stich)
@@ -208,6 +211,7 @@ class Reinwerfer < Entscheider
 
     waehlbare_karten.sample(random: @zufalls_generator)
   end
+  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 end
