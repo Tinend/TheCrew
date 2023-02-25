@@ -35,7 +35,7 @@ module SpielErsteller
     Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information, reporter: reporter,
               statistiker: statistiker)
   end
-  
+
   def self.erstelle_menschen_spiel(
     anzahl_spieler:,
     entscheider_klasse:,
@@ -46,13 +46,13 @@ module SpielErsteller
   )
     spiel_information = SpielInformation.new(anzahl_spieler: anzahl_spieler)
     spieler = Array.new(anzahl_spieler) do |i|
-      if i == 0
-        entscheider = Mensch.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)),
+      entscheider = if i.zero?
+                      Mensch.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)),
+                                 zaehler_manager: statistiker.neuer_zaehler_manager)
+                    else
+                      entscheider_klasse.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)),
                                              zaehler_manager: statistiker.neuer_zaehler_manager)
-      else
-        entscheider = entscheider_klasse.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)),
-                                             zaehler_manager: statistiker.neuer_zaehler_manager)
-      end
+                    end
       Spieler.new(entscheider: entscheider, spiel_informations_sicht: spiel_information.fuer_spieler(i))
     end
     karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spiel_information: spiel_information)

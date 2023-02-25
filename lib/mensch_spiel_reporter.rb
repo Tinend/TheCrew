@@ -11,8 +11,8 @@ class MenschSpielReporter < PutsReporter
     raise ArgumentError if karten.length != auftraege.length
 
     karten.each_index do |index|
-      if index == 0
-        puts "Du:"
+      if index.zero?
+        puts 'Du:'
       else
         puts "Spieler #{index + 1}"
       end
@@ -22,7 +22,6 @@ class MenschSpielReporter < PutsReporter
   end
 
   def berichte_kommunikation(spieler_index:, kommunikation:)
-    super(spieler_index: spieler_index, kommunikation: kommunikation) if !spieler_index.zero?
+    super(spieler_index: spieler_index, kommunikation: kommunikation) unless spieler_index.zero?
   end
-
 end

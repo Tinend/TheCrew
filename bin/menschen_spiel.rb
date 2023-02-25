@@ -53,6 +53,7 @@ GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
 zufalls_generator = Random.new(SEED)
 reporter = MenschSpielReporter.new
 spiel = SpielErsteller.erstelle_menschen_spiel(anzahl_spieler: ANZAHL_SPIELER, zufalls_generator: zufalls_generator,
-                                               entscheider_klasse: GEWAEHLTER_ENTSCHEIDER, anzahl_auftraege: ANZAHL_AUFTRAEGE,
-                                               reporter: reporter, statistiker: Statistiker.new)
+                                               entscheider_klasse: GEWAEHLTER_ENTSCHEIDER,
+                                               anzahl_auftraege: ANZAHL_AUFTRAEGE, reporter: reporter,
+                                               statistiker: Statistiker.new)
 spiel.spiele
