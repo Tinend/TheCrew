@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # Helfer für Entscheider, um Statistiken zu erstellen, zB wie oft
