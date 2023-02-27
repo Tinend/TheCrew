@@ -5,12 +5,12 @@
 # wenn mehrere Spieler Aufträge von dieser Farbe hat,
 # aber sie selber kein Auftrag ist
 module ElefantMultipleAuftragFarbeAnspielenWert
-  def multiple_auftrag_farbe_anspielen_wert(karte:, auftraege_mit_farbe:)
+  def multiple_auftrag_farbe_anspielen_wert(karte:, auftraege_mit_farbe:, elefant_rueckgabe:)
     spieler_index = will_blanken_auftrag(farbe: karte.farbe)
     if spieler_index.nil? || spieler_index.zero?
-      eigene_auftrag_farbe_anspielen_wert(karte: karte)
+      eigene_auftrag_farbe_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     else
-      fremden_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
+      fremden_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe, elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 
