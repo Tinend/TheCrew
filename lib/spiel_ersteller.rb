@@ -35,5 +35,34 @@ module SpielErsteller
     Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information, reporter: reporter,
               statistiker: statistiker)
   end
+
+  def self.erstelle_menschen_spiel(
+    anzahl_spieler:,
+    entscheider_klasse:,
+    zufalls_generator:,
+    anzahl_auftraege:,
+    reporter:,
+    statistiker:
+  )
+    spiel_information = SpielInformation.new(anzahl_spieler: anzahl_spieler)
+    spieler = Array.new(anzahl_spieler) do |i|
+      entscheider = if i.zero?
+                      Mensch.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)),
+                                 zaehler_manager: statistiker.neuer_zaehler_manager)
+                    else
+                      entscheider_klasse.new(zufalls_generator: Random.new(zufalls_generator.rand(1 << 64)),
+                                             zaehler_manager: statistiker.neuer_zaehler_manager)
+                    end
+      Spieler.new(entscheider: entscheider, spiel_informations_sicht: spiel_information.fuer_spieler(i))
+    end
+    karten_verwalter = KartenVerwalter.new(karten: Karte.alle, spiel_information: spiel_information)
+    karten_verwalter.verteilen(zufalls_generator: zufalls_generator)
+    auftrag_verwalter = AuftragVerwalter.new(auftraege: Auftrag.alle, spieler: spieler)
+    auftrag_verwalter.auftraege_ziehen(anzahl: anzahl_auftraege, zufalls_generator: zufalls_generator)
+    auftrag_verwalter.auftraege_verteilen(spiel_information: spiel_information)
+    richter = Richter.new(spiel_information: spiel_information)
+    Spiel.new(spieler: spieler, richter: richter, spiel_information: spiel_information, reporter: reporter,
+              statistiker: statistiker)
+  end
   # rubocop:enable Metrics/ParameterLists
 end

@@ -13,11 +13,13 @@ require 'turnier_reporter'
 seed_setzer = nil
 auftrag_setzer = nil
 anzahl_spiele_setzer = nil
-entscheider_setzer = []
+entscheider_entferner = []
+entscheider_liste_gewaehlt = nil
 ARGV.each do |a|
   seed_setzer = a if a[0..1] == '-r'
   auftrag_setzer = a if a[0..1] == '-a'
-  entscheider_setzer += a[3..].split(',') if a[0..1] == '-x'
+  entscheider_liste_gewaehlt = a[3..].split(',') if a[0..1] == '-x'
+  entscheider_entferner += a[3..].split(',') if a[0..1] == '-y'
   anzahl_spiele_setzer = a if a[0..1] == '-s'
   turnier_hilfe if a[0..1] == '-h'
 end
@@ -40,8 +42,20 @@ ANZAHL_SPIELE = if anzahl_spiele_setzer.nil?
                 else
                   anzahl_spiele_setzer[3..].to_i
                 end
-ENTSCHEIDER = EntscheiderListe.entscheider_klassen.reject do |entscheider|
-  entscheider_setzer.any? do |es|
+
+ENTSCHEIDER_MOEGLICH = EntscheiderListe.entscheider_klassen.map(&:to_s)
+if entscheider_liste_gewaehlt.nil?
+  entscheider_liste_gewaehlt = EntscheiderListe.entscheider_klassen
+else
+  entscheider_liste_gewaehlt.collect! do |entscheider|
+    raise "Der Entscheider #{entscheider} existiert nicht" unless ENTSCHEIDER_MOEGLICH.include?(entscheider)
+
+    Module.const_get entscheider
+  end
+end
+# ENTSCHEIDER = EntscheiderListe.entscheider_klassen.reject do |entscheider|
+ENTSCHEIDER = entscheider_liste_gewaehlt.reject do |entscheider|
+  entscheider_entferner.any? do |es|
     es == entscheider.to_s
   end
 end

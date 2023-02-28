@@ -1,15 +1,19 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+require_relative 'elefant_multiple_auftrag_farbe_abspielen_wert'
+
 # berechnet Wert für Karten anspielen, wenn
 # Karte kein Auftrag ist
 module ElefantKeinenAuftragAbspielenWert
+  include ElefantMultipleAuftragFarbeAbspielenWert
+
   def keinen_auftrag_abspielen_wert(karte:, stich:)
     auftraege_mit_farbe = auftraege_mit_farbe_berechnen(stich.farbe)
     eigene_auftraege_mit_farbe = auftraege_mit_farbe[0]
     fremde_auftraege_mit_farbe = auftraege_mit_farbe.sum - eigene_auftraege_mit_farbe
     if eigene_auftraege_mit_farbe.positive? && fremde_auftraege_mit_farbe.positive?
-      eigen_und_fremd_auftrag_stich_farbe_abspielen_wert # (karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
+      multiple_auftrag_farbe_abspielen_wert(karte: karte, stich: stich)
     elsif eigene_auftraege_mit_farbe.positive?
       eigene_auftrag_stich_farbe_abspielen_wert(karte: karte)
     elsif fremde_auftraege_mit_farbe.positive?
@@ -31,11 +35,6 @@ module ElefantKeinenAuftragAbspielenWert
     else
       [0, 0, 1, karte.schlag_wert, 0]
     end
-  end
-
-  # (karte:, auftraege_mit_farbe:)
-  def eigen_und_fremd_auftrag_stich_farbe_abspielen_wert
-    [0, 0, 0, 0, 0]
   end
 
   def keine_auftrag_stich_farbe_abspielen_wert(karte:, stich:)

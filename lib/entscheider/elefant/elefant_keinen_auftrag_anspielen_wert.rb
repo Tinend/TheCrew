@@ -16,7 +16,7 @@ module ElefantKeinenAuftragAnspielenWert
     eigene_auftraege_mit_farbe = auftraege_mit_farbe[0]
     fremde_auftraege_mit_farbe = auftraege_mit_farbe.sum - eigene_auftraege_mit_farbe
     if eigene_auftraege_mit_farbe.positive? && fremde_auftraege_mit_farbe.positive?
-      eigen_und_fremd_auftrag_farbe_anspielen_wert(karte: karte)
+      multiple_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe)
     elsif eigene_auftraege_mit_farbe.positive?
       eigene_auftrag_farbe_anspielen_wert(karte: karte)
     elsif fremde_auftraege_mit_farbe.positive?
@@ -75,10 +75,6 @@ module ElefantKeinenAuftragAnspielenWert
     else
       [0, -1, 0, 0, -karte.wert, 0]
     end
-  end
-
-  def eigen_und_fremd_auftrag_farbe_anspielen_wert(karte:)
-    multiple_auftrag_farbe_anspielen_wert(karte: karte)
   end
 
   def keine_auftrag_farbe_anspielen_wert(karte:)

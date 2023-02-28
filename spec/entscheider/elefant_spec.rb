@@ -59,6 +59,11 @@ RSpec.describe Elefant do
     auftrag
   end
   let(:rote_zwei) { Karte.new(farbe: Farbe::ROT, wert: 2) }
+  let(:rote_zwei_auftrag) do
+    auftrag = Auftrag.new(rote_zwei)
+    auftrag.aktivieren
+    auftrag
+  end
   let(:rote_eins) { Karte.new(farbe: Farbe::ROT, wert: 1) }
   let(:rote_eins_auftrag) do
     auftrag = Auftrag.new(rote_eins)
@@ -200,8 +205,7 @@ RSpec.describe Elefant do
     expect(karte).to eq(rote_neun)
   end
 
-  it 'Spielt den Auftrag rote Neun aus, auch wenn ein anderer Spieler einen roten Auftrag hat',
-     skip: 'funktioniert noch nicht' do
+  it 'Spielt den Auftrag rote Neun aus, auch wenn ein anderer Spieler einen roten Auftrag hat' do
     spiel_information.verteil_karten([[Karte.max_trumpf, rote_neun, gruene_drei], [], [], [], []])
     spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_fuenf_auftrag)
     spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_sechs_auftrag)
@@ -210,7 +214,7 @@ RSpec.describe Elefant do
     expect(karte).to eq(rote_neun)
   end
 
-  it 'Spielt rote vier, wenn fremder, roter Auftrag blank ist', skip: 'funktioniert noch nicht' do
+  it 'Spielt rote vier, wenn fremder, roter Auftrag blank ist' do
     spiel_information.verteil_karten([[Karte.max_trumpf, rote_neun, rote_vier, gruene_drei], [], [rote_sechs], [], []])
     spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_fuenf_auftrag)
     spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_sechs_auftrag)
@@ -218,7 +222,39 @@ RSpec.describe Elefant do
     kommunikation = Kommunikation.new(karte: rote_sechs, art: :einzige, gegangene_stiche: 0)
     spiel_information.kommuniziert(spieler_index: 2, kommunikation: kommunikation)
     karte = spieler.waehle_karte(leere_stich_sicht)
-    expect(karte).to eq(rote_vier)
+    expect(karte).to eq(gruene_drei)
+  end
+
+  it 'Wenn er 9, 2 (Auftrag), 3 hat und 6 (Auftrag) liegt, dann spielt er die 3' do
+    spiel_information.verteil_karten([[rote_neun, rote_drei, rote_zwei], [], [Karte.max_trumpf], [], []])
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_zwei_auftrag)
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: rote_sechs_auftrag)
+    stich = Stich.new
+    stich.legen(karte: rote_sechs, spieler_index: 4)
+    stich_sicht = stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler)
+    karte = spieler.waehle_karte(stich_sicht)
+    expect(karte).to eq(rote_drei)
+  end
+
+  it 'Holt einen liegenden Auftrag' do
+    spiel_information.verteil_karten([[rote_neun, rote_drei], [], [Karte.max_trumpf], [], []])
+    spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_sechs_auftrag)
+    stich = Stich.new
+    stich.legen(karte: rote_sechs, spieler_index: 4)
+    stich_sicht = stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler)
+    karte = spieler.waehle_karte(stich_sicht)
+    expect(karte).to eq(rote_neun)
+  end
+
+  it 'Holt einen liegenden Auftrag, auch wenn er andere Aufträge auf der Hand hat' do
+    spiel_information.verteil_karten([[rote_neun, rote_drei, rote_zwei], [], [Karte.max_trumpf], [], []])
+    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_zwei_auftrag)
+    spiel_information.auftrag_gewaehlt(spieler_index: 0, auftrag: rote_sechs_auftrag)
+    stich = Stich.new
+    stich.legen(karte: rote_sechs, spieler_index: 4)
+    stich_sicht = stich.fuer_spieler(spieler_index: 0, anzahl_spieler: anzahl_spieler)
+    karte = spieler.waehle_karte(stich_sicht)
+    expect(karte).to eq(rote_neun)
   end
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers
