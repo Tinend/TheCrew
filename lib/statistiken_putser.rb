@@ -10,7 +10,7 @@ module StatistikenPutser
     stat_stuff = statistiken.map do |name, wert|
       namen_padding = ' ' * (namen_max_laenge - name.length)
       wert_padding = wert < 0.1 ? ' ' : ''
-      "  #{name}:#{namen_padding} #{wert_padding}#{(wert*100).round(2)}%"
+      "  #{name}:#{namen_padding} #{wert_padding}#{(wert * 100).round(2)}%"
     end
     puts stat_stuff.sort!
   end

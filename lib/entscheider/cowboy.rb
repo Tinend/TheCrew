@@ -49,7 +49,7 @@ class Cowboy < Entscheider
     schlechte_farben = blanke_auftrags_farben_anderer
     (waehlbare_karten & auftrags_karten(0)).select do |k|
       karte_sollte_bleiben?(Stich.new, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) &&
-        !blanke_auftrags_farben_anderer.include?(k.farbe)
+        !schlechte_farben.include?(k.farbe)
     end
   end
 
@@ -58,7 +58,7 @@ class Cowboy < Entscheider
     (waehlbare_karten - alle_auftrags_karten).select do |k|
       karte_sollte_bleiben?(Stich.new, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) &&
         auftrags_forderungs_farben.any? { |f| k.farbe == f } &&
-        !blanke_auftrags_farben_anderer.include?(k.farbe)        
+        !blanke_auftrags_farben_anderer.include?(k.farbe)
     end
   end
 
@@ -108,6 +108,7 @@ class Cowboy < Entscheider
     auftrags_karten(0).empty? ? altruistisch_anspielen(waehlbare_karten) : egoistisch_anspielen(waehlbare_karten)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def egoistisch_anspielen(waehlbare_karten)
     @zaehler_manager.erhoehe_zaehler(:egositisch_anspielen)
 
@@ -132,12 +133,13 @@ class Cowboy < Entscheider
 
     alles_ziehende = alles_ziehende_karten(waehlbare_karten)
     unless alles_ziehende.empty?
-      @zaehler_manager.erhoehe_zaehler(:alles_ziehende)      
+      @zaehler_manager.erhoehe_zaehler(:alles_ziehende)
       max_karte(alles_ziehende)
     end
 
     altruistisch_anspielen(waehlbare_karten)
   end
+  # rubocop:enable Metrics/MethodLength
 
   def hilfreich_angespielte_auftrags_karten(waehlbare_karten)
     (waehlbare_karten & auftrags_karten_anderer(0)).select do |karte|
@@ -339,6 +341,8 @@ class Cowboy < Entscheider
   # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/AbcSize
   def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
     @zaehler_manager.erhoehe_zaehler(:kleinstes_uebel)
 
@@ -398,5 +402,7 @@ class Cowboy < Entscheider
   end
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/AbcSize
 end
 # rubocop:enable Metrics/ClassLength

@@ -14,11 +14,16 @@ require 'statistiker'
 RSpec.describe Elefant do
   subject(:elefant) do
     elefant = described_class.new(zufalls_generator: Random.new(42),
-                                  zaehler_manager: Statistiker.new.neuer_zaehler_manager)
+                                  zaehler_manager: statistiker.neuer_zaehler_manager)
     elefant.sehe_spiel_informations_sicht(spiel_informations_sicht)
     elefant
   end
 
+  let(:statistiker) do
+    statistiker = Statistiker.new
+    statistiker.beachte_neues_spiel(anzahl_spieler)
+    statistiker
+  end
   let(:anzahl_spieler) { 5 }
   let(:spiel_information) { SpielInformation.new(anzahl_spieler: anzahl_spieler) }
   let(:spiel_informations_sicht) { spiel_information.fuer_spieler(0) }

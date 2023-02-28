@@ -95,7 +95,8 @@ class SpielInformation
       @spiel_information.alle_auftraege
     end
 
-    def anzahl_karten(spieler_index:)p
+    def anzahl_karten(spieler_index:)
+      p
       @spiel_information.karten[(spieler_index + @spieler_index) % anzahl_spieler].length
     end
 
@@ -157,10 +158,15 @@ class SpielInformation
       vorheriger_eintrag = (@stich_cache ||= {})[key]
       anzahl_stiche = @spiel_information.stiche.length
       waehrend_stich = !@aktiver_stich.nil?
-      return vorheriger_eintrag.wert if vorheriger_eintrag && vorheriger_eintrag.anzahl_stiche == anzahl_stiche && vorheriger_eintrag.waehrend_stich == waehrend_stich
+      if vorheriger_eintrag &&
+         vorheriger_eintrag.anzahl_stiche == anzahl_stiche &&
+         vorheriger_eintrag.waehrend_stich == waehrend_stich
+        return vorheriger_eintrag.wert
+      end
 
       wert = yield
-      @stich_cache[key] = StichCacheEintrag.new(anzahl_stiche: anzahl_stiche, wert: wert, waehrend_stich: waehrend_stich)
+      @stich_cache[key] =
+        StichCacheEintrag.new(anzahl_stiche: anzahl_stiche, wert: wert, waehrend_stich: waehrend_stich)
       wert
     end
 

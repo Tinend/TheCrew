@@ -104,9 +104,9 @@ module GefaehrlicheKartenKommunizierender
   # rubocop:enable Metrics/AbcSize
 
   def am_zug_beim_kommunizieren?
-    return @spiel_informations_sicht.kapitaen_index == 0 if @spiel_informations_sicht.stiche.empty?
+    return @spiel_informations_sicht.kapitaen_index.zero? if @spiel_informations_sicht.stiche.empty?
 
-    @spiel_informations_sicht.stiche.last.staerkste_gespielte_karte.spieler_index == 0
+    @spiel_informations_sicht.stiche.last.staerkste_gespielte_karte.spieler_index.zero?
   end
 
   def uebernehmbar_durch_andere?(karte)
@@ -117,6 +117,8 @@ module GefaehrlicheKartenKommunizierender
     end
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def waehle_kommunikation(kommunizierbares)
     # Dieses Modul kommuniziert nie, wenn es selber ausspielt.
     return if am_zug_beim_kommunizieren?
@@ -134,6 +136,8 @@ module GefaehrlicheKartenKommunizierender
     return if blanke_auftraege_kommunikation.empty?
 
     @zaehler_manager.erhoehe_zaehler(:blanke_auftraege_kommunikation)
-    return blanke_auftraege_kommunikation.sample(random: @zufalls_generator)
+    blanke_auftraege_kommunikation.sample(random: @zufalls_generator)
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 end
