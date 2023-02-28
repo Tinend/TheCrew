@@ -7,10 +7,11 @@ module StatistikenPutser
 
     puts "#{statistiken_name} Statistiken:"
     namen_max_laenge = statistiken.keys.map(&:length).max
-    statistiken.each do |name, wert|
+    stat_stuff = statistiken.map do |name, wert|
       namen_padding = ' ' * (namen_max_laenge - name.length)
       wert_padding = wert < 0.1 ? ' ' : ''
-      puts "  #{name}:#{namen_padding} #{wert_padding}#{(wert*100).round(2)}%"
+      "  #{name}:#{namen_padding} #{wert_padding}#{(wert*100).round(2)}%"
     end
+    puts stat_stuff.sort!
   end
 end

@@ -103,10 +103,37 @@ module GefaehrlicheKartenKommunizierender
   # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/AbcSize
 
+  def am_zug_beim_kommunizieren?
+    return @spiel_informations_sicht.kapitaen_index == 0 if @spiel_informations_sicht.stiche.empty?
+
+    @spiel_informations_sicht.stiche.last.staerkste_gespielte_karte.spieler_index == 0
+  end
+
+  def uebernehmbar_durch_andere?(karte)
+    andere_spieler_indizes(0).any? do |i|
+      @spiel_informations_sicht.moegliche_karten(i).any? do |k|
+        k.farbe == karte.farbe && k.schlaegt?(karte)
+      end
+    end
+  end
+
   def waehle_kommunikation(kommunizierbares)
-    gute_kommunikation = kommunizierbares.filter do |k|
+    # Dieses Modul kommuniziert nie, wenn es selber ausspielt.
+    return if am_zug_beim_kommunizieren?
+
+    gefaehrliche_hohe_kommunikation = kommunizierbares.filter do |k|
       !k.hoechste? && gefaehrliche_hohe_unausweichliche_karten.include?(k.karte)
     end
-    gute_kommunikation.sample(random: @zufalls_generator)
+    unless gefaehrliche_hohe_kommunikation.empty?
+      @zaehler_manager.erhoehe_zaehler(:gefaehrliche_hohe_kommunikation)
+      return gefaehrliche_hohe_kommunikation.sample(random: @zufalls_generator)
+    end
+    blanke_auftraege_kommunikation = kommunizierbares.filter do |k|
+      k.einzige? && alle_auftrags_karten.include?(k.karte) && uebernehmbar_durch_andere?(k.karte)
+    end
+    return if blanke_auftraege_kommunikation.empty?
+
+    @zaehler_manager.erhoehe_zaehler(:blanke_auftraege_kommunikation)
+    return blanke_auftraege_kommunikation.sample(random: @zufalls_generator)
   end
 end

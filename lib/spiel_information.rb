@@ -69,12 +69,13 @@ class SpielInformation
   class SpielInformationsSicht
     # Ein Wert, der sich während eines Stichs nicht verändert und die Anzahl Stiche.
     class StichCacheEintrag
-      def initialize(anzahl_stiche:, wert:)
+      def initialize(anzahl_stiche:, wert:, waehrend_stich:)
         @anzahl_stiche = anzahl_stiche
         @wert = wert
+        @waehrend_stich = waehrend_stich
       end
 
-      attr_reader :anzahl_stiche, :wert
+      attr_reader :anzahl_stiche, :wert, :waehrend_stich
     end
 
     def initialize(spiel_information:, spieler_index:)
@@ -86,11 +87,15 @@ class SpielInformation
       @aktiver_stich = aktiver_stich
     end
 
+    def entferne_aktiven_stich
+      @aktiver_stich = nil
+    end
+
     def alle_auftraege
       @spiel_information.alle_auftraege
     end
 
-    def anzahl_karten(spieler_index:)
+    def anzahl_karten(spieler_index:)p
       @spiel_information.karten[(spieler_index + @spieler_index) % anzahl_spieler].length
     end
 
@@ -151,10 +156,11 @@ class SpielInformation
     def stich_cache(key)
       vorheriger_eintrag = (@stich_cache ||= {})[key]
       anzahl_stiche = @spiel_information.stiche.length
-      return vorheriger_eintrag.wert if vorheriger_eintrag && vorheriger_eintrag.anzahl_stiche == anzahl_stiche
+      waehrend_stich = !@aktiver_stich.nil?
+      return vorheriger_eintrag.wert if vorheriger_eintrag && vorheriger_eintrag.anzahl_stiche == anzahl_stiche && vorheriger_eintrag.waehrend_stich == waehrend_stich
 
       wert = yield
-      @stich_cache[key] = StichCacheEintrag.new(anzahl_stiche: anzahl_stiche, wert: wert)
+      @stich_cache[key] = StichCacheEintrag.new(anzahl_stiche: anzahl_stiche, wert: wert, waehrend_stich: waehrend_stich)
       wert
     end
 

@@ -15,6 +15,8 @@ module Reinwerfender
 
   # Gibt einen Spieler index zurück, der diesen Stich unbedingt nehmen muss,
   # wenn der Stich bereits eine Auftragskarte eines Spielers danach enthält
+  # TODO: Wenn es klar ist, dass ein Nachfolger eine Auftragskarte reinschmeissen muss,
+  # gibt es auch einen nehmen muesser sonst tot.
   def nehmen_muesser_sonst_tot(stich)
     # Absichtlich sich selbst als letztes, da er lieber selber Aufträge vermasselt, als sie
     # für andere zu vermasseln.

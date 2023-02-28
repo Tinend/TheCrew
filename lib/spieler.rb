@@ -77,6 +77,7 @@ class Spieler
       raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' \
             "Waehlbare: #{waehlbare.join(' ')}; gewaehlt: #{karte}"
     end
+    @spiel_informations_sicht.entferne_aktiven_stich
 
     karte
   end
