@@ -19,6 +19,8 @@ module ElefantAnspielen
     #waehlbare_karten.max_by { |karte| anspielen_wert(karte) }
     rueckgabe = waehlbare_rueckgaben.max
     @zaehler_manager.erhoehe_zaehler(rueckgabe.symbol)
+    #puts rueckgabe.symbol
+    #p rueckgabe.wert
     rueckgabe.karte
   end
 
