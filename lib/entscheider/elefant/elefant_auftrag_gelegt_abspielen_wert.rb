@@ -17,7 +17,7 @@ module ElefantAuftragGelegtAbspielenWert
 
   def gelegten_auftrag_unterstuetzen_abspielen_wert(stich:, karte:, spieler_index:, elefant_rueckgabe:)
     if spieler_index.zero?
-      elefant_rueckgabe.symbol = :eigenen_auftrag_holen_anspielen
+      elefant_rueckgabe.symbol = :eigenen_auftrag_holen_abspielen
       elefant_rueckgabe.wert = [0, 1, 0, karte.schlag_wert, 0]
     elsif karte.farbe == stich.staerkste_karte.farbe
       elefant_rueckgabe.symbol = :fremden_geholten_auftrag_unterbieten_abspielen

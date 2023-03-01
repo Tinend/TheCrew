@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 require_relative 'reporter'
@@ -47,6 +48,6 @@ class PutsReporter < Reporter
   end
 
   def berichte_spiel_statistiken(statistiken)
-    berichte_statistiken('Spiel', statistiken)
+    berichte_statistiken('Spiel', statistiken) if @statistiken_ausgeben
   end
 end

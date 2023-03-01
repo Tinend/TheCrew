@@ -25,6 +25,9 @@ module ElefantAbspielen
     }
     rueckgabe = waehlbare_rueckgaben.max
     @zaehler_manager.erhoehe_zaehler(rueckgabe.symbol)
+    #puts rueckgabe.karte
+    #puts rueckgabe.symbol
+    #p rueckgabe.wert
     rueckgabe.karte
   end
 
