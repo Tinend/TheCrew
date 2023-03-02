@@ -19,6 +19,7 @@ module ElefantAnspielen
     #waehlbare_karten.max_by { |karte| anspielen_wert(karte) }
     rueckgabe = waehlbare_rueckgaben.max
     @zaehler_manager.erhoehe_zaehler(rueckgabe.symbol)
+    #puts rueckgabe.karte
     #puts rueckgabe.symbol
     #p rueckgabe.wert
     rueckgabe.karte
@@ -39,11 +40,20 @@ module ElefantAnspielen
 
   def eigenen_auftrag_anspielen_wert(karte:, elefant_rueckgabe:)
     if jeder_kann_unterbieten?(karte: karte)
-      elefant_rueckgabe.symbol = :eigenen_auftrag_sicher_anspielen
-      elefant_rueckgabe.wert = [0, 1, 4, karte.wert, 0]
+      holbaren_eigenen_auftrag_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     else
       elefant_rueckgabe.symbol = :eigenen_auftrag_sicher_unanspielen
       elefant_rueckgabe.wert = [0, -1, 0, 0, 0]
+    end
+  end
+
+  def holbaren_eigenen_auftrag_anspielen_wert(karte:, elefant_rueckgabe:)
+    if nur_blanke_auftraege_von?(auftrag_index: 0, farbe: karte.farbe)
+      elefant_rueckgabe.symbol = :holbaren_eigenen_auftrag_anspielen
+      elefant_rueckgabe.wert = [0, 1, 4, karte.wert, 0]
+    else
+      elefant_rueckgabe.symbol = :holbaren_eigenen_doppel_blanken_auftrag_anspielen
+      elefant_rueckgabe.wert = [-1, 0, 0, 0, 0]
     end
   end
 
@@ -60,23 +70,24 @@ module ElefantAnspielen
 
   def holbaren_fremden_auftrag_anspielen_wert(karte:, auftrag_index:, elefant_rueckgabe:)
     if nur_blanke_auftraege_von?(auftrag_index: auftrag_index, farbe: karte.farbe)
-      elefant_rueckgabe.symbol = :fremden_auftrag_sicher_anspielen
+      elefant_rueckgabe.symbol = :holbaren_fremden_auftrag_anspielen_anspielen
       elefant_rueckgabe.wert = [0, 1, 1, 0, 0]
     else
-      elefant_rueckgabe.symbol = :fremden_doppel_blanken_auftrag_anspielen
+      elefant_rueckgabe.symbol = :holbaren_fremden_doppel_blanken_auftrag_anspielen
       elefant_rueckgabe.wert = [-1, 0, 0, 0, 0]
     end
   end
 
   def nur_blanke_auftraege_von?(auftrag_index:, farbe:)
-    auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe)
+    auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe).dup
     auftraege.delete_at(auftrag_index)
     negativ_karten = auftraege.flatten.collect do |auftrag|
       auftrag.karte
     end
     karten = Karte::alle_mit_farbe(farbe) - negativ_karten
     (0..@spiel_informations_sicht.anzahl_spieler - 1).each do |spieler_index|
-      return false if (karten & @spiel_informations_sicht.moegliche_karten(spieler_index)).empty?
+      return false if (karten & @spiel_informations_sicht.moegliche_karten(spieler_index)).empty? &&
+                      !(@spiel_informations_sicht.moegliche_karten(spieler_index) & Karte::alle_mit_farbe(farbe)).empty?
     end
     true
   end
