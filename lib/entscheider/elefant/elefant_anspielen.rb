@@ -11,9 +11,13 @@ module ElefantAnspielen
   include ElefantKeinenAuftragAnspielenWert
 
   def anspielen(waehlbare_karten)
+    #puts
     waehlbare_rueckgaben = waehlbare_karten.collect {|karte|
       elefant_rueckgabe = ElefantRueckgabe.new(karte)
       anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
+      #puts elefant_rueckgabe.karte
+      #puts elefant_rueckgabe.symbol
+      #p elefant_rueckgabe.wert
       elefant_rueckgabe
     }
     #waehlbare_karten.max_by { |karte| anspielen_wert(karte) }

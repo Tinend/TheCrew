@@ -56,6 +56,11 @@ module BakterieKommunizierender
         kommunikation: kommunikation,
         prioritaet: 1000
       )
+    elsif kommunikation.art == :tiefste
+      BakterieKommunikation.new(
+        kommunikation: kommunikation,
+        prioritaet: (min_karte.wert - 6) * 100
+      )
     else
       BakterieKommunikation.new(
         kommunikation: kommunikation,

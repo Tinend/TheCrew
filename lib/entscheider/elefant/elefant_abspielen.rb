@@ -17,10 +17,14 @@ module ElefantAbspielen
   include ElefantAuftragGelegtAbspielenWert
 
   def abspielen(stich, waehlbare_karten)
+    #puts
     #waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
     waehlbare_rueckgaben = waehlbare_karten.collect {|karte|
       elefant_rueckgabe = ElefantRueckgabe.new(karte)
       abspielen_wert(karte: karte, stich: stich, elefant_rueckgabe: elefant_rueckgabe)
+      #puts elefant_rueckgabe.karte
+      #puts elefant_rueckgabe.symbol
+      #p elefant_rueckgabe.wert
       elefant_rueckgabe
     }
     rueckgabe = waehlbare_rueckgaben.max
