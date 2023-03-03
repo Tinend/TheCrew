@@ -96,7 +96,6 @@ class SpielInformation
     end
 
     def anzahl_karten(spieler_index:)
-      p
       @spiel_information.karten[(spieler_index + @spieler_index) % anzahl_spieler].length
     end
 
