@@ -15,12 +15,14 @@ auftrag_setzer = nil
 anzahl_spiele_setzer = nil
 entscheider_entferner = []
 entscheider_liste_gewaehlt = nil
+unendlich_setzer = nil
 ARGV.each do |a|
   seed_setzer = a if a[0..1] == '-r'
   auftrag_setzer = a if a[0..1] == '-a'
   entscheider_liste_gewaehlt = a[3..].split(',') if a[0..1] == '-x'
   entscheider_entferner += a[3..].split(',') if a[0..1] == '-y'
   anzahl_spiele_setzer = a if a[0..1] == '-s'
+  unendlich_setzer = a if a[0..1] == '-u'
   turnier_hilfe if a[0..1] == '-h'
 end
 
@@ -64,5 +66,11 @@ puts "Es gibt #{ANZAHL_AUFTRAEGE} Aufträge und jeder Spieler spielt #{ANZAHL_SP
 einstellungen = TurnierOrganisator::TurnierEinstellungen.new(anzahl_spieler: ANZAHL_SPIELER,
                                                              anzahl_spiele: ANZAHL_SPIELE,
                                                              anzahl_auftraege: ANZAHL_AUFTRAEGE)
-TurnierOrganisator.organisiere_turnier(turnier_einstellungen: einstellungen, seed: SEED,
-                                       entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new)
+
+i = 0
+loop do
+  TurnierOrganisator.organisiere_turnier(turnier_einstellungen: einstellungen, seed: SEED + i,
+                                         entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new)
+  break unless unendlich_setzer
+  i += 1
+end

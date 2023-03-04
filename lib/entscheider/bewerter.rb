@@ -2,10 +2,12 @@
 
 # Bewerter, der für eine AI eine Spiel Information bewertet.
 class Bewerter
-  VERLOREN_BEWERTUNG = -1000
-  NICHT_KOMMUNIZIERT_VERLOREN_BEWERTUNG = -100
-  GEWONNEN_BEWERTUNG = 1000
-  NICHT_KOMMUNIZIERT_GEWONNEN_BEWERTUNG = 1
+  VERLOREN_BEWERTUNG = -1000.0
+  NICHT_KOMMUNIZIERT_VERLOREN_BEWERTUNG = -100.0
+  GEWONNEN_BEWERTUNG = 1000.0
+  NICHT_KOMMUNIZIERT_GEWONNEN_BEWERTUNG = 1.0
+  EIGENER_AUFTRAG_ERFUELLT_BEWERTUNG = 50.0
+  ANDERER_AUFTRAG_ERFUELLT_BEWERTUNG = 40.0
 
   def bewerte_verloren(spiel_informations_sicht)
     bewertung = VERLOREN_BEWERTUNG
@@ -20,6 +22,8 @@ class Bewerter
   end
 
   def bewerte(spiel_informations_sicht)
-    -spiel_informations_sicht.alle_auftraege.length
+    bewertung = EIGENER_AUFTRAG_ERFUELLT_BEWERTUNG * spiel_informations_sicht.auftraege[0].count(&:erfuellt)
+    bewertung += ANDERER_AUFTRAG_ERFUELLT_BEWERTUNG * spiel_informations_sicht.auftraege[1..-1].flatten.count(&:erfuellt)
+    bewertung
   end
 end

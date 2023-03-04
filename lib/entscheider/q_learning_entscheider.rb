@@ -118,12 +118,12 @@ class QLearningEntscheider < Entscheider
     return aktions_raum.einzige.aktion if aktions_raum.length == 1
 
     start = Time.now
-    puts 'Modell Aktion'
+    puts '    Modell Aktion'
     beste_ai_aktion = aktions_raum.ai_aktionen.max_by do |ai_aktion|
       ai_input.setze_aktion(ai_aktion)
       modell_bewerte(ai_input)
     end
-    puts "#{Time.now - start} Sekunden"
+    puts "    #{Time.now - start} Sekunden"
     beste_ai_aktion.aktion
   end
 
