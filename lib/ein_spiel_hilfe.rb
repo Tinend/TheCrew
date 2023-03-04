@@ -9,5 +9,5 @@ def ein_spiel_hilfe
   puts '   -r=x         Setzt den Seed auf x. Standartmäßig oder bei x=0, wird ein Zufälliger genommen'
   puts '   -s=x         Setzt die Zahl der Spieler auf x, Standart is 4'
   puts '   -x=[spieler] Nimmt diesen Spieler für das Spiel. Standard ist der ZufallsEntscheider'
- exit
+  exit
 end

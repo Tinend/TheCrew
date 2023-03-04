@@ -1,4 +1,6 @@
 # coding: utf-8
+# frozen_string_literal: true
+
 # Fasst die Karte, den Wert und das Symbol einer Karte
 # für den Elefanten zusammen
 class ElefantRueckgabe
@@ -11,7 +13,7 @@ class ElefantRueckgabe
   attr_accessor :symbol, :wert
   attr_reader :karte
 
-  def <=>(x)
-    -(x <=> wert)
+  def <=>(other)
+    -(other <=> wert)
   end
 end

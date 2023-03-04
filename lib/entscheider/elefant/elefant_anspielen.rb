@@ -11,21 +11,21 @@ module ElefantAnspielen
   include ElefantKeinenAuftragAnspielenWert
 
   def anspielen(waehlbare_karten)
-    #puts
-    waehlbare_rueckgaben = waehlbare_karten.collect {|karte|
+    # puts
+    waehlbare_rueckgaben = waehlbare_karten.collect do |karte|
       elefant_rueckgabe = ElefantRueckgabe.new(karte)
       anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
-      #puts elefant_rueckgabe.karte
-      #puts elefant_rueckgabe.symbol
-      #p elefant_rueckgabe.wert
+      # puts elefant_rueckgabe.karte
+      # puts elefant_rueckgabe.symbol
+      # p elefant_rueckgabe.wert
       elefant_rueckgabe
-    }
-    #waehlbare_karten.max_by { |karte| anspielen_wert(karte) }
+    end
+    # waehlbare_karten.max_by { |karte| anspielen_wert(karte) }
     rueckgabe = waehlbare_rueckgaben.max
     @zaehler_manager.erhoehe_zaehler(rueckgabe.symbol)
-    #puts rueckgabe.karte
-    #puts rueckgabe.symbol
-    #p rueckgabe.wert
+    # puts rueckgabe.karte
+    # puts rueckgabe.symbol
+    # p rueckgabe.wert
     rueckgabe.karte
   end
 
@@ -85,18 +85,15 @@ module ElefantAnspielen
   def nur_blanke_auftraege_von?(auftrag_index:, farbe:)
     auftraege = @spiel_informations_sicht.unerfuellte_auftraege_mit_farbe(farbe).dup
     auftraege.delete_at(auftrag_index)
-    negativ_karten = auftraege.flatten.collect do |auftrag|
-      auftrag.karte
-    end
-    karten = Karte::alle_mit_farbe(farbe) - negativ_karten
+    negativ_karten = auftraege.flatten.collect(&:karte)
+    karten = Karte.alle_mit_farbe(farbe) - negativ_karten
     (0..@spiel_informations_sicht.anzahl_spieler - 1).each do |spieler_index|
       return false if (karten & @spiel_informations_sicht.moegliche_karten(spieler_index)).empty? &&
-                      !(@spiel_informations_sicht.moegliche_karten(spieler_index) & Karte::alle_mit_farbe(farbe)).empty?
+                      !(@spiel_informations_sicht.moegliche_karten(spieler_index) & Karte.alle_mit_farbe(farbe)).empty?
     end
     true
   end
 
-  
   def ist_blank_auf_farbe?(farbe:, spieler_index:)
     @spiel_informations_sicht.moegliche_karten(spieler_index).all? do |moegliche_karte|
       moegliche_karte.farbe != farbe

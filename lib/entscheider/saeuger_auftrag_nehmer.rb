@@ -4,7 +4,7 @@
 # Simpler algorithmus zum Aufträge wählen
 module SaeugerAuftragNehmer
   def waehl_auftrag(auftraege)
-    auftraege.max_by { |auftrag| auftrag_punkte(auftrag: auftrag)}
+    auftraege.max_by { |auftrag| auftrag_punkte(auftrag: auftrag) }
   end
 
   def auftrag_punkte(auftrag:)

@@ -7,7 +7,7 @@ module ElefantNuetzliches
   HOHE_KARTE_UEBERBIETEN = 6
 
   def karte_ist_auftrag_von(karte)
-    #puts karte
+    # puts karte
     @spiel_informations_sicht.unerfuellte_auftraege.each_with_index do |auftrags_liste, index|
       return index if auftrags_liste.any? { |auftrag| auftrag.karte == karte }
     end

@@ -33,7 +33,8 @@ module ElefantKeinenAuftragAnspielenWert
     if auftrag.nil?
       eigene_auftrag_farbe_blank_machen_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     else
-      eigene_auftrag_farbe_nicht_blank_machen_anspielen_wert(karte: karte, auftrag: auftrag, elefant_rueckgabe: elefant_rueckgabe)
+      eigene_auftrag_farbe_nicht_blank_machen_anspielen_wert(karte: karte, auftrag: auftrag,
+                                                             elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 
@@ -92,9 +93,11 @@ module ElefantKeinenAuftragAnspielenWert
     if karte.trumpf?
       trumpf_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     elsif habe_noch_auftraege?
-      eigene_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
+      eigene_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte: karte,
+                                                                      elefant_rueckgabe: elefant_rueckgabe)
     else
-      fremde_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
+      fremde_auftraege_mit_anderer_farbe_unterstuetzen_anspielen_wert(karte: karte,
+                                                                      elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 

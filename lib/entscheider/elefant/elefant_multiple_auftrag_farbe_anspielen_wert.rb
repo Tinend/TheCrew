@@ -13,7 +13,8 @@ module ElefantMultipleAuftragFarbeAnspielenWert
     elsif spieler_index.nil? || spieler_index.zero?
       eigene_auftrag_farbe_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     else
-      fremden_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe, elefant_rueckgabe: elefant_rueckgabe)
+      fremden_auftrag_farbe_anspielen_wert(karte: karte, auftraege_mit_farbe: auftraege_mit_farbe,
+                                           elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 
@@ -25,7 +26,8 @@ module ElefantMultipleAuftragFarbeAnspielenWert
 
       neuer_spieler_index = karte_ist_auftrag_von(kommunikation.karte)
       next if neuer_spieler_index.nil?
-      return :tod if !spieler_index.nil?
+      return :tod unless spieler_index.nil?
+
       spieler_index = neuer_spieler_index
     end
     spieler_index

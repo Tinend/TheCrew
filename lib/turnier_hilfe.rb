@@ -11,5 +11,5 @@ def turnier_hilfe
   puts '   -x=x1,x2,... Lässt die Spieler x1, x2... an einem Turnier teilnehmen'
   puts '                standartmäßig sind alle ausgewählt'
   puts '   -y=x1,x2,... Schließt die Spieler x1, x2... aus dem Turnier aus'
- exit
+  exit
 end

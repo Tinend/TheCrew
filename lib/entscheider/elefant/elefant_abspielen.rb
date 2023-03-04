@@ -17,21 +17,21 @@ module ElefantAbspielen
   include ElefantAuftragGelegtAbspielenWert
 
   def abspielen(stich, waehlbare_karten)
-    #puts
-    #waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
-    waehlbare_rueckgaben = waehlbare_karten.collect {|karte|
+    # puts
+    # waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
+    waehlbare_rueckgaben = waehlbare_karten.collect do |karte|
       elefant_rueckgabe = ElefantRueckgabe.new(karte)
       abspielen_wert(karte: karte, stich: stich, elefant_rueckgabe: elefant_rueckgabe)
-      #puts elefant_rueckgabe.karte
-      #puts elefant_rueckgabe.symbol
-      #p elefant_rueckgabe.wert
+      # puts elefant_rueckgabe.karte
+      # puts elefant_rueckgabe.symbol
+      # p elefant_rueckgabe.wert
       elefant_rueckgabe
-    }
+    end
     rueckgabe = waehlbare_rueckgaben.max
     @zaehler_manager.erhoehe_zaehler(rueckgabe.symbol)
-    #puts rueckgabe.karte
-    #puts rueckgabe.symbol
-    #p rueckgabe.wert
+    # puts rueckgabe.karte
+    # puts rueckgabe.symbol
+    # p rueckgabe.wert
     rueckgabe.karte
   end
 
@@ -41,7 +41,8 @@ module ElefantAbspielen
     if spieler_index.nil?
       kein_auftrag_gelegt_abspielen_wert(karte: karte, stich: stich, elefant_rueckgabe: elefant_rueckgabe)
     else
-      auftrag_gelegt_abspielen_wert(stich: stich, karte: karte, spieler_index: spieler_index, elefant_rueckgabe: elefant_rueckgabe)
+      auftrag_gelegt_abspielen_wert(stich: stich, karte: karte, spieler_index: spieler_index,
+                                    elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 

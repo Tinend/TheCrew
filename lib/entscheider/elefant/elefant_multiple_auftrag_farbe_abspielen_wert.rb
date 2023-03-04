@@ -13,7 +13,7 @@ module ElefantMultipleAuftragFarbeAbspielenWert
     elsif spieler_index.nil? || spieler_index.zero?
       eigene_auftrag_stich_farbe_abspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     else
-      fremden_auftrag_stich_farbe_abspielen_wert(stich: stich, karte: karte, elefant_rueckgabe: elefant_rueckgabe)
+      fremde_auftrag_stich_farbe_abspielen_wert(stich: stich, karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 end
