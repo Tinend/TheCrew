@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Bewerter, der für eine AI eine Spiel Information bewertet.
 class Bewerter
   VERLOREN_BEWERTUNG = -1000
   NICHT_KOMMUNIZIERT_VERLOREN_BEWERTUNG = -100

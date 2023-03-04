@@ -210,8 +210,6 @@ class Cowboy < Entscheider
     nicht_trumpfs.select { |k| k.wert == min_wert }.sample(random: @zufalls_generator)
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def toetlichen_genommenen_stich_abspielen(stich, nehmen_muesser, waehlbare_karten)
@@ -261,13 +259,9 @@ class Cowboy < Entscheider
     # Dann ist eh egal. Wir nehmen eine möglichst tiefe.
     min_karte(waehlbare_karten)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def abspielen(stich, waehlbare_karten)
@@ -333,15 +327,11 @@ class Cowboy < Entscheider
 
     kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
   # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
-  # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/AbcSize
   def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
     @zaehler_manager.erhoehe_zaehler(:kleinstes_uebel)
@@ -400,9 +390,7 @@ class Cowboy < Entscheider
     @zaehler_manager.erhoehe_zaehler(:schon_verloren)
     waehlbare_karten.sample(random: @zufalls_generator)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/AbcSize
 end
 # rubocop:enable Metrics/ClassLength

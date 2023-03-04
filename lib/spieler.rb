@@ -42,7 +42,7 @@ class Spieler
     return unless kommunikation
 
     unless waehlbare.include?(kommunikation)
-      raise 'Entscheider hat eine unmögliche Kommunikation gewaehlt.' \
+      raise 'Entscheider hat eine unmögliche Kommunikation gewaehlt. ' \
             "Waehlbare: #{waehlbare.join(' ')}; gewaehlt: #{kommunikation}"
     end
     @kann_kommunizieren = false

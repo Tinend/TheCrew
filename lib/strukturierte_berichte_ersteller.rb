@@ -16,29 +16,42 @@ class StrukturierteBerichteErsteller
                                                                        anzahl_auftraege: ANZAHL_AUFTRAEGE)
   SEED = 42
 
-  def initialize(basis_verzeichnis:)
+  def initialize(basis_verzeichnis:, entscheider_klasse:)
     @basis_verzeichnis = basis_verzeichnis
+    @entscheider_klasse = entscheider_klasse
   end
 
   def erstelle_bericht
     reporter = StrukturierterReporter.new
     TurnierOrganisator.organisiere_turnier(turnier_einstellungen: TURNIER_EINSTELLUNGEN, seed: SEED,
-                                           entscheider_klassen: EntscheiderListe.entscheider_klassen,
+                                           entscheider_klassen: [@entscheider_klasse],
                                            reporter: reporter)
-    { spiel_berichte_pro_entscheider: reporter.spiel_berichte_pro_entscheider,
-      punkte_berichte: reporter.punkte_berichte }
+    {
+      spiel_berichte: reporter.spiel_berichte,
+      punkte: reporter.punkte
+    }
+  end
+
+  def finde_entscheider_punkte_bericht(punkte_berichte)
+    punkte_berichte.find { |e| e['entscheider'] == @entscheider_klasse.to_s }
   end
 
   def speichere_bericht(bericht)
-    bericht[:spiel_berichte_pro_entscheider].each do |entscheider, entscheider_bericht|
-      File.write(spiel_berichte_file_fuer_entscheider(entscheider), YAML.dump(entscheider_bericht))
-    end
+    File.write(spiel_berichte_file, YAML.dump(bericht[:spiel_berichte]))
 
     punkte_entwicklung = lade_punkte_entwicklung
-    punkte_bericht = bericht[:punkte_berichte]
-    return if punkte_entwicklung.last == punkte_bericht
+    punkte = bericht[:punkte]
+    entscheider_punkte_bericht = finde_entscheider_punkte_bericht(punkte_entwicklung.last)
+    return if entscheider_punkte_bericht && entscheider_punkte_bericht['punkte'] == punkte
 
-    punkte_entwicklung.push(punkte_bericht)
+    punkte_berichte = punkte_entwicklung.last.map(&:dup)
+    entscheider_punkte_bericht = finde_entscheider_punkte_bericht(punkte_berichte)
+    if entscheider_punkte_bericht
+      entscheider_punkte_bericht['punkte'] = punkte
+    else
+      punkte_berichte.push({ 'entscheider' => @entscheider_klasse.to_s, 'punkte' => punkte })
+    end
+    punkte_entwicklung.push(punkte_berichte)
     File.write(punkte_entwicklung_file, YAML.dump(punkte_entwicklung))
   end
 
@@ -46,17 +59,8 @@ class StrukturierteBerichteErsteller
     File.join(@basis_verzeichnis, 'data', 'punkte_entwicklung.yml')
   end
 
-  def spiel_berichte_file_fuer_entscheider(entscheider)
-    File.join(@basis_verzeichnis, 'data', "spiel_berichte_#{entscheider}.yml")
-  end
-
-  def lade_spiel_berichte_fuer_entscheider(entscheider)
-    file = spiel_berichte_file_fuer_entscheider(entscheider)
-    if File.exist?(file)
-      YAML.safe_load(File.read(file))
-    else
-      []
-    end
+  def spiel_berichte_file
+    File.join(@basis_verzeichnis, 'data', "spiel_berichte_#{@entscheider_klasse}.yml")
   end
 
   def lade_punkte_entwicklung
@@ -67,13 +71,22 @@ class StrukturierteBerichteErsteller
     end
   end
 
-  def lade_bericht
-    spiel_berichte_pro_entscheider = EntscheiderListe.entscheider_klassen.to_h do |k|
-      [k.to_s, lade_spiel_berichte_fuer_entscheider(k)]
+  def lade_spiel_berichte
+    file = spiel_berichte_file
+    if File.exist?(file)
+      YAML.safe_load(File.read(file))
+    else
+      []
     end
+  end
+
+  def lade_bericht
+    punkte_entwicklung = lade_punkte_entwicklung
+    entscheider_punkte_bericht = finde_entscheider_punkte_bericht(punkte_entwicklung.last)
+    punkte = entscheider_punkte_bericht ? entscheider_punkte_bericht['punkte'] : nil
     {
-      spiel_berichte_pro_entscheider: spiel_berichte_pro_entscheider,
-      punkte_berichte: lade_punkte_entwicklung.last
+      spiel_berichte: lade_spiel_berichte,
+      punkte: punkte
     }
   end
 end

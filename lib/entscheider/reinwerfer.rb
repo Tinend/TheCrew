@@ -66,8 +66,6 @@ class Reinwerfer < Entscheider
     nicht_trumpfs.select { |k| k.wert == min_wert }.sample(random: @zufalls_generator)
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/MethodLength
   def toetlichen_genommenen_stich_abspielen(stich, nehmen_muesser, waehlbare_karten)
     # Wenn wir selbst nehmen müssen, machen wir das.
@@ -110,12 +108,8 @@ class Reinwerfer < Entscheider
     # Dann ist eh egal. Wir nehmen eine möglichst tiefe.
     min_karte(waehlbare_karten)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/MethodLength
 
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/MethodLength
   def abspielen(stich, waehlbare_karten)
     # Wenn dieser Stich eh schon tötlich ist, wenn er nicht durchkommt.
@@ -162,14 +156,10 @@ class Reinwerfer < Entscheider
 
     kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/MethodLength
 
   # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
     # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist und auch nicht schlägt.
     nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
@@ -212,6 +202,4 @@ class Reinwerfer < Entscheider
     waehlbare_karten.sample(random: @zufalls_generator)
   end
   # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
 end

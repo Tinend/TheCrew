@@ -5,6 +5,7 @@ require_relative 'reporter'
 # Dieser Reporter berichtet all seinen subreportern weiter.
 class TeeReporter < Reporter
   def initialize(subreporter)
+    super()
     @subreporter = subreporter
   end
 
@@ -24,20 +25,17 @@ class TeeReporter < Reporter
 
   def berichte_stich(stich:, vermasselte_auftraege:, erfuellte_auftraege:)
     @subreporter.each do |r|
-      r.berichte_stich(stich: stich, vermasselte_auftraege: vermasselte_auftraege, erfuellte_auftraege: erfuellte_auftraege)
+      r.berichte_stich(stich: stich, vermasselte_auftraege: vermasselte_auftraege,
+                       erfuellte_auftraege: erfuellte_auftraege)
     end
   end
 
   def berichte_gewonnen
-    @subreporter.each do |r|
-      r.berichte_gewonnen
-    end
+    @subreporter.each(&:berichte_gewonnen)
   end
 
   def berichte_verloren
-    @subreporter.each do |r|
-      r.berichte_verloren
-    end
+    @subreporter.each(&:berichte_verloren)
   end
 
   def berichte_spiel_statistiken(statistiken)
@@ -48,7 +46,8 @@ class TeeReporter < Reporter
 
   def berichte_gesamt_statistiken(gesamt_statistiken:, gewonnen_statistiken:, verloren_statistiken:)
     @subreporter.each do |r|
-      r.berichte_gesamt_statistiken(gesamt_statistiken: gesamt_statistiken, gewonnen_statistiken: gewonnen_statistiken, verloren_statistiken: verloren_statistiken)
+      r.berichte_gesamt_statistiken(gesamt_statistiken: gesamt_statistiken, gewonnen_statistiken: gewonnen_statistiken,
+                                    verloren_statistiken: verloren_statistiken)
     end
   end
 

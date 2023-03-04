@@ -62,8 +62,6 @@ module GefaehrlicheKartenKommunizierender
   end
 
   # Sagt ja, wenn der Sieger des Stichs bleiben sollte, wenn die Spieler danach halbwegs schlau sind.
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/AbcSize
   def karte_sollte_bleiben?(stich, gespielte_karte)
     # Wenn der Stich gestochen wurde, gehen wir Mal davon aus, dass niemand übersticht.
@@ -99,8 +97,6 @@ module GefaehrlicheKartenKommunizierender
       true
     end
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/AbcSize
 
   def am_zug_beim_kommunizieren?
@@ -117,8 +113,6 @@ module GefaehrlicheKartenKommunizierender
     end
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   def waehle_kommunikation(kommunizierbares)
     # Dieses Modul kommuniziert nie, wenn es selber ausspielt.
     return if am_zug_beim_kommunizieren?
@@ -138,6 +132,4 @@ module GefaehrlicheKartenKommunizierender
     @zaehler_manager.erhoehe_zaehler(:blanke_auftraege_kommunikation)
     blanke_auftraege_kommunikation.sample(random: @zufalls_generator)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
 end

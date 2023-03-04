@@ -1,5 +1,9 @@
-require_relative 'ai_input_ersteller'
+# frozen_string_literal: true
 
+require_relative 'ai_input_ersteller'
+require_relative 'ai_aktions_raum'
+
+# Modell, dass auf Reinforcement Learning mit dem Q-learning Algorithmus basiert.
 class QLearningModell
   ANZAHL_EPOCHEN = 1
   FEHLER_ZWISCHEN_BERICHTEN = 1
@@ -14,10 +18,10 @@ class QLearningModell
   end
 
   def initialize
-    input_laenge = AiInputErsteller.new.input_laenge
+    ai_input_laenge = AiInputErsteller.ai_input_laenge
     @q_nn_model = RubyFann::Standard.new(
-      num_inputs: input_laenge,
-      hidden_neurons: [input_laenge],
+      num_inputs: ai_input_laenge,
+      hidden_neurons: [ai_input_laenge],
       num_outputs: 1
     )
     @q_nn_model.set_learning_rate(LEARNING_RATE)
@@ -32,59 +36,70 @@ class QLearningModell
   end
 
   def inspect
-    "#<QLearningModell @replay_memory_pointer=#{@replay_memory_pointer} @q_nn_model=#{@q_nn_model} @replay_memory.length=#{@replay_memory.length}>"
+    "#<QLearningModell @replay_memory_pointer=#{@replay_memory_pointer} " \
+      "@q_nn_model=#{@q_nn_model} @replay_memory.length=#{@replay_memory.length}>"
   end
 
-  def merke(input, bewertung, alter_input)
-    # Add reward, old_state and inputq state to memory
-    @replay_memory[@replay_memory_pointer] = {bewertung: bewertung, alter_input: alter_input, input: input}
-    # Increment memory pointer
+  def speichere_replay_memory(item)
+    @replay_memory[@replay_memory_pointer] = item
     @replay_memory_pointer = (@replay_memory_pointer + 1) % REPLAY_MEMORY_SIZE
-    if @replay_memory.length >= REPLAY_MEMORY_SIZE
-      trainiere_modell
-    end
   end
-  
-  def trainiere_modell
-    # Randomly sample a batch of actions from the memory and train network with these actions
-    batch = @replay_memory.sample(REPLAY_BATCH_SIZE)
+
+  def zufaelliger_replay_memory_batch
+    @replay_memory.sample(REPLAY_BATCH_SIZE)
+  end
+
+  def merke(ai_input, bewertung, alter_ai_input, ai_aktionen)
+    raise TypeError unless ai_input.nil? || ai_input.is_a?(AiInputErsteller::AiInput)
+    raise TypeError unless alter_ai_input.nil? || alter_ai_input.is_a?(AiInputErsteller::AiInput)
+    raise TypeError unless ai_aktionen.is_a?(Array) && ai_aktionen.all?(AiAktionsRaum::AiAktion)
+    raise ArgumentError if ai_input && ai_aktionen.empty?
+    return if alter_ai_input.nil?
+
+    # Add reward, old_state and inputq state to memory
+    speichere_replay_memory({ bewertung: bewertung, alter_ai_input: alter_ai_input, ai_input: ai_input,
+                              ai_aktionen: ai_aktionen })
+
+    return unless @replay_memory.length >= REPLAY_MEMORY_SIZE
+
+    trainiere_modell
+  end
+
+  def erstelle_trainings_daten
+    batch = zufaelliger_replay_memory_batch
     training_x_data = []
     training_y_data = []
     # For each batch calculate new q_value based on current network and reward
     batch.each do |m|
-      puts "Batch item"
-      # Am Ende des Spiels wird nichts mehr hinzugefügt.
-      unless m[:input]
+      puts 'Batch item'
+      # Am Ende des Spiels wird nichts mehr hinzugefügt. q_value bleibt.
+      unless m[:ai_input]
         # Add to training set
-        training_x_data.push(m[:old_input_state])
+        training_x_data.push(m[:alter_ai_input])
         training_y_data.push(m[:bewertung])
         next
       end
 
-      q_table_row = aktionen.map do |a|
-        # Create neural network input vector for this action
-        input_state_action = m[:input].clone
-        # Set a 1 in the action location of the input vector
-        if a.nil?
-          input_state_action[Karte.alle.length] = 1
-        else
-          input_state_action[AiInputErsteller.karten_index(a)] = 1
-        end
-        # Run the network for this action and get q table row entry
-        @q_nn_model.run(input_state_action).first
+      q_table_row = m[:ai_aktionen].map do |a|
+        ai_input.setze_aktion(a)
+        bewerte(ai_input)
       end
       # Update the q value
-      updated_q_value = m[:bewertung] + DISCOUNT * q_table_row.max
+      updated_q_value = m[:bewertung] + (DISCOUNT * q_table_row.max)
       # Add to training set
-      training_x_data.push(m[:old_input_state])
+      training_x_data.push(m[:alter_ai_input])
       training_y_data.push([updated_q_value])
     end
-    # Train network with batch
-    train = RubyFann::TrainData.new(inputs: training_x_data, desired_outputs: training_y_data)
-    @q_nn_model.train_on_data(train, ANZAHL_EPOCHEN, FEHLER_ZWISCHEN_BERICHTEN, GEWUENSCHTER_MITTLERER_QUADRATISCHER_FEHLER)
+    RubyFann::TrainData.new(inputs: training_x_data, desired_outputs: training_y_data)
   end
 
-  def bewerte(input)
-    @q_nn_model.run(input).first
+  def trainiere_modell
+    train = erstelle_trainings_daten
+    @q_nn_model.train_on_data(train, ANZAHL_EPOCHEN, FEHLER_ZWISCHEN_BERICHTEN,
+                              GEWUENSCHTER_MITTLERER_QUADRATISCHER_FEHLER)
+  end
+
+  def bewerte(ai_input)
+    @q_nn_model.run(ai_input.input_array).first
   end
 end

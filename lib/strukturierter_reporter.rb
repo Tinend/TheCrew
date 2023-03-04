@@ -8,11 +8,9 @@ class StrukturierterReporter < Reporter
   def initialize
     super()
     @spiel_berichte = []
-    @spiel_berichte_pro_entscheider = {}
-    @punkte_berichte = []
   end
 
-  attr_reader :spiel_berichte_pro_entscheider, :punkte_berichte
+  attr_reader :spiel_berichte, :punkte
 
   def karte_string(karte)
     "#{karte.farbe.name} #{karte.wert}"
@@ -69,14 +67,9 @@ class StrukturierterReporter < Reporter
 
   def berichte_gesamt_statistiken(gesamt_statistiken:, gewonnen_statistiken:, verloren_statistiken:); end
 
+  # rubocop:disable Lint/UnusedMethodArgument
   def berichte_punkte(entscheider:, punkte:)
-    @spiel_berichte_pro_entscheider[entscheider.to_s] = @spiel_berichte
-    @spiel_berichte = []
-    @punkte_berichte.push(
-      {
-        'entscheider' => entscheider.to_s,
-        'punkte' => punkte
-      }
-    )
+    @punkte = punkte
   end
+  # rubocop:enable Lint/UnusedMethodArgument
 end
