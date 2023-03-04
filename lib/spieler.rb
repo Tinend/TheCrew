@@ -14,6 +14,8 @@ class Spieler
     @kann_kommunizieren = true
   end
 
+  attr_reader :entscheider
+
   def auftraege
     @spiel_informations_sicht.eigene_auftraege
   end
@@ -49,7 +51,7 @@ class Spieler
 
   def waehl_auftrag(auftraege)
     auftrag = @entscheider.waehl_auftrag(auftraege)
-    raise 'Entscheider hat einen nicht existierenden Auftrag gewaehlt.' unless auftraege.include?(auftrag)
+    raise "Entscheider hat nicht existierenden Auftrag #{auftrag} gewaehlt." unless auftraege.include?(auftrag)
 
     auftrag
   end

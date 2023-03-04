@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'spiel_ersteller'
+require 'statistiker'
 
 # Modul, dass ein Turnier organisiert mit den gegebenen Einstellungen.
 module TurnierOrganisator

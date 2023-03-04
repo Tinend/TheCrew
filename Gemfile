@@ -5,6 +5,7 @@
 source 'https://rubygems.org'
 
 gem 'colorize'
+gem 'ruby-fann'
 
 group :development, :test do
   gem 'rake'

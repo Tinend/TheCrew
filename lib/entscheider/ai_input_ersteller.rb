@@ -1,16 +1,35 @@
 require_relative '../karte'
 
-module AiInputErstellender
+class AiInputErsteller
   MIN_SPIELER = 2
   MAX_SPIELER = 5
-  ANZAHL_KARTEN = 40
 
-  def karten_index(karte)
+  def self.karten_index(karte)
     Karte.alle.index(karte)
   end
 
+  class AktionInputTeil
+    def fuelle(_spiel_informations_sicht, aktions_art, _input, _basis_index); end
+
+    def laenge
+      Karte.alle.length + 1
+    end
+  end
+
+  class AktionsArtInputTeil
+    AKTIONS_ARTEN = [:kommunikation, :auftrag, :karte]
+
+    def fuelle(_spiel_informations_sicht, aktions_art, input, basis_index)
+      input[basis_index + AKTIONEN.index(aktion)] = 1
+    end
+
+    def laenge
+      3
+    end
+  end
+
   class AnzahlSpielerInputTeil
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       input[basis_index + spiel_informations_sicht.anzahl_spieler - MIN_SPIELER] = 1
     end
 
@@ -20,7 +39,7 @@ module AiInputErstellender
   end
 
   class KapitaenIndexInputTeil
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       input[basis_index + spiel_informations_sicht.kapitaen_index] = 1
     end
 
@@ -30,9 +49,9 @@ module AiInputErstellender
   end
 
   class HandKartenInputTeil
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       spiel_informations_sicht.karten.each do |k|
-        input[basis_index + karten_index(k)] = 1
+        input[basis_index + AiInputErsteller.karten_index(k)] = 1
       end
     end
 
@@ -46,7 +65,7 @@ module AiInputErstellender
       @spieler_index = spieler_index
     end
 
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       return if @spieler_index >= spiel_informations_sicht.anzahl_spieler
 
       anzahl_karten = spiel_informations_sicht.anzahl_karten(spieler_index: @spieler_index)
@@ -63,12 +82,12 @@ module AiInputErstellender
       @spieler_index = spieler_index
     end
 
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       return if @spieler_index >= spiel_informations_sicht.anzahl_spieler
 
       auftraege = spiel_informations_sicht.auftraege[@spieler_index]
       auftraege.each do |a|
-        input[basis_index + karten_index(a.karte)] = 1
+        input[basis_index + AiInputErsteller.karten_index(a.karte)] = 1
       end
     end
 
@@ -82,13 +101,13 @@ module AiInputErstellender
       @spieler_index = spieler_index
     end
 
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       return if @spieler_index >= spiel_informations_sicht.anzahl_spieler
 
       kommunikation = spiel_informations_sicht.kommunikationen[@spieler_index]
       return unless kommunikation
 
-      input[basis_index + karten_index(kommunikation.karte)] = 1
+      input[basis_index + AiInputErsteller.karten_index(kommunikation.karte)] = 1
     end
 
     def laenge
@@ -101,13 +120,13 @@ module AiInputErstellender
       @spieler_index = spieler_index
     end
 
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       return if @spieler_index >= spiel_informations_sicht.anzahl_spieler
 
       kommunikation = spiel_informations_sicht.kommunikationen[@spieler_index]
       return unless kommunikation
 
-      kommunikations_art_index = Kommunikatino::ARTEN.index(kommunikation.art)
+      kommunikations_art_index = Kommunikation::ARTEN.index(kommunikation.art)
       input[basis_index + kommunikations_art_index] = 1
     end
 
@@ -121,7 +140,7 @@ module AiInputErstellender
       @spieler_index = spieler_index
     end
 
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       return if @spieler_index >= spiel_informations_sicht.anzahl_spieler
 
       kommunikation = spiel_informations_sicht.kommunikationen[@spieler_index]
@@ -135,19 +154,37 @@ module AiInputErstellender
     end
   end
 
-  class GespielteKarteInputTeil
+  class GegangeneKarteInputTeil
     def initialize(stich_index, karten_index)
       @stich_index = stich_index
       @karten_index = karten_index
     end
 
-    def fuelle(spiel_informations_sicht, input, basis_index)
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       return if @stich_index >= spiel_informations_sicht.stiche.length
       return if @karten_index >= spiel_informations_sicht.anzahl_spieler
 
       stich = spiel_informations_sicht.stiche[@stich_index]
       karte = stich.karten[@karten_index]
-      input[basis_index + karten_index(karte)] = 1
+      input[basis_index + AiInputErsteller.karten_index(karte)] = 1
+    end
+
+    def laenge
+      Karte.alle.length * MAX_SPIELER
+    end
+  end
+
+  class AktuelleStichKarteInputTeil
+    def initialize(karten_index)
+      @karten_index = karten_index
+    end
+
+    def fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
+      return unless spiel_informations_sicht.aktiver_stich
+      return if @karten_index >= spiel_informations_sicht.aktiver_stich.length
+
+      karte = spiel_informations_sicht.aktiver_stich.karten[@karten_index]
+      input[basis_index + AiInputErsteller.karten_index(karte)] = 1
     end
 
     def laenge
@@ -157,6 +194,7 @@ module AiInputErstellender
 
   def input_teile
     @input_teile ||= [
+      AktionInputTeil.new,
       AnzahlSpielerInputTeil.new,
       KapitaenIndexInputTeil.new,
       HandKartenInputTeil.new
@@ -167,11 +205,13 @@ module AiInputErstellender
         KommunizierteKarteInputTeil.new(spieler_index),
         KommunikationsArtInputTeil.new(spieler_index),
         KommunikationsGegangeneSticheInputTeil.new(spieler_index)
-      ] + (0...(Karte.alle.length / MIN_SPIELER)).flat_map do |runde_index|
-        (0...MAX_SPIELER).map do |karten_index|
-          GespielteKarteInputTeil.new(runde_index, karten_index)
-        end
+      ]
+    end + (0...(Karte.alle.length / MIN_SPIELER)).flat_map do |runde_index|
+      (0...MAX_SPIELER).map do |karten_index|
+        GegangeneKarteInputTeil.new(runde_index, karten_index)
       end
+    end + (0...MAX_SPIELER).map do |karten_index|
+      AktuelleStichKarteInputTeil.new(karten_index)
     end
   end
 
@@ -179,11 +219,11 @@ module AiInputErstellender
     input_teile.map { |t| t.laenge }.reduce(:+)
   end
 
-  def spiel_informations_sicht_zu_input(spiel_informations_sicht)
+  def input(spiel_informations_sicht, aktions_art)
     input = Array.new(input_laenge, 0)
     basis_index = 0
     input_teile.each do |t|
-      t.fuelle(spiel_informations_sicht, input, basis_index)
+      t.fuelle(spiel_informations_sicht, aktions_art, input, basis_index)
       basis_index += t.laenge
     end
     input

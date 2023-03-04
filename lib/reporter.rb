@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'statistiker'
-
 # Diese Klasse berichtet über alles, was im Spiel passiert.
 class Reporter
   def berichte_start_situation(karten:, auftraege:)

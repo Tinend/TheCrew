@@ -83,6 +83,8 @@ class SpielInformation
       @spieler_index = spieler_index
     end
 
+    attr_reader :aktiver_stich
+
     def erhalte_aktiven_stich(aktiver_stich)
       @aktiver_stich = aktiver_stich
     end
