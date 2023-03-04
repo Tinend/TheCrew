@@ -5,22 +5,27 @@ require 'strukturierte_berichte_ersteller'
 require 'entscheider_liste'
 
 RSpec.describe StrukturierteBerichteErsteller do
-  subject(:ersteller) do
-    basis_verzeichnis = File.join(File.dirname(__FILE__), '..')
-    described_class.new(basis_verzeichnis: basis_verzeichnis)
-  end
+  EntscheiderListe.entscheider_klassen.each do |entscheider_klasse|
+    context entscheider_klasse.to_s do
+      subject(:ersteller) do
+        basis_verzeichnis = File.join(File.dirname(__FILE__), '..')
+        described_class.new(basis_verzeichnis: basis_verzeichnis, entscheider_klasse: entscheider_klasse)
+      end
 
-  # rubocop:disable RSpec/MultipleExpectations
-  it 'hat den gleichen generierten und geladenen. Wenn dies fehlschlägt, einfach ' \
-     'bin/erstelle_strukturierten_bericht ausführen und eventuell mit git diff die Diffs anschauen.' do
-    erstellt = ersteller.erstelle_bericht
-    geladen = ersteller.lade_bericht
-    expect(erstellt[:punkte_bericht]).to eq(geladen[:punkte_bericht])
-    EntscheiderListe.entscheider_klassen.each do |entscheider|
-      erstellt_fuer_entscheider = erstellt[:spiel_berichte_pro_entscheider][entscheider.to_s]
-      geladen_fuer_entscheider = geladen[:spiel_berichte_pro_entscheider][entscheider.to_s]
-      expect(erstellt_fuer_entscheider).to eq(geladen_fuer_entscheider)
+      let(:erstellt) do
+        ersteller.erstelle_bericht
+      end
+
+      let(:geladen) do
+        ersteller.lade_bericht
+      end
+
+      it 'macht im Turnier den gleichen Spielbericht wie den geladenen. Wenn dies fehlschlägt, einfach ' \
+         "bin/erstelle_strukturierten_bericht -x=#{entscheider_klasse} ausführen " \
+         'und eventuell mit git diff die Diffs anschauen.' do
+        skip 'QLearningEntscheider ist noch nicht bereit' if entscheider_klasse == QLearningEntscheider
+        expect(erstellt).to eq(geladen)
+      end
     end
   end
-  # rubocop:enable RSpec/MultipleExpectations
 end

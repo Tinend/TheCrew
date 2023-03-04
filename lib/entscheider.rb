@@ -28,4 +28,9 @@ class Entscheider
 
   # Macht nix wenn nicht neu definiert.
   def vorbereitungs_phase; end
+
+  # Der Reporter, der diesem Spieler weiter leitet, was im Spiel passiert.
+  # Kann zum Beispiel benutzt werden, um ihn nach einem Verlust zu benachrichtigen.
+  # Macht nix wenn nicht neu definiert.
+  def reporter; end
 end

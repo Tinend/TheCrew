@@ -49,11 +49,11 @@ class Statistiker
   end
 
   def verloren_statistiken
-    @gesamt_statistiker.statistiken
+    @verloren_statistiker.statistiken
   end
 
   def gewonnen_statistiken
-    @gesamt_statistiker.statistiken
+    @gewonnen_statistiker.statistiken
   end
 
   def gesamt_statistiken

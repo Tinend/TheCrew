@@ -17,6 +17,10 @@ class BekannteKartenTracker
 
   attr_reader :sichere_karten, :moegliche_karten
 
+  def aktiver_stich_karten
+    @aktiver_stich&.karten || []
+  end
+
   def anfangs_moegliche_karten
     kapitaen_index = @spiel_informations_sicht.kapitaen_index
     ungegangene_karten = Karte.alle - @spiel_informations_sicht.stiche.flat_map(&:karten)
@@ -25,9 +29,9 @@ class BekannteKartenTracker
       when 0
         @spiel_informations_sicht.karten.dup
       when kapitaen_index
-        ungegangene_karten - @spiel_informations_sicht.karten - @aktiver_stich.karten
+        ungegangene_karten - @spiel_informations_sicht.karten - aktiver_stich_karten
       else
-        ungegangene_karten - @spiel_informations_sicht.karten - [Karte.max_trumpf] - @aktiver_stich.karten
+        ungegangene_karten - @spiel_informations_sicht.karten - [Karte.max_trumpf] - aktiver_stich_karten
       end
     end
   end
@@ -39,7 +43,7 @@ class BekannteKartenTracker
       when 0
         @spiel_informations_sicht.karten.dup
       when kapitaen_index
-        [Karte.max_trumpf] - @spiel_informations_sicht.stiche.flat_map(&:karten) - @aktiver_stich.karten
+        [Karte.max_trumpf] - @spiel_informations_sicht.stiche.flat_map(&:karten) - aktiver_stich_karten
       else
         []
       end
@@ -67,7 +71,7 @@ class BekannteKartenTracker
   end
 
   def hat_nachher_andere_karte_dieser_farbe_gespielt(spieler_index, kommunikation)
-    (@spiel_informations_sicht.stiche[kommunikation.gegangene_stiche..] + [@aktiver_stich]).any? do |s, _i|
+    (@spiel_informations_sicht.stiche[kommunikation.gegangene_stiche..] + [@aktiver_stich].compact).any? do |s, _i|
       s.gespielte_karten.any? do |k|
         k.karte != kommunikation.karte &&
           k.karte.farbe == kommunikation.karte.farbe && k.spieler_index == spieler_index
@@ -90,7 +94,7 @@ class BekannteKartenTracker
   end
 
   def beachte_blankheit
-    (@spiel_informations_sicht.stiche + [@aktiver_stich]).each do |s|
+    (@spiel_informations_sicht.stiche + [@aktiver_stich].compact).each do |s|
       s.gespielte_karten.each do |g|
         # Spieler hat nicht angegeben.
         @moegliche_karten[g.spieler_index].delete_if { |k| k.farbe == s.farbe } if g.karte.farbe != s.farbe
@@ -107,7 +111,7 @@ class BekannteKartenTracker
   end
 
   def ist_gegangen?(karte)
-    (@spiel_informations_sicht.stiche + [@aktiver_stich]).flat_map(&:karten).include?(karte)
+    (@spiel_informations_sicht.stiche + [@aktiver_stich].compact).flat_map(&:karten).include?(karte)
   end
 
   def beachte_kommunikation(spieler_index, kommunikation)

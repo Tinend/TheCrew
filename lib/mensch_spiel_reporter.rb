@@ -22,6 +22,6 @@ class MenschSpielReporter < PutsReporter
   end
 
   def berichte_kommunikation(spieler_index:, kommunikation:)
-    super(spieler_index: spieler_index, kommunikation: kommunikation) unless spieler_index.zero?
+    super unless spieler_index.zero?
   end
 end

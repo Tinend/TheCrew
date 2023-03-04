@@ -14,6 +14,8 @@ class Spieler
     @kann_kommunizieren = true
   end
 
+  attr_reader :entscheider
+
   def auftraege
     @spiel_informations_sicht.eigene_auftraege
   end
@@ -40,7 +42,7 @@ class Spieler
     return unless kommunikation
 
     unless waehlbare.include?(kommunikation)
-      raise 'Entscheider hat eine unmögliche Kommunikation gewaehlt.' \
+      raise 'Entscheider hat eine unmögliche Kommunikation gewaehlt. ' \
             "Waehlbare: #{waehlbare.join(' ')}; gewaehlt: #{kommunikation}"
     end
     @kann_kommunizieren = false
@@ -49,7 +51,7 @@ class Spieler
 
   def waehl_auftrag(auftraege)
     auftrag = @entscheider.waehl_auftrag(auftraege)
-    raise 'Entscheider hat einen nicht existierenden Auftrag gewaehlt.' unless auftraege.include?(auftrag)
+    raise "Entscheider hat nicht existierenden Auftrag #{auftrag} gewaehlt." unless auftraege.include?(auftrag)
 
     auftrag
   end
@@ -77,6 +79,7 @@ class Spieler
       raise 'Entscheider hat eine nicht spielbare Karte gewaehlt.' \
             "Waehlbare: #{waehlbare.join(' ')}; gewaehlt: #{karte}"
     end
+    @spiel_informations_sicht.entferne_aktiven_stich
 
     karte
   end

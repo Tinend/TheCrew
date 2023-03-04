@@ -9,7 +9,7 @@ class KartenVerwalter
     @karten = karten
   end
 
-  def verteilen(zufalls_generator: Random.new)
+  def verteilen(zufalls_generator:)
     @karten.shuffle!(random: zufalls_generator)
     anzahl_spieler = @spiel_information.anzahl_spieler
     blattgroesse = @karten.length / anzahl_spieler

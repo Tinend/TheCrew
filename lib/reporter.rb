@@ -1,8 +1,6 @@
 # coding: utf-8
 # frozen_string_literal: true
 
-require_relative 'statistiker'
-
 # Diese Klasse berichtet über alles, was im Spiel passiert.
 class Reporter
   def initialize(statistiken_ausgeben: false)

@@ -22,15 +22,17 @@ class Karte
       (f.min_wert..f.max_wert).map do |w|
         new(farbe: f, wert: w)
       end
-    end
+    end.freeze
   end
 
   def self.alle_truempfe
-    @alle_truempfe ||= (Farbe::RAKETE.min_wert..Farbe::RAKETE.max_wert).map { |w| new(farbe: Farbe::RAKETE, wert: w) }
+    @alle_truempfe ||= (Farbe::RAKETE.min_wert..Farbe::RAKETE.max_wert).map do |w|
+      new(farbe: Farbe::RAKETE, wert: w)
+    end.freeze
   end
 
   def self.alle
-    @alle ||= alle_normalen + alle_truempfe
+    @alle ||= (alle_normalen + alle_truempfe).freeze
   end
 
   def self.alle_mit_farbe(farbe)

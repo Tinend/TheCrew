@@ -46,8 +46,10 @@ class Cowboy < Entscheider
   end
 
   def durchbringbare_auftrags_karten(waehlbare_karten)
+    schlechte_farben = blanke_auftrags_farben_anderer
     (waehlbare_karten & auftrags_karten(0)).select do |k|
-      karte_sollte_bleiben?(Stich.new, Stich::GespielteKarte.new(karte: k, spieler_index: 0))
+      karte_sollte_bleiben?(Stich.new, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) &&
+        !schlechte_farben.include?(k.farbe)
     end
   end
 
@@ -55,13 +57,40 @@ class Cowboy < Entscheider
     auftrags_forderungs_farben = (auftrags_karten(0) - karten).map(&:farbe).uniq
     (waehlbare_karten - alle_auftrags_karten).select do |k|
       karte_sollte_bleiben?(Stich.new, Stich::GespielteKarte.new(karte: k, spieler_index: 0)) &&
-        auftrags_forderungs_farben.any? { |f| k.farbe == f }
+        auftrags_forderungs_farben.any? { |f| k.farbe == f } &&
+        !blanke_auftrags_farben_anderer.include?(k.farbe)
+    end
+  end
+
+  def blanke_auftrags_farben
+    Farbe::NORMALE_FARBEN.select do |farbe|
+      andere_spieler_indizes(0).any? do |i|
+        moegliche_karten_der_farbe = @spiel_informations_sicht.moegliche_karten(i).select do |k|
+          k.farbe == farbe
+        end
+        # Wenn der Spieler mindestens eine Karte der Farbe hat und
+        # alle Karten der Farbe Auftragskarten sind, ist die Farbe gefährlich
+        !moegliche_karten_der_farbe.empty? && (moegliche_karten_der_farbe - alle_auftrags_karten).empty?
+      end
+    end
+  end
+
+  def blanke_auftrags_farben_anderer
+    Farbe::NORMALE_FARBEN.select do |farbe|
+      andere_spieler_indizes(0).any? do |i|
+        moegliche_karten_der_farbe = @spiel_informations_sicht.moegliche_karten(i).select do |k|
+          k.farbe == farbe
+        end
+        # Wenn der Spieler mindestens eine Karte der Farbe hat und
+        # alle Karten der Farbe Auftragskarten sind, ist die Farbe gefährlich
+        !moegliche_karten_der_farbe.empty? && (moegliche_karten_der_farbe - auftrags_karten_anderer(0)).empty?
+      end
     end
   end
 
   # Karten, die eine Farbe weg ziehen, wo man selber eine Auftragskarte durch bringen will.
   def farbe_ziehende_karten(waehlbare_karten)
-    zieh_farben = (auftrags_karten(0) & karten).map(&:farbe).uniq
+    zieh_farben = (auftrags_karten(0) & karten).map(&:farbe).uniq - blanke_auftrags_farben
     (waehlbare_karten - alle_auftrags_karten).select do |k|
       zieh_farben.any? { |f| k.farbe == f }
     end
@@ -79,24 +108,38 @@ class Cowboy < Entscheider
     auftrags_karten(0).empty? ? altruistisch_anspielen(waehlbare_karten) : egoistisch_anspielen(waehlbare_karten)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def egoistisch_anspielen(waehlbare_karten)
     @zaehler_manager.erhoehe_zaehler(:egositisch_anspielen)
 
     # TODO: Wissentlich Aufträge zerstören verhindern.
     durchbringbare = durchbringbare_auftrags_karten(waehlbare_karten)
-    durchbringbare.sample(random: @zufalls_generator) unless durchbringbare.empty?
+    unless durchbringbare.empty?
+      @zaehler_manager.erhoehe_zaehler(:durchbringbare)
+      durchbringbare.sample(random: @zufalls_generator)
+    end
 
     fordernde = auftrag_fordernde_karten(waehlbare_karten)
-    max_karte(fordernde) unless fordernde.empty?
+    unless fordernde.empty?
+      @zaehler_manager.erhoehe_zaehler(:fordernde)
+      return max_karte(fordernde)
+    end
 
     farb_ziehende = farbe_ziehende_karten(waehlbare_karten)
-    max_karte(farb_ziehende) unless farb_ziehende.empty?
+    unless farb_ziehende.empty?
+      @zaehler_manager.erhoehe_zaehler(:farb_ziehende)
+      return max_karte(farb_ziehende)
+    end
 
     alles_ziehende = alles_ziehende_karten(waehlbare_karten)
-    max_karte(farb_ziehende) unless alles_ziehende.empty?
+    unless alles_ziehende.empty?
+      @zaehler_manager.erhoehe_zaehler(:alles_ziehende)
+      max_karte(alles_ziehende)
+    end
 
     altruistisch_anspielen(waehlbare_karten)
   end
+  # rubocop:enable Metrics/MethodLength
 
   def hilfreich_angespielte_auftrags_karten(waehlbare_karten)
     (waehlbare_karten & auftrags_karten_anderer(0)).select do |karte|
@@ -161,14 +204,12 @@ class Cowboy < Entscheider
 
   def min_karte(karten)
     nicht_trumpfs = nicht_truempfe(karten)
-    return karten.max_by(&:wert) if nicht_trumpfs.empty?
+    return karten.min_by(&:wert) if nicht_trumpfs.empty?
 
     min_wert = nicht_trumpfs.map(&:wert).min
     nicht_trumpfs.select { |k| k.wert == min_wert }.sample(random: @zufalls_generator)
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def toetlichen_genommenen_stich_abspielen(stich, nehmen_muesser, waehlbare_karten)
@@ -178,9 +219,13 @@ class Cowboy < Entscheider
     if nehmen_muesser.zero?
       # Wenn wir eine gute Option haben, machen wir das.
       gute_karten = auftrags_nehmende_karten(waehlbare_karten, stich)
-      return max_karte(gute_karten) unless gute_karten.empty?
+      unless gute_karten.empty?
+        @zaehler_manager.erhoehe_zaehler(:selber_nehmen_muesser_gut)
+        return max_karte(gute_karten)
+      end
 
       # Ansonsten versuchen wir, was wir können.
+      @zaehler_manager.erhoehe_zaehler(:selber_nehmen_muesser_schlecht)
       return max_karte(waehlbare_karten)
     end
 
@@ -214,13 +259,9 @@ class Cowboy < Entscheider
     # Dann ist eh egal. Wir nehmen eine möglichst tiefe.
     min_karte(waehlbare_karten)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
-  # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
   def abspielen(stich, waehlbare_karten)
@@ -286,21 +327,19 @@ class Cowboy < Entscheider
 
     kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
   # Wenn es ziemlich schlecht aussieht, versucht diese Funktion, irgendwie zu verhindern, dass wir sofort verlieren.
-  # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def kleinstes_uebel(stich, waehlbare_karten, nehmende_karten, sollte_bleiben)
     @zaehler_manager.erhoehe_zaehler(:kleinstes_uebel)
 
     # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist und auch nicht schlägt.
     nicht_destruktive_karten = undestruktive_nicht_schlagende_karten(stich, waehlbare_karten)
     unless nicht_destruktive_karten.empty?
-      @zaehler_manager.erhoehe_zaehler(:nicht_destruktive_karten)
+      @zaehler_manager.erhoehe_zaehler(:nicht_destruktive_nicht_schlagende_karten)
       return nicht_destruktive_karten.sample(random: @zufalls_generator)
     end
 
@@ -324,6 +363,13 @@ class Cowboy < Entscheider
       end
     end
 
+    # Dann wenn möglich eine Karte werfen, die keine Auftragskarte ist.
+    nicht_destruktive_karten = waehlbare_karten - alle_auftrags_karten
+    unless nicht_destruktive_karten.empty?
+      @zaehler_manager.erhoehe_zaehler(:nicht_destruktive_karten)
+      return nicht_destruktive_karten.sample(random: @zufalls_generator)
+    end
+
     # Dann wenn möglich eine Karte werfen, die uns nicht sofort verlieren lässt
     # unter der unklaren Annahme, dass der Stich Sieger bleibt.
     hoffnungsvoll_bleibende_karten = undestruktive_nicht_schlagende_karten_wenn_bleibt(stich, waehlbare_karten)
@@ -332,8 +378,9 @@ class Cowboy < Entscheider
       return hoffnungsvoll_bleibende_karten.sample(random: @zufalls_generator)
     end
 
-    # Dann wenn möglich eine Karte werfen, die eine Auftragskarte eines Spielers danach ist.
-    hoffnungsvoll_geschlagene_karten = auftrags_karten_danach(stich)
+    # Dann wenn möglich eine Karte werfen, die eine Auftragskarte von einem selbst oder
+    # eines Spielers danach ist.
+    hoffnungsvoll_geschlagene_karten = auftrags_karten_danach(stich) + auftrags_karten(0)
     unless hoffnungsvoll_geschlagene_karten.empty?
       @zaehler_manager.erhoehe_zaehler(:hoffnungsvoll_geschlagene_karten)
       min_karte(hoffnungsvoll_geschlagene_karten)
@@ -343,7 +390,7 @@ class Cowboy < Entscheider
     @zaehler_manager.erhoehe_zaehler(:schon_verloren)
     waehlbare_karten.sample(random: @zufalls_generator)
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end
 # rubocop:enable Metrics/ClassLength
