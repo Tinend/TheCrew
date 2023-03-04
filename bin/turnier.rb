@@ -72,5 +72,6 @@ loop do
   TurnierOrganisator.organisiere_turnier(turnier_einstellungen: einstellungen, seed: SEED + i,
                                          entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new)
   break unless unendlich_setzer
+
   i += 1
 end

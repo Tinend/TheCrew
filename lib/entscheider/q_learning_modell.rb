@@ -67,36 +67,41 @@ class QLearningModell
     trainiere_modell
   end
 
+  def item_zu_trainings_daten(_item, _traning_x_data, _trainig_y_data)
+    # Am Ende des Spiels wird nichts mehr hinzugefügt. q_value bleibt.
+    unless m[:ai_input]
+      # Add to training set
+      training_x_data.push(m[:alter_ai_input].input_array)
+      training_y_data.push(m[:bewertung])
+      return
+    end
+
+    ai_input = m[:ai_input].dup
+    q_table_row = m[:ai_aktionen].map do |a|
+      ai_input.setze_aktion(a)
+      bewerte(ai_input)
+    end
+    # Update the q value
+    updated_q_value = m[:bewertung] + (DISCOUNT * q_table_row.max)
+    # Add to training set
+    training_x_data.push(m[:alter_ai_input].input_array)
+    training_y_data.push([updated_q_value])
+  end
+
   def erstelle_trainings_daten
     batch = zufaelliger_replay_memory_batch
     training_x_data = []
     training_y_data = []
-    puts "    Trainingsdaten werden erstellt"
-    progressbar = ProgressBar.create(total: batch.length)
+    puts '    Trainingsdaten werden erstellt'
+    progress_bar = ProgressBar.create(total: batch.length)
     start = Time.now
     # For each batch calculate new q_value based on current network and reward
     batch.each do |m|
-      progressbar.increment
-      # Am Ende des Spiels wird nichts mehr hinzugefügt. q_value bleibt.
-      unless m[:ai_input]
-        # Add to training set
-        training_x_data.push(m[:alter_ai_input].input_array)
-        training_y_data.push(m[:bewertung])
-        next
-      end
-
-      ai_input = m[:ai_input].dup
-      q_table_row = m[:ai_aktionen].map do |a|
-        ai_input.setze_aktion(a)
-        bewerte(ai_input)
-      end
-      # Update the q value
-      updated_q_value = m[:bewertung] + (DISCOUNT * q_table_row.max)
-      # Add to training set
-      training_x_data.push(m[:alter_ai_input].input_array)
-      training_y_data.push([updated_q_value])
+      progress_bar.increment
+      item_zu_trainings_daten(m, traning_x_data, trainig_y_data)
     end
-    puts "    #{Time.now-start} Sekunden Trainings Daten erstellt"
+
+    puts "    #{Time.now - start} Sekunden Trainings Daten erstellt"
     ueberpruefe_trainings_daten(training_x_data, training_y_data)
     RubyFann::TrainData.new(inputs: training_x_data, desired_outputs: training_y_data)
   end
@@ -106,21 +111,19 @@ class QLearningModell
     raise TypeError unless training_x_data.all?(Array)
     raise TypeError unless training_x_data.all? { |x| x.all?(Integer) }
     raise TypeError unless training_y_data.is_a?(Array)
+    raise TypeError unless training_y_data.all?(Array)
+    raise TypeError unless training_y_data.all? { |x| x.all?(Float) }
     raise ArgumentError unless training_x_data.length == training_y_data.length
     raise TypeError unless training_x_data.all? { |x| x.length == AiInputErsteller.ai_input_laenge }
-
-    training_y_data.each do |f|
-      raise TypeError, "#{f} is not a float" unless f.is_a?(Float)
-    end
   end
 
   def trainiere_modell
     train = erstelle_trainings_daten
-    puts "    Modell wird neu trainiert"
+    puts '    Modell wird neu trainiert'
     start = Time.now
     @q_nn_model.train_on_data(train, ANZAHL_EPOCHEN, FEHLER_ZWISCHEN_BERICHTEN,
                               GEWUENSCHTER_MITTLERER_QUADRATISCHER_FEHLER)
-    puts "    #{Time.now-start} Sekunden trainiert"
+    puts "    #{Time.now - start} Sekunden trainiert"
   end
 
   def bewerte(ai_input)

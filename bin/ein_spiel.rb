@@ -60,5 +60,6 @@ loop do
                                         reporter: reporter, statistiker: Statistiker.new)
   spiel.spiele
   break unless unendlich_setzer
+
   i += 1
 end

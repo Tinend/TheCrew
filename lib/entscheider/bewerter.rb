@@ -23,7 +23,7 @@ class Bewerter
 
   def bewerte(spiel_informations_sicht)
     bewertung = EIGENER_AUFTRAG_ERFUELLT_BEWERTUNG * spiel_informations_sicht.auftraege[0].count(&:erfuellt)
-    bewertung += ANDERER_AUFTRAG_ERFUELLT_BEWERTUNG * spiel_informations_sicht.auftraege[1..-1].flatten.count(&:erfuellt)
+    bewertung += ANDERER_AUFTRAG_ERFUELLT_BEWERTUNG * spiel_informations_sicht.auftraege[1..].flatten.count(&:erfuellt)
     bewertung
   end
 end
