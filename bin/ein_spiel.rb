@@ -9,6 +9,7 @@ require 'ein_spiel_hilfe'
 require 'spiel_ersteller'
 require 'puts_reporter'
 require 'stackprof'
+require 'statistiker'
 
 seed_setzer = nil
 auftrag_setzer = nil
