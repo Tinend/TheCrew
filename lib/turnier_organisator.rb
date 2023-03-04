@@ -23,14 +23,13 @@ module TurnierOrganisator
                                entscheider_klassen:,
                                seed:,
                                reporter:)
-    zufalls_generator = Random.new(seed)
     entscheider_klassen.each do |entscheider_klasse|
-      persoenlicher_zufalls_generator = zufalls_generator.dup
+      zufalls_generator = Random.new(seed)
       punkte = 0
       statistiker = Statistiker.new
       turnier_einstellungen.anzahl_spiele.times do
         spiel = SpielErsteller.erstelle_spiel(anzahl_spieler: turnier_einstellungen.anzahl_spieler,
-                                              zufalls_generator: persoenlicher_zufalls_generator,
+                                              zufalls_generator: zufalls_generator,
                                               entscheider_klasse: entscheider_klasse,
                                               anzahl_auftraege: turnier_einstellungen.anzahl_auftraege,
                                               reporter: reporter,

@@ -13,7 +13,7 @@ class Auftrag
   attr_reader :karte, :erfuellt
 
   def self.alle
-    Karte.alle_normalen.map { |karte| new(karte) }
+    Karte.alle_normalen.map { |karte| new(karte) }.freeze
   end
 
   def erfuellen(karte)

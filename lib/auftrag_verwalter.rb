@@ -11,7 +11,7 @@ class AuftragVerwalter
 
   attr_reader :ausgelegte_auftraege
 
-  def auftraege_ziehen(anzahl:, zufalls_generator: Random.new)
+  def auftraege_ziehen(anzahl:, zufalls_generator:)
     @auftraege.shuffle!(random: zufalls_generator)
     @ausgelegte_auftraege = @auftraege[0...anzahl]
     @ausgelegte_auftraege.each(&:aktivieren)

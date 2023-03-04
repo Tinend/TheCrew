@@ -80,6 +80,7 @@ class QLearningModell
         next
       end
 
+      ai_input = m[:ai_input].dup
       q_table_row = m[:ai_aktionen].map do |a|
         ai_input.setze_aktion(a)
         bewerte(ai_input)

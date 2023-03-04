@@ -24,6 +24,10 @@ class AiInputErsteller
 
     attr_reader :input_array
 
+    def ==(other)
+      @input_array == other.input_array
+    end
+
     def setze_aktion(ai_aktion)
       AiAktionsRaum.maximal_laenge.times { |i| @input_array[i] = 0 }
       @input_array[ai_aktion.index] = 1
