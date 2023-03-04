@@ -66,14 +66,14 @@
   - spieler_index: 0
     karte: grün 2
     art: einzige
+  - spieler_index: 1
+    karte: grün 7
+    art: tiefste
   - spieler_index: 2
     karte: rot 3
     art: einzige
   - spieler_index: 3
     karte: grün 6
-    art: einzige
-  - spieler_index: 1
-    karte: grün 7
     art: einzige
   stiche:
   - anspieler: 0
@@ -935,12 +935,12 @@
   - spieler_index: 0
     karte: blau 8
     art: einzige
+  - spieler_index: 1
+    karte: grün 7
+    art: tiefste
   - spieler_index: 3
     karte: rot 4
     art: hoechste
-  - spieler_index: 1
-    karte: grün 8
-    art: einzige
   - spieler_index: 2
     karte: grün 9
     art: einzige
@@ -1039,14 +1039,14 @@
   - spieler_index: 0
     karte: gelb 8
     art: einzige
+  - spieler_index: 1
+    karte: grün 7
+    art: tiefste
   - spieler_index: 3
     karte: blau 8
     art: hoechste
   - spieler_index: 2
     karte: blau 3
-    art: einzige
-  - spieler_index: 1
-    karte: grün 9
     art: einzige
   stiche:
   - anspieler: 2
@@ -1294,14 +1294,14 @@
   - grün 7, gelb 7
   - grün 3
   kommunikationen:
+  - spieler_index: 0
+    karte: rot 7
+    art: tiefste
   - spieler_index: 1
     karte: blau 2
     art: einzige
   - spieler_index: 2
     karte: gelb 4
-    art: einzige
-  - spieler_index: 0
-    karte: rot 8
     art: einzige
   - spieler_index: 3
     karte: blau 8
@@ -1397,12 +1397,12 @@
   - spieler_index: 0
     karte: gelb 5
     art: hoechste
+  - spieler_index: 1
+    karte: rot 7
+    art: tiefste
   - spieler_index: 2
     karte: rot 5
     art: hoechste
-  - spieler_index: 1
-    karte: rot 9
-    art: einzige
   - spieler_index: 3
     karte: blau 1
     art: einzige
@@ -1452,8 +1452,8 @@
     karte: blau 9
     art: einzige
   - spieler_index: 3
-    karte: grün 6
-    art: hoechste
+    karte: rot 7
+    art: tiefste
   stiche:
   - anspieler: 3
     karten: blau 6, blau 3, blau 7, blau 9
@@ -1545,8 +1545,8 @@
     karte: blau 8
     art: einzige
   - spieler_index: 1
-    karte: gelb 3
-    art: einzige
+    karte: grün 7
+    art: tiefste
   - spieler_index: 3
     karte: blau 4
     art: hoechste
@@ -1599,8 +1599,8 @@
     karte: blau 5
     art: einzige
   - spieler_index: 2
-    karte: rot 9
-    art: einzige
+    karte: rot 7
+    art: tiefste
   - spieler_index: 3
     karte: rot 4
     art: tiefste
@@ -1694,14 +1694,14 @@
   - gelb 1, blau 3
   - grün 9
   kommunikationen:
+  - spieler_index: 2
+    karte: grün 7
+    art: tiefste
   - spieler_index: 3
     karte: grün 1
     art: einzige
   - spieler_index: 0
     karte: grün 2
-    art: einzige
-  - spieler_index: 2
-    karte: blau 3
     art: einzige
   - spieler_index: 1
     karte: grün 4
@@ -2000,14 +2000,14 @@
   - spieler_index: 0
     karte: grün 3
     art: hoechste
+  - spieler_index: 1
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 2
     karte: gelb 3
     art: hoechste
   - spieler_index: 3
     karte: grün 9
-    art: einzige
-  - spieler_index: 1
-    karte: gelb 9
     art: einzige
   stiche:
   - anspieler: 2
@@ -2755,8 +2755,8 @@
   - rot 4, blau 1
   kommunikationen:
   - spieler_index: 2
-    karte: rot 8
-    art: hoechste
+    karte: rot 7
+    art: tiefste
   - spieler_index: 3
     karte: grün 1
     art: einzige
@@ -3155,14 +3155,14 @@
   - grün 5, grün 1
   - gelb 7, gelb 6
   kommunikationen:
+  - spieler_index: 2
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 3
     karte: gelb 6
     art: hoechste
   - spieler_index: 0
     karte: grün 4
-    art: einzige
-  - spieler_index: 2
-    karte: grün 5
     art: einzige
   stiche:
   - anspieler: 2
@@ -3249,6 +3249,9 @@
   - rot 7
   - gelb 7, gelb 5
   kommunikationen:
+  - spieler_index: 3
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 1
     karte: rot 3
     art: einzige
@@ -3258,9 +3261,6 @@
   - spieler_index: 2
     karte: gelb 5
     art: einzige
-  - spieler_index: 3
-    karte: gelb 7
-    art: tiefste
   stiche:
   - anspieler: 3
     karten: Rakete 1, blau 3, grün 9, grün 7
@@ -3302,12 +3302,12 @@
   - rot 7
   - rot 6, gelb 2
   kommunikationen:
+  - spieler_index: 1
+    karte: grün 7
+    art: tiefste
   - spieler_index: 2
     karte: gelb 8
     art: tiefste
-  - spieler_index: 1
-    karte: grün 8
-    art: einzige
   - spieler_index: 0
     karte: blau 9
     art: einzige
@@ -3413,12 +3413,12 @@
   - spieler_index: 1
     karte: rot 6
     art: einzige
+  - spieler_index: 3
+    karte: rot 7
+    art: tiefste
   - spieler_index: 2
     karte: grün 5
     art: hoechste
-  - spieler_index: 3
-    karte: rot 7
-    art: einzige
   stiche:
   - anspieler: 1
     karten: grün 2, grün 7, grün 1, grün 8
@@ -3621,7 +3621,7 @@
     art: einzige
   - spieler_index: 3
     karte: gelb 7
-    art: einzige
+    art: tiefste
   stiche:
   - anspieler: 2
     karten: grün 1, grün 5, grün 8, grün 3
@@ -3914,8 +3914,8 @@
   - gelb 5
   kommunikationen:
   - spieler_index: 0
-    karte: blau 6
-    art: einzige
+    karte: grün 7
+    art: tiefste
   - spieler_index: 1
     karte: rot 8
     art: hoechste
@@ -3971,11 +3971,11 @@
   - spieler_index: 3
     karte: gelb 8
     art: einzige
-  - spieler_index: 2
-    karte: rot 8
-    art: einzige
   - spieler_index: 1
     karte: rot 7
+    art: tiefste
+  - spieler_index: 2
+    karte: rot 8
     art: einzige
   stiche:
   - anspieler: 0
@@ -4325,12 +4325,12 @@
   - spieler_index: 2
     karte: blau 6
     art: einzige
+  - spieler_index: 3
+    karte: blau 7
+    art: tiefste
   - spieler_index: 0
     karte: grün 4
     art: hoechste
-  - spieler_index: 3
-    karte: blau 7
-    art: einzige
   stiche:
   - anspieler: 2
     karten: grün 3, grün 9, grün 7, grün 5
@@ -4935,8 +4935,8 @@
   - gelb 3
   kommunikationen:
   - spieler_index: 1
-    karte: blau 5
-    art: hoechste
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 2
     karte: grün 8
     art: einzige

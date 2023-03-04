@@ -1,10 +1,10 @@
 # coding: utf-8
+# frozen_string_literal: true
 
 # Berechnet den Wert für Karten,
 # Wenn eine Farbe abgespielt wird,
 # bei der es keine Aufträge gibt
 module ElefantKeineAuftragStichFarbeAbspielenWert
-
   def keine_auftrag_stich_farbe_abspielen_wert(karte:, stich:, elefant_rueckgabe:)
     if karte.farbe == stich.farbe
       keine_auftrag_stich_farbe_gleiche_farbe_abspielen_wert(karte: karte, stich: stich,
@@ -16,15 +16,15 @@ module ElefantKeineAuftragStichFarbeAbspielenWert
 
   def keine_auftrag_stich_farbe_gleiche_farbe_abspielen_wert(karte:, stich:, elefant_rueckgabe:)
     if habe_noch_auftraege?
-      eigene_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte: karte, stich: stich,
-                                                                                          elefant_rueckgabe: elefant_rueckgabe)
+      eigene_auftraege_unterstuetzen_mit_fremder_stich_farbe_abspielen_wert(karte: karte, stich: stich,
+                                                                            elefant_rueckgabe: elefant_rueckgabe)
     else
-      fremde_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte: karte, stich: stich,
-                                                                                          elefant_rueckgabe: elefant_rueckgabe)
+      fremde_auftraege_unterstuetzen_mit_fremder_stich_farbe_abspielen_wert(karte: karte, stich: stich,
+                                                                            elefant_rueckgabe: elefant_rueckgabe)
     end
   end
-  def eigene_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte:, stich:,
-                                                                                          elefant_rueckgabe:)
+
+  def eigene_auftraege_unterstuetzen_mit_fremder_stich_farbe_abspielen_wert(karte:, stich:, elefant_rueckgabe:)
     if karte.schlaegt?(stich.staerkste_karte)
       elefant_rueckgabe.symbol = :eigene_auftraege_mit_fremder_farbe_unterstuetzen_schlagen_abspielen
       elefant_rueckgabe.wert = [0, 0, 1, -karte.wert, 0]
@@ -34,8 +34,8 @@ module ElefantKeineAuftragStichFarbeAbspielenWert
     end
   end
 
-  def fremde_auftraege_mit_anderer_stich_farbe_gleiche_farbe_unterstuetzen_abspielen_wert(karte:, stich:,
-                                                                                          elefant_rueckgabe:)
+  def fremde_auftraege_unterstuetzen_mit_fremder_stich_farbe_abspielen_wert(karte:, stich:,
+                                                                            elefant_rueckgabe:)
     if karte.schlaegt?(stich.staerkste_karte)
       elefant_rueckgabe.symbol = :fremde_auftraege_mit_fremder_farbe_unterstuetzen_schlagen_abspielen
       elefant_rueckgabe.wert = [0, 0, -1, karte.schlag_wert, 0]

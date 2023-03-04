@@ -1,8 +1,11 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
+
 # ein paar nützliche Funktionen, die an- und abspielen brauchen
 module ElefantNuetzliches
+  # rubocop:enable Metrics/ModuleLength
   HOHE_KARTE_UNTERBIETEN = 6
   HOHE_KARTE_UEBERBIETEN = 6
 
