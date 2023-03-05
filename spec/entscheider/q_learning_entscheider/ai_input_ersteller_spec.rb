@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'entscheider/ai_input_ersteller'
+require 'entscheider/q_learning_entscheider/ai_input_ersteller'
 require 'spiel_information'
 require 'karte'
 

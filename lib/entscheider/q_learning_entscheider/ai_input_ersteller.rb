@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../karte'
+require_relative '../../karte'
 require_relative 'ai_aktions_raum'
 
 # Erstellt den Input für eine AI aus einer SpielInformationsSicht.

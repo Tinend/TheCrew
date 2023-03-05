@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 require_relative '../entscheider'
-require_relative 'spiel_informations_sicht_benutzender'
+require_relative 'gemeinsam/spiel_informations_sicht_benutzender'
 require_relative 'bakterie/bakterie_kommunizierender'
 
 # Hangelt sich zwischen den Aufträgen durch

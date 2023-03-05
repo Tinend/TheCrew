@@ -3,8 +3,8 @@
 
 require_relative '../entscheider'
 require_relative '../farbe'
-require_relative 'saeuger_auftrag_nehmer'
-require_relative 'spiel_informations_sicht_benutzender'
+require_relative 'gemeinsam/saeuger_auftrag_nehmer'
+require_relative 'gemeinsam/spiel_informations_sicht_benutzender'
 require_relative 'schimpanse/schimpanse_kommunizierender'
 require_relative 'schimpanse/schimpanse_zeitdruck'
 require_relative 'schimpanse/schimpanse_legen'

@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 
 require_relative '../entscheider'
-require_relative 'spiel_informations_sicht_benutzender'
-require_relative 'zufalls_kommunizierender'
+require_relative 'gemeinsam/spiel_informations_sicht_benutzender'
+require_relative 'gemeinsam/zufalls_kommunizierender'
 
 # Entscheider, der immer zufällig entschiedet, was er spielt.
 class ZufallsEntscheider < Entscheider

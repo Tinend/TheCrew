@@ -3,8 +3,8 @@
 
 require_relative '../entscheider'
 require_relative '../farbe'
-require_relative 'saeuger_auftrag_nehmer'
-require_relative 'spiel_informations_sicht_benutzender'
+require_relative 'gemeinsam/saeuger_auftrag_nehmer'
+require_relative 'gemeinsam/spiel_informations_sicht_benutzender'
 require_relative 'elefant/elefant_abspielen'
 require_relative 'elefant/elefant_anspielen'
 require_relative 'elefant/elefant_kommunizieren'

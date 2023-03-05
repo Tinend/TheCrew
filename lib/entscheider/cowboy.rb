@@ -1,15 +1,15 @@
 # coding: utf-8
 # frozen_string_literal: true
 
-require_relative 'reinwerfender'
+require_relative 'reinwerfer/reinwerfender'
 require_relative 'zufalls_entscheider'
-require_relative 'abspiel_anspiel_unterscheidender'
-require_relative 'gefaehrliche_karten_kommunizierender'
+require_relative 'gemeinsam/abspiel_anspiel_unterscheidender'
+require_relative 'reinwerfer/gefaehrliche_karten_kommunizierender'
 require_relative '../entscheider'
 require_relative '../stich'
 require_relative '../farbe'
-require_relative 'saeuger_auftrag_nehmer'
-require_relative 'spiel_informations_sicht_benutzender'
+require_relative 'gemeinsam/saeuger_auftrag_nehmer'
+require_relative 'gemeinsam/spiel_informations_sicht_benutzender'
 
 # Entscheider, der immer zufällig entschiedet, was er spielt.
 # Wenn er eine Karte reinwerfen kann, die jemand anderem hilft,

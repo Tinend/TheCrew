@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../kommunikation'
-require_relative '../auftrag'
-require_relative '../karte'
+require_relative '../../kommunikation'
+require_relative '../../auftrag'
+require_relative '../../karte'
 require_relative 'ai_input_ersteller'
 
 # Stellt die möglichen Aktionen in einem Zug vor, i.e. eines der folgenden:

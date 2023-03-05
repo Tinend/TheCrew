@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../karte'
+require_relative '../../karte'
 
 # Modul, das hilft, gefährliche hohe Karten, die einen Auftrag zerstören könnten,
 # zu kommunizieren und anzunehmen, dass andere Spieler das auch tun würden.

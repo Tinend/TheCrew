@@ -2,9 +2,9 @@
 # frozen_string_literal: true
 
 require_relative '../entscheider'
-require_relative 'saeuger_auftrag_nehmer'
-require_relative 'spiel_informations_sicht_benutzender'
-require_relative 'zufalls_kommunizierender'
+require_relative 'gemeinsam/saeuger_auftrag_nehmer'
+require_relative 'gemeinsam/spiel_informations_sicht_benutzender'
+require_relative 'gemeinsam/zufalls_kommunizierender'
 
 # Aufträge: Wenn er ihn hat, bevorzugt groß, wenn er ihn nicht hat, bevorzugt tief
 # Grundlage für die meisten Entscheider mit Tiernamen
