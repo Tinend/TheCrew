@@ -2,15 +2,16 @@
 
 require_relative 'ai_input_ersteller'
 require_relative 'ai_aktions_raum'
+require_relative 'reinforcement_learning_modell'
 require 'pry'
 require 'progressbar'
 
 # Modell, dass auf Reinforcement Learning mit dem Q-learning Algorithmus basiert.
-class QLearningModell
+class QLearningModell < ReinforcementLearningModell
   ANZAHL_EPOCHEN = 10
   FEHLER_ZWISCHEN_BERICHTEN = 1
-  GEWUENSCHTER_MITTLERER_QUADRATISCHER_FEHLER = 5.0
-  LEARNING_RATE = 0.2
+  GEWUENSCHTER_MITTLERER_QUADRATISCHER_FEHLER = 25.0
+  LEARNING_RATE = 100.0
   REPLAY_BATCH_SIZE = 400
   REPLAY_MEMORY_SIZE = 500
   DISCOUNT = 0.95
@@ -21,9 +22,10 @@ class QLearningModell
 
   def initialize
     ai_input_laenge = AiInputErsteller.ai_input_laenge
+    hidden_size = ai_input_laenge
     @q_nn_model = RubyFann::Standard.new(
       num_inputs: ai_input_laenge,
-      hidden_neurons: [ai_input_laenge],
+      hidden_neurons: [hidden_size, Math.sqrt(hidden_size).ceil],
       num_outputs: 1
     )
     @q_nn_model.set_learning_rate(LEARNING_RATE)
@@ -67,25 +69,19 @@ class QLearningModell
     trainiere_modell
   end
 
-  def item_zu_trainings_daten(_item, _traning_x_data, _trainig_y_data)
+  def item_zu_trainings_daten(item)
     # Am Ende des Spiels wird nichts mehr hinzugefügt. q_value bleibt.
-    unless m[:ai_input]
-      # Add to training set
-      training_x_data.push(m[:alter_ai_input].input_array)
-      training_y_data.push(m[:bewertung])
-      return
-    end
+    return [item[:alter_ai_input].input_array, [item[:bewertung]]] unless item[:ai_input]
 
-    ai_input = m[:ai_input].dup
-    q_table_row = m[:ai_aktionen].map do |a|
+    ai_input = item[:ai_input].dup
+    q_table_row = item[:ai_aktionen].map do |a|
       ai_input.setze_aktion(a)
       bewerte(ai_input)
     end
     # Update the q value
-    updated_q_value = m[:bewertung] + (DISCOUNT * q_table_row.max)
+    updated_q_value = item[:bewertung] + (DISCOUNT * q_table_row.max)
     # Add to training set
-    training_x_data.push(m[:alter_ai_input].input_array)
-    training_y_data.push([updated_q_value])
+    return [item[:alter_ai_input].input_array, [updated_q_value]]
   end
 
   def erstelle_trainings_daten
@@ -98,14 +94,18 @@ class QLearningModell
     # For each batch calculate new q_value based on current network and reward
     batch.each do |m|
       progress_bar.increment
-      item_zu_trainings_daten(m, traning_x_data, trainig_y_data)
+      x_item, y_item = item_zu_trainings_daten(m)
+      training_x_data.push(x_item)
+      training_y_data.push(y_item)
     end
-
     puts "    #{Time.now - start} Sekunden Trainings Daten erstellt"
     ueberpruefe_trainings_daten(training_x_data, training_y_data)
     RubyFann::TrainData.new(inputs: training_x_data, desired_outputs: training_y_data)
   end
 
+  # Überprüft, ob die Trainingsdaten in Ordnung sind. Theoretisch sollte das nicht nötig sein,
+  # in der Praxis ist es das manchmal, wenn der Code hier sich ändert. Dies führt zu nützlichen
+  # Fehlern anstatt Segfaults.
   def ueberpruefe_trainings_daten(training_x_data, training_y_data)
     raise TypeError unless training_x_data.is_a?(Array)
     raise TypeError unless training_x_data.all?(Array)
