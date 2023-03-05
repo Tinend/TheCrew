@@ -10,6 +10,7 @@ gem 'ruby-fann', '~> 1.3'
 
 group :development, :test do
   gem 'rake'
+  gem 'rake-compiler'
 end
 
 group :test do

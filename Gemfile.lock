@@ -16,6 +16,8 @@ GEM
       method_source (~> 1.0)
     rainbow (3.1.1)
     rake (13.0.6)
+    rake-compiler (1.2.0)
+      rake
     regexp_parser (2.7.0)
     rexml (3.2.5)
     rspec (3.12.0)
@@ -61,6 +63,7 @@ DEPENDENCIES
   progressbar (= 1.11)
   pry
   rake
+  rake-compiler
   rspec
   rubocop
   rubocop-rake
