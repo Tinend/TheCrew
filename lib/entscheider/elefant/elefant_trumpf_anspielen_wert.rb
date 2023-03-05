@@ -3,13 +3,31 @@
 
 # Berechnet den Wert für eine Trumpf Karte
 module ElefantTrumpfAnspielenWert
-  def trumpf_anspielen_wert(karte:)
+  def trumpf_anspielen_wert(karte:, elefant_rueckgabe:)
     if !habe_noch_auftraege?
-      [0, 0, 0, 0, -1]
+      keine_auftraege_trumpf_anspielen(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     elsif nur_noch_ich_habe_truempfe?
-      nur_noch_ich_habe_truempfe_trumpf_anspielen_wert(karte: karte)
+      trumpf_monopol_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
     else
-      andere_haben_noch_truempfe_trumpf_anspielen_wert(karte: karte)
+      andere_haben_noch_truempfe_trumpf_anspielen_wert(karte: karte, elefant_rueckgabe: elefant_rueckgabe)
+    end
+  end
+
+  def keine_auftraege_trumpf_anspielen(karte:, elefant_rueckgabe:)
+    if jemand_kann_trumpf_ueberbieten?(karte: karte)
+      elefant_rueckgabe.symbol = :keine_eigenen_auftraege_trumpf_anspielen
+      elefant_rueckgabe.wert = [0, 0, 0, 0, -1]
+    else
+      elefant_rueckgabe.symbol = :toten_trumpf_anspielen
+      elefant_rueckgabe.wert = [-1, 0, 0, 0, 0]
+    end
+  end
+
+  def jemand_kann_trumpf_ueberbieten?(karte:)
+    (1..@spiel_informations_sicht.anzahl_spieler - 1).any? do |spieler_index|
+      @spiel_informations_sicht.moegliche_karten(spieler_index).any? do |moegliche_karte|
+        moegliche_karte.schlaegt?(karte)
+      end
     end
   end
 
@@ -20,19 +38,23 @@ module ElefantTrumpfAnspielenWert
     end
   end
 
-  def andere_haben_noch_truempfe_trumpf_anspielen_wert(karte:)
+  def andere_haben_noch_truempfe_trumpf_anspielen_wert(karte:, elefant_rueckgabe:)
     if habe_noch_zwei_truempfe? && @spiel_informations_sicht.unerfuellte_auftraege[1..].flatten.empty?
-      [0, 0, 1, karte.wert, 0]
+      elefant_rueckgabe.symbol = :auftrag_monopol_trumpf_anspielen
+      elefant_rueckgabe.wert = [0, 0, 1, karte.wert, 0]
     else
-      [0, 0, 0, 0, -1]
+      elefant_rueckgabe.symbol = :andere_haben_auftraege_trumpf_anspielen
+      elefant_rueckgabe.wert = [0, 0, 0, 0, -1]
     end
   end
 
-  def nur_noch_ich_habe_truempfe_trumpf_anspielen_wert(karte:)
+  def trumpf_monopol_anspielen_wert(karte:, elefant_rueckgabe:)
     if karte.wert == 4
-      [0, 1, 4, 0, -1]
+      elefant_rueckgabe.symbol = :trumpf_monopol_4_anspielen
+      elefant_rueckgabe.wert = [0, 1, 4, 0, -1]
     else
-      [0, 1, 4, 0, karte.wert]
+      elefant_rueckgabe.symbol = :trumpf_monopol_anspielen
+      elefant_rueckgabe.wert = [0, 1, 4, 0, karte.wert]
     end
   end
 

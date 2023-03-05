@@ -12,6 +12,8 @@ class TurnierReporter < LeererReporter
   end
 
   def berichte_gesamt_statistiken(gesamt_statistiken:, gewonnen_statistiken:, verloren_statistiken:)
+    return unless @statistiken_ausgeben
+
     berichte_statistiken('Gesamt', gesamt_statistiken)
     berichte_statistiken('Gewonnen', gewonnen_statistiken)
     berichte_statistiken('Verloren', verloren_statistiken)

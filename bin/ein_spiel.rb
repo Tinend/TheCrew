@@ -16,13 +16,15 @@ auftrag_setzer = nil
 anzahl_spieler_setzer = nil
 entscheider_setzer = nil
 unendlich_setzer = nil
+statistiken_ausgeben = true
 ARGV.each do |a|
-  seed_setzer = a[3..].to_i if a[0..1] == '-r'
   auftrag_setzer = a[3..] if a[0..1] == '-a'
-  entscheider_setzer = a[3..] if a[0..1] == '-x'
-  anzahl_spieler_setzer = a[3..] if a[0..1] == '-s'
   unendlich_setzer = a if a[0..1] == '-u'
+  statistiken_ausgeben = false if a[0..1] == '-b'
   ein_spiel_hilfe if a[0..1] == '-h'
+  seed_setzer = a[3..].to_i if a[0..1] == '-r'
+  anzahl_spieler_setzer = a[3..] if a[0..1] == '-s'
+  entscheider_setzer = a[3..] if a[0..1] == '-x'
 end
 
 ANZAHL_SPIELER = if anzahl_spieler_setzer.nil?
@@ -50,7 +52,7 @@ GEWAEHLTER_ENTSCHEIDER = if entscheider_setzer.nil?
                          else
                            Module.const_get entscheider_setzer
                          end
-reporter = PutsReporter.new
+reporter = PutsReporter.new(statistiken_ausgeben: statistiken_ausgeben)
 
 i = 0
 loop do

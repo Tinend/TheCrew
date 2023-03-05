@@ -320,9 +320,9 @@
   - entscheider: Bakterie
     punkte: 0
 - - entscheider: Elefant
-    punkte: 24
+    punkte: 29
   - entscheider: Cowboy
-    punkte: 8
+    punkte: 7
   - entscheider: Schimpanse
     punkte: 34
   - entscheider: Reinwerfer
@@ -342,7 +342,7 @@
   - entscheider: Bakterie
     punkte: 0
 - - entscheider: Elefant
-    punkte: 24
+    punkte: 29
   - entscheider: Cowboy
     punkte: 8
   - entscheider: Schimpanse
@@ -366,7 +366,7 @@
   - entscheider: QLearningEntscheider
     punkte: 0
 - - entscheider: Elefant
-    punkte: 24
+    punkte: 29
   - entscheider: Cowboy
     punkte: 8
   - entscheider: Schimpanse
@@ -390,7 +390,7 @@
   - entscheider: QLearningEntscheider
     punkte: 0
 - - entscheider: Elefant
-    punkte: 24
+    punkte: 29
   - entscheider: Cowboy
     punkte: 12
   - entscheider: Schimpanse
@@ -463,6 +463,30 @@
     punkte: 0
 - - entscheider: Elefant
     punkte: 30
+  - entscheider: Cowboy
+    punkte: 12
+  - entscheider: Schimpanse
+    punkte: 28
+  - entscheider: Reinwerfer
+    punkte: 9
+  - entscheider: Rhinoceros
+    punkte: 22
+  - entscheider: Hase
+    punkte: 1
+  - entscheider: Saeuger
+    punkte: 0
+  - entscheider: Archaeon
+    punkte: 0
+  - entscheider: ZufallsEntscheider
+    punkte: 0
+  - entscheider: GeschlosseneFormelBot
+    punkte: 0
+  - entscheider: Bakterie
+    punkte: 0
+  - entscheider: QLearningEntscheider
+    punkte: 0
+- - entscheider: Elefant
+    punkte: 35
   - entscheider: Cowboy
     punkte: 12
   - entscheider: Schimpanse

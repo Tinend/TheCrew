@@ -16,14 +16,16 @@ anzahl_spiele_setzer = nil
 entscheider_entferner = []
 entscheider_liste_gewaehlt = nil
 unendlich_setzer = nil
+statistik_ausgeben = true
 ARGV.each do |a|
-  seed_setzer = a if a[0..1] == '-r'
   auftrag_setzer = a if a[0..1] == '-a'
+  statistik_ausgeben = false if a[0..1] == '-b'
+  turnier_hilfe if a[0..1] == '-h'
+  seed_setzer = a if a[0..1] == '-r'
+  anzahl_spiele_setzer = a if a[0..1] == '-s'
   entscheider_liste_gewaehlt = a[3..].split(',') if a[0..1] == '-x'
   entscheider_entferner += a[3..].split(',') if a[0..1] == '-y'
-  anzahl_spiele_setzer = a if a[0..1] == '-s'
   unendlich_setzer = a if a[0..1] == '-u'
-  turnier_hilfe if a[0..1] == '-h'
 end
 
 ANZAHL_SPIELER = 4
@@ -70,7 +72,7 @@ einstellungen = TurnierOrganisator::TurnierEinstellungen.new(anzahl_spieler: ANZ
 i = 0
 loop do
   TurnierOrganisator.organisiere_turnier(turnier_einstellungen: einstellungen, seed: SEED + i,
-                                         entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new)
+                                         entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new(statistiken_ausgeben: statistik_ausgeben)
   break unless unendlich_setzer
 
   i += 1

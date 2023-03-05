@@ -17,28 +17,44 @@ module ElefantAbspielen
   include ElefantAuftragGelegtAbspielenWert
 
   def abspielen(stich, waehlbare_karten)
-    # waehlbare_karten.max_by { |karte| x = abspielen_wert(karte: karte, stich: stich); puts karte; p x}
-    waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
+    # puts
+    # waehlbare_karten.max_by { |karte| abspielen_wert(karte: karte, stich: stich) }
+    waehlbare_rueckgaben = waehlbare_karten.collect do |karte|
+      elefant_rueckgabe = ElefantRueckgabe.new(karte)
+      abspielen_wert(karte: karte, stich: stich, elefant_rueckgabe: elefant_rueckgabe)
+      # puts elefant_rueckgabe.karte
+      # puts elefant_rueckgabe.symbol
+      # p elefant_rueckgabe.wert
+      elefant_rueckgabe
+    end
+    rueckgabe = waehlbare_rueckgaben.max
+    @zaehler_manager.erhoehe_zaehler(rueckgabe.symbol)
+    # puts rueckgabe.karte
+    # puts rueckgabe.symbol
+    # p rueckgabe.wert
+    rueckgabe.karte
   end
 
   # wie gut eine Karte zum drauflegen geeignet ist
-  def abspielen_wert(karte:, stich:)
+  def abspielen_wert(karte:, stich:, elefant_rueckgabe:)
     spieler_index = finde_auftrag_in_stich(stich)
     if spieler_index.nil?
-      kein_auftrag_gelegt_abspielen_wert(karte: karte, stich: stich)
+      kein_auftrag_gelegt_abspielen_wert(karte: karte, stich: stich, elefant_rueckgabe: elefant_rueckgabe)
     else
-      auftrag_gelegt_abspielen_wert(stich: stich, karte: karte, spieler_index: spieler_index)
+      auftrag_gelegt_abspielen_wert(stich: stich, karte: karte, spieler_index: spieler_index,
+                                    elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 
-  def kein_auftrag_gelegt_abspielen_wert(karte:, stich:)
+  def kein_auftrag_gelegt_abspielen_wert(karte:, stich:, elefant_rueckgabe:)
     karten_auftrag_index = karte_ist_auftrag_von(karte)
     if karten_auftrag_index.nil?
-      keinen_auftrag_abspielen_wert(karte: karte, stich: stich)
+      keinen_auftrag_abspielen_wert(karte: karte, stich: stich, elefant_rueckgabe: elefant_rueckgabe)
     elsif karten_auftrag_index.zero?
-      eigenen_auftrag_abspielen_wert(karte: karte, stich: stich)
+      eigenen_auftrag_abspielen_wert(karte: karte, stich: stich, elefant_rueckgabe: elefant_rueckgabe)
     else
-      fremden_auftrag_abspielen_wert(karte: karte, stich: stich, ziel_spieler_index: karten_auftrag_index)
+      fremden_auftrag_abspielen_wert(karte: karte, stich: stich, ziel_spieler_index: karten_auftrag_index,
+                                     elefant_rueckgabe: elefant_rueckgabe)
     end
   end
 end

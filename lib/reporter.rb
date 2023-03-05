@@ -1,7 +1,12 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # Diese Klasse berichtet über alles, was im Spiel passiert.
 class Reporter
+  def initialize(statistiken_ausgeben: false)
+    @statistiken_ausgeben = statistiken_ausgeben
+  end
+
   def berichte_start_situation(karten:, auftraege:)
     raise NotImplementedError
   end

@@ -13,8 +13,10 @@ require 'statistiker'
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe Elefant do
   subject(:elefant) do
+    statistiker = Statistiker.new
     elefant = described_class.new(zufalls_generator: Random.new(42),
                                   zaehler_manager: statistiker.neuer_zaehler_manager)
+    statistiker.beachte_neues_spiel(5)
     elefant.sehe_spiel_informations_sicht(spiel_informations_sicht)
     elefant
   end
@@ -105,7 +107,7 @@ RSpec.describe Elefant do
 
   it 'Schmiert die rote sechs in einen Stich mit der roten neun' do
     spiel_information.verteil_karten([[rote_drei, rote_sechs], [Karte.max_trumpf], [], [], []])
-    spiel_information.auftrag_gewaehlt(spieler_index: 1, auftrag: rote_sechs_auftrag)
+    spiel_information.auftrag_gewaehlt(spieler_index: 4, auftrag: rote_sechs_auftrag)
     karte = spieler.waehle_karte(neun_stich_sicht)
     expect(karte).to eq(rote_sechs)
   end

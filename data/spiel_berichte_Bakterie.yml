@@ -1,4 +1,3 @@
----
 - karten:
   - Rakete 4, blau 8, blau 9, gelb 2, gelb 9, grün 8, grün 5, rot 4, grün 9, grün
     4
@@ -177,7 +176,7 @@
     karte: grün 1
     art: einzige
   - spieler_index: 2
-    karte: blau 8
+    karte: rot 7
     art: tiefste
   stiche:
   - anspieler: 0
@@ -274,8 +273,8 @@
   - rot 4
   kommunikationen:
   - spieler_index: 0
-    karte: grün 7
-    art: einzige
+    karte: blau 7
+    art: tiefste
   - spieler_index: 1
     karte: rot 3
     art: einzige
@@ -323,11 +322,11 @@
   - blau 1, gelb 5
   - rot 4, grün 2
   kommunikationen:
+  - spieler_index: 0
+    karte: rot 7
+    art: tiefste
   - spieler_index: 3
     karte: rot 3
-    art: einzige
-  - spieler_index: 0
-    karte: gelb 9
     art: einzige
   - spieler_index: 2
     karte: grün 5
@@ -373,15 +372,15 @@
   - gelb 4
   - rot 6, blau 3
   kommunikationen:
+  - spieler_index: 1
+    karte: blau 7
+    art: tiefste
   - spieler_index: 2
     karte: gelb 6
     art: hoechste
   - spieler_index: 3
     karte: rot 5
     art: hoechste
-  - spieler_index: 1
-    karte: blau 9
-    art: einzige
   - spieler_index: 0
     karte: blau 6
     art: einzige
@@ -432,8 +431,8 @@
     karte: gelb 7
     art: tiefste
   - spieler_index: 3
-    karte: rot 4
-    art: hoechste
+    karte: blau 7
+    art: tiefste
   - spieler_index: 2
     karte: blau 3
     art: einzige
@@ -735,11 +734,11 @@
   - spieler_index: 1
     karte: gelb 8
     art: einzige
+  - spieler_index: 3
+    karte: blau 7
+    art: tiefste
   - spieler_index: 2
     karte: gelb 4
-    art: einzige
-  - spieler_index: 3
-    karte: gelb 6
     art: einzige
   - spieler_index: 0
     karte: grün 3
@@ -837,8 +836,8 @@
     karte: grün 4
     art: einzige
   - spieler_index: 1
-    karte: blau 4
-    art: einzige
+    karte: grün 7
+    art: tiefste
   - spieler_index: 2
     karte: rot 3
     art: einzige
@@ -1698,8 +1697,8 @@
   - grün 9
   kommunikationen:
   - spieler_index: 2
-    karte: blau 5
-    art: einzige
+    karte: grün 7
+    art: tiefste
   - spieler_index: 3
     karte: grün 3
     art: einzige
@@ -1852,11 +1851,11 @@
   - spieler_index: 1
     karte: rot 8
     art: einzige
+  - spieler_index: 2
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 3
     karte: rot 9
-    art: einzige
-  - spieler_index: 2
-    karte: gelb 9
     art: einzige
   - spieler_index: 0
     karte: gelb 1
@@ -2768,8 +2767,8 @@
   - rot 4, blau 1
   kommunikationen:
   - spieler_index: 0
-    karte: grün 3
-    art: hoechste
+    karte: blau 7
+    art: tiefste
   - spieler_index: 3
     karte: rot 4
     art: einzige
@@ -3497,8 +3496,8 @@
     karte: grün 8
     art: einzige
   - spieler_index: 3
-    karte: blau 8
-    art: einzige
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 1
     karte: blau 7
     art: hoechste
@@ -4317,8 +4316,8 @@
     karte: blau 8
     art: tiefste
   - spieler_index: 3
-    karte: blau 5
-    art: hoechste
+    karte: gelb 7
+    art: tiefste
   stiche:
   - anspieler: 3
     karten: grün 9, grün 8, grün 4, grün 7
@@ -4363,12 +4362,12 @@
   - spieler_index: 1
     karte: blau 5
     art: hoechste
-  - spieler_index: 3
-    karte: blau 6
-    art: hoechste
   - spieler_index: 2
     karte: gelb 7
     art: tiefste
+  - spieler_index: 3
+    karte: blau 6
+    art: hoechste
   stiche:
   - anspieler: 0
     karten: Rakete 4, Rakete 3, Rakete 2, Rakete 1
@@ -4514,8 +4513,8 @@
     karte: rot 8
     art: tiefste
   - spieler_index: 2
-    karte: gelb 6
-    art: hoechste
+    karte: grün 7
+    art: tiefste
   - spieler_index: 1
     karte: rot 3
     art: einzige
@@ -4616,14 +4615,14 @@
   - spieler_index: 0
     karte: gelb 6
     art: hoechste
+  - spieler_index: 1
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 2
     karte: gelb 9
     art: hoechste
   - spieler_index: 3
     karte: gelb 3
-    art: einzige
-  - spieler_index: 1
-    karte: gelb 8
     art: einzige
   stiche:
   - anspieler: 2
@@ -4714,12 +4713,12 @@
   - grün 1, gelb 1
   - blau 6, blau 8
   kommunikationen:
+  - spieler_index: 2
+    karte: blau 7
+    art: tiefste
   - spieler_index: 0
     karte: grün 8
     art: einzige
-  - spieler_index: 2
-    karte: grün 5
-    art: hoechste
   - spieler_index: 1
     karte: grün 7
     art: einzige
@@ -4819,8 +4818,8 @@
   - blau 7, grün 4
   kommunikationen:
   - spieler_index: 2
-    karte: rot 8
-    art: einzige
+    karte: grün 7
+    art: tiefste
   - spieler_index: 0
     karte: rot 9
     art: einzige
@@ -4925,12 +4924,12 @@
   - spieler_index: 2
     karte: gelb 4
     art: hoechste
+  - spieler_index: 3
+    karte: gelb 7
+    art: tiefste
   - spieler_index: 0
     karte: gelb 5
     art: einzige
-  - spieler_index: 3
-    karte: grün 5
-    art: tiefste
   stiche:
   - anspieler: 1
     karten: Rakete 4, Rakete 3, Rakete 1, rot 4

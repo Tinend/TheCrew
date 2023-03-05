@@ -51,10 +51,20 @@ module BakterieKommunizierender
         @spiel_informations_sicht.karten.any? { |karte| karte == fremde_karte } ||
         @spiel_informations_sicht.ist_gegangen?(fremde_karte)
     end
+    hohe_karte_gefaerdet_auftrag_kommunikation(min_karte: min_karte, kommunikation: kommunikation,
+                                               fremde_karten: fremde_karten)
+  end
+
+  def hohe_karte_gefaerdet_auftrag_kommunikation(min_karte:, kommunikation:, fremde_karten:)
     if fremde_karten.empty?
       BakterieKommunikation.new(
         kommunikation: kommunikation,
         prioritaet: 1000
+      )
+    elsif kommunikation.art == :tiefste
+      BakterieKommunikation.new(
+        kommunikation: kommunikation,
+        prioritaet: (min_karte.wert - 6) * 100
       )
     else
       BakterieKommunikation.new(
