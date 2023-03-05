@@ -20,6 +20,7 @@ end
 group :development do
   gem 'pry'
   gem 'rubocop'
+  gem 'rubocop-performance'
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
   gem 'stackprof'

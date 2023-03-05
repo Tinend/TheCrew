@@ -21,6 +21,7 @@ class QLearningModell < ReinforcementLearningModell
   end
 
   def initialize
+    super()
     ai_input_laenge = AiInputErsteller.ai_input_laenge
     hidden_size = ai_input_laenge
     @q_nn_model = RubyFann::Standard.new(
@@ -81,7 +82,7 @@ class QLearningModell < ReinforcementLearningModell
     # Update the q value
     updated_q_value = item[:bewertung] + (DISCOUNT * q_table_row.max)
     # Add to training set
-    return [item[:alter_ai_input].input_array, [updated_q_value]]
+    [item[:alter_ai_input].input_array, [updated_q_value]]
   end
 
   def erstelle_trainings_daten

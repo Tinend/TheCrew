@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Reinforcement Learning Modell, das sich Stellungen mit ihrer Bewertung merken kann
+# und Bewertungen versuchen kann.
 class ReinforcementLearningModell
   def bewerte(ai_input)
     raise NotImplementedError

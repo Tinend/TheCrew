@@ -1,8 +1,15 @@
+# frozen_string_literal: true
+
 require_relative 'reinforcement_learning_modell'
 
 # Ruby Code als Wrapper für C Code.
 class NativeModell < ReinforcementLearningModell
+  def self.instanz
+    @instanz ||= new
+  end
+
   def initialize
+    super()
     @native = Native::TensorFlowModell.new
   end
 
