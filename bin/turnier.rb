@@ -72,7 +72,7 @@ einstellungen = TurnierOrganisator::TurnierEinstellungen.new(anzahl_spieler: ANZ
 i = 0
 loop do
   TurnierOrganisator.organisiere_turnier(turnier_einstellungen: einstellungen, seed: SEED + i,
-                                         entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new(statistiken_ausgeben: statistik_ausgeben)
+                                         entscheider_klassen: ENTSCHEIDER, reporter: TurnierReporter.new(statistiken_ausgeben: statistik_ausgeben))
   break unless unendlich_setzer
 
   i += 1
