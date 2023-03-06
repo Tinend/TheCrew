@@ -5,8 +5,8 @@ require_relative '../entscheider'
 require_relative '../farbe'
 require_relative 'gemeinsam/saeuger_auftrag_nehmer'
 require_relative 'gemeinsam/spiel_informations_sicht_benutzender'
-require_relative 'rhinoceros_abspielen'
-require_relative 'rhinoceros_anspielen'
+require_relative 'rhinoceros/rhinoceros_abspielen'
+require_relative 'rhinoceros/rhinoceros_anspielen'
 
 # Rennt geradewegs auf die Aufträge zu
 # Geht 100 Fälle durch und wählt geeigneten aus
